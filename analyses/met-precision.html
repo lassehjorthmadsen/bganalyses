@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Lasse Hjorth Madsen">
+<meta name="dcterms.date" content="2023-04-29">
+
+<title>bganalyses - Match Equity Precision</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">bganalyses</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../analyses/explore-emg.html">
+ <span class="menu-text">Explore EMG Normalization</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../analyses/met-precision.html" aria-current="page">
+ <span class="menu-text">Match Equity Precision</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#why-this" id="toc-why-this" class="nav-link active" data-scroll-target="#why-this">Why This?</a></li>
+  <li><a href="#the-rounding-problem" id="toc-the-rounding-problem" class="nav-link" data-scroll-target="#the-rounding-problem">The rounding problem</a></li>
+  <li><a href="#how-common-is-this" id="toc-how-common-is-this" class="nav-link" data-scroll-target="#how-common-is-this">How common is this?</a>
+  <ul class="collapse">
+  <li><a href="#simple-take-points" id="toc-simple-take-points" class="nav-link" data-scroll-target="#simple-take-points">Simple take points</a></li>
+  <li><a href="#with-rounding-errors" id="toc-with-rounding-errors" class="nav-link" data-scroll-target="#with-rounding-errors">With rounding errors</a></li>
+  <li><a href="#with-gammons" id="toc-with-gammons" class="nav-link" data-scroll-target="#with-gammons">With gammons</a></li>
+  </ul></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Match Equity Precision</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Lasse Hjorth Madsen </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 29, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<section id="why-this" class="level2">
+<h2 class="anchored" data-anchor-id="why-this">Why This?</h2>
+<p>Match equity calculations in backgammon can be tricky and hard to perform over the table. How accurate can we hope to be when calculating take points that involve more than one entry in a match equity table?</p>
+<p>Let’s do a couple of simple experiments and try to find out.</p>
+</section>
+<section id="the-rounding-problem" class="level2">
+<h2 class="anchored" data-anchor-id="the-rounding-problem">The rounding problem</h2>
+<p>Here’s one example that is fairly straight forward. You’re in the beginning of a 17-point match, off for a bad start, trailing 0-5 or 17-away, 12-away, or (-17,-12). You’re facing a double in a bearoff that you consider a borderline take/pass for money.</p>
+<p>Perhaps something like this:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="met-precision_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="384"></p>
+</div>
+</div>
+<p>Should trailing as white make you more or less inclined to accept a double from black?</p>
+<p>For simplicity let’s do the calculations assuming no redoubles, since this example is a bearoff with no recube potential anyway. Using the Kazaross XG2 match equity table, with full six digit precision, the calculation goes like this.</p>
+<div class="cell">
+
+</div>
+<ul>
+<li><p>A pass means (-17,-11), <span class="math inline">\(mwc=0.2647\)</span></p></li>
+<li><p>Taking and winning means (-15, -12), <span class="math inline">\(mwc=0.374741\)</span>, for a gain of: <span class="math inline">\(0.374741-0.2647 = 0.110041\)</span></p></li>
+<li><p>Taking and losing means (-17,-10), <span class="math inline">\(mwc=0.22625\)</span>, for a loss of: <span class="math inline">\(0.2647 - 0.22625 = 0.03845\)</span></p></li>
+<li><p><span class="math inline">\(Take\ point = \frac{loss}{loss+gain} = \frac{0.03845}{0.03845 + 0.110041} = 0.2589383\)</span></p></li>
+</ul>
+<p>Your take point is a bit <em>higher</em> than for money, you should be <em>less</em> inclined to take; so you probably have a <em>pass</em> if this is borderline for money.</p>
+<p>But of course, nobody can do calculations like this with six digits over the board. If you’re a really good tournament player, you might attempt doing the same calculations rounded to two digits (whole percentages).</p>
+<p>Let’s see how that would play out:</p>
+<div class="cell">
+
+</div>
+<ul>
+<li><p>A pass means (-17,-11), <span class="math inline">\(mwc=0.26\)</span></p></li>
+<li><p>Taking and winning means (-15, -12), <span class="math inline">\(mwc=0.37\)</span>, for a gain of: <span class="math inline">\(0.37-0.26 = 0.11\)</span></p></li>
+<li><p>Taking and losing means (-17,-10), <span class="math inline">\(mwc=0.23\)</span>, for a loss of: <span class="math inline">\(0.26 - 0.23 = 0.03\)</span></p></li>
+<li><p><span class="math inline">\(Take\ point = \frac{loss}{loss+gain} = \frac{0.03}{0.03 + 0.11} = 0.2142857\)</span></p></li>
+</ul>
+<p>Now, you reach the opposite conclusion: Your take point is considerably <em>lower</em> than the well-known <span class="math inline">\(0.25\)</span> cubeless take point for money. You might well have a clear <em>take</em>.</p>
+<p>Looking at the calculations, we see that the calculations are impacted heavily from a couple of rounding errors: The equity from passing and getting to (-17-11) gets rounded <em>down</em>; the equity from taking and winning gets rounded <em>up</em> so the total <span class="math inline">\(mwc\)</span> loss from taking (and being wrong) is only about <span class="math inline">\(0.03\)</span>, almost a full percentage point lower that the <span class="math inline">\(0.038\)</span> we get using all digits.</p>
+<p>Finally, that lower number goes into both the numerator and the denominator, of the take point calculation, impacting the take point in a big way.</p>
+</section>
+<section id="how-common-is-this" class="level2">
+<h2 class="anchored" data-anchor-id="how-common-is-this">How common is this?</h2>
+<p>Did I cherry pick this example? Well, yes, but the cherry wasn’t hard to find. Let’s look at more examples.</p>
+<section id="simple-take-points" class="level3">
+<h3 class="anchored" data-anchor-id="simple-take-points">Simple take points</h3>
+<p>For starters, here’s a plot showing more cubeless, gammonless take points, when the player being doubled is 17-away.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="met-precision_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Some observations:</p>
+<ul>
+<li>Not surprisingly, you have a low take point, around <span class="math inline">\(0.19\)</span>, when the opponent needs just two points to win, and you have an automatic redouble available.</li>
+<li>Same thing when the opponent needs three points and you’re kind of desperate.</li>
+<li>You have a much <em>higher</em> take point when the opponent needs four, because the extra two point at stake are very valuable for the opponent.</li>
+<li>The same holds, but to a smaller and smaller degree, when the opponent needs 6, 8 or 10 points to win.</li>
+</ul>
+<p>Let’s extend the plot to cover more scores:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="met-precision_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Some observations:</p>
+<ul>
+<li><p>In general, for this kind of doubles (initial, cubeless, gammonless) it is <em>easier</em>, not harder, to accept a double if you are leading.</p></li>
+<li><p>The exception is if the opponent needs only two or three points while having a big lead. Here, you’re near dead if you lose anyway, so take points are low.</p></li>
+<li><p>The very highest take point we find at (-4,-3): <span class="math inline">\(0.352\)</span> At this score you’re often better off passing and getting to the notorious (-4,-2) where you can double very aggresively and try to win the match with a gammon.</p></li>
+</ul>
+</section>
+<section id="with-rounding-errors" class="level3">
+<h3 class="anchored" data-anchor-id="with-rounding-errors">With rounding errors</h3>
+<p>But the goal was to examine the impact of rounding errors. Let’s go back to the 17-away take points from the first diagram, and experiment with the number of digits we use for calculating take points.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="met-precision_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We see that the 2-digit calculations are often off by a fair amount. The (-17,-12) example I mentioned earlier, is not the only one.</p>
+<p>Let’s extend this again with many small plots for different scores:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="met-precision_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>From the chart it is pretty evident that two-digit precision just doesn’t cut it for calculating these kind of take points: They are all over the place, basically.</p>
+<div class="cell">
+
+</div>
+<p>Across all scores, the average absolute difference between take points with two-digit precision and six-digit precision is: 0.041</p>
+<p>The distribution of differences looks like this:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="met-precision_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We see that is is very common for the two-digit take point to be off by a couple of percentage points; sometimes as much as five percentage points.</p>
+<p>(In some extreme cases the difference between two-digit and six-digit take points can be as high as <span class="math inline">\(0.78\)</span>; this is because of scores like (-2,-23) where the leader’s rounded <span class="math inline">\(mwc\)</span> is <span class="math inline">\(1.00\)</span> even after passing; there’s no measurable gain from taking and winning, so the take point becomes <span class="math inline">\(1.00\)</span>).</p>
+</section>
+<section id="with-gammons" class="level3">
+<h3 class="anchored" data-anchor-id="with-gammons">With gammons</h3>
+<p>Before we wrap up, let’s have a look at how take points with and without rounding error look when we also have gammons and backgammons. We use gammon and backgammon <em>frequencies</em>, that is, the proportion of games won or lost, that result in a gammon or backgammon. For illustration, we use frequencies similar to what can be expected at the beginning of a money game:</p>
+<ul>
+<li>Player’s gammon frequency: <span class="math inline">\(0.26\)</span></li>
+<li>Player’s backgammon frequency: <span class="math inline">\(0.012\)</span></li>
+<li>Opponent’s gammon frequency: <span class="math inline">\(0.26\)</span></li>
+<li>Opponent’s gammon frequency: <span class="math inline">\(0.012\)</span></li>
+</ul>
+<p>A plot similar to the one earlier, this time comparing take points with and without gammons, 2- and 6-digit precision, when 17-away, vs.&nbsp;opponent score:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="met-precision_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>For gammonish positions the take points tend to increase with size of lead, but using only two digits basically create so much noise to that the calculations are meaningless.</p>
+<p>Funny enough, it seems that the noise is actually sightly <em>smaller</em> when working with positions where gammons and backgammons are possible. This is probably because the most destructive rounding errors then to be cancel out when we have more numbers involved.</p>
+<p>The density plot of take point rounding errors confirm this:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="met-precision_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
+<ul>
+<li>It seems that doing take point calculations that involve several entries in the match equity table really requires at least three digit precision.</li>
+<li>Since this is not feasible to do over the board, the best practial approach is probably to study benchmark positions and to use heuristics along those lines:
+<ul>
+<li>When one player need 2, 3, or 4 points to win, be aware that those remaining points are particular valuable.</li>
+<li>Automatic redoubles creating <em>overage</em> for one player and has a big impact on take decisions.<br>
+</li>
+<li>When leading, be slightly <em>more</em> willing to take doubles in races where no gammons are possible.</li>
+<li>When leading, be slightly <em>less</em> willing to take doubles in games where gammons are a real possibility.</li>
+</ul></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
