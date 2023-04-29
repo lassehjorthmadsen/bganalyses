@@ -8,6 +8,8 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
+      - analyses/explore-emg.qmd
+      - analyses/met-precision.qmd
 
 format:
   html:

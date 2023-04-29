@@ -50,5 +50,5 @@ rsconnect/
 
 # Other stuff
 .DS_Store
-
 /.quarto/
+/_site/
