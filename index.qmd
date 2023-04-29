@@ -1,7 +1,8 @@
 ---
-title: "bganalyses"
+title: "Backgammon related analyses"
 ---
 
-This is a Quarto website.
+This is my backgammon playground, where I keep some rather nerdy analyses related to backgammon theory.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Check out the top menu if you're curious.
+
