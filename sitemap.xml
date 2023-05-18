@@ -2,18 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/about.html</loc>
-    <lastmod>2023-04-29T08:34:57.517Z</lastmod>
+    <lastmod>2023-05-18T23:10:52.217Z</lastmod>
   </url>
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/explore-emg.html</loc>
-    <lastmod>2023-04-29T08:34:59.592Z</lastmod>
+    <lastmod>2023-05-18T23:10:53.884Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/janowski.html</loc>
+    <lastmod>2023-05-18T23:11:00.495Z</lastmod>
   </url>
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/met-precision.html</loc>
-    <lastmod>2023-04-29T08:35:01.158Z</lastmod>
+    <lastmod>2023-05-18T23:11:01.773Z</lastmod>
   </url>
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/index.html</loc>
-    <lastmod>2023-04-29T08:35:02.071Z</lastmod>
+    <lastmod>2023-05-18T23:11:02.504Z</lastmod>
   </url>
 </urlset>
