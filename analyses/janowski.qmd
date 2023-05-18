@@ -14,6 +14,7 @@ execute:
 ```{r setup}
 library(tidyverse)
 library(knitr)
+options(scipen = 9999)
 devtools::load_all(path = "../../backgammon")
 ```
 
@@ -23,41 +24,92 @@ This note is for better understanding exactly what eXtreme Gammon does to estima
 ## How XG works
 They basic mechanism is this:
 
--   A neural net evaluates a position and come up with six probabilities for either winning or losing a regular game, a gammon and a backgammon. (Strictly speaking only five probabilities are estimated; the last outcome is redundant since the probabilities must sum to 1). The estimated probabilities  are for cubeless money game: What will happen if the game is played to conclusion with no doubling cube at money game conditions.
+-   A neural net evaluates a position and come up with six probabilities for either winning or losing a regular game, a gammon and a backgammon.  The estimated probabilities are for cubeless money game: What will happen if the game is played to conclusion with no doubling cube at money game conditions.
 
 - To improve the quality of this estimate, a weighted average of all possible positions after one and after two rolls is calculated; what we call 2- and 3-ply evaluations. The initial neural net evaluation, 1-ply, is not available in XG.
 
-- From the estimated probability distribtion, it is easy to calculate an expected, or average outcome, the *equity* of the position. This is still assuming money game with no doubling cube. Since that situation *never* happens, the number is not terribly relevant. Therefore, XG tries to estimate what the *cubeful* equity is, using [formulars](https://bkgm.com/articles/Janowski/cubeformulae.pdf) develped by Rick Janowski.
+- From the estimated probability distribution, it is easy to calculate an expected, or average outcome, the *equity* of the position. This is still assuming money game with no doubling cube. Since that situation *never* happens, the number is not terribly relevant. Therefore, XG tries to estimate what the *cubeful* equity is, using [formulas](https://bkgm.com/articles/Janowski/cubeformulae.pdf) develped by Rick Janowski.
 
-## An example
-Let's look at a position after White opens with 21, slotting:
+## Janowski formulas
+
+We won't explain in detail how Rick Janowski's formulars work (that is in the article linked above), we'll just show an example.
+
+As mentioned above, a game of backgammon played to conclusion can end in six possible ways. A position has the follow probabilities of each outcome:
+
+```{r}
+tab <- probs_table(c(47, 17, 1, 31, 4, 0)/100)
+kable(tab, format = "html", table.attr = "style='width:60%;'")
+```
+
+Suppose the relative gammon and backgammon frequencies stay constant as the chance to win changes. Then, the average win will be:
+
+$$W=\frac{47 \times 1  + 17 \times 2 + 1 \times 3}{47 + 17 + 1} = `r round((47 + 17*2 + 1*3) / (47 + 17 + 1), 3)`\ points$$
+The average loss will be:
+
+$$L=\frac{31 \times 1  + 4 \times 2 + 0 \times 3}{31 + 4 + 0} = `r round((31 + 4*2 + 0*3) / (31 + 4 + 0) %>% round(3), 3)`\ points$$
+
+The take point, taking recubes into account is:
+
+$$TP= \frac{L-0.5}{W+L+0.5x}$$
+
+where $x$ is what Janowski calls the *cube-life index*, a number between 0 (where the cube is dead) and 1, where all doubles are efficient, i.e. right at the borderline between take and pass.  
+
+The *equity*, as a function of game winning chances, $p$ and cube location (*player*, *center*, *opponent*) is:
+
+$$E_{player}= p(W+L+0.5x)-L$$
+$$E_{center}= p(W+L+0.5x)-L-0.5x$$
+$$E_{opponent}= \frac{4}{4-x}(p(W+L+0.5x)-L-0.25x)$$
+
+From these, we can estimate cube actions and the size of any cube errors.
+
+A couple of observations:
+
+  - It shouldn't be too difficult to extend this to match play, since $W$ and $L$ can be calculated with match equities, rather than 1, 2, 3 for regular, gammon and backgammon.
+  
+  - It is a simplification to assume that gammon frequencies remain and cube-life remain constant through a game; near conclusion games are more likely to be races without gammons and fewer opportunities to double efficiently.
+  
+Let's do this with a few practical examples and check if the formulas agree with what XG says.  
+
+## Money game examples
+Let's look at a position after Black opens with 21, slotting:
 
 ```{r}
 #| fig.width = 4, fig.height = 4
-ggboard("XGID=-b---AD-C--AeD---c-e----B-:0:0:-1:00:0:0:0:0:10")
+ggboard("XGID=-b----E-C---dEa--c-da---B-:0:0:1:00:0:0:0:0:10")
 ```
 
-According to XG 2-ply (an average of the value of the position after Black's 21 possible replies), the propabilites of the six possible outcomes of the game, if played to conclusion, are as follows:
+According to XG 2-ply (an average of the value of the position after Black's 21 possible replies), the probabilities of the six possible outcomes of the game, if played to conclusion, are as follows:
 
 ```{r}
-tab <- tibble(" " = c("White wins", "Black wins"), 
-              "Regular" = c(.3656, .3574),
-              "Gammon" = c(.1300, .1319),
-              "Backgammon" = c(0.0060, 0.0091)) %>%
-  rowwise() %>% 
-  mutate("Total" = Regular + Gammon + Backgammon) %>% 
-  ungroup()
-
-knitr::kable(tab, format = "html", table.attr = "style='width:60%;'")
+probs <- outcome_probs(c(49.84, 14.10, 0.91, 50.16, 13.60, 0.60))/100
+tab <- probs_table(probs)
+kable(tab, format = "html", table.attr = "style='width:60%;'")
 ```
 
-This comes to a cubeless equity of: $E = `r sum(as.matrix(tab[, 2:4]) * c(1, -1, 2, -2, 3, -3))`$; White is a slight favorite to win, but a small money underdog because of the extra gammons and backgammons. The cubeless equity after a double that XG report, is just the double of this value, so assuming double/take, then a dead cube forever.
+This comes to a cubeless equity of: $E = `r sum(as.matrix(tab[1:2, 1:3]) * c(1, -1, 2, -2, 3, -3))`$; White is a slight underdog to win, but is compensated by a tiny bit of extra gammons and     backgammons, so that the game is basically even. 
 
-Note that the numbers that XG reports are probabilities for winning (*including* gammons and backgammons), gammon (*including* backgammon), and backgammon. So they have to be converted to get probabilities that sum to 1.
+Note that the numbers that XG reports are probabilities for winning (*including* gammons and backgammons), gammon (*including* backgammon), and backgammon. So they have to be converted to get probabilities that sum to 1. (My R-package, [`backgammon`](https://lassehjorthmadsen.github.io/backgammon/index.html) has a function for that.)
 
-Also: It is a mystery to me that the cubeless distribution changes slightly when Jacoby is enabled. It is *not* that gammons or gammons are set to zero; the raw winning chances change. It can't be because future cube actions are taken into account; these are cubeless numbers and they don't change depending on the cube position, unless Jacoby is set.
+If we apply Janowski's formulars to the above cubeless probablities, we get:
 
+```{r}
+pwin <- sum(probs[1:3]) 
+probs_fliped <- c(probs[4:6], probs[1:3])
+```
 
+  - Assuming a *dead* cube, $x=0$, White's take point is: `r round(tp_janowski(probs, 0), 4)`
+  - Assuming a perfectly *live* cube, $x=1$, White's take point is: `r round(tp_janowski(probs, 1), 4)`
+  - Assuming a *dead* cube, $x=0$, Blacks's take point is: `r round(tp_janowski(probs_fliped, 0), 4)`
+  - Assuming a perfectly *live* cube, $x=1$, Black's take point is: `r round(tp_janowski(probs_fliped, 1), 4)`
+
+All these numbers align perfectly with what you get when you consult XGs `Analyze|Cube Information` menu.
+
+```{r}
+p <- sum(probs[1:3])
+eq_janowski(probs = probs, C = 1, p = p, x = 0.706)
+eq_janowski(probs = probs, C = 0, p = p, x = 0.706)
+2 * eq_janowski(probs = probs, C = -1, p = p, x = 0.706)
+```
 
 
 
