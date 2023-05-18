@@ -9,6 +9,7 @@ website:
         text: Home
       - analyses/explore-emg.qmd
       - analyses/met-precision.qmd
+      - analyses/janowski.qmd)
 
 format:
   html:
