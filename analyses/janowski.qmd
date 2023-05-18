@@ -74,7 +74,8 @@ Let's do this with a few practical examples and check if the formulas agree with
 Let's look at a position after Black opens with 21, slotting:
 
 ```{r}
-#| fig.width = 4, fig.height = 4
+#| fig.width = 4
+#| fig.height = 4
 ggboard("XGID=-b----E-C---dEa--c-da---B-:0:0:1:00:0:0:0:0:10")
 ```
 
