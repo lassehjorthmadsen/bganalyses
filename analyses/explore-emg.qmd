@@ -48,7 +48,7 @@ roll3 <- met %>%
   arrange(-emg_diff)
 ```
 
-## Why This?
+## Why this?
 
 This note explores how eXtreme Gammon normalizes mwc, *Match Winning Chances*, to emg, *Equivalent to Money Game*, a metric that is (supposedly) comparable to money game equities. It is similar to what Jeremy Bagai did years ago in a detailed analysis [here](http://www.fortuitouspress.com/emg).
 

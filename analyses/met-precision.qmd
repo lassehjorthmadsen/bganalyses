@@ -60,7 +60,7 @@ tp <- met %>%
   ungroup()
 ```
 
-## Why This?
+## Why this?
 
 Match equity calculations in backgammon can be tricky and hard to perform over the table. How accurate can we hope to be when calculating take points that involve more than one entry in a match equity table?
 
