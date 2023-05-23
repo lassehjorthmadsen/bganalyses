@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lasse Hjorth Madsen">
-<meta name="dcterms.date" content="2023-05-21">
+<meta name="dcterms.date" content="2023-05-24">
 
 <title>Janowski Formulars</title>
 <style>
@@ -125,7 +125,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#why-this" id="toc-why-this" class="nav-link active" data-scroll-target="#why-this">Why this?</a></li>
   <li><a href="#how-xg-works" id="toc-how-xg-works" class="nav-link" data-scroll-target="#how-xg-works">How XG works</a></li>
   <li><a href="#janowski-formulas" id="toc-janowski-formulas" class="nav-link" data-scroll-target="#janowski-formulas">Janowski formulas</a></li>
-  <li><a href="#money-game-examples" id="toc-money-game-examples" class="nav-link" data-scroll-target="#money-game-examples">Money game examples</a></li>
+  <li><a href="#money-game-examples" id="toc-money-game-examples" class="nav-link" data-scroll-target="#money-game-examples">Money game examples</a>
+  <ul class="collapse">
+  <li><a href="#opening-game" id="toc-opening-game" class="nav-link" data-scroll-target="#opening-game">Opening game</a></li>
+  <li><a href="#bear-off-position" id="toc-bear-off-position" class="nav-link" data-scroll-target="#bear-off-position">Bear-off position</a></li>
+  <li><a href="#middle-game" id="toc-middle-game" class="nav-link" data-scroll-target="#middle-game">Middle game</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -151,7 +156,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 21, 2023</p>
+      <p class="date">May 24, 2023</p>
     </div>
   </div>
   
@@ -173,7 +178,7 @@ ul.task-list li input[type="checkbox"] {
 <p>They basic mechanism is this:</p>
 <ul>
 <li><p>A neural net evaluates a position and come up with six probabilities for either winning or losing a regular game, a gammon and a backgammon. The estimated probabilities are for cubeless money game: What will happen if the game is played to conclusion with no doubling cube at money game conditions.</p></li>
-<li><p>To improve the quality of this estimate, a weighted average of all possible positions after one and after two rolls is calculated; what we call 2- and 3-ply evaluations. The initial neural net evaluation, 1-ply, is not available in XG.</p></li>
+<li><p>To improve the quality of this estimate, a weighted average of all possible positions after one and after two rolls is calculated; what we call 2- and 3-ply evaluations. The initial neural net evaluation is 1-ply.</p></li>
 <li><p>From the estimated probability distribution, it is easy to calculate an expected, or average outcome, the <em>equity</em> of the position. This is still assuming money game with no doubling cube. Since that situation <em>never</em> happens, the number is not terribly relevant. Therefore, XG tries to estimate what the <em>cubeful</em> equity is, using <a href="https://bkgm.com/articles/Janowski/cubeformulae.pdf">formulas</a> develped by Rick Janowski.</p></li>
 </ul>
 </section>
@@ -239,13 +244,15 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="money-game-examples" class="level2">
 <h2 class="anchored" data-anchor-id="money-game-examples">Money game examples</h2>
+<section id="opening-game" class="level3">
+<h3 class="anchored" data-anchor-id="opening-game">Opening game</h3>
 <p>Let’s look at a position after Black opens with 21, slotting:</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="janowski_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="384"></p>
 </div>
 </div>
-<p>According to XG 2-ply (an average of the value of the position after Black’s 21 possible replies), the probabilities of the six possible outcomes of the game, if played to conclusion, are as follows:</p>
+<p>According to XG 1-ply, the probabilities of the six possible outcomes of the game, if played to conclusion, are as follows:</p>
 <div class="cell">
 <div class="cell-output-display">
 
@@ -262,23 +269,23 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
   <tr>
    <td style="text-align:left;"> Player wins </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.3574 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.1319 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.0091 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.4984 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.3571 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.1316 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.0102 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.4989 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Opponent wins </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.3656 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.1300 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.0060 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.5016 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.3654 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.1285 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.0072 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.5011 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Sum </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.7230 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.2619 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.0151 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.7225 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.2601 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.0174 </td>
    <td style="text-align:right;width: 3.1cm; "> 1.0000 </td>
   </tr>
 </tbody>
@@ -286,17 +293,17 @@ ul.task-list li input[type="checkbox"] {
 
 </div>
 </div>
-<p>This comes to a cubeless equity of: <span class="math inline">\(E = 0.0049\)</span>; White is a slight underdog to win, but is compensated by a tiny bit of extra gammons and backgammons, so that the game is basically even.</p>
+<p>This comes to a cubeless equity of: <span class="math inline">\(E = 0.0069\)</span>; White is a slight underdog to win, but is compensated by a tiny bit of extra gammons and backgammons, so that the game is basically even.</p>
 <p>Note that the numbers that XG reports are probabilities for winning (<em>including</em> gammons and backgammons), gammon (<em>including</em> backgammon), and backgammon. So they have to be converted to get probabilities that sum to 1. (My R-package, <a href="https://lassehjorthmadsen.github.io/backgammon/index.html"><code>backgammon</code></a> has a function for that.)</p>
 <p>If we apply Janowski’s formulars to the above cubeless probablities, we get:</p>
 <div class="cell">
 
 </div>
 <ul>
-<li>Assuming a <em>dead</em> cube, <span class="math inline">\(x=0\)</span>, White’s take point is: 0.303</li>
-<li>Assuming a perfectly <em>live</em> cube, <span class="math inline">\(x=1\)</span>, White’s take point is: 0.2539</li>
-<li>Assuming a <em>dead</em> cube, <span class="math inline">\(x=0\)</span>, Blacks’s take point is: 0.31</li>
-<li>Assuming a perfectly <em>live</em> cube, <span class="math inline">\(x=1\)</span>, Black’s take point is: 0.2598</li>
+<li>Assuming a <em>dead</em> cube, <span class="math inline">\(x=0\)</span>, White’s take point is: 0.3032</li>
+<li>Assuming a perfectly <em>live</em> cube, <span class="math inline">\(x=1\)</span>, White’s take point is: 0.2541</li>
+<li>Assuming a <em>dead</em> cube, <span class="math inline">\(x=0\)</span>, Blacks’s take point is: 0.3107</li>
+<li>Assuming a perfectly <em>live</em> cube, <span class="math inline">\(x=1\)</span>, Black’s take point is: 0.2604</li>
 </ul>
 <p>All these numbers align perfectly with what you get when you consult XGs <code>Analyze|Cube Information</code> menu.</p>
 <p>Regarding the cubeful equities for the actual position, we have:</p>
@@ -304,15 +311,18 @@ ul.task-list li input[type="checkbox"] {
 
 </div>
 <ul>
-<li>White’s equity owning the cube: 0.181</li>
-<li>White’s equity with a centered cube: 0.005</li>
-<li>White’s equity after double/take: -0.344</li>
+<li>White’s equity owning the cube: 0.183</li>
+<li>White’s equity with a centered cube: 0.008</li>
+<li>White’s equity after double/take: -0.34</li>
 </ul>
 <p>Which also agrees with what XG says, <em>if we assume a cube-life index of <span class="math inline">\(0.706\)</span></em>. Does XG change the cube-life index depending on the position?</p>
 <p>Lets do another example to try to find out.</p>
+</section>
+<section id="bear-off-position" class="level3">
+<h3 class="anchored" data-anchor-id="bear-off-position">Bear-off position</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="janowski_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="janowski_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="384"></p>
 </div>
 </div>
 <div class="cell">
@@ -331,23 +341,84 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
   <tr>
    <td style="text-align:left;"> Player wins </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.4969 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.49694 </td>
    <td style="text-align:right;width: 3.1cm; "> 0 </td>
    <td style="text-align:right;width: 3.1cm; "> 0 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.4969 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.49694 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Opponent wins </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.5031 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.50306 </td>
    <td style="text-align:right;width: 3.1cm; "> 0 </td>
    <td style="text-align:right;width: 3.1cm; "> 0 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.5031 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.50306 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Sum </td>
-   <td style="text-align:right;width: 3.1cm; "> 1.0000 </td>
+   <td style="text-align:right;width: 3.1cm; "> 1.00000 </td>
    <td style="text-align:right;width: 3.1cm; "> 0 </td>
    <td style="text-align:right;width: 3.1cm; "> 0 </td>
+   <td style="text-align:right;width: 3.1cm; "> 1.00000 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell">
+
+</div>
+<p>With no gammons, the cubeless take point clearly is <span class="math inline">\(0.25\)</span> and the perfectly efficient cubeful take point is <span class="math inline">\(0.20\)</span> which is also what XG reports.</p>
+<p>The cubeless equity is also easy to calculate: <span class="math inline">\(E=-0.00612\)</span></p>
+<p>The Janowski-style estimated cubeful equities, assuming a cube-life index of <span class="math inline">\(0.622\)</span>, are:</p>
+<ul>
+<li>White’s equity owning the cube: 0.1484</li>
+<li>White’s equity with a centered cube: -0.0084</li>
+<li>White’s equity after double/take: -0.3251</li>
+</ul>
+<p>XG reports <span class="math inline">\(0.1484, -0.0087, -0.3252\)</span> respectively, very close to the calculated values, so it must assume a lower cube value in the second postion, which would also be reasonable in a medium to short length race like this.</p>
+<p>Let’s do a final example.</p>
+</section>
+<section id="middle-game" class="level3">
+<h3 class="anchored" data-anchor-id="middle-game">Middle game</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="janowski_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="384"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> Regular </th>
+   <th style="text-align:right;"> Gammon </th>
+   <th style="text-align:right;"> Backgammon </th>
+   <th style="text-align:right;"> Sum </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Player wins </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.4156 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.2333 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.0305 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.6794 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Opponent wins </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.2610 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.0568 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.0028 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.3206 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sum </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.6766 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.2901 </td>
+   <td style="text-align:right;width: 3.1cm; "> 0.0333 </td>
    <td style="text-align:right;width: 3.1cm; "> 1.0000 </td>
   </tr>
 </tbody>
@@ -355,17 +426,20 @@ ul.task-list li input[type="checkbox"] {
 
 </div>
 </div>
-<p>With no gammons, the cubeless take point clearly is <span class="math inline">\(0.25\)</span> and the perfectly efficient cubeful take point is <span class="math inline">\(0.20\)</span> which is also what XG reports.</p>
-<p>The calculated equities, Janowski-style, assuming a cube-life index of <span class="math inline">\(0.706\)</span>, are:</p>
+<div class="cell">
+
+</div>
+<p>The cubeless equity is: <span class="math inline">\(E=0.5907\)</span></p>
+<p>The Janowski-style estimated cubeful equities, assuming a cube-life index of <span class="math inline">\(0.706\)</span>, are:</p>
 <ul>
-<li>White’s equity owning the cube: 0.173</li>
-<li>White’s equity with a centered cube: -0.005</li>
-<li>White’s equity after double/take: -0.361</li>
+<li>White’s equity owning the cube: 0.8305</li>
+<li>White’s equity with a centered cube: 0.7942</li>
+<li>White’s equity after double/take: 0.9551</li>
 </ul>
-<p>XG reports <span class="math inline">\(0.145, -0.013, -0.325\)</span> respective, so it must assume a lower cube value which would also be reasonable in a medium to short length race like this.</p>
-<p>Trouble is, in order to match these values, we would need cube-life indices of <span class="math inline">\(0.595\)</span> when White owns the cube, <span class="math inline">\(0.635\)</span> when Black owns the cube, while <em>no</em> cube-life value would produce <span class="math inline">\(E = -0.013\)</span>; the value XG reports for a centered cube.</p>
+<p>XG reports <span class="math inline">\(0.8304, 0.8140, 0.9557\)</span>, again close to the calculated values, although not exactly the same. The reason for the discrepancy (especially with the cube in the middle) is not obvious. (I used 1-ply to make sure the difference is not due to how the numbers gets aggregated at higher plies.)</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
