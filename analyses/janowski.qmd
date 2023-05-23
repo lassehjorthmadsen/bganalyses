@@ -28,7 +28,7 @@ They basic mechanism is this:
 
 -   A neural net evaluates a position and come up with six probabilities for either winning or losing a regular game, a gammon and a backgammon.  The estimated probabilities are for cubeless money game: What will happen if the game is played to conclusion with no doubling cube at money game conditions.
 
-- To improve the quality of this estimate, a weighted average of all possible positions after one and after two rolls is calculated; what we call 2- and 3-ply evaluations. The initial neural net evaluation, 1-ply, is not available in XG.
+- To improve the quality of this estimate, a weighted average of all possible positions after one and after two rolls is calculated; what we call 2- and 3-ply evaluations. The initial neural net evaluation is 1-ply.
 
 - From the estimated probability distribution, it is easy to calculate an expected, or average outcome, the *equity* of the position. This is still assuming money game with no doubling cube. Since that situation *never* happens, the number is not terribly relevant. Therefore, XG tries to estimate what the *cubeful* equity is, using [formulas](https://bkgm.com/articles/Janowski/cubeformulae.pdf) develped by Rick Janowski.
 
@@ -74,6 +74,7 @@ A couple of observations:
 Let's do this with a few practical examples and check if the formulas agree with what XG says.  
 
 ## Money game examples
+### Opening game
 Let's look at a position after Black opens with 21, slotting:
 
 ```{r}
@@ -82,10 +83,13 @@ Let's look at a position after Black opens with 21, slotting:
 ggboard("XGID=-b----E-C---dEa--c-da---B-:0:0:1:00:0:0:0:0:10")
 ```
 
-According to XG 2-ply (an average of the value of the position after Black's 21 possible replies), the probabilities of the six possible outcomes of the game, if played to conclusion, are as follows:
+According to XG 1-ply, the probabilities of the six possible outcomes of the game, if played to conclusion, are as follows:
 
 ```{r}
-probs <- outcome_probs(c(49.84, 14.10, 0.91, 50.16, 13.60, 0.60))/100
+# Player Winning Chances:   49,89% (G:14,18% B:1,02%)
+# Opponent Winning Chances: 50,11% (G:13,57% B:0,72%)
+
+probs <- outcome_probs(c(49.89, 14.18, 1.02, 50.11, 13.57, 0.72))/100
 probs %>% 
   probs_table() %>% 
   kable("html") %>%
@@ -114,38 +118,86 @@ Regarding the cubeful equities for the actual position, we have:
 
 ```{r}
 p <- sum(probs[1:3])
+x <- 0.706
 ```
 
-- White's equity owning the cube: `r round(eq_janowski(probs = probs, C = 1, p = p, x = 0.706), 3)`
-- White's equity with a centered cube: `r round(eq_janowski(probs = probs, C = 0, p = p, x = 0.706), 3)`
-- White's equity after double/take: `r round(2 * eq_janowski(probs = probs, C = -1, p = p, x = 0.706), 3)`
+- White's equity owning the cube: `r round(eq_janowski(probs = probs, C = 1, p = p, x = x), 3)`
+- White's equity with a centered cube: `r round(eq_janowski(probs = probs, C = 0, p = p, x = x), 3)`
+- White's equity after double/take: `r round(2 * eq_janowski(probs = probs, C = -1, p = p, x = x), 3)`
  
-Which also agrees with what XG says, *if we assume a cube-life index of $0.706$*. Does XG change the cube-life index depending on the position?
+Which also agrees with what XG says, *if we assume a cube-life index of $`r x`$*. Does XG change the cube-life index depending on the position?
 
 Lets do another example to try to find out.
 
+### Bear-off position
+
 ```{r}
+#| fig.width: 4
+#| fig.height: 4
 ggboard("XGID=-BBBCBB------------bbbbbb-:0:0:1:00:0:0:0:0:10")
 ```
 
-
 ```{r}
-probs <- outcome_probs(c(49.69, 0, 0, 50.31, 0, 0))/100
+probs <- outcome_probs(c(49.694, 0, 0, 50.306, 0, 0))/100
 probs %>% 
   probs_table() %>% 
   kable("html") %>%
   column_spec(2:5, width = "3.1cm") 
 ```
 
+```{r}
+p <- sum(probs[1:3])
+x <- 0.622
+```
+
 With no gammons, the cubeless take point clearly is $0.25$ and the perfectly efficient cubeful take point is $0.20$ which is also what XG reports.
 
-The calculated equities, Janowski-style, assuming a cube-life index of $0.706$, are:
+The cubeless equity is also easy to calculate: $E=`r eq_janowski(probs, 0, p, 0)`$
 
-- White's equity owning the cube: `r round(eq_janowski(probs = probs, C = 1, p = p, x = 0.706), 3)`
-- White's equity with a centered cube: `r round(eq_janowski(probs = probs, C = 0, p = p, x = 0.706), 3)`
-- White's equity after double/take: `r round(2 * eq_janowski(probs = probs, C = -1, p = p, x = 0.706), 3)`
+The Janowski-style estimated cubeful equities, assuming a cube-life index of $`r x`$, are:
 
-XG reports $0.145, -0.013, -0.325$ respective, so it must assume a lower cube value which would also be reasonable in a medium to short length race like this. 
+- White's equity owning the cube: `r round(eq_janowski(probs = probs, C = 1, p = p, x = x), 4)`
+- White's equity with a centered cube: `r round(eq_janowski(probs = probs, C = 0, p = p, x = x), 4)`
+- White's equity after double/take: `r round(2 * eq_janowski(probs = probs, C = -1, p = p, x = x), 4)`
 
-Trouble is, in order to match these values, we would need cube-life indices of $0.595$ when White owns the cube, $0.635$ when Black owns the cube, while *no* cube-life value would produce $E = -0.013$; the value XG reports for a centered cube.
+XG reports $0.1484, -0.0087, -0.3252$ respectively, very close to the calculated values, so it must assume a lower cube value in the second postion, which would also be reasonable in a medium to short length race like this. 
+
+Let's do a final example.
+
+### Middle game
+
+```{r}
+#| fig.width: 4
+#| fig.height: 4
+ggboard("XGID=ab--B-D-B---cEaA-c-e----A-:0:0:1:00:0:0:0:0:10")
+```
+
+```{r}
+# Analyzed in 1-ply
+# Player Winning Chances:   67,94% (G:26,38% B:3,05%)
+# Opponent Winning Chances: 32,06% (G:5,96% B:0,28%)
+
+probs <- outcome_probs(c(67.94, 26.38, 3.05, 32.06, 5.96, 0.28))/100
+probs %>% 
+  probs_table() %>% 
+  kable("html") %>%
+  column_spec(2:5, width = "3.1cm") 
+```
+
+```{r}
+p <- sum(probs[1:3])
+x <- 0.706
+```
+
+The cubeless equity is: $E=`r eq_janowski(probs, 0, p, 0)`$
+
+The Janowski-style estimated cubeful equities, assuming a cube-life index of $`r x`$, are:
+
+- White's equity owning the cube: `r round(eq_janowski(probs = probs, C = 1, p = p, x = x), 4)`
+- White's equity with a centered cube: `r round(eq_janowski(probs = probs, C = 0, p = p, x = x), 4)`
+- White's equity after double/take: `r round(2 * eq_janowski(probs = probs, C = -1, p = p, x = x), 4)`
+
+XG reports $0.8304, 0.8140, 0.9557$, again close to the calculated values, although not exactly the same. The reason for the discrepancy (especially with the cube in the middle) is not obvious. (I used 1-ply to make sure the difference is not due to how the numbers gets aggregated at higher plies.)
+
+
 
