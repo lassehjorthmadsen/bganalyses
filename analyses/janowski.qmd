@@ -199,5 +199,5 @@ The Janowski-style estimated cubeful equities, assuming a cube-life index of $`r
 
 XG reports $0.8304, 0.8140, 0.9557$, again close to the calculated values, although not exactly the same. The reason for the discrepancy (especially with the cube in the middle) is not obvious. (I used 1-ply to make sure the difference is not due to how the numbers gets aggregated at higher plies.)
 
-
+Perhaps XG uses a model with *two* cube-life indices, one for each player, like Janowski suggests in his article. In that case, it is a bit unclear how to determine the cube-life indices.
 
