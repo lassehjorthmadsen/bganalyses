@@ -21,7 +21,7 @@ devtools::load_all(path = "../../backgammon")
 ```
 
 ## Why this?
-This note is for better understanding exactly what eXtreme Gammon does to estimate cubeless and cubeful equities at money and match play. In particular, we apply the Janowski Formular(s) and try to figure out what it means when the eXtreme Gammon Documentation says that "In eXtreme Gammon the Janowski formula has been extended to apply also in match play".
+This note is for better understanding exactly what eXtreme Gammon and GNU Backgammon does to estimate cubeless and cubeful equities at money and match play. In particular, we apply the Janowski Formular(s) and try to figure out what it means when the eXtreme Gammon Documentation says that "In eXtreme Gammon the Janowski formula has been extended to apply also in match play".
 
 ## How XG works
 They basic mechanism is this:
@@ -74,7 +74,7 @@ A couple of observations:
 Let's do this with a few practical examples and check if the formulas agree with what XG says.  
 
 ## Money game examples
-### Opening game
+### Opening position
 Let's look at a position after Black opens with 21, slotting:
 
 ```{r}
@@ -90,6 +90,7 @@ According to XG 1-ply, the probabilities of the six possible outcomes of the gam
 # Opponent Winning Chances: 50,11% (G:13,57% B:0,72%)
 
 probs <- outcome_probs(c(49.89, 14.18, 1.02, 50.11, 13.57, 0.72))/100
+
 probs %>% 
   probs_table() %>% 
   kable("html") %>%
@@ -100,32 +101,75 @@ This comes to a cubeless equity of: $E = `r sum(probs * c(1, 2, 3, -1, -2, -3))`
 
 Note that the numbers that XG reports are probabilities for winning (*including* gammons and backgammons), gammon (*including* backgammon), and backgammon. So they have to be converted to get probabilities that sum to 1. (My R-package, [`backgammon`](https://lassehjorthmadsen.github.io/backgammon/index.html) has a function for that.)
 
-If we apply Janowski's formulars to the above cubeless probablities, we get:
+If we apply Janowski's take point formulars to the above cubeless probablities, we get:
 
 ```{r}
-pwin <- sum(probs[1:3]) 
 probs_fliped <- c(probs[4:6], probs[1:3])
+
+tp_table <- tibble(
+  Cube = c("Dead", "Perfectly live"),
+  `Black's take point` = c(round(tp_janowski(probs_fliped, 0), 4),
+                           round(tp_janowski(probs_fliped, 1), 4)),
+  `White's take point` = c(round(tp_janowski(probs, 0), 4),
+                           round(tp_janowski(probs, 1), 4))
+)
+
+tp_table %>% 
+  kable("html") %>%
+  column_spec(2:3, width = "5cm") 
 ```
 
-  - Assuming a *dead* cube, $x=0$, White's take point is: `r round(tp_janowski(probs, 0), 4)`
-  - Assuming a perfectly *live* cube, $x=1$, White's take point is: `r round(tp_janowski(probs, 1), 4)`
-  - Assuming a *dead* cube, $x=0$, Blacks's take point is: `r round(tp_janowski(probs_fliped, 0), 4)`
-  - Assuming a perfectly *live* cube, $x=1$, Black's take point is: `r round(tp_janowski(probs_fliped, 1), 4)`
+All these four numbers align perfectly with what you get when you consult XGs `Analyze|Cube Information` menu. GNU Backgammon, in `Analyze|Market Window`, also gives the exact same take points. We can conclude that both programs probably implemented Janowski's formular in the same way for money games.
 
-All these numbers align perfectly with what you get when you consult XGs `Analyze|Cube Information` menu.
+Of course, the interesting bit is the *actual* take points; the "Dead" and "Perfectly live" take point are just lower and upper bounds between which the "real" take point must be found. Janowski just takes a weighted average of the two, to arrive at a guesstimate for the actual or real take point. The weight used is called the cube-life index, more on that in a moment. 
 
-Regarding the cubeful equities for the actual position, we have:
+Regarding the cubeful equities for White in the actual position, we have:
 
 ```{r}
 p <- sum(probs[1:3])
 x <- 0.706
+
+tibble(`Cube location` = c("Owned by White", "Centered", "Owned by Black"), 
+       `Equity` = c(round(eq_janowski(probs = probs, C = 1, p = p, x = x), 3),
+                    round(eq_janowski(probs = probs, C = 0, p = p, x = x), 3),
+                    round(2 * eq_janowski(probs = probs, C = -1, p = p, x = x), 3))
+       ) %>%
+  kable("html") 
 ```
 
-- White's equity owning the cube: `r round(eq_janowski(probs = probs, C = 1, p = p, x = x), 3)`
-- White's equity with a centered cube: `r round(eq_janowski(probs = probs, C = 0, p = p, x = x), 3)`
-- White's equity after double/take: `r round(2 * eq_janowski(probs = probs, C = -1, p = p, x = x), 3)`
- 
-Which also agrees with what XG says, *if we assume a cube-life index of $`r x`$*. Does XG change the cube-life index depending on the position?
+Which also agrees with what XG says, *if we assume a cube-life index of $`r x`$*. I got to that number just by experimenting. It's a little funny with such an odd fraction, so I suspect this is really just a cherry-pick that happens to match XG. 
+
+Let's examine what GNU says about the same position, to find out if it is applying Janowski like I expect it to. You can't input specific probabilities, and get the estimated cubeful equities for each cube location, so we'll need to rely on GNU's evaluations, which of course are slightly different. 
+
+Here, GNU 2-ply (what XG calls 3-ply) cubeless estimates for the same opening position:
+
+```{r}
+probs <- outcome_probs(c(0.5251, 0.1494, 0.0068, 0.4749, 0.1251, 0.0053))
+probs %>% 
+  probs_table() %>% 
+  kable("html") %>%
+  column_spec(2:5, width = "3.1cm") 
+```
+
+Which comes to a cubeless *equity* of $E = `r sum(probs * c(1, 2, 3, -1, -2, -3))`$.
+
+The [GNU Backgammon Manual](https://www.gnu.org/software/gnubg/manual/gnubg.html), helpfully states that they use a cube-life index, or cube efficiency, of $0.68$ for contact positions. Applying Janowski's formulars for cubeful equity to the above probabilities and, using $0.68$ as cube efficiency, we get:  
+
+```{r}
+p <- sum(probs[1:3])
+x <- 0.68
+
+tibble(`Cube location` = c("Owned by White", "Centered", "Owned by Black"), 
+       `Equity` = c(round(eq_janowski(probs = probs, C = 1, p = p, x = x), 4),
+                    round(eq_janowski(probs = probs, C = 0, p = p, x = x), 4),
+                    round(2 * eq_janowski(probs = probs, C = -1, p = p, x = x), 4))
+       ) %>%
+  kable("html") 
+```
+
+Those are all near-identical to what GNU reports. I'm a little unsure if the small discrepancies are due to rounding errors or some other details that I'm not aware of. 
+
+Going back to the questions of which cube-life index XG uses: Perhaps it depends on the position? (GNU BG uses a slightly lower value, $0.60$ rather than $0.68$, in short races.)
 
 Lets do another example to try to find out.
 
@@ -164,7 +208,7 @@ XG reports $0.1484, -0.0087, -0.3252$ respectively, very close to the calculated
 
 Let's do a final example.
 
-### Middle game
+### Middle game position
 
 ```{r}
 #| fig.width: 4
