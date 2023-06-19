@@ -1,0 +1,26 @@
+---
+title: "Discovering the MET-formula"
+author: "Lasse Hjorth Madsen"
+date: today 
+format: html
+toc: true
+toc-expand: true
+editor: source
+execute:
+  echo: false
+  warning: false
+---
+
+```{r setup}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+options(scipen = 9999)
+options(knitr.table.format = "html")
+devtools::load_all(path = "../../backgammon")
+```
+
+## Why this?
+The most popular match equity tabel around is the Kazaross XG2 table. It is created empirically, by letting XG play against itself at all match scores up to 25 points. It would be fun to discover the actual formula underlying the table. There likely is one: Everything has a underlying mathematical structure.
+
+# Symbolic regression

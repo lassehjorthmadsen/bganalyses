@@ -1,0 +1,14 @@
+{
+  "hash": "654e9a1036eee9380d61f3b1b82dd026",
+  "result": {
+    "markdown": "---\ntitle: \"Mistakes Where Made\"\nauthor: \"Lasse Hjorth Madsen\"\ndate: today \nformat: html\ntoc: true\ntoc-expand: true\neditor: source\nexecute:\n  echo: false\n  warning: false\n---\n\n::: {.cell}\n\n:::\n\n\n## Why this?\n\nThis is a collection of positions where I made some kind of mistake. They are collected from my own matches, at the moment mostly online matches at [Backgammon Galaxy](play.backgammongalaxy.com).\n\nI picked ones that I though had learning potential, i.e. where I made some sort of conceptual mistake. So no mistakes from oversights, mis-clicks, or general sloppiness.\n\nFor the most part, the positions are presented as money games, even if they originally were from matches. This is in order to focus on the *concepts* that I got wrong, not the particular matchscore. The exceptions are when I made a mistake *because* of the match score.\n\nI will try to organize the positions into meaningful themes, and will try to include variations, to highlight certain ideas. \n\n## Checker plays\n\n### Overplays\n### Underplays\n\n## Cube descisions\n\n### Missed doubles\n### Wrong doubles\n\n## Match play mistakes",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

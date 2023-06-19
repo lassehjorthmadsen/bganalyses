@@ -1,0 +1,14 @@
+{
+  "hash": "562b0b777b7e310f507718044a73bc62",
+  "result": {
+    "markdown": "---\ntitle: \"Mistakes Where Made\"\nauthor: \"Lasse Hjorth Madsen\"\ndate: today \nformat: html\ntoc: true\ntoc-expand: true\neditor: source\nexecute:\n  echo: false\n  warning: false\n---\n\n::: {.cell}\n\n:::\n\n\n## Why this?\nAt [Backgammon Galaxy](play.backgammongalaxy.com) I play mostly three point matches. I guees because this is what most people want to play. So I though I would take a better look at the specific considerations for scores inside the three point match. How much and in what way are they different from money game?\n\n## 3-away, 3-away\n\n### Initial doubles and takes\n### Redoubles and takes\n### Checker plays\n\n## 2-away, 3-away\n\n### Doubles and takes\n### Checker plays\n\n## 3-away, 2-away\n\n### Doubles and takes\n### Checker plays\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

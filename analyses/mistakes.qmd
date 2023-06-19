@@ -1,0 +1,43 @@
+---
+title: "Mistakes Where Made"
+author: "Lasse Hjorth Madsen"
+date: today 
+format: html
+toc: true
+toc-expand: true
+editor: source
+execute:
+  echo: false
+  warning: false
+---
+
+```{r setup}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+options(scipen = 9999)
+options(knitr.table.format = "html")
+devtools::load_all(path = "../../backgammon")
+```
+
+## Why this?
+
+This is a collection of positions where I made some kind of mistake. They are collected from my own matches, at the moment mostly online matches at [Backgammon Galaxy](play.backgammongalaxy.com).
+
+I picked ones that I though had learning potential, i.e. where I made some sort of conceptual mistake. So no mistakes from oversights, mis-clicks, or general sloppiness.
+
+For the most part, the positions are presented as money games, even if they originally were from matches. This is in order to focus on the *concepts* that I got wrong, not the particular matchscore. The exceptions are when I made a mistake *because* of the match score.
+
+I will try to organize the positions into meaningful themes, and will try to include variations, to highlight certain ideas. 
+
+## Checker plays
+
+### Overplays
+### Underplays
+
+## Cube descisions
+
+### Missed doubles
+### Wrong doubles
+
+## Match play mistakes

@@ -4,6 +4,7 @@ author: "Lasse Hjorth Madsen"
 date: today 
 format: html
 toc: true
+toc-depth: 4
 toc-expand: true
 editor: source
 execute:
@@ -21,20 +22,26 @@ devtools::load_all(path = "../../backgammon")
 ```
 
 ## Why this?
+
 This note is for better understanding exactly what eXtreme Gammon and GNU Backgammon does to estimate cubeless and cubeful equities at money and match play. In particular, we apply the Janowski Formular(s) and try to figure out what it means when the eXtreme Gammon Documentation says that "In eXtreme Gammon the Janowski formula has been extended to apply also in match play".
 
 ## How XG works
+
 They basic mechanism is this:
 
--   A neural net evaluates a position and come up with six probabilities for either winning or losing a regular game, a gammon and a backgammon.  The estimated probabilities are for cubeless money game: What will happen if the game is played to conclusion with no doubling cube at money game conditions.
+-   A neural net evaluates a position and come up with six probabilities for either winning or losing a regular game, a gammon and a backgammon. The estimated probabilities are for cubeless money game: What will happen if the game is played to conclusion with no doubling cube at money game conditions.
 
-- To improve the quality of this estimate, a weighted average of all possible positions after one and after two rolls is calculated; what we call 2- and 3-ply evaluations. The initial neural net evaluation is 1-ply.
+-   To improve the quality of this estimate, a weighted average of all possible positions after one and after two rolls is calculated; what we call 2- and 3-ply evaluations. The initial neural net evaluation is 1-ply. (In GNU BG, the corresponding plies are called 0, 1, 2, etc.)
 
-- From the estimated probability distribution, it is easy to calculate an expected, or average outcome, the *equity* of the position. This is still assuming money game with no doubling cube. Since that situation *never* happens, the number is not terribly relevant. Therefore, XG tries to estimate what the *cubeful* equity is, using [formulas](https://bkgm.com/articles/Janowski/cubeformulae.pdf) develped by Rick Janowski.
+-   From the estimated probability distribution, it is easy to calculate an expected, or average outcome, the *equity* of the position. This is still assuming money game with no doubling cube. Since that situation *never* happens, the number is not terribly relevant. Therefore, XG tries to estimate what the *cubeful* equity is, using [formulas](https://bkgm.com/articles/Janowski/cubeformulae.pdf) develped by Rick Janowski.
 
 ## Janowski formulas
 
-We won't explain in detail how Rick Janowski's formulars work (that is in the article linked above), we'll just show an example.
+We won't explain in detail how all of Rick Janowski's formulas work (that is in the article linked above), we'll explain the idea and discuss examples.
+
+First, money game.
+
+### Money game
 
 As mentioned , a game of backgammon played to conclusion can end in six possible ways. A certain position in Janowski's article, have the following probabilities of each outcome:
 
@@ -44,37 +51,87 @@ probs_table(c(47, 17, 1, 31, 4, 0)/100) %>%
   column_spec(2:5, width = "3.1cm") 
 ```
 
+```{r}
+W <- (47 + 17*2 + 1*3) / (47 + 17 + 1)
+L <- (31 + 4*2  + 0*3) / (31 +  4 + 0)
+```
+
+
 Suppose the relative gammon and backgammon frequencies stay constant as the chance to win changes. Then, the average win will be:
 
-$$W=\frac{47 \times 1  + 17 \times 2 + 1 \times 3}{47 + 17 + 1} = `r round((47 + 17*2 + 1*3) / (47 + 17 + 1), 3)`\ points$$
+$$W=\frac{47 \times 1  + 17 \times 2 + 1 \times 3}{47 + 17 + 1} = `r round(W, 3)`\ points$$
+
 The average loss will be:
 
-$$L=\frac{31 \times 1  + 4 \times 2 + 0 \times 3}{31 + 4 + 0} = `r round((31 + 4*2 + 0*3) / (31 + 4 + 0) %>% round(3), 3)`\ points$$
+$$L=\frac{31 \times 1  + 4 \times 2 + 0 \times 3}{31 + 4 + 0} = `r round(L, 3)`\ points$$ 
+The values are all assuming a cube-level of 1, also called *normalized* values. To get the monetary value, they will have to be multiplied by the cube value and the stakes per point.
 
-The take point, taking recubes into account is:
+The take point, *not* taking re-cubes into account, aka the *dead cube* take point, is:
+
+$$TP= \frac{L-0.5}{W+L}$$
+
+This is just another way to express the familiar take point formula, most often written like this: $TP= \frac{Loss}{Gain + Loss}$
+
+So, as an example, using the above figures for average wins and losses, our dead-cube take point would be:
+
+$$TP = \frac{`r round(L, 3)` - 0.5}{`r round(W, 3)` + `r round(L, 3)`} = `r round((L - 0.5) / (W + L), 3)`$$ 
+
+The dead-cube take point is what we might use in a last roll situation: When the opponent will either win or lose om the next roll, and we will never get the opportunity to redouble. The opposite situation is what we might call the *live cube*, where we unrealistically assume that our redoubles will always be fully efficient; we will redouble exactly at our opponent's take point, when he will be indifferent between taking and passing.
+
+The *real* take point for most positions is some where between these two extremes: Lower that the pessimistic dead-cube take point, but higher that the overly optimistic live-cube take point.
+
+#### The continous model
+
+To calculate the live-cube take point, we need to briefly visit the so-called continuous model, proposed by Keeler and Spencer, as long back as 1975, in an article called [*Optimal Doubling in Backgammon*](https://bkgm.com/articles/KeelerSpencer/OptimalDoublingInBackgammon/index.html).
+
+The basic idea is simple: Suppose the winning chance in some game moves smoothly and randomly along, then if $E$ is the event that the winning probability, $x$, of player A, rises to $x+b$ before it drops to $x-a$ is:
+
+$$P(E) = \frac{a}{a+b}$$
+
+This applies to any game where winning chance move continuously as time passes. Wheeler and Spencer has a nice example from basketball, paraphrased like this:
+
+Suppose UCLA has 90% chance of beating MIT. What is the probability that MIT will have 50% chance of winning at some point during a game? In other words, the probability of MIT winning will have to rise from $0.1$ to $0.5$ before it drops from $0.1$ to $0.0$. So $a = 0.1, b = 0.4$. Then: 
+
+$$P(E) = \frac{0.1}{0.1+0.4} = 0.2$$
+
+The probability that MIT will at some point have an even game is $0.2 = 20%$.
+
+Applying this to backgammon, let's assume that we accept a cube with winning chances of $0.2$ and that we can double our opponent efficiently out if we reach a winning chance of $0.8$. What are our actual winning chances then, assuming a perfectly continouous game? We need to improve from $0.2$ to $0.8$ before we detoriate from $0.2$ to $0.0$ so $a=0.2, b=0.6$, and:
+
+$$P(E) = \frac{0.2}{0.2+0.6} = \frac{1}{4} = 0.25$$
+
+This illustrates that the optimistic live-cube model would allow us to take a gammonless game with a winning probability of just $0.2$ since cube access could turn that into the nessesary $0.25$. (Keeler and Spencer has a more formal proof of the $0.2$ live-cube take point.)
+
+As mentioned, the real-life take point would have to be found somewhere between $0.2$ and $0.25$. We can think of it as the weighted average of the two, where the weight represents the *cube efficiency* or what Janowski calls the *cube-life index*. 
+
+Experiments show that in long races the take point is about $0.215$, suggesting a cube efficiency of $0.7$ since $0.7\times 0.20 + 0.3\times 0.25 = 0.215$ 
+
+Incorporating this into the Janowski formular for take points, we can get an estimated, "real" take point, that takes recubes *and* cube efficiency into account:
 
 $$TP= \frac{L-0.5}{W+L+0.5x}$$
 
-where $x$ is what Janowski calls the *cube-life index*, a number between 0 (where the cube is dead) and 1, where all doubles are efficient, i.e. right at the borderline between take and pass.  
+where $x$ is what Janowski calls the *cube-life index*, a number between 0 (where the cube is dead) and 1, where all doubles are efficient, i.e. right at the borderline between take and pass.
 
-The *equity*, as a function of game winning chances, $p$ and cube location (*player*, *center*, *opponent*) is:
+#### Equity from cube location
 
-$$E_{player}= p(W+L+0.5x)-L$$
-$$E_{center}= p(W+L+0.5x)-L-0.5x$$
-$$E_{opponent}= \frac{4}{4-x}(p(W+L+0.5x)-L-0.25x)$$
+Expanding the above ideas, the Janowski-formulas can be rearranged to express the *equity*, as a function of game winning chances, $p$ and cube location (*player*, *center*, *opponent*):
+
+$$E_{player}= p(W+L+0.5x)-L$$ $$E_{center}= p(W+L+0.5x)-L-0.5x$$ $$E_{opponent}= \frac{4}{4-x}(p(W+L+0.5x)-L-0.25x)$$
 
 From these, we can estimate cube actions and the size of any cube errors.
 
 A couple of observations:
 
-  - It shouldn't be too difficult to extend this to match play, since $W$ and $L$ can be calculated with match equities, rather than 1, 2, 3 for regular, gammon and backgammon.
-  
-  - It is a simplification to assume that gammon frequencies remain and cube-life remain constant through a game; near conclusion games are more likely to be races without gammons and fewer opportunities to double efficiently.
-  
-Let's do this with a few practical examples and check if the formulas agree with what XG says.  
+-   It shouldn't be too difficult to extend this to match play, since $W$ and $L$ can be calculated with match equities, rather than 1, 2, 3 for regular, gammon and backgammon.
 
-## Money game examples
-### Opening position
+-   It is a simplification to assume that gammon frequencies remain and cube-life remain constant through a game; near conclusion games are more likely to be races without gammons and fewer opportunities to double efficiently.
+
+Let's do this with a few practical examples and check if the formulas agree with what XG says.
+
+#### Examples
+
+##### Opening position
+
 Let's look at a position after Black opens with 21, slotting:
 
 ```{r}
@@ -97,7 +154,7 @@ probs %>%
   column_spec(2:5, width = "3.1cm") 
 ```
 
-This comes to a cubeless equity of: $E = `r sum(probs * c(1, 2, 3, -1, -2, -3))`$; White is a slight underdog to win, but is compensated by a tiny bit of extra gammons and backgammons, so that the game is basically even. 
+This comes to a cubeless equity of: $E = `r sum(probs * c(1, 2, 3, -1, -2, -3))`$; White is a slight underdog to win, but is compensated by a tiny bit of extra gammons and backgammons, so that the game is basically even.
 
 Note that the numbers that XG reports are probabilities for winning (*including* gammons and backgammons), gammon (*including* backgammon), and backgammon. So they have to be converted to get probabilities that sum to 1. (My R-package, [`backgammon`](https://lassehjorthmadsen.github.io/backgammon/index.html) has a function for that.)
 
@@ -121,7 +178,7 @@ tp_table %>%
 
 All these four numbers align perfectly with what you get when you consult XGs `Analyze|Cube Information` menu. GNU Backgammon, in `Analyze|Market Window`, also gives the exact same take points. We can conclude that both programs probably implemented Janowski's formular in the same way for money games.
 
-Of course, the interesting bit is the *actual* take points; the "Dead" and "Perfectly live" take point are just lower and upper bounds between which the "real" take point must be found. Janowski just takes a weighted average of the two, to arrive at a guesstimate for the actual or real take point. The weight used is called the cube-life index, more on that in a moment. 
+Of course, the interesting bit is the *actual* take points; the "Dead" and "Perfectly live" take point are just lower and upper bounds between which the "real" take point must be found. As mentioned, Janowski just takes a weighted average of the two, to arrive at a guesstimate for the real take point.
 
 Regarding the cubeful equities for White in the actual position, we have:
 
@@ -137,9 +194,9 @@ tibble(`Cube location` = c("Owned by White", "Centered", "Owned by Black"),
   kable("html") 
 ```
 
-Which also agrees with what XG says, *if we assume a cube-life index of $`r x`$*. I got to that number just by experimenting. It's a little funny with such an odd fraction, so I suspect this is really just a cherry-pick that happens to match XG. 
+Which also agrees with what XG says, *if we assume a cube-life index of* $`r x`$. I got to that number just by experimenting. It's a little funny with such an odd fraction, so I suspect this is really just a cherry-pick that happens to match XG.
 
-Let's examine what GNU says about the same position, to find out if it is applying Janowski like I expect it to. You can't input specific probabilities, and get the estimated cubeful equities for each cube location, so we'll need to rely on GNU's evaluations, which of course are slightly different. 
+Let's examine what GNU says about the same position, to find out if it is applying Janowski like I expect it to. You can't input specific probabilities, and get the estimated cubeful equities for each cube location, so we'll need to rely on GNU's evaluations, which of course are slightly different.
 
 Here, GNU 2-ply (what XG calls 3-ply) cubeless estimates for the same opening position:
 
@@ -153,7 +210,7 @@ probs %>%
 
 Which comes to a cubeless *equity* of $E = `r sum(probs * c(1, 2, 3, -1, -2, -3))`$.
 
-The [GNU Backgammon Manual](https://www.gnu.org/software/gnubg/manual/gnubg.html), helpfully states that they use a cube-life index, or cube efficiency, of $0.68$ for contact positions. Applying Janowski's formulars for cubeful equity to the above probabilities and, using $0.68$ as cube efficiency, we get:  
+The [GNU Backgammon Manual](https://www.gnu.org/software/gnubg/manual/gnubg.html), helpfully states that they use a cube-life index, or cube efficiency, of $0.68$ for contact positions. Applying Janowski's formulars for cubeful equity to the above probabilities and, using $0.68$ as cube efficiency, we get:
 
 ```{r}
 p <- sum(probs[1:3])
@@ -167,13 +224,13 @@ tibble(`Cube location` = c("Owned by White", "Centered", "Owned by Black"),
   kable("html") 
 ```
 
-Those are all near-identical to what GNU reports. I'm a little unsure if the small discrepancies are due to rounding errors or some other details that I'm not aware of. 
+Those are all near-identical to what GNU reports. I'm a little unsure if the small discrepancies are due to rounding errors or some other details that I'm not aware of.
 
 Going back to the questions of which cube-life index XG uses: Perhaps it depends on the position? (GNU BG uses a slightly lower value, $0.60$ rather than $0.68$, in short races.)
 
 Lets do another example to try to find out.
 
-### Bear-off position
+##### Bear-off position
 
 ```{r}
 #| fig.width: 4
@@ -198,17 +255,17 @@ With no gammons, the cubeless take point clearly is $0.25$ and the perfectly eff
 
 The cubeless equity is also easy to calculate: $E=`r eq_janowski(probs, 0, p, 0)`$
 
-The Janowski-style estimated cubeful equities, assuming a cube-life index of $`r x`$, are:
+The Janowski-style estimated cubefull equities, assuming a cube-life index of $`r x`$, are:
 
-- White's equity owning the cube: `r round(eq_janowski(probs = probs, C = 1, p = p, x = x), 4)`
-- White's equity with a centered cube: `r round(eq_janowski(probs = probs, C = 0, p = p, x = x), 4)`
-- White's equity after double/take: `r round(2 * eq_janowski(probs = probs, C = -1, p = p, x = x), 4)`
+-   White's equity owning the cube: `r round(eq_janowski(probs = probs, C = 1, p = p, x = x), 4)`
+-   White's equity with a centered cube: `r round(eq_janowski(probs = probs, C = 0, p = p, x = x), 4)`
+-   White's equity after double/take: `r round(2 * eq_janowski(probs = probs, C = -1, p = p, x = x), 4)`
 
-XG reports $0.1484, -0.0087, -0.3252$ respectively, very close to the calculated values, so it must assume a lower cube value in the second postion, which would also be reasonable in a medium to short length race like this. 
+XG reports $0.1484, -0.0087, -0.3252$ respectively, very close to the calculated values, so it must assume a lower cube value in the second postion, which would also be reasonable in a medium to short length race like this.
 
 Let's do a final example.
 
-### Middle game position
+##### Middle game position
 
 ```{r}
 #| fig.width: 4
@@ -237,11 +294,22 @@ The cubeless equity is: $E=`r eq_janowski(probs, 0, p, 0)`$
 
 The Janowski-style estimated cubeful equities, assuming a cube-life index of $`r x`$, are:
 
-- White's equity owning the cube: `r round(eq_janowski(probs = probs, C = 1, p = p, x = x), 4)`
-- White's equity with a centered cube: `r round(eq_janowski(probs = probs, C = 0, p = p, x = x), 4)`
-- White's equity after double/take: `r round(2 * eq_janowski(probs = probs, C = -1, p = p, x = x), 4)`
+-   White's equity owning the cube: `r round(eq_janowski(probs = probs, C = 1, p = p, x = x), 4)`
+-   White's equity with a centered cube: `r round(eq_janowski(probs = probs, C = 0, p = p, x = x), 4)`
+-   White's equity after double/take: `r round(2 * eq_janowski(probs = probs, C = -1, p = p, x = x), 4)`
 
 XG reports $0.8304, 0.8140, 0.9557$, again close to the calculated values, although not exactly the same. The reason for the discrepancy (especially with the cube in the middle) is not obvious. (I used 1-ply to make sure the difference is not due to how the numbers gets aggregated at higher plies.)
 
 Perhaps XG uses a model with *two* cube-life indices, one for each player, like Janowski suggests in his article. In that case, it is a bit unclear how to determine the cube-life indices.
 
+### Match play
+
+In match play, we're not interested in how much we win or lose in a single game, but in the probability of winning the whole match. For this reason, the appropriate unit is no longer the average value or equity of a position, but our match winning chances, $mwc$.
+
+#### The live cube take point
+#### Example: 5-away, 3-away
+##### No gammons
+##### Gammons
+#### Example: 17-away, 16-away
+
+## Conclusions

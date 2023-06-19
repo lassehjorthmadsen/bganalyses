@@ -1,0 +1,40 @@
+---
+title: "Mistakes Where Made"
+author: "Lasse Hjorth Madsen"
+date: today 
+format: html
+toc: true
+toc-expand: true
+editor: source
+execute:
+  echo: false
+  warning: false
+---
+
+```{r setup}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+options(scipen = 9999)
+options(knitr.table.format = "html")
+devtools::load_all(path = "../../backgammon")
+```
+
+## Why this?
+At [Backgammon Galaxy](play.backgammongalaxy.com) I play mostly three point matches. I guees because this is what most people want to play. So I though I would take a better look at the specific considerations for scores inside the three point match. How much and in what way are they different from money game?
+
+## 3-away, 3-away
+
+### Initial doubles and takes
+### Redoubles and takes
+### Checker plays
+
+## 2-away, 3-away
+
+### Doubles and takes
+### Checker plays
+
+## 3-away, 2-away
+
+### Doubles and takes
+### Checker plays

@@ -1,0 +1,14 @@
+{
+  "hash": "97267349691bbaa0b4f18a5438e40311",
+  "result": {
+    "markdown": "---\ntitle: \"Discovering the MET-formula\"\nauthor: \"Lasse Hjorth Madsen\"\ndate: today \nformat: html\ntoc: true\ntoc-expand: true\neditor: source\nexecute:\n  echo: false\n  warning: false\n---\n\n::: {.cell}\n\n:::\n\n\n## Why this?\nThe most popular match equity tabel around is the Kazaross XG2 table. It is created empirically, by letting XG play against itself at all match scores up to 25 points. It would be fun to discover the actual formula underlying the table. There likely is one: Everything has a underlying mathematical structure.\n\n# Symbolic regression",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
