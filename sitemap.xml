@@ -2,22 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/about.html</loc>
-    <lastmod>2023-06-14T13:35:36.168Z</lastmod>
+    <lastmod>2023-06-19T21:13:25.757Z</lastmod>
   </url>
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/explore-emg.html</loc>
-    <lastmod>2023-06-14T13:35:39.915Z</lastmod>
+    <lastmod>2023-06-19T21:13:27.770Z</lastmod>
   </url>
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/janowski.html</loc>
-    <lastmod>2023-06-14T13:35:43.216Z</lastmod>
+    <lastmod>2023-06-19T21:13:29.787Z</lastmod>
   </url>
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/met-precision.html</loc>
-    <lastmod>2023-06-14T13:35:45.639Z</lastmod>
+    <lastmod>2023-06-19T21:13:31.342Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/met-regression.html</loc>
+    <lastmod>2023-06-19T21:13:32.494Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/mistakes.html</loc>
+    <lastmod>2023-06-19T21:13:33.671Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/three-pointers.html</loc>
+    <lastmod>2023-06-19T21:13:34.685Z</lastmod>
   </url>
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/index.html</loc>
-    <lastmod>2023-06-14T13:35:47.264Z</lastmod>
+    <lastmod>2023-06-19T21:13:35.695Z</lastmod>
   </url>
 </urlset>
