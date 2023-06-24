@@ -338,7 +338,7 @@ Our take point assuming a dead cube is $`r round(tp(5,3,1,met), 3)`$ (we skip th
 
 If we ever *redouble*, then our opponent, if accepting, will have a dead cube, so their live and dead take point is the same, $`r round(tp(3,5,2,met), 3)`$. This is quite high, due to the fact that we can use all four points; our opponent can use only three. That is good news for us, since we don't have to improve nearly as much as in money game to win with the cube. So in this case, applying the continious model, we get: 
 
-$$TP_{live}=`r round(tp(5,3,1,met), 3) `\times (1- `r round(tp(3,5,2,met), 3)`) = `r round(tp(5,3,1,met) * (1-tp(3,5,2,met)), 3)`$$
+$$TP_{live}=`r round(tp(5,3,1,met), 3)`\times (1- `r round(tp(3,5,2,met), 3)`) = `r round(tp(5,3,1,met) * (1-tp(3,5,2,met)), 3)`$$
 
 So there's a big differens between the dead-cube and the live-cube take points which make a lot of sense, because owning a cube at 2 when trailing (-5,-3) really is powerful: We only risk one additional point when redoubling, but we can win two extra. *And* the opponent will be holding a dead cube, so we're not givning away anything.
 
@@ -356,9 +356,9 @@ tp_table <- tibble(
                                      `Cube value`, met)) %>% 
   ungroup() 
 
-live <- tp_table$`Dead-cube take point` # Initalize live tp values
+live <- tp_table$`Dead-cube take point` # Initialize live tp values
 
-# Calulate live tp values starting with second-to-last double
+# Calculate live tp values starting with second-to-last double
 for (i in seq_along(live)[-1]) {
   live[i] <- live[i] * (1 - live[i-1]) 
  }
@@ -376,13 +376,13 @@ tp_table %>%
   column_spec(1:6, width = "5cm") 
 ```
 
-These are all the same numbers that GNU BG and XG reports, in the "Market window" and "Cube Information" dialog boxes. 
+These are all the same numbers that GNU BG and XG reports, in the "Market window" and "Cube Information" dialog boxes. And rollouts suggest that in a long race (I tried 125 pips vs 139 pips) you have a small take with about 22% winning chances, like the "real-cube" average indicate.
 
+This is about the same as in money game, so the lesson for this score (-5, -3) is that the extraordinary cube leverage just about cancels out the somewhat higher take point (of $`r round(tp(5,3,1,met), 3)`$) one would have without using the cube, so in the end the take point is close to money game. Of course this is for a long race; if it was a very short race or even a last-roll situation we would be back to the higher take point. A four-roll position would be a pass, for example.
 
+### Example: 17-away, 16-away
 
-### Example: 16-away, 17-away
-
-For fun, let's study the same example for a longer match; now we're being initially doubled when trailing 17-away, 16-away, (-16, -17). Since the recube vig propagates all the way through redouble after redouble, we have to start by considering the last possible double. Counting at fingers, we can discover that the last possible double (after multiple turn-arounds and cube actions), would be us offering a 16-cube which will be dead hereafter.
+For fun, let's study the same example for a longer match; now we're being initially doubled when trailing 17-away, 16-away, (-16, -17). Since the recube vig propagates all the way through redouble after redouble, we have to start by considering the last possible double. Counting at fingers, we can discover that the last possible double (after multiple turn-arounds and cube actions), would be when we own a 8-cube, and our needs to decide it they should take a 16-cube which will be dead hereafter.
 
 All the take points, in tabular form, starting with the 8-cube, where the live-cube take point is identical to the dead-cube take point:
 
@@ -398,9 +398,9 @@ tp_table <- tibble(
                                      `Cube value`, met)) %>% 
   ungroup() 
 
-live <- tp_table$`Dead-cube take point` # Initalize live tp values
+live <- tp_table$`Dead-cube take point` # Initialize live tp values
 
-# Calulate live tp values starting with second-to-last double
+# Calculate live tp values starting with second-to-last double
 for (i in seq_along(live)[-1]) {
   live[i] <- live[i] * (1 - live[i-1]) 
  }
