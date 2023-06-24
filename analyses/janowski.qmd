@@ -382,7 +382,7 @@ This is about the same as in money game, so the lesson for this score (-5, -3) i
 
 ### Example: 17-away, 16-away
 
-For fun, let's study the same example for a longer match; now we're being initially doubled when trailing 17-away, 16-away, (-16, -17). Since the recube vig propagates all the way through redouble after redouble, we have to start by considering the last possible double. Counting at fingers, we can discover that the last possible double (after multiple turn-arounds and cube actions), would be when we own a 8-cube, and our needs to decide it they should take a 16-cube which will be dead hereafter.
+For fun, let's study the same example for a longer match; now we're being initially doubled when trailing 17-away, 16-away, (-17, -16). Since the recube vig propagates all the way through redouble after redouble, we have to start by considering the last possible double. Counting at fingers, we can discover that the last possible double (after multiple turn-arounds and cube actions), would be when we own a 8-cube, and our needs to decide it they should take a 16-cube which will be dead hereafter.
 
 All the take points, in tabular form, starting with the 8-cube, where the live-cube take point is identical to the dead-cube take point:
 
