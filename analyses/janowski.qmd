@@ -18,7 +18,11 @@ library(knitr)
 library(kableExtra)
 options(scipen = 9999)
 options(knitr.table.format = "html")
+
 devtools::load_all(path = "../../backgammon")
+
+met_file <- devtools::package_file("data-raw/Kazaross XG2.met", path = "../../backgammon")
+met <- get_met(filename = met_file)
 ```
 
 ## Why this?
@@ -41,7 +45,7 @@ We won't explain in detail how all of Rick Janowski's formulas work (that is in 
 
 First, money game.
 
-### Money game
+## Money game
 
 As mentioned , a game of backgammon played to conclusion can end in six possible ways. A certain position in Janowski's article, have the following probabilities of each outcome:
 
@@ -76,11 +80,11 @@ So, as an example, using the above figures for average wins and losses, our dead
 
 $$TP = \frac{`r round(L, 3)` - 0.5}{`r round(W, 3)` + `r round(L, 3)`} = `r round((L - 0.5) / (W + L), 3)`$$ 
 
-The dead-cube take point is what we might use in a last roll situation: When the opponent will either win or lose om the next roll, and we will never get the opportunity to redouble. The opposite situation is what we might call the *live cube*, where we unrealistically assume that our redoubles will always be fully efficient; we will redouble exactly at our opponent's take point, when he will be indifferent between taking and passing.
+The dead-cube take point is what we might use in a last roll situation: When the opponent will either win or lose om the next roll, and we will never get the opportunity to redouble. The opposite situation is what we might call the *live cube*, take point, where we unrealistically assume that our redoubles will always be fully efficient; we will redouble exactly at our opponent's take point, when he or she will be indifferent between taking and passing.
 
 The *real* take point for most positions is some where between these two extremes: Lower that the pessimistic dead-cube take point, but higher that the overly optimistic live-cube take point.
 
-#### The continous model
+### The continous model
 
 To calculate the live-cube take point, we need to briefly visit the so-called continuous model, proposed by Keeler and Spencer, as long back as 1975, in an article called [*Optimal Doubling in Backgammon*](https://bkgm.com/articles/KeelerSpencer/OptimalDoublingInBackgammon/index.html).
 
@@ -112,7 +116,7 @@ $$TP= \frac{L-0.5}{W+L+0.5x}$$
 
 where $x$ is what Janowski calls the *cube-life index*, a number between 0 (where the cube is dead) and 1, where all doubles are efficient, i.e. right at the borderline between take and pass.
 
-#### Equity from cube location
+### Equity from cube location
 
 Expanding the above ideas, the Janowski-formulas can be rearranged to express the *equity*, as a function of game winning chances, $p$ and cube location (*player*, *center*, *opponent*):
 
@@ -128,9 +132,9 @@ A couple of observations:
 
 Let's do this with a few practical examples and check if the formulas agree with what XG says.
 
-#### Examples
+### Examples
 
-##### Opening position
+#### Opening position
 
 Let's look at a position after Black opens with 21, slotting:
 
@@ -230,7 +234,7 @@ Going back to the questions of which cube-life index XG uses: Perhaps it depends
 
 Lets do another example to try to find out.
 
-##### Bear-off position
+#### Bear-off position
 
 ```{r}
 #| fig.width: 4
@@ -265,7 +269,7 @@ XG reports $0.1484, -0.0087, -0.3252$ respectively, very close to the calculated
 
 Let's do a final example.
 
-##### Middle game position
+#### Middle game position
 
 ```{r}
 #| fig.width: 4
@@ -302,14 +306,120 @@ XG reports $0.8304, 0.8140, 0.9557$, again close to the calculated values, altho
 
 Perhaps XG uses a model with *two* cube-life indices, one for each player, like Janowski suggests in his article. In that case, it is a bit unclear how to determine the cube-life indices.
 
-### Match play
+## Match play
 
 In match play, we're not interested in how much we win or lose in a single game, but in the probability of winning the whole match. For this reason, the appropriate unit is no longer the average value or equity of a position, but our match winning chances, $mwc$.
 
-#### The live cube take point
-#### Example: 5-away, 3-away
-##### No gammons
-##### Gammons
-#### Example: 17-away, 16-away
+### The live cube take point
+
+Let's see if we can generalize the Janowski formulas to match play. The loss, L, and win, W, part from the money game section above, should be easy enough: We can just plug in match equities from from Kazaross XG2 match equity table, to get the average $mwc$ when losing or winning respectively.
+
+From the continuous model described above, we know that for money:
+
+$$TP_{live} = TP_{dead}\times(1-TP_{live})$$
+
+Because as we now know, $TP_{dead}= 0.25$ and $TP_{live} = 0.20$, so that: 
+
+$$TP_{live} = 0.25\times(1-0.20) = 0.20$$
+
+The intuition behind this is, that when we hold he cube, we are "in the game until the end," that is, until our winning chances are zero, but we don't have to go to 100% to win; when we have winning chances of $0.8$, we can use the cube to effectively win the game.
+
+In match play, our opponent may have a take point different from ours, so we would need to think:
+
+$$TP_{live} = TP_{dead}\times(1-TP_{opponent})$$
+
+where $TP_{live}$ is *our* live cube take point, and $TP_{opponent}$ is the opponent's live cube take point, i.e. assuming all doubles are perfectly efficient. (Again, this is not a very realistic assumption; we use it just to come up with the *lowest* take point that we can have.)
+
+### Example: 5-away, 3-away
+
+Let's do the simplest possible example of a live cube take point. We're trailing 5-away, 3-away, (-5,-3 for short), it's a long race, and we're being offered an initial double. What are our most optimistic and least optimistic take points?
+
+Our take point assuming a dead cube is $`r round(tp(5,3,1,met), 3)`$ (we skip the actual calculations; it is just the standard one.)
+
+If we ever *redouble*, then our opponent, if accepting, will have a dead cube, so their live and dead take point is the same, $`r round(tp(3,5,2,met), 3)`$. This is quite high, due to the fact that we can use all four points; our opponent can use only three. That is good news for us, since we don't have to improve nearly as much as in money game to win with the cube. So in this case, applying the continious model, we get: 
+
+$$TP_{live}=`r round(tp(5,3,1,met), 3) `\times (1- `r round(tp(3,5,2,met), 3)`) = `r round(tp(5,3,1,met) * (1-tp(3,5,2,met)), 3)`$$
+
+So there's a big differens between the dead-cube and the live-cube take points which make a lot of sense, because owning a cube at 2 when trailing (-5,-3) really is powerful: We only risk one additional point when redoubling, but we can win two extra. *And* the opponent will be holding a dead cube, so we're not givning away anything.
+
+For overview, we can put our results in a table like this, while adding a column for the "real" take point, which, as mentioned, is just a weighted average of the dead- and the live-cube take point. (Using a weight, or cube efficiency, of $0.7$.)
+
+```{r}
+tp_table <- tibble(
+  `Taker, points away` = c(3, 5),
+  `Doubler, points away` = c(5, 3),
+  `Cube value` = c(2, 1)
+) %>% 
+  rowwise() %>% 
+  mutate(`Dead-cube take point` = tp(`Taker, points away`, 
+                                     `Doubler, points away`,
+                                     `Cube value`, met)) %>% 
+  ungroup() 
+
+live <- tp_table$`Dead-cube take point` # Initalize live tp values
+
+# Calulate live tp values starting with second-to-last double
+for (i in seq_along(live)[-1]) {
+  live[i] <- live[i] * (1 - live[i-1]) 
+ }
+
+# Add live TPs
+tp_table <- tp_table %>% 
+  mutate(`Live-cube take point` = live,
+         `Real-cube take point` = 
+           0.7 * `Live-cube take point` + 
+           0.3 * `Dead-cube take point`) %>% 
+  mutate(across(contains("take point"), round, 5))
+
+tp_table %>% 
+  kable("html") %>%
+  column_spec(1:6, width = "5cm") 
+```
+
+These are all the same numbers that GNU BG and XG reports, in the "Market window" and "Cube Information" dialog boxes. 
+
+
+
+### Example: 16-away, 17-away
+
+For fun, let's study the same example for a longer match; now we're being initially doubled when trailing 17-away, 16-away, (-16, -17). Since the recube vig propagates all the way through redouble after redouble, we have to start by considering the last possible double. Counting at fingers, we can discover that the last possible double (after multiple turn-arounds and cube actions), would be us offering a 16-cube which will be dead hereafter.
+
+All the take points, in tabular form, starting with the 8-cube, where the live-cube take point is identical to the dead-cube take point:
+
+```{r}
+tp_table <- tibble(
+  `Taker, points away` = c(16, 17, 16, 17),
+  `Doubler, points away` = c(17, 16, 17, 16),
+  `Cube value` = c(8, 4, 2, 1)
+) %>% 
+  rowwise() %>% 
+  mutate(`Dead-cube take point` = tp(`Taker, points away`, 
+                                     `Doubler, points away`,
+                                     `Cube value`, met)) %>% 
+  ungroup() 
+
+live <- tp_table$`Dead-cube take point` # Initalize live tp values
+
+# Calulate live tp values starting with second-to-last double
+for (i in seq_along(live)[-1]) {
+  live[i] <- live[i] * (1 - live[i-1]) 
+ }
+
+# Add live TPs
+tp_table <- tp_table %>% 
+  mutate(`Live-cube take point` = live,
+         `Real-cube take point` = 
+           0.7 * `Live-cube take point` + 
+           0.3 * `Dead-cube take point`)
+
+tp_table <- tp_table %>% 
+  mutate(across(contains("take point"), round, 3))
+
+tp_table %>% 
+  kable("html") %>%
+  column_spec(1:6, width = "5cm") 
+```
+
+### Gammons
 
 ## Conclusions
