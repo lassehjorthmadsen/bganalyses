@@ -98,13 +98,13 @@ Suppose UCLA has 90% chance of beating MIT. What is the probability that MIT wil
 
 $$P(E) = \frac{0.1}{0.1+0.4} = 0.2$$
 
-The probability that MIT will at some point have an even game is $0.2 = 20%$.
+The probability that MIT will at some point have an even game is $0.2 = 20\%$.
 
-Applying this to backgammon, let's assume that we accept a cube with winning chances of $0.2$ and that we can double our opponent efficiently out if we reach a winning chance of $0.8$. What are our actual winning chances then, assuming a perfectly continouous game? We need to improve from $0.2$ to $0.8$ before we detoriate from $0.2$ to $0.0$ so $a=0.2, b=0.6$, and:
+Applying this to backgammon, let's assume that we accept a cube with winning chances of $0.2$ and that we can double our opponent efficiently out if we reach a winning chance of $0.8$. What are our actual winning chances then, assuming a perfectly continuous game? We need to improve from $0.2$ to $0.8$ before we deteriorate from $0.2$ to $0.0$ so $a=0.2, b=0.6$, and:
 
 $$P(E) = \frac{0.2}{0.2+0.6} = \frac{1}{4} = 0.25$$
 
-This illustrates that the optimistic live-cube model would allow us to take a gammonless game with a winning probability of just $0.2$ since cube access could turn that into the nessesary $0.25$. (Keeler and Spencer has a more formal proof of the $0.2$ live-cube take point.)
+In other words: The optimistic live-cube model would allow us to take a gammonless game with a winning probability of just $0.2$ since cube access could turn that into the necessary $0.25$. (Keeler and Spencer has a more formal proof of the $0.2$ live-cube take point.)
 
 As mentioned, the real-life take point would have to be found somewhere between $0.2$ and $0.25$. We can think of it as the weighted average of the two, where the weight represents the *cube efficiency* or what Janowski calls the *cube-life index*. 
 
@@ -118,7 +118,7 @@ where $x$ is what Janowski calls the *cube-life index*, a number between 0 (wher
 
 ### Equity from cube location
 
-Expanding the above ideas, the Janowski-formulas can be rearranged to express the *equity*, as a function of game winning chances, $p$ and cube location (*player*, *center*, *opponent*):
+Expanding the above ideas, the Janowski-formulas can be rearranged to express the *equity*, as a function of game winning chances, $p$, cube efficiency, $x$, and cube location (*player*, *center*, *opponent*):
 
 $$E_{player}= p(W+L+0.5x)-L$$ $$E_{center}= p(W+L+0.5x)-L-0.5x$$ $$E_{opponent}= \frac{4}{4-x}(p(W+L+0.5x)-L-0.25x)$$
 
@@ -382,7 +382,7 @@ This is about the same as in money game, so the lesson for this score (-5, -3) i
 
 ### Example: 17-away, 16-away
 
-For fun, let's study the same example for a longer match; now we're being initially doubled when trailing 17-away, 16-away, (-17, -16). Since the recube vig propagates all the way through redouble after redouble, we have to start by considering the last possible double. Counting at fingers, we can discover that the last possible double (after multiple turn-arounds and cube actions), would be when we own a 8-cube, and our needs to decide it they should take a 16-cube which will be dead hereafter.
+For fun, let's study the same example for a longer match; now we're being initially doubled when trailing 17-away, 16-away, (-17, -16). Since the recube vig propagates all the way through redouble after redouble, we have to start by considering the last possible double. Counting at fingers, we can discover that the last possible double (after multiple turn-arounds and cube actions), would be when we own a 8-cube, and our opponent needs to decide it they should take a 16-cube which will be dead hereafter.
 
 All the take points, in tabular form, starting with the 8-cube, where the live-cube take point is identical to the dead-cube take point:
 
@@ -419,6 +419,24 @@ tp_table %>%
   kable("html") %>%
   column_spec(1:6, width = "5cm") 
 ```
+
+From the table, we can note that the "real-cube take point" is $0.217$, about the same as for money, which is not surprising in a straight race at the begining of a long match. We could also note our opponent's take point, should we ever get to offer him a 16-cube, is somewhat low for a dead cube: $0.210$. That's because the 16 points he can win is exactly what he needs to win the match, so they are slightly more valuable the 16 points we can win.
+
+In a funny way, this take points affects *our* take point for the initial double, since the calculations are recursive, with each take point affecting the next.
+
+To see this more clearly, we can write out the full calculations. For simplicity, we use $TP_1, TP_2, TP_4, and\ TP_8$ to indicate the dead-cube take points when the cube is at 1, 2, 4, 8 respectively. (The column "Dead-cube take point" from the table.)
+
+Then:
+
+$$TP_{1_{live}} = TP_1 \times (1 - TP_2 \times (1 - TP_4 \times (1- TP_8)))$$
+Which can be written as:
+
+$$TP_{1_{live}} = TP_1 - TP_1 \times TP_2 + TP_1 \times TP_2 \times TP_4 - TP_1 \times TP_2 \times TP_4 \times TP_8$$
+
+
+
+
+
 
 ### Gammons
 
