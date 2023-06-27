@@ -2,6 +2,7 @@
 title: "Backgammon Playground"
 about:
   template: solana
+  image: images/medievalplayers.jpg
 ---
 
 This is my backgammon playground, where I keep some analyses related to backgammon. They help me wrap my head around stuff related to match theory, how [eXtreme Gammon](https://www.extremegammon.com/) works under the hood, and how match scores differ. 
