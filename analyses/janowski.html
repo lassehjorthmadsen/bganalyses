@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.427">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lasse Hjorth Madsen">
-<meta name="dcterms.date" content="2023-06-19">
+<meta name="dcterms.date" content="2023-06-27">
 
 <title>Janowski Formulars</title>
 <style>
@@ -19,7 +19,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -57,13 +57,15 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
 <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
@@ -73,11 +75,16 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Janowski Formulars</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analyses/janowski.html">Janowski Formulars</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -85,59 +92,68 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-      <div class="mt-2 flex-shrink-0 align-items-center">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Home</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analyses/explore-emg.html" class="sidebar-item-text sidebar-link">Explore EMG Normalization</a>
+  <a href="../analyses/explore-emg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explore EMG Normalization</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analyses/met-precision.html" class="sidebar-item-text sidebar-link">Match Equity Precision</a>
+  <a href="../analyses/met-precision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Match Equity Precision</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analyses/janowski.html" class="sidebar-item-text sidebar-link active">Janowski Formulars</a>
+  <a href="../analyses/janowski.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Janowski Formulars</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#why-this" id="toc-why-this" class="nav-link active" data-scroll-target="#why-this">Why this?</a></li>
   <li><a href="#how-xg-works" id="toc-how-xg-works" class="nav-link" data-scroll-target="#how-xg-works">How XG works</a></li>
-  <li><a href="#janowski-formulas" id="toc-janowski-formulas" class="nav-link" data-scroll-target="#janowski-formulas">Janowski formulas</a>
-  <ul>
+  <li><a href="#janowski-formulas" id="toc-janowski-formulas" class="nav-link" data-scroll-target="#janowski-formulas">Janowski formulas</a></li>
   <li><a href="#money-game" id="toc-money-game" class="nav-link" data-scroll-target="#money-game">Money game</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#the-continous-model" id="toc-the-continous-model" class="nav-link" data-scroll-target="#the-continous-model">The continous model</a></li>
   <li><a href="#equity-from-cube-location" id="toc-equity-from-cube-location" class="nav-link" data-scroll-target="#equity-from-cube-location">Equity from cube location</a></li>
-  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a>
+  <ul class="collapse">
+  <li><a href="#opening-position" id="toc-opening-position" class="nav-link" data-scroll-target="#opening-position">Opening position</a></li>
+  <li><a href="#bear-off-position" id="toc-bear-off-position" class="nav-link" data-scroll-target="#bear-off-position">Bear-off position</a></li>
+  <li><a href="#middle-game-position" id="toc-middle-game-position" class="nav-link" data-scroll-target="#middle-game-position">Middle game position</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#match-play" id="toc-match-play" class="nav-link" data-scroll-target="#match-play">Match play</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#the-live-cube-take-point" id="toc-the-live-cube-take-point" class="nav-link" data-scroll-target="#the-live-cube-take-point">The live cube take point</a></li>
   <li><a href="#example-5-away-3-away" id="toc-example-5-away-3-away" class="nav-link" data-scroll-target="#example-5-away-3-away">Example: 5-away, 3-away</a></li>
-  <li><a href="#example-17-away-16-away" id="toc-example-17-away-16-away" class="nav-link" data-scroll-target="#example-17-away-16-away">Example: 17-away, 16-away</a></li>
-  </ul></li>
+  <li><a href="#example-25-away-24-away" id="toc-example-25-away-24-away" class="nav-link" data-scroll-target="#example-25-away-24-away">Example: 25-away, 24-away</a></li>
+  <li><a href="#gammons" id="toc-gammons" class="nav-link" data-scroll-target="#gammons">Gammons</a></li>
   </ul></li>
   <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
   </ul>
@@ -148,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Janowski Formulars</h1>
+<h1 class="title">Janowski Formulars</h1>
 </div>
 
 
@@ -165,7 +181,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 19, 2023</p>
+      <p class="date">June 27, 2023</p>
     </div>
   </div>
   
@@ -175,9 +191,6 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<div class="cell">
-
-</div>
 <section id="why-this" class="level2">
 <h2 class="anchored" data-anchor-id="why-this">Why this?</h2>
 <p>This note is for better understanding exactly what eXtreme Gammon and GNU Backgammon does to estimate cubeless and cubeful equities at money and match play. In particular, we apply the Janowski Formular(s) and try to figure out what it means when the eXtreme Gammon Documentation says that “In eXtreme Gammon the Janowski formula has been extended to apply also in match play”.</p>
@@ -195,97 +208,95 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="janowski-formulas">Janowski formulas</h2>
 <p>We won’t explain in detail how all of Rick Janowski’s formulas work (that is in the article linked above), we’ll explain the idea and discuss examples.</p>
 <p>First, money game.</p>
-<section id="money-game" class="level3">
-<h3 class="anchored" data-anchor-id="money-game">Money game</h3>
+</section>
+<section id="money-game" class="level2">
+<h2 class="anchored" data-anchor-id="money-game">Money game</h2>
 <p>As mentioned , a game of backgammon played to conclusion can end in six possible ways. A certain position in Janowski’s article, have the following probabilities of each outcome:</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> Regular </th>
-   <th style="text-align:right;"> Gammon </th>
-   <th style="text-align:right;"> Backgammon </th>
-   <th style="text-align:right;"> Sum </th>
-  </tr>
- </thead>
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Regular</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Gammon</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Backgammon</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Sum</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> Player wins </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.47 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.17 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.01 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.65 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Opponent wins </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.31 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.04 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.00 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.35 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Sum </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.78 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.21 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.01 </td>
-   <td style="text-align:right;width: 3.1cm; "> 1.00 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">Player wins</td>
+<td style="text-align: right; width: 3.1cm;">0.47</td>
+<td style="text-align: right; width: 3.1cm;">0.17</td>
+<td style="text-align: right; width: 3.1cm;">0.01</td>
+<td style="text-align: right; width: 3.1cm;">0.65</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Opponent wins</td>
+<td style="text-align: right; width: 3.1cm;">0.31</td>
+<td style="text-align: right; width: 3.1cm;">0.04</td>
+<td style="text-align: right; width: 3.1cm;">0.00</td>
+<td style="text-align: right; width: 3.1cm;">0.35</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sum</td>
+<td style="text-align: right; width: 3.1cm;">0.78</td>
+<td style="text-align: right; width: 3.1cm;">0.21</td>
+<td style="text-align: right; width: 3.1cm;">0.01</td>
+<td style="text-align: right; width: 3.1cm;">1.00</td>
+</tr>
 </tbody>
 </table>
 
-</div>
-</div>
-<div class="cell">
 
+</div>
 </div>
 <p>Suppose the relative gammon and backgammon frequencies stay constant as the chance to win changes. Then, the average win will be:</p>
 <p><span class="math display">\[W=\frac{47 \times 1  + 17 \times 2 + 1 \times 3}{47 + 17 + 1} = 1.292\ points\]</span></p>
 <p>The average loss will be:</p>
 <p><span class="math display">\[L=\frac{31 \times 1  + 4 \times 2 + 0 \times 3}{31 + 4 + 0} = 1.114\ points\]</span> The values are all assuming a cube-level of 1, also called <em>normalized</em> values. To get the monetary value, they will have to be multiplied by the cube value and the stakes per point.</p>
-<p>The take point, <em>not</em> taking re-cubes into account, aka the <em>dead cube</em> take point, is:</p>
+<p>The take point, <em>not</em> taking re-cubes into account, aka the <em>dead-cube</em> take point, is:</p>
 <p><span class="math display">\[TP= \frac{L-0.5}{W+L}\]</span></p>
-<p>This is just another way to express the familiar take point formula, most often written like this: <span class="math inline">\(TP= \frac{Loss}{Gain + Loss}\)</span></p>
+<p>This is just another way to express the familiar take point formula, most often written like this: <span class="math inline">\(TP= \frac{Risk}{Gain + Risk}\)</span></p>
 <p>So, as an example, using the above figures for average wins and losses, our dead-cube take point would be:</p>
 <p><span class="math display">\[TP = \frac{1.114 - 0.5}{1.292 + 1.114} = 0.255\]</span></p>
-<p>The dead-cube take point is what we might use in a last roll situation: When the opponent will either win or lose om the next roll, and we will never get the opportunity to redouble. The opposite situation is what we might call the <em>live cube</em>, where we unrealistically assume that our redoubles will always be fully efficient; we will redouble exactly at our opponent’s take point, when he will be indifferent between taking and passing.</p>
-<p>The <em>real</em> take point for most positions is some where between these two extremes: Lower that the pessimistic dead-cube take point, but higher that the overly optimistic live-cube take point.</p>
-<section id="the-continous-model" class="level4">
-<h4 class="anchored" data-anchor-id="the-continous-model">The continous model</h4>
+<p>The dead-cube take point is what we might use in a last roll situation: When the opponent will either win or lose om the next roll, and we will never get the opportunity to redouble. The opposite situation is what we might call the <em>live-cube</em> take point, where we unrealistically assume that our redoubles will always be fully efficient; we will redouble exactly at our opponent’s take point, when he or she will be indifferent between taking and passing.</p>
+<p>The <em>real</em> take point for most positions is somewhere between these two extremes: Lower that the pessimistic dead-cube take point, but higher that the overly optimistic live-cube take point.</p>
+<section id="the-continous-model" class="level3">
+<h3 class="anchored" data-anchor-id="the-continous-model">The continous model</h3>
 <p>To calculate the live-cube take point, we need to briefly visit the so-called continuous model, proposed by Keeler and Spencer, as long back as 1975, in an article called <a href="https://bkgm.com/articles/KeelerSpencer/OptimalDoublingInBackgammon/index.html"><em>Optimal Doubling in Backgammon</em></a>.</p>
-<p>The basic idea is simple: Suppose the winning chance in some game moves smoothly and randomly along, then if <span class="math inline">\(E\)</span> is the event that the winning probability, <span class="math inline">\(x\)</span>, of player A, rises to <span class="math inline">\(x+b\)</span> before it drops to <span class="math inline">\(x-a\)</span> is:</p>
+<p>The basic idea is simple: Suppose the winning chance in some game moves smoothly and randomly along. <span class="math inline">\(E\)</span> is the event that the winning probability, <span class="math inline">\(x,\)</span> of player A, rises to <span class="math inline">\(x+b\)</span> before it drops to <span class="math inline">\(x-a\)</span>. The probability of <span class="math inline">\(E\)</span> is then:</p>
 <p><span class="math display">\[P(E) = \frac{a}{a+b}\]</span></p>
 <p>This applies to any game where winning chance move continuously as time passes. Wheeler and Spencer has a nice example from basketball, paraphrased like this:</p>
-<p>Suppose UCLA has 90% chance of beating MIT. What is the probability that MIT will have 50% chance of winning at some point during a game? In other words, the probability of MIT winning will have to rise from <span class="math inline">\(0.1\)</span> to <span class="math inline">\(0.5\)</span> before it drops from <span class="math inline">\(0.1\)</span> to <span class="math inline">\(0.0\)</span>. So <span class="math inline">\(a = 0.1, b = 0.4\)</span>. Then:</p>
+<p>Suppose UCLA has a 90% chance of beating MIT. What is the probability that MIT will have 50% chance of winning at some point during a game? In other words, the probability of MIT winning will have to rise from <span class="math inline">\(0.1\)</span> to <span class="math inline">\(0.5\)</span> before it drops from <span class="math inline">\(0.1\)</span> to <span class="math inline">\(0.0\)</span>. So <span class="math inline">\(a = 0.1, b = 0.4\)</span>. Then:</p>
 <p><span class="math display">\[P(E) = \frac{0.1}{0.1+0.4} = 0.2\]</span></p>
-<p>The probability that MIT will at some point have an even game is <span class="math inline">\(0.2 = 20%\)</span>.</p>
-<p>Applying this to backgammon, let’s assume that we accept a cube with winning chances of <span class="math inline">\(0.2\)</span> and that we can double our opponent efficiently out if we reach a winning chance of <span class="math inline">\(0.8\)</span>. What are our actual winning chances then, assuming a perfectly continouous game? We need to improve from <span class="math inline">\(0.2\)</span> to <span class="math inline">\(0.8\)</span> before we detoriate from <span class="math inline">\(0.2\)</span> to <span class="math inline">\(0.0\)</span> so <span class="math inline">\(a=0.2, b=0.6\)</span>, and:</p>
+<p>The probability that MIT will at some point have an even game is <span class="math inline">\(0.2 = 20\%\)</span>.</p>
+<p>Applying this to backgammon, let’s assume that we accept a cube with winning chances of <span class="math inline">\(0.2\)</span> and that we can double our opponent efficiently out if we reach a winning chance of <span class="math inline">\(0.8\)</span>. What are our actual winning chances then, assuming a perfectly continuous game? We need to improve from <span class="math inline">\(0.2\)</span> to <span class="math inline">\(0.8\)</span> before we deteriorate from <span class="math inline">\(0.2\)</span> to <span class="math inline">\(0.0\)</span> so <span class="math inline">\(a=0.2, b=0.6\)</span>, and:</p>
 <p><span class="math display">\[P(E) = \frac{0.2}{0.2+0.6} = \frac{1}{4} = 0.25\]</span></p>
-<p>This illustrates that the optimistic live-cube model would allow us to take a gammonless game with a winning probability of just <span class="math inline">\(0.2\)</span> since cube access could turn that into the nessesary <span class="math inline">\(0.25\)</span>. (Keeler and Spencer has a more formal proof of the <span class="math inline">\(0.2\)</span> live-cube take point.)</p>
+<p>In other words: The optimistic live-cube model would allow us to take a gammonless game with a cubeless winning probability of just <span class="math inline">\(0.2\)</span> since cube access could turn that into the necessary <span class="math inline">\(0.25\)</span> winning probability. (Keeler and Spencer has a more formal proof of the <span class="math inline">\(0.2\)</span> live-cube take point.)</p>
 <p>As mentioned, the real-life take point would have to be found somewhere between <span class="math inline">\(0.2\)</span> and <span class="math inline">\(0.25\)</span>. We can think of it as the weighted average of the two, where the weight represents the <em>cube efficiency</em> or what Janowski calls the <em>cube-life index</em>.</p>
 <p>Experiments show that in long races the take point is about <span class="math inline">\(0.215\)</span>, suggesting a cube efficiency of <span class="math inline">\(0.7\)</span> since <span class="math inline">\(0.7\times 0.20 + 0.3\times 0.25 = 0.215\)</span></p>
 <p>Incorporating this into the Janowski formular for take points, we can get an estimated, “real” take point, that takes recubes <em>and</em> cube efficiency into account:</p>
 <p><span class="math display">\[TP= \frac{L-0.5}{W+L+0.5x}\]</span></p>
 <p>where <span class="math inline">\(x\)</span> is what Janowski calls the <em>cube-life index</em>, a number between 0 (where the cube is dead) and 1, where all doubles are efficient, i.e.&nbsp;right at the borderline between take and pass.</p>
 </section>
-<section id="equity-from-cube-location" class="level4">
-<h4 class="anchored" data-anchor-id="equity-from-cube-location">Equity from cube location</h4>
-<p>Expanding the above ideas, the Janowski-formulas can be rearranged to express the <em>equity</em>, as a function of game winning chances, <span class="math inline">\(p\)</span> and cube location (<em>player</em>, <em>center</em>, <em>opponent</em>):</p>
+<section id="equity-from-cube-location" class="level3">
+<h3 class="anchored" data-anchor-id="equity-from-cube-location">Equity from cube location</h3>
+<p>Expanding the above ideas, the Janowski-formulas can be rearranged to express the <em>equity</em>, as a function of game winning chances, <span class="math inline">\(p\)</span>, cube efficiency, <span class="math inline">\(x\)</span>, and cube location (<em>player</em>, <em>center</em>, <em>opponent</em>):</p>
 <p><span class="math display">\[E_{player}= p(W+L+0.5x)-L\]</span> <span class="math display">\[E_{center}= p(W+L+0.5x)-L-0.5x\]</span> <span class="math display">\[E_{opponent}= \frac{4}{4-x}(p(W+L+0.5x)-L-0.25x)\]</span></p>
 <p>From these, we can estimate cube actions and the size of any cube errors.</p>
 <p>A couple of observations:</p>
 <ul>
 <li><p>It shouldn’t be too difficult to extend this to match play, since <span class="math inline">\(W\)</span> and <span class="math inline">\(L\)</span> can be calculated with match equities, rather than 1, 2, 3 for regular, gammon and backgammon.</p></li>
-<li><p>It is a simplification to assume that gammon frequencies remain and cube-life remain constant through a game; near conclusion games are more likely to be races without gammons and fewer opportunities to double efficiently.</p></li>
+<li><p>It is a simplification to assume that gammon frequencies and cube efficiency remain constant through a game; near conclusion games are more likely to be races without gammons and with fewer opportunities to double efficiently.</p></li>
 </ul>
-<p>Let’s do this with a few practical examples and check if the formulas agree with what XG says.</p>
+<p>Let’s do a few practical examples and check if the formulas agree with what XG says.</p>
 </section>
-<section id="examples" class="level4">
-<h4 class="anchored" data-anchor-id="examples">Examples</h4>
-<section id="opening-position" class="level5">
-<h5 class="anchored" data-anchor-id="opening-position">Opening position</h5>
+<section id="examples" class="level3">
+<h3 class="anchored" data-anchor-id="examples">Examples</h3>
+<section id="opening-position" class="level4">
+<h4 class="anchored" data-anchor-id="opening-position">Opening position</h4>
 <p>Let’s look at a position after Black opens with 21, slotting:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -295,102 +306,102 @@ ul.task-list li input[type="checkbox"] {
 <p>According to XG 1-ply, the probabilities of the six possible outcomes of the game, if played to conclusion, are as follows:</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> Regular </th>
-   <th style="text-align:right;"> Gammon </th>
-   <th style="text-align:right;"> Backgammon </th>
-   <th style="text-align:right;"> Sum </th>
-  </tr>
- </thead>
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Regular</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Gammon</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Backgammon</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Sum</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> Player wins </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.3571 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.1316 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.0102 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.4989 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Opponent wins </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.3654 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.1285 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.0072 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.5011 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Sum </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.7225 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.2601 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.0174 </td>
-   <td style="text-align:right;width: 3.1cm; "> 1.0000 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">Player wins</td>
+<td style="text-align: right; width: 3.1cm;">0.3571</td>
+<td style="text-align: right; width: 3.1cm;">0.1316</td>
+<td style="text-align: right; width: 3.1cm;">0.0102</td>
+<td style="text-align: right; width: 3.1cm;">0.4989</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Opponent wins</td>
+<td style="text-align: right; width: 3.1cm;">0.3654</td>
+<td style="text-align: right; width: 3.1cm;">0.1285</td>
+<td style="text-align: right; width: 3.1cm;">0.0072</td>
+<td style="text-align: right; width: 3.1cm;">0.5011</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sum</td>
+<td style="text-align: right; width: 3.1cm;">0.7225</td>
+<td style="text-align: right; width: 3.1cm;">0.2601</td>
+<td style="text-align: right; width: 3.1cm;">0.0174</td>
+<td style="text-align: right; width: 3.1cm;">1.0000</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
 <p>This comes to a cubeless equity of: <span class="math inline">\(E = 0.0069\)</span>; White is a slight underdog to win, but is compensated by a tiny bit of extra gammons and backgammons, so that the game is basically even.</p>
-<p>Note that the numbers that XG reports are probabilities for winning (<em>including</em> gammons and backgammons), gammon (<em>including</em> backgammon), and backgammon. So they have to be converted to get probabilities that sum to 1. (My R-package, <a href="https://lassehjorthmadsen.github.io/backgammon/index.html"><code>backgammon</code></a> has a function for that.)</p>
+<p>Note that the numbers that XG reports are probabilities for winning (<em>including</em> gammons and backgammons), gammon (<em>including</em> backgammon), and backgammon. They have to be converted to get probabilities that sum to 1, like in the above table, if one prefers that way of looking at it. (My R-package, <a href="https://lassehjorthmadsen.github.io/backgammon/index.html"><code>backgammon</code></a> has a function for that.)</p>
 <p>If we apply Janowski’s take point formulars to the above cubeless probablities, we get:</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> Cube </th>
-   <th style="text-align:right;"> Black's take point </th>
-   <th style="text-align:right;"> White's take point </th>
-  </tr>
- </thead>
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Cube</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Black's take point</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">White's take point</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> Dead </td>
-   <td style="text-align:right;width: 5cm; "> 0.3107 </td>
-   <td style="text-align:right;width: 5cm; "> 0.3032 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Perfectly live </td>
-   <td style="text-align:right;width: 5cm; "> 0.2604 </td>
-   <td style="text-align:right;width: 5cm; "> 0.2541 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">Dead</td>
+<td style="text-align: right; width: 5cm;">0.3107</td>
+<td style="text-align: right; width: 5cm;">0.3032</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Perfectly live</td>
+<td style="text-align: right; width: 5cm;">0.2604</td>
+<td style="text-align: right; width: 5cm;">0.2541</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
 <p>All these four numbers align perfectly with what you get when you consult XGs <code>Analyze|Cube Information</code> menu. GNU Backgammon, in <code>Analyze|Market Window</code>, also gives the exact same take points. We can conclude that both programs probably implemented Janowski’s formular in the same way for money games.</p>
 <p>Of course, the interesting bit is the <em>actual</em> take points; the “Dead” and “Perfectly live” take point are just lower and upper bounds between which the “real” take point must be found. As mentioned, Janowski just takes a weighted average of the two, to arrive at a guesstimate for the real take point.</p>
-<p>Regarding the cubeful equities for White in the actual position, we have:</p>
+<p>Putting aside for a moment the take points, let’s look at the <em>equities</em>, i.e.&nbsp;the average or <em>expected</em> value of a position. For White in the above position, using the Janowski formulas, we get:</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> Cube location </th>
-   <th style="text-align:right;"> Equity </th>
-  </tr>
- </thead>
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Cube location</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Equity</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> Owned by White </td>
-   <td style="text-align:right;"> 0.183 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Centered </td>
-   <td style="text-align:right;"> 0.008 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Owned by Black </td>
-   <td style="text-align:right;"> -0.340 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">Owned by White</td>
+<td style="text-align: right;">0.183</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Centered</td>
+<td style="text-align: right;">0.008</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Owned by Black</td>
+<td style="text-align: right;">-0.340</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -399,41 +410,41 @@ ul.task-list li input[type="checkbox"] {
 <p>Here, GNU 2-ply (what XG calls 3-ply) cubeless estimates for the same opening position:</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> Regular </th>
-   <th style="text-align:right;"> Gammon </th>
-   <th style="text-align:right;"> Backgammon </th>
-   <th style="text-align:right;"> Sum </th>
-  </tr>
- </thead>
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Regular</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Gammon</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Backgammon</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Sum</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> Player wins </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.3757 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.1426 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.0068 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.5251 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Opponent wins </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.3498 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.1198 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.0053 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.4749 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Sum </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.7255 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.2624 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.0121 </td>
-   <td style="text-align:right;width: 3.1cm; "> 1.0000 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">Player wins</td>
+<td style="text-align: right; width: 3.1cm;">0.3757</td>
+<td style="text-align: right; width: 3.1cm;">0.1426</td>
+<td style="text-align: right; width: 3.1cm;">0.0068</td>
+<td style="text-align: right; width: 3.1cm;">0.5251</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Opponent wins</td>
+<td style="text-align: right; width: 3.1cm;">0.3498</td>
+<td style="text-align: right; width: 3.1cm;">0.1198</td>
+<td style="text-align: right; width: 3.1cm;">0.0053</td>
+<td style="text-align: right; width: 3.1cm;">0.4749</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sum</td>
+<td style="text-align: right; width: 3.1cm;">0.7255</td>
+<td style="text-align: right; width: 3.1cm;">0.2624</td>
+<td style="text-align: right; width: 3.1cm;">0.0121</td>
+<td style="text-align: right; width: 3.1cm;">1.0000</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -441,29 +452,29 @@ ul.task-list li input[type="checkbox"] {
 <p>The <a href="https://www.gnu.org/software/gnubg/manual/gnubg.html">GNU Backgammon Manual</a>, helpfully states that they use a cube-life index, or cube efficiency, of <span class="math inline">\(0.68\)</span> for contact positions. Applying Janowski’s formulars for cubeful equity to the above probabilities and, using <span class="math inline">\(0.68\)</span> as cube efficiency, we get:</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> Cube location </th>
-   <th style="text-align:right;"> Equity </th>
-  </tr>
- </thead>
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Cube location</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Equity</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> Owned by White </td>
-   <td style="text-align:right;"> 0.2545 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Centered </td>
-   <td style="text-align:right;"> 0.1018 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Owned by Black </td>
-   <td style="text-align:right;"> -0.1709 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">Owned by White</td>
+<td style="text-align: right;">0.2545</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Centered</td>
+<td style="text-align: right;">0.1018</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Owned by Black</td>
+<td style="text-align: right;">-0.1709</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -471,8 +482,8 @@ ul.task-list li input[type="checkbox"] {
 <p>Going back to the questions of which cube-life index XG uses: Perhaps it depends on the position? (GNU BG uses a slightly lower value, <span class="math inline">\(0.60\)</span> rather than <span class="math inline">\(0.68\)</span>, in short races.)</p>
 <p>Lets do another example to try to find out.</p>
 </section>
-<section id="bear-off-position" class="level5">
-<h5 class="anchored" data-anchor-id="bear-off-position">Bear-off position</h5>
+<section id="bear-off-position" class="level4">
+<h4 class="anchored" data-anchor-id="bear-off-position">Bear-off position</h4>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="janowski_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="384"></p>
@@ -480,50 +491,47 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> Regular </th>
-   <th style="text-align:right;"> Gammon </th>
-   <th style="text-align:right;"> Backgammon </th>
-   <th style="text-align:right;"> Sum </th>
-  </tr>
- </thead>
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Regular</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Gammon</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Backgammon</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Sum</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> Player wins </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.49694 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.49694 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Opponent wins </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.50306 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.50306 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Sum </td>
-   <td style="text-align:right;width: 3.1cm; "> 1.00000 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0 </td>
-   <td style="text-align:right;width: 3.1cm; "> 1.00000 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">Player wins</td>
+<td style="text-align: right; width: 3.1cm;">0.49694</td>
+<td style="text-align: right; width: 3.1cm;">0</td>
+<td style="text-align: right; width: 3.1cm;">0</td>
+<td style="text-align: right; width: 3.1cm;">0.49694</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Opponent wins</td>
+<td style="text-align: right; width: 3.1cm;">0.50306</td>
+<td style="text-align: right; width: 3.1cm;">0</td>
+<td style="text-align: right; width: 3.1cm;">0</td>
+<td style="text-align: right; width: 3.1cm;">0.50306</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sum</td>
+<td style="text-align: right; width: 3.1cm;">1.00000</td>
+<td style="text-align: right; width: 3.1cm;">0</td>
+<td style="text-align: right; width: 3.1cm;">0</td>
+<td style="text-align: right; width: 3.1cm;">1.00000</td>
+</tr>
 </tbody>
 </table>
 
-</div>
-</div>
-<div class="cell">
 
+</div>
 </div>
 <p>With no gammons, the cubeless take point clearly is <span class="math inline">\(0.25\)</span> and the perfectly efficient cubeful take point is <span class="math inline">\(0.20\)</span> which is also what XG reports.</p>
 <p>The cubeless equity is also easy to calculate: <span class="math inline">\(E=-0.00612\)</span></p>
-<p>The Janowski-style estimated cubefull equities, assuming a cube-life index of <span class="math inline">\(0.622\)</span>, are:</p>
+<p>The Janowski-style estimated cubeful equities, assuming a cube-life index of <span class="math inline">\(0.622,\)</span> are:</p>
 <ul>
 <li>White’s equity owning the cube: 0.1484</li>
 <li>White’s equity with a centered cube: -0.0084</li>
@@ -532,8 +540,8 @@ ul.task-list li input[type="checkbox"] {
 <p>XG reports <span class="math inline">\(0.1484, -0.0087, -0.3252\)</span> respectively, very close to the calculated values, so it must assume a lower cube value in the second postion, which would also be reasonable in a medium to short length race like this.</p>
 <p>Let’s do a final example.</p>
 </section>
-<section id="middle-game-position" class="level5">
-<h5 class="anchored" data-anchor-id="middle-game-position">Middle game position</h5>
+<section id="middle-game-position" class="level4">
+<h4 class="anchored" data-anchor-id="middle-game-position">Middle game position</h4>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="janowski_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="384"></p>
@@ -541,46 +549,43 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> Regular </th>
-   <th style="text-align:right;"> Gammon </th>
-   <th style="text-align:right;"> Backgammon </th>
-   <th style="text-align:right;"> Sum </th>
-  </tr>
- </thead>
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Regular</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Gammon</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Backgammon</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Sum</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> Player wins </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.4156 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.2333 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.0305 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.6794 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Opponent wins </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.2610 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.0568 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.0028 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.3206 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Sum </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.6766 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.2901 </td>
-   <td style="text-align:right;width: 3.1cm; "> 0.0333 </td>
-   <td style="text-align:right;width: 3.1cm; "> 1.0000 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">Player wins</td>
+<td style="text-align: right; width: 3.1cm;">0.4156</td>
+<td style="text-align: right; width: 3.1cm;">0.2333</td>
+<td style="text-align: right; width: 3.1cm;">0.0305</td>
+<td style="text-align: right; width: 3.1cm;">0.6794</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Opponent wins</td>
+<td style="text-align: right; width: 3.1cm;">0.2610</td>
+<td style="text-align: right; width: 3.1cm;">0.0568</td>
+<td style="text-align: right; width: 3.1cm;">0.0028</td>
+<td style="text-align: right; width: 3.1cm;">0.3206</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sum</td>
+<td style="text-align: right; width: 3.1cm;">0.6766</td>
+<td style="text-align: right; width: 3.1cm;">0.2901</td>
+<td style="text-align: right; width: 3.1cm;">0.0333</td>
+<td style="text-align: right; width: 3.1cm;">1.0000</td>
+</tr>
 </tbody>
 </table>
 
-</div>
-</div>
-<div class="cell">
 
+</div>
 </div>
 <p>The cubeless equity is: <span class="math inline">\(E=0.5907\)</span></p>
 <p>The Janowski-style estimated cubeful equities, assuming a cube-life index of <span class="math inline">\(0.706\)</span>, are:</p>
@@ -594,24 +599,157 @@ ul.task-list li input[type="checkbox"] {
 </section>
 </section>
 </section>
-<section id="match-play" class="level3">
-<h3 class="anchored" data-anchor-id="match-play">Match play</h3>
+<section id="match-play" class="level2">
+<h2 class="anchored" data-anchor-id="match-play">Match play</h2>
 <p>In match play, we’re not interested in how much we win or lose in a single game, but in the probability of winning the whole match. For this reason, the appropriate unit is no longer the average value or equity of a position, but our match winning chances, <span class="math inline">\(mwc\)</span>.</p>
-<section id="the-live-cube-take-point" class="level4">
-<h4 class="anchored" data-anchor-id="the-live-cube-take-point">The live cube take point</h4>
+<section id="the-live-cube-take-point" class="level3">
+<h3 class="anchored" data-anchor-id="the-live-cube-take-point">The live cube take point</h3>
+<p>Let’s see if we can generalize the Janowski formulas to match play. The loss, L, and win, W, part from the money game section above, should be easy enough: We can just plug in match equities from from Kazaross XG2 match equity table, to get the average <span class="math inline">\(mwc\)</span> when losing or winning respectively.</p>
+<p>From the continuous model described above, we know that for money:</p>
+<p><span class="math display">\[TP_{live} = TP_{dead}\times(1-TP_{live})\]</span></p>
+<p>Because as we now know, <span class="math inline">\(TP_{dead}= 0.25\)</span> and <span class="math inline">\(TP_{live} = 0.20\)</span>, so that:</p>
+<p><span class="math display">\[TP_{live} = 0.25\times(1-0.20) = 0.20\]</span></p>
+<p>The intuition behind this is, that when we hold he cube, we are “in the game until the end,” that is, until our winning chances are zero, but we don’t have to go to 100% to win; when we have winning chances of <span class="math inline">\(0.8\)</span>, we can use the cube to effectively win the game.</p>
+<p>In match play, our opponent may have a take point different from ours, so we would need to think:</p>
+<p><span class="math display">\[TP_{live} = TP_{dead}\times(1-TP_{opponent})\]</span></p>
+<p>where <span class="math inline">\(TP_{live}\)</span> is <em>our</em> live cube take point, and <span class="math inline">\(TP_{opponent}\)</span> is the opponent’s live cube take point, i.e.&nbsp;assuming all doubles are perfectly efficient. (Again, this is not a very realistic assumption; we use it just to come up with the <em>lowest</em> take point that we can have.)</p>
 </section>
-<section id="example-5-away-3-away" class="level4">
-<h4 class="anchored" data-anchor-id="example-5-away-3-away">Example: 5-away, 3-away</h4>
-<section id="no-gammons" class="level5">
-<h5 class="anchored" data-anchor-id="no-gammons">No gammons</h5>
+<section id="example-5-away-3-away" class="level3">
+<h3 class="anchored" data-anchor-id="example-5-away-3-away">Example: 5-away, 3-away</h3>
+<p>Let’s do the simplest possible example of a live cube take point. We’re trailing 5-away, 3-away, (-5,-3 for short), it’s a long race, and we’re being offered an initial double. What are our most optimistic and least optimistic take points?</p>
+<p>Our take point assuming a dead cube is <span class="math inline">\(0.287\)</span> (we skip the actual calculation; it is just the standard one, that I mentioned earlier, <span class="math inline">\(TP= \frac{Risk}{Gain + Risk}\)</span>)</p>
+<p>If we ever <em>redouble</em>, then our opponent, if accepting, will have a dead cube, so their live and dead take point is the same, <span class="math inline">\(0.334\)</span>. This is quite high, due to the fact that we can use all four points; our opponent can use only three. That is good news for us, since we don’t have to improve nearly as much as in money game to win with the cube. So in this case, applying the continious model, we get:</p>
+<p><span class="math display">\[TP_{live}=0.287\times (1- 0.334) = 0.191\]</span></p>
+<p>So there’s a big difference between the dead-cube and the live-cube take points which make a lot of sense, because owning a cube at 2 when trailing (-5,-3) really is powerful: We only risk one additional point when redoubling, but we can win <em>two</em> extra points. <em>And</em> the opponent will be holding a dead cube, so we’re not giving away anything.</p>
+<p>For overview, we can put our results in a table like this, adding a column for the “real” take point, which, as mentioned, is just a weighted average of the dead- and the live-cube take point. (Using a weight, or cube efficiency, of <span class="math inline">\(0.7\)</span>.)</p>
+<div class="cell">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">Taker, points away</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Doubler, points away</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Cube value</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Dead-cube take point</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Live-cube take point</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Real-cube take point</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right; width: 5cm;">3</td>
+<td style="text-align: right; width: 5cm;">5</td>
+<td style="text-align: right; width: 5cm;">2</td>
+<td style="text-align: right; width: 5cm;">0.33401</td>
+<td style="text-align: right; width: 5cm;">0.33401</td>
+<td style="text-align: right; width: 5cm;">0.33401</td>
+</tr>
+<tr class="even">
+<td style="text-align: right; width: 5cm;">5</td>
+<td style="text-align: right; width: 5cm;">3</td>
+<td style="text-align: right; width: 5cm;">1</td>
+<td style="text-align: right; width: 5cm;">0.28731</td>
+<td style="text-align: right; width: 5cm;">0.19135</td>
+<td style="text-align: right; width: 5cm;">0.22014</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>These are all the same numbers that GNU BG and XG reports, in the “Market window” and “Cube Information” dialog boxes. And rollouts suggest that in a long race (I tried 125 pips vs 139 pips) you have a small take with about 22% winning chances, like the “real-cube” average indicate.</p>
+<p>This is about the same as in money game, so the lesson for this score (-5, -3) is that the extraordinary cube leverage just about cancels out the somewhat higher take point (of <span class="math inline">\(0.287\)</span>) one would have without using the cube, so in the end the take point is close to money game. Of course this is for a long race; if it was a very short race or even a last-roll situation we would be back to the higher take point. A four-roll position would be a pass, for example.</p>
 </section>
-<section id="gammons" class="level5">
-<h5 class="anchored" data-anchor-id="gammons">Gammons</h5>
+<section id="example-25-away-24-away" class="level3">
+<h3 class="anchored" data-anchor-id="example-25-away-24-away">Example: 25-away, 24-away</h3>
+<p>For fun, let’s study the same example for a much longer match; now we’re being initially doubled when trailing 25-away, 24-away, (-25, -24). Since the recube vig propagates all the way through redouble after redouble, we have to start by considering the last possible double. Counting at fingers, we can discover that the last possible double (after multiple turn-arounds and cube actions), would be when the opponent owns a 16-cube, and we need to decide if we should pass and trail (-25, -8) or accept a 32-cube which will be dead hereafter.</p>
+<p>All the take points, in tabular form, starting with the 16-cube, where the live-cube take point is identical to the dead-cube take point:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">Taker, points away</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Doubler, points away</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Cube value</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Dead-cube take point</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Live-cube take point</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Real-cube take point</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right; width: 5cm;">25</td>
+<td style="text-align: right; width: 5cm;">24</td>
+<td style="text-align: right; width: 5cm;">16</td>
+<td style="text-align: right; width: 5cm;">0.043</td>
+<td style="text-align: right; width: 5cm;">0.043</td>
+<td style="text-align: right; width: 5cm;">0.043</td>
+</tr>
+<tr class="even">
+<td style="text-align: right; width: 5cm;">24</td>
+<td style="text-align: right; width: 5cm;">25</td>
+<td style="text-align: right; width: 5cm;">8</td>
+<td style="text-align: right; width: 5cm;">0.233</td>
+<td style="text-align: right; width: 5cm;">0.223</td>
+<td style="text-align: right; width: 5cm;">0.226</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right; width: 5cm;">25</td>
+<td style="text-align: right; width: 5cm;">24</td>
+<td style="text-align: right; width: 5cm;">4</td>
+<td style="text-align: right; width: 5cm;">0.243</td>
+<td style="text-align: right; width: 5cm;">0.189</td>
+<td style="text-align: right; width: 5cm;">0.205</td>
+</tr>
+<tr class="even">
+<td style="text-align: right; width: 5cm;">24</td>
+<td style="text-align: right; width: 5cm;">25</td>
+<td style="text-align: right; width: 5cm;">2</td>
+<td style="text-align: right; width: 5cm;">0.254</td>
+<td style="text-align: right; width: 5cm;">0.206</td>
+<td style="text-align: right; width: 5cm;">0.221</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right; width: 5cm;">25</td>
+<td style="text-align: right; width: 5cm;">24</td>
+<td style="text-align: right; width: 5cm;">1</td>
+<td style="text-align: right; width: 5cm;">0.253</td>
+<td style="text-align: right; width: 5cm;">0.201</td>
+<td style="text-align: right; width: 5cm;">0.216</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>From the table we can note that our “real-cube” take point for the initial double is <span class="math inline">\(0.216\)</span>, again about the same as for money, which is not surprising in a straight race at the beginning of a long match. We note also our take point, should we ever face a 32-cube, is very low: <span class="math inline">\(0.043\)</span>. That’s what we have if we trail (-25, -8), so if we’re doing any better, we should take.</p>
+<p>That means also that the 16-cube is of little value to the opponent, since to use it efficiently, he or she must nearly win first. One way to see that, is to notice that their take point for the 16-cube, is almost the same in the dead-cube model as in the live-cube model. (<span class="math inline">\(0.233\)</span> and <span class="math inline">\(0.223\)</span> respectively.)</p>
+<p>In a funny way, <em>all</em> the take points affects our take point for the initial double, since the calculations are recursive, with each take point affecting the next.</p>
+<p>To see this more clearly, we can write out the full calculations. For simplicity, we use <span class="math inline">\(TP_1, TP_2, TP_4, TP_8\)</span>, and <span class="math inline">\(TP_{16}\)</span> to indicate the dead-cube take points when the cube is at 1, 2, 4, 8, and 16. (The column “Dead-cube take point” from the table.) <span class="math inline">\(TP_{1_{live}}\)</span> is the live-cube take point when the cube is at <span class="math inline">\(1.\)</span></p>
+<p>Then:</p>
+<p><span class="math display">\[TP_{1_{live}} = TP_1 \times (1 - TP_2 \times (1 - TP_4 \times (1- TP_8 \times (1-TP_{16}))))\]</span> Which can be written as:</p>
+<p><span class="math display">\[
+\begin{align*}
+TP_{1_{live}} = TP_1 \\
+- TP_1 \times TP_2 \\
++ TP_1 \times TP_2 \times TP_4 \\
+- TP_1 \times TP_2 \times TP_4 \times TP_8 \\
++ TP_1 \times TP_2 \times TP_4 \times TP_8 \times TP_{16} \\
+\end{align*}
+\]</span> So it is clear that the big effect on the live-cube take point of course is from the actual dead-cube take point, at the same cube level. Our take point if we eventually gets redoubled from 16 to 32, <span class="math inline">\(TP_{16}\)</span>, plays very little role, and is only of theoretical interest. Our opponent’s take point when we redouble, <span class="math inline">\(TP_2\)</span>, on the other hand, does play a role, as the (-5,-3) example showed.</p>
+<p>We can plot the take points to show this effect, starting with the dead-cube take point at cube level 1, then work subsequent take points into the live cube model, one by one:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="janowski_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We see how we get from the initial dead-cube take point of 0.253 to the live-cube take point of 0.201. Each subsequent take point has less and less of an impact on our initial take point. And let’s just rember once again that the real take point is to be found between these two values; when the game still has a way to go, it is usually closer to live-cube take point that to the dead-cube take point.</p>
 </section>
-</section>
-<section id="example-17-away-16-away" class="level4">
-<h4 class="anchored" data-anchor-id="example-17-away-16-away">Example: 17-away, 16-away</h4>
-</section>
+<section id="gammons" class="level3">
+<h3 class="anchored" data-anchor-id="gammons">Gammons</h3>
 </section>
 </section>
 <section id="conclusions" class="level2">
@@ -648,9 +786,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -715,6 +867,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
