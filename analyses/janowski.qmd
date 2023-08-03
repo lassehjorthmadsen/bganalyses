@@ -39,7 +39,7 @@ They basic mechanism is this:
 
 -   To improve the quality of this estimate, a weighted average of all possible positions after one and after two rolls is calculated; what we call 2- and 3-ply evaluations. The initial neural net evaluation is 1-ply. (In GNU BG, the corresponding plies are called 0, 1, 2, etc.)
 
--   From the estimated probability distribution, it is easy to calculate an expected, or average outcome, the *equity* of the position. This is still assuming money game with no doubling cube. Since that situation *never* happens, the number is not terribly relevant. Therefore, XG tries to estimate what the *cubeful* equity is, using [formulas](https://bkgm.com/articles/Janowski/cubeformulae.pdf) develped by Rick Janowski.
+-   From the estimated probability distribution, it is easy to calculate an expected, or average outcome, the *equity* of the position. This is still assuming money game with no doubling cube. Since that situation *never* happens under official rules, this number is not terribly relevant. Therefore, XG tries to estimate what the *cubeful* equity is, using [formulas](https://bkgm.com/articles/Janowski/cubeformulae.pdf) develped by Rick Janowski.
 
 ## Janowski formulas
 
@@ -63,7 +63,7 @@ L <- (31 + 4*2  + 0*3) / (31 +  4 + 0)
 ```
 
 
-Suppose the relative gammon and backgammon frequencies stay constant as the chance to win changes. Then, the average win will be:
+The average win is then:
 
 $$W=\frac{47 \times 1  + 17 \times 2 + 1 \times 3}{47 + 17 + 1} = `r round(W, 3)`\ points$$
 
@@ -76,13 +76,17 @@ The take point, *not* taking re-cubes into account, aka the *dead-cube* take poi
 
 $$TP= \frac{L-0.5}{W+L}$$
 
-This is just another way to express the familiar take point formula, most often written like this: $TP= \frac{Risk}{Gain + Risk}$
+This is just another way to express the familiar take point formula, most often written like this:
+
+$$TP= \frac{Risk}{Gain + Risk}$$
 
 So, as an example, using the above figures for average wins and losses, our dead-cube take point would be:
 
 $$TP = \frac{`r round(L, 3)` - 0.5}{`r round(W, 3)` + `r round(L, 3)`} = `r round((L - 0.5) / (W + L), 3)`$$ 
 
-The dead-cube take point is what we might use in a last roll situation: When the opponent will either win or lose om the next roll, and we will never get the opportunity to redouble. The opposite situation is what we might call the *live-cube* take point, where we unrealistically assume that our redoubles will always be fully efficient; we will redouble exactly at our opponent's take point, when he or she will be indifferent between taking and passing.
+The dead-cube take point is what we might use in a last roll situation: When the opponent will either win or lose om the next roll, and we will never get the opportunity to redouble.
+
+The opposite situation is what we might call the *live-cube* take point, where we unrealistically assume that our redoubles will always be fully efficient; we will redouble exactly at our opponent's take point, when he or she will be indifferent between taking and passing.
 
 The *real* take point for most positions is somewhere between these two extremes: Lower that the pessimistic dead-cube take point, but higher that the overly optimistic live-cube take point.
 
@@ -100,15 +104,15 @@ Suppose UCLA has a 90% chance of beating MIT. What is the probability that MIT w
 
 $$P(E) = \frac{0.1}{0.1+0.4} = 0.2$$
 
-The probability that MIT will at some point have an even game is $0.2 = 20\%$.
+The probability that MIT will at some point have an even game is: $0.2 = 20\%$.
 
 Applying this to backgammon, let's assume that we accept a cube with winning chances of $0.2$ and that we can double our opponent efficiently out if we reach a winning chance of $0.8$. What are our actual winning chances then, assuming a perfectly continuous game? We need to improve from $0.2$ to $0.8$ before we deteriorate from $0.2$ to $0.0$ so $a=0.2, b=0.6$, and:
 
 $$P(E) = \frac{0.2}{0.2+0.6} = \frac{1}{4} = 0.25$$
 
-In other words: The optimistic live-cube model would allow us to take a gammonless game with a cubeless winning probability of just $0.2$ since cube access could turn that into the necessary $0.25$ winning probability. (Keeler and Spencer has a more formal proof of the $0.2$ live-cube take point.)
+In other words: The optimistic live-cube model would allow us to take a gammonless game with a cubeless winning probability of just $0.2$ since cube access would turn that into the necessary $0.25$ winning probability. (Keeler and Spencer has a more formal proof of the $0.2$ live-cube take point.)
 
-As mentioned, the real-life take point would have to be found somewhere between $0.2$ and $0.25$. We can think of it as the weighted average of the two, where the weight represents the *cube efficiency* or what Janowski calls the *cube-life index*. 
+As mentioned, the real-life take point would have to be found somewhere between the live-cube take point of $0.2$ and the dead-cube take point of $0.25$. We can think of it as the weighted average of the two, where the weight represents the *cube efficiency* or what Janowski calls the *cube-life index*. 
 
 Experiments show that in long races the take point is about $0.215$, suggesting a cube efficiency of $0.7$ since $0.7\times 0.20 + 0.3\times 0.25 = 0.215$ 
 
@@ -116,7 +120,7 @@ Incorporating this into the Janowski formular for take points, we can get an est
 
 $$TP= \frac{L-0.5}{W+L+0.5x}$$
 
-where $x$ is what Janowski calls the *cube-life index*, a number between 0 (where the cube is dead) and 1, where all doubles are efficient, i.e. right at the borderline between take and pass.
+where $x$ is what Janowski calls the *cube-life index*, a number between 0 (where the cube is dead) and 1, where all doubles are efficient, i.e. right at the borderline between a take and a pass.
 
 ### Equity from cube location
 
@@ -171,7 +175,7 @@ probs_fliped <- c(probs[4:6], probs[1:3])
 
 tp_table <- tibble(
   Cube = c("Dead", "Perfectly live"),
-  `Opponent's take point` = c(round(tp_money(probs_fliped, 0), 4),
+  `Black's take point` = c(round(tp_money(probs_fliped, 0), 4),
                            round(tp_money(probs_fliped, 1), 4)),
   `White's take point` = c(round(tp_money(probs, 0), 4),
                            round(tp_money(probs, 1), 4))
@@ -182,39 +186,45 @@ tp_table %>%
   column_spec(2:3, width = "5cm") 
 ```
 
-All these four numbers align perfectly with what you get when you consult XGs `Analyze|Cube Information` menu. GNU Backgammon, in `Analyze|Market Window`, also gives the exact same take points. We can conclude that both programs probably implemented Janowski's formular in the same way for money games.
+All these four numbers align perfectly with what you get when you consult XGs `Analyze|Cube Information` menu. GNU Backgammon, in `Analyze|Market Window`, also gives the exact same take points. We can conclude that both programs probably implemented Janowski's take point formular in the same way for money games.
 
 Of course, the interesting bit is the *actual* take points; the "Dead" and "Perfectly live" take point are just lower and upper bounds between which the "real" take point must be found. As mentioned, Janowski just takes a weighted average of the two, to arrive at a guesstimate for the real take point.
 
-Putting aside for a moment the take points, let's look at the *equities*, i.e. the average or *expected* value of a position. For White in the above position, using the Janowski formulas, we get:
 
 ```{r}
 p <- sum(probs[1:3])
-x <- 0.706
+x <- 0.7
+```
 
-tibble(`Cube location` = c("Owned by White", "Centered", "Owned by Opponent"), 
-       `Equity` = c(round(eq_money(probs = probs, C = 1, p = p, x = x), 3),
+Putting aside for a moment the take points, let's look at the cubeful *equities*, i.e. the average or *expected* value of a position, while taking into account the doubling cube. For White in the above position, using the Janowski formulas, and assuming a cube-life index of $`r x`$, we get:
+
+```{r}
+tibble(`Cube location` = c("Owned by Player", "Centered", "Owned by Opponent"), 
+       `Calculated Equity` = c(round(eq_money(probs = probs, C = 1, p = p, x = x), 3),
                     round(eq_money(probs = probs, C = 0, p = p, x = x), 3),
-                    round(2 * eq_money(probs = probs, C = -1, p = p, x = x), 3))
+                    round(2 * eq_money(probs = probs, C = -1, p = p, x = x), 3)),
+       `XG BG reported Equity` = c(0, 0, 0)
        ) %>%
   kable("html") 
 ```
 
-Which also agrees with what XG says, *if we assume a cube-life index of* $`r x`$. I got to that number just by experimenting. It's a little funny with such an odd fraction, so I suspect this is really just a cherry-pick that happens to match XG.
+The calculated equities agrees pretty closely with what XG says. 
 
-Let's examine what GNU says about the same position, to find out if it is applying Janowski like I expect it to. You can't input specific probabilities, and get the estimated cubeful equities for each cube location, so we'll need to rely on GNU's evaluations, which of course are slightly different.
+Note that XGs reported equity listed as "Owned by Opponent" is doubled, so you can directly compare a non-double action to a double/take action. This is why it looks like Opponent (Black), has about double the equity as Player (White), if owning the cube.
+
+Let's examine what GNU says about the same position, to find out if it is applying Janowski like I expect it to. You can't input specific probabilities, and get the estimated cubeful equities for each cube location, so we'll need to switch to GNU's evaluations, which of course are slightly different from XG's.
 
 Here, GNU 2-ply (what XG calls 3-ply) cubeless estimates for the same opening position:
 
 ```{r}
-probs <- outcome_probs(c(0.5251, 0.1494, 0.0068, 0.4749, 0.1251, 0.0053))
+probs <- outcome_probs(c(0.4990, 0.1443, 0.0097, 0.5010, 0.1428, 0.0075))
 probs %>% 
   probs_table() %>% 
   kable("html") %>%
   column_spec(2:5, width = "3.1cm") 
 ```
 
-Which comes to a cubeless *equity* of $E = `r sum(probs * c(1, 2, 3, -1, -2, -3))`$.
+Which comes to a cubeless *equity* of $E = `r sum(probs * c(1, 2, 3, -1, -2, -3))`$. 
 
 The [GNU Backgammon Manual](https://www.gnu.org/software/gnubg/manual/gnubg.html), helpfully states that they use a cube-life index, or cube efficiency, of $0.68$ for contact positions. Applying Janowski's formulars for cubeful equity to the above probabilities and, using $0.68$ as cube efficiency, we get:
 
@@ -222,10 +232,11 @@ The [GNU Backgammon Manual](https://www.gnu.org/software/gnubg/manual/gnubg.html
 p <- sum(probs[1:3])
 x <- 0.68
 
-tibble(`Cube location` = c("Owned by White", "Centered", "Owned by Opponent"), 
-       `Equity` = c(round(eq_money(probs = probs, C = 1, p = p, x = x), 4),
+tibble(`Cube location` = c("Owned by Player", "Centered", "Owned by Opponent"), 
+       `Calculated Equity` = c(round(eq_money(probs = probs, C = 1, p = p, x = x), 4),
                     round(eq_money(probs = probs, C = 0, p = p, x = x), 4),
-                    round(2 * eq_money(probs = probs, C = -1, p = p, x = x), 4))
+                    round(2 * eq_money(probs = probs, C = -1, p = p, x = x), 4)),
+       `GNU BG reported Equity` = c(0.1722, 0.0036, -0.3373)
        ) %>%
   kable("html") 
 ```
@@ -263,11 +274,17 @@ The cubeless equity is also easy to calculate: $E=`r eq_money(probs, 0, p, 0)`$
 
 The Janowski-style estimated cubeful equities, assuming a cube-life index of $`r x`,$ are:
 
--   White's equity owning the cube: `r round(eq_money(probs = probs, C = 1, p = p, x = x), 4)`
--   White's equity with a centered cube: `r round(eq_money(probs = probs, C = 0, p = p, x = x), 4)`
--   White's equity after double/take: `r round(2 * eq_money(probs = probs, C = -1, p = p, x = x), 4)`
+```{r}
+tibble(`Cube location` = c("Owned by Player", "Centered", "Owned by Opponent"), 
+       `Estimated Equity` = c(round(eq_money(probs = probs, C = 1, p = p, x = x), 4),
+                    round(eq_money(probs = probs, C = 0, p = p, x = x), 4),
+                    round(2 * eq_money(probs = probs, C = -1, p = p, x = x), 4)),
+       `XG reported Equity` = c(0.1484, -0.0087, -0.3252)
+       ) %>%
+  kable("html") 
+```
 
-XG reports $0.1484, -0.0087, -0.3252$ respectively, very close to the calculated values, so it must assume a lower cube value in the second postion, which would also be reasonable in a medium to short length race like this.
+The values that XG report are very close to the calculated values, so it must assume a lower cube value in the second position, which would also be reasonable in a medium to short length race like this.
 
 Let's do a final example.
 
@@ -278,6 +295,8 @@ Let's do a final example.
 #| fig.height: 4
 ggboard("XGID=ab--B-D-B---cEaA-c-e----A-:0:0:1:00:0:0:0:0:10")
 ```
+
+XG's 1-ply estimated probabilities are:
 
 ```{r}
 # Analyzed in 1-ply
@@ -293,20 +312,24 @@ probs %>%
 
 ```{r}
 p <- sum(probs[1:3])
-x <- 0.706
+x <- 0.7
 ```
 
 The cubeless equity is: $E=`r eq_money(probs, 0, p, 0)`$
 
 The Janowski-style estimated cubeful equities, assuming a cube-life index of $`r x`$, are:
 
--   White's equity owning the cube: `r round(eq_money(probs = probs, C = 1, p = p, x = x), 4)`
--   White's equity with a centered cube: `r round(eq_money(probs = probs, C = 0, p = p, x = x), 4)`
--   White's equity after double/take: `r round(2 * eq_money(probs = probs, C = -1, p = p, x = x), 4)`
+```{r}
+tibble(`Cube location` = c("Owned by Player", "Centered", "Owned by Opponent"), 
+       `Estimated Equity` = c(round(eq_money(probs = probs, C = 1, p = p, x = x), 4),
+                    round(eq_money(probs = probs, C = 0, p = p, x = x), 4),
+                    round(2 * eq_money(probs = probs, C = -1, p = p, x = x), 4)),
+       `XG reported Equity` = c(0.8304, 0.8140, 0.9557)
+       ) %>%
+  kable("html") 
+```
 
-XG reports $0.8304, 0.8140, 0.9557$, again close to the calculated values, although not exactly the same. The reason for the discrepancy (especially with the cube in the middle) is not obvious. (I used 1-ply to make sure the difference is not due to how the numbers gets aggregated at higher plies.)
-
-Perhaps XG uses a model with *two* cube-life indices, one for each player, like Janowski suggests in his article. In that case, it is a bit unclear how to determine the cube-life indices.
+XG's values are again close to the calculated values, although not exactly the same. The reason for the discrepancy (especially with the cube in the middle) is not obvious. (I used 1-ply to make sure the difference is not due to how the numbers gets aggregated at higher plies.)
 
 ## Match play
 
@@ -330,13 +353,13 @@ In match play, our opponent may have a take point different from ours, so we wou
 
 $$TP_{live} = TP_{dead}\times(1-TP_{opponent})$$
 
-where $TP_{live}$ is *our* live cube take point, and $TP_{opponent}$ is the opponent's live cube take point, i.e. assuming all doubles are perfectly efficient. (Again, this is not a very realistic assumption; we use it just to come up with the *lowest* take point that we can have.)
+where $TP_{live}$ is *our* live cube take point, and $TP_{opponent}$ is the opponent's live cube take point, i.e. assuming all doubles are perfectly efficient. (Again, this is not a very realistic assumption; we use it just to come up with the *lowest* take point that we can possibly have.)
 
 ### Example: 5-away, 3-away
 
 Let's do the simplest possible example of a live cube take point. We're trailing 5-away, 3-away, (-5,-3 for short), it's a long race, and we're being offered an initial double. What are our most optimistic and least optimistic take points?
 
-Our take point assuming a dead cube is $`r round(tp(5,3,1,met), 3)`$ (we skip the actual calculation; it is just the standard one, that I mentioned earlier, $TP= \frac{Risk}{Gain + Risk}$)
+Our take point assuming a dead cube is $`r round(tp(5,3,1,met), 3)`$ (we skip the actual calculation; it is just the standard one, that I mentioned earlier, $TP= \frac{Risk}{Gain + Risk}$).
 
 If we ever *redouble*, then our opponent, if accepting, will have a dead cube, so their live and dead take point is the same, $`r round(tp(3,5,2,met), 3)`$. This is quite high, due to the fact that we can use all four points; our opponent can use only three. That is good news for us, since we don't have to improve nearly as much as in money game to win with the cube. So in this case, applying the continious model, we get: 
 
@@ -475,11 +498,11 @@ plot_data %>%
 ```
 We see how we get from the initial dead-cube take point of `r round(tp(25,24,1,met), 3)` to the live-cube take point of `r round(tp_info(25,24,c(0.5,0,0,0.5,0,0),1,met,0.7)["tp_live"], 3)`. Each subsequent take point has less and less of an impact on our initial take point. And let's just rember once again that the real take point is to be found between these two values; when the game still has a way to go, it is usually closer to live-cube take point that to the dead-cube take point.
 
-### Gammons
+### Example with gammons
 
-Okay, so far it seems possible to (more or less) reproduce how XG and GNU BG transforms cubeless distributions into cubeful match equities. Let's try a match play example with gammons.
+Okay, so far it seems possible to (more or less) reproduce how XG and GNU BG transforms cubeless distributions into cubeful match equities and takepoints. Let's try a match play example with lots of gammons, with us playing White and leading (-4,-7).
 
-Here's a standard opening blitz after 63, 55, dance:
+A standard opening blitz after 63, 55, dance, looks like this:
 
 ```{r}
 #| fig.width: 4
@@ -489,7 +512,7 @@ ggboard("XGID=aB-B--CaA---dE-a-c-e----B-:0:0:1:00:3:0:0:7:10")
  GNU BG 2-ply evaluates the position like this:
 
 ```{r}
-probs <- outcome_probs(c(0.6604, 0.3895, 0.0167, 0.3396, 0.0853, 0.0046))  
+probs <- outcome_probs(c(0.6581, 0.3704, 0.0078, 0.3419, 0.0807, 0.0038))  
 probs_fliped <- c(probs[4:6], probs[1:3])
 
 probs %>% 
@@ -498,31 +521,32 @@ probs %>%
   column_spec(2:5, width = "3.1cm") 
 ```
 
-Do we have a double? Can our opponent take?
+We're clear favorites with a strong gammon threat; it is more likely that we will win a gammon than a single game. If we double, a gammon will win the match exactly, while a single win will put us at 2-away which is also valuable. However, our opponent will be quick to redouble, after which our gammons will be worthless and his gammons will be leathal. 
 
-Applying the Janowski formulas, we get take points as follows:
+So, what's the buttom line? Do we have a double? Can our opponent take? 
 
+Applying the Janowski formulas, we get take points for Black, and take points for White for the potential recube, as follows:
 
 ```{r}
-
-tp_info_pl <- tp_info(4, 7, probs, 1, met)
-tp_info_op <- tp_info(7, 4, probs_fliped, 1, met)
+tp_info_recube  <- tp_info(4, 7, probs, 2, met)
+tp_info_initial <- tp_info(7, 4, probs_fliped, 1, met)
 
 tp_table <- tibble(
-  Cube = c("Dead-cube", "Live-cube", "Real-cube"),
-  `Opponent's take point` = c(round(tp_info_op["tp_dead"], 4),
-                           round(tp_info_op["tp_live"], 4),
-                           round(tp_info_op["tp_real"], 4)),
-  `Player's take point` = c(round(tp_info_pl["tp_dead"], 4),
-                           round(tp_info_pl["tp_live"], 4),
-                           round(tp_info_pl["tp_real"], 4))
-)
+  `Taker, points away` = c(4, 7),
+  `Doubler, points away` = c(7, 4),
+  `Cube value` = c(2, 1),
+  `Dead-cube take point` = c(tp_info_recube["tp_dead"], tp_info_initial["tp_dead"]),
+  `Live-cube take point` = c(tp_info_recube["tp_live"], tp_info_initial["tp_live"]),
+  `Real-cube take point` = c(tp_info_recube["tp_real"], tp_info_initial["tp_real"])
+  ) %>%
+  mutate(across(contains("take point"), round, 4))
 
 tp_table %>% 
   kable("html") %>%
-  column_spec(1:3, width = "5cm") 
-
+  column_spec(1:6, width = "5cm") 
 ```
+
+In the last row we see that Black as a very high take point, `r round(tp_info_initial["tp_dead"], 4)`, for the reason mentioned: The likely gammon will lose the match. Should Black turn the match around, however, White *also* has a high takepoint, `r round(tp_info_recube["tp_dead"], 4)`, and since the cube would be dead, there's no further benefit; the live-cube takepoint is the same as the dead-cube takepoint. For that reason, Black's live-cube and real-cube takepoints are much lower: The model suggests Black would be able to take with a winning probability of `r round(tp_info_initial["tp_real"], 4)`. 
 
 
 ## Conclusions
