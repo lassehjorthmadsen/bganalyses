@@ -49,7 +49,7 @@ First, money game.
 
 ## Money game
 
-As mentioned , a game of backgammon played to conclusion can end in six possible ways. A certain position in Janowski's article, have the following probabilities of each outcome:
+As mentioned, a game of backgammon played to conclusion can end in six possible ways. A certain position in Janowski's article, have the following probabilities of each outcome:
 
 ```{r}
 probs_table(c(47, 17, 1, 31, 4, 0)/100) %>%
