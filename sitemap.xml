@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://lassehjorthmadsen.github.io/bganalyses/index.html</loc>
-    <lastmod>2023-06-27T21:32:47.131Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/mistakes.html</loc>
-    <lastmod>2023-06-27T21:32:45.522Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/met-precision.html</loc>
-    <lastmod>2023-06-27T21:32:43.871Z</lastmod>
+    <loc>https://lassehjorthmadsen.github.io/bganalyses/about.html</loc>
+    <lastmod>2023-08-04T11:31:25.523Z</lastmod>
   </url>
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/explore-emg.html</loc>
-    <lastmod>2023-06-27T21:32:39.692Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lassehjorthmadsen.github.io/bganalyses/about.html</loc>
-    <lastmod>2023-06-27T21:32:37.730Z</lastmod>
+    <lastmod>2023-08-04T11:31:27.801Z</lastmod>
   </url>
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/janowski.html</loc>
-    <lastmod>2023-06-27T21:32:42.332Z</lastmod>
+    <lastmod>2023-08-04T11:31:31.751Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/met-precision.html</loc>
+    <lastmod>2023-08-04T11:31:33.252Z</lastmod>
   </url>
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/met-regression.html</loc>
-    <lastmod>2023-06-27T21:32:44.696Z</lastmod>
+    <lastmod>2023-08-04T11:31:34.252Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/mistakes.html</loc>
+    <lastmod>2023-08-04T11:31:35.170Z</lastmod>
   </url>
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/three-pointers.html</loc>
-    <lastmod>2023-06-27T21:32:46.393Z</lastmod>
+    <lastmod>2023-08-04T11:31:36.018Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lassehjorthmadsen.github.io/bganalyses/index.html</loc>
+    <lastmod>2023-08-04T11:31:36.834Z</lastmod>
   </url>
 </urlset>
