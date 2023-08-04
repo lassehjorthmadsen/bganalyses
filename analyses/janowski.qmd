@@ -203,7 +203,7 @@ tibble(`Cube location` = c("Owned by Player", "Centered", "Owned by Opponent"),
        `Calculated Equity` = c(round(eq_money(probs = probs, C = 1, p = p, x = x), 3),
                     round(eq_money(probs = probs, C = 0, p = p, x = x), 3),
                     round(2 * eq_money(probs = probs, C = -1, p = p, x = x), 3)),
-       `XG reported Equity` = c(0, 0, 0)
+       `XG reported Equity` = c(0.181, 0.002, -0.344)
        ) %>%
   kable("html") 
 ```
