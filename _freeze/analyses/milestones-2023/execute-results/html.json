@@ -1,0 +1,20 @@
+{
+  "hash": "c18003f432d34780e56c6f2aa8c811fb",
+  "result": {
+    "markdown": "---\ntitle: \"Milestones III, 2023\"\nauthor: \"Lasse Hjorth Madsen\"\ndate: today \nformat: html\ntoc: true\ntoc-expand: true\neditor: source\nexecute:\n  echo: false\n  warning: false\n---\n\n<style type=\"text/css\">\n   .main-container {max-width: 100%;}\n   .row {display: flex;}\n   .column {flex: 100%;}\n</style>\n\n\n::: {.cell}\n\n:::\n\n\n## Why this?\n\nThis is a collection of positions from the Milestones III tournament in Denmark, 2023, where players compete for wins and for best performance rating (PR). Every player gets to play 15 7-point matches. I will try to collect one problem from each of my own matches: Positions where I made some mistake, that I found difficult, surprising or otherwise interesting.\n\nIn some cases, I show also variations, to better understand what is going on. I will try to organize the positions in some broad categories.\n\n## Cube actions\n\n<div class = \"row\">\n<div class = \"column\">\n\n::: {.cell}\n::: {.cell-output-display}\n![](milestones-2023_files/figure-html/unnamed-chunk-1-1.png){width=384}\n:::\n:::\n\n</div>\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n```{=html}\n<div id=\"htmlwidget-f32c18c9fa406140d2a8\" style=\"width:100%;height:auto;\" class=\"datatables html-widget \"></div>\n<script type=\"application/json\" data-for=\"htmlwidget-f32c18c9fa406140d2a8\">{\"x\":{\"filter\":\"none\",\"vertical\":false,\"data\":[[\"       No double\",\"       Double/Take\",\"       Double/Pass\"],[\"     +0,690 (-0,020)\",\"   +0,710\",\"   +1,000 (+0,290)\"]],\"container\":\"<table class=\\\"display\\\">\\n  <thead>\\n    <tr>\\n      <th>Action<\\/th>\\n      <th>Equity<\\/th>\\n    <\\/tr>\\n  <\\/thead>\\n<\\/table>\",\"options\":{\"dom\":\"t\",\"ordering\":false,\"headerCallback\":\"function(thead) {\\n  $(thead).css('font-size', '80%');\\n}\",\"columnDefs\":[],\"order\":[],\"autoWidth\":false,\"orderClasses\":false,\"rowCallback\":\"function(row, data, displayNum, displayIndex, dataIndex) {\\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-size':'80%'});\\nvar value=data[1]; $(this.api().cell(row, 1).node()).css({'font-size':'80%'});\\n}\"},\"selection\":{\"mode\":\"multiple\",\"selected\":null,\"target\":\"row\",\"selectable\":null}},\"evals\":[\"options.headerCallback\",\"options.rowCallback\"],\"jsHooks\":[]}</script>\n```\n:::\n:::\n\n</div>\n\n## Checker plays\n\n",
+    "supporting": [
+      "milestones-2023_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<script src=\"../site_libs/htmlwidgets-1.6.2/htmlwidgets.js\"></script>\r\n<link href=\"../site_libs/datatables-css-0.0.0/datatables-crosstalk.css\" rel=\"stylesheet\" />\r\n<script src=\"../site_libs/datatables-binding-0.28/datatables.js\"></script>\r\n<script src=\"../site_libs/jquery-3.6.0/jquery-3.6.0.min.js\"></script>\r\n<link href=\"../site_libs/dt-core-1.13.4/css/jquery.dataTables.min.css\" rel=\"stylesheet\" />\r\n<link href=\"../site_libs/dt-core-1.13.4/css/jquery.dataTables.extra.css\" rel=\"stylesheet\" />\r\n<script src=\"../site_libs/dt-core-1.13.4/js/jquery.dataTables.min.js\"></script>\r\n<link href=\"../site_libs/crosstalk-1.2.0/css/crosstalk.min.css\" rel=\"stylesheet\" />\r\n<script src=\"../site_libs/crosstalk-1.2.0/js/crosstalk.min.js\"></script>\r\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

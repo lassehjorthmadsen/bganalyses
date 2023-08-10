@@ -1,0 +1,67 @@
+---
+title: "Milestones III, 2023"
+author: "Lasse Hjorth Madsen"
+date: today 
+format: html
+toc: true
+toc-expand: true
+editor: source
+execute:
+  echo: false
+  warning: false
+---
+<style type="text/css">
+   .main-container {max-width: 100%;}
+   .row {display: flex;}
+   .column {flex: 100%;}
+</style>
+
+```{r setup}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(DT)
+options(scipen = 9999)
+options(knitr.table.format = "html")
+devtools::load_all(path = "../../backgammon")
+```
+
+## Why this?
+
+This is a collection of positions from the Milestones III tournament in Denmark, 2023, where players compete for wins and for best performance rating (PR). Every player gets to play 15 7-point matches. I will try to collect one problem from each of my own matches: Positions where I made some mistake, that I found difficult, surprising or otherwise interesting.
+
+In some cases, I show also variations, to better understand what is going on. I will try to organize the positions in some broad categories.
+
+## Cube actions
+
+<div class = "row">
+<div class = "column">
+```{r}
+#| fig.width: 4
+#| fig.height: 4
+ggboard("XGID=bA-a-BBBB-A-cBb--c-dA-A-A-:0:0:1:00:2:0:0:7:10")
+```
+</div>
+
+
+```{r}
+"Cubeful Equities:
+       No double:     +0,690 (-0,020)
+       Double/Take:   +0,710
+       Double/Pass:   +1,000 (+0,290)
+Best Cube action: Double / Take" %>%
+  read_lines() %>% 
+  as_tibble() %>% 
+  slice(c(-1,-5)) %>% 
+  separate(value, into = c("Action", "Equity"), sep = ":") %>%
+  datatable(options = list(dom = 't', ordering = F, headerCallback = DT::JS(
+    "function(thead) {",
+    "  $(thead).css('font-size', '80%');",
+    "}"
+  )), width = "100%", rownames = NULL) %>% 
+  formatStyle(columns = c(1, 2), fontSize = '80%')
+```
+</div>
+
+## Checker plays
+
