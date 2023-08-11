@@ -2,7 +2,10 @@
 title: "Milestones III, 2023"
 author: "Lasse Hjorth Madsen"
 date: today 
-format: html
+format: 
+  html:
+    fig-width: 4
+    fig-height: 4
 toc: true
 toc-expand: true
 editor: source
@@ -10,58 +13,72 @@ execute:
   echo: false
   warning: false
 ---
-<style type="text/css">
-   .main-container {max-width: 100%;}
-   .row {display: flex;}
-   .column {flex: 100%;}
-</style>
 
 ```{r setup}
 library(tidyverse)
 library(knitr)
-library(kableExtra)
-library(DT)
 options(scipen = 9999)
-options(knitr.table.format = "html")
 devtools::load_all(path = "../../backgammon")
 ```
 
 ## Why this?
 
-This is a collection of positions from the Milestones III tournament in Denmark, 2023, where players compete for wins and for best performance rating (PR). Every player gets to play 15 7-point matches. I will try to collect one problem from each of my own matches: Positions where I made some mistake, that I found difficult, surprising or otherwise interesting.
+This is a collection of positions from the Milestones III tournament in Denmark, 2023, where players compete for wins and for best performance rating (PR). Every player gets to play 15 7-point matches. I will collect about one problem from each of my own matches: Positions where I made some mistake, that I found difficult, surprising or otherwise interesting.
 
-In some cases, I show also variations, to better understand what is going on. I will try to organize the positions in some broad categories.
+In some cases, I show also variations, to better understand what is going on. I will organize the positions only into cube actions and checker plays, adding more as they come.
 
 ## Cube actions
 
-<div class = "row">
-<div class = "column">
+### Position 1
+
 ```{r}
-#| fig.width: 4
-#| fig.height: 4
 ggboard("XGID=bA-a-BBBB-A-cBb--c-dA-A-A-:0:0:1:00:2:0:0:7:10")
 ```
-</div>
 
+Over the board, this looked to me as a strong double. White has an excellent forward structure, a fat racing lead, and a four prime that can be extended from the back in relative safety, since Black has two checkers on the bar. The only weakness is White's blot on the ace point, but getting hit is not a big deal, so it can't be much of a liability. (Might it even be desirable to get hit, to have that checker recirculated back into action?)
+
+Meanwhile, Black has made almost no progress; only the 11-point is made.
+
+My guess was a strong double, and a smallish take for Black. It is, however, the other way around: White has only a small double, Black has a huge take:
 
 ```{r}
 "Cubeful Equities:
-       No double:     +0,690 (-0,020)
-       Double/Take:   +0,710
-       Double/Pass:   +1,000 (+0,290)
-Best Cube action: Double / Take" %>%
-  read_lines() %>% 
-  as_tibble() %>% 
-  slice(c(-1,-5)) %>% 
-  separate(value, into = c("Action", "Equity"), sep = ":") %>%
-  datatable(options = list(dom = 't', ordering = F, headerCallback = DT::JS(
-    "function(thead) {",
-    "  $(thead).css('font-size', '80%');",
-    "}"
-  )), width = "100%", rownames = NULL) %>% 
-  formatStyle(columns = c(1, 2), fontSize = '80%')
+       No double:     +0,690 (-0,047)
+       Double/Take:   +0,736
+       Double/Pass:   +1,000 (+0,264)
+1296 Games rolled with Variance Reduction.
+Moves: 3-ply, cube decisions: XG Roller" %>%
+cat()
 ```
-</div>
+To see if this is match-score related, let's check the same position for money, and while we're at it, also check if XG Roller ++ (fast, truncated rollouts), gets it right, compared to a full rollout at strong settings. 
+
+```{r}
+#| layout-ncol: 2
+
+ggboard("XGID=bA-a-BBBB-A-cBb--c-dA-A-A-:0:0:1:00:0:0:0:0:10")
+
+"Cubeful Equities:
+       No double:     +0,800 (-0,120)
+       Double/Take:   +0,920
+       Double/Pass:   +1,000 (+0,080)
+1296 Games rolled with Variance Reduction.
+Moves: 3-ply, cube decisions: XG Roller
+
+Analyzed in XG Roller++
+       No double:     +0,784 (-0,134)
+       Double/Take:   +0,918
+       Double/Pass:   +1,000 (+0,082)
+" %>%
+cat("\n", ., sep = "") 
+```
+
+For money, the double is bigger, and the take is smaller. It appears that the 2-point lead does make a difference. But why?
+
+Take points: Money and at-the-score
+Dead cube, no gammons
+Dead cube, gammons
+Live cube, gammons
+
 
 ## Checker plays
 
