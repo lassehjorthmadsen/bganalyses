@@ -17,8 +17,13 @@ execute:
 ```{r setup}
 library(tidyverse)
 library(knitr)
+library(kableExtra)
+
 options(scipen = 9999)
 devtools::load_all(path = "../../backgammon")
+
+met_file <- devtools::package_file("data-raw/Kazaross XG2.met", path = "../../backgammon")
+met <- get_met(filename = met_file)
 ```
 
 ## Why this?
@@ -50,7 +55,32 @@ My guess was a strong double, and a smallish take for Black. It is, however, the
 Moves: 3-ply, cube decisions: XG Roller" %>%
 cat()
 ```
-To see if this is match-score related, let's check the same position for money, and while we're at it, also check if XG Roller ++ (fast, truncated rollouts), gets it right, compared to a full rollout at strong settings. 
+Looking at the outcome probabilities, we see that White does have a big gammon threat, but also that Black wins more than a third of the games:
+
+```{r}
+# Analyzed in Rollout
+# No double
+#   Player Winning Chances:   65,12% (G:35,26% B:1,62%)
+#   Opponent Winning Chances: 34,88% (G:7,79% B:0,49%)
+# Double/Take
+#   Player Winning Chances:   65,58% (G:36,41% B:2,44%)
+#   Opponent Winning Chances: 34,42% (G:7,92% B:0,75%)
+
+probs <- outcome_probs(c(65.58, 36.41, 2.44, 34.42, 7.92, 0.75)) %>% 
+  `/`(100) %>% 
+  round(3)
+
+probs_fliped <- c(probs[4:6], probs[1:3])
+
+probs %>% 
+  probs_table() %>% 
+  kable("html") %>%
+  column_spec(2:5, width = "3.1cm")
+```
+
+One thing that I might have overlooked here, is that White has very few real crushing sequencies, because he's a little short on ammo. Black will almost always make some kind of anchor, and then have some kind of counterplay agains White's three back checkers.
+
+To see if this result is match-score related, let's check the same position for money, and while we're at it, also check if XG Roller ++ (fast, truncated rollouts), gets it right, compared to a full rollout at strong settings. 
 
 ```{r}
 #| layout-ncol: 2
@@ -72,12 +102,53 @@ Analyzed in XG Roller++
 cat("\n", ., sep = "") 
 ```
 
-For money, the double is bigger, and the take is smaller. It appears that the 2-point lead does make a difference. But why?
+For money, the double is bigger, and the take is smaller, so more in line with my first impression. It appears that the 2-point lead for White does make a difference.
 
-Take points: Money and at-the-score
-Dead cube, no gammons
-Dead cube, gammons
-Live cube, gammons
+But why?
+
+The next table shows Black's takepoints under different assumption: No cube and no gammons (like a last-roll position); no cube and gammon rates from the table above; and finally taking both cube and gammons into account. 
+
+```{r}
+tp_table <- tibble(
+  `Cube assumptions` = c("Dead cube, no gammons", "Dead cube, gammons", "Both cube and gammons"),
+  `Moneygame takepoint` = c(tp_money(c(0.5, 0, 0, 0.5, 0, 0), 0),
+                            tp_money(probs_fliped, x = 0),
+                            tp_money(probs_fliped, x = 0.68)
+                            ),
+  `7-away, 5-away takepoint` = c(tp(7, 5, 1, met, last_roll = TRUE),
+                                 tp_info(7, 5, probs_fliped, 1, met)["tp_dead"],
+                                 tp_info(7, 5, probs_fliped, 1, met)["tp_real"])
+  )
+
+tp_table %>% 
+  mutate(across(where(is.numeric), round, 3),
+         Difference = `7-away, 5-away takepoint` - `Moneygame takepoint`) %>% 
+  kable("html") %>% 
+  column_spec(2:4, width = "3.5cm")
+```
+
+The last-roll takepoint is not to different from money at this score, and it also doesn't make much difference to factor in gammons. When we consider possible recubes, however, we see that Black's takepoint at the score, is somewhat lower than it would be for money.
+
+This is because he'll redouble more aggressively at the score. We can see why, by looking at *White's* takepoints for a potential recube, assuming the same gammon frequencies: 
+
+```{r}
+tp_table <- tibble(
+  `Cube assumptions` = c("Dead cube, no gammons", "Dead cube, gammons", "Both cube and gammons"),
+  `Moneygame takepoint` = c(tp_money(c(0.5, 0, 0, 0.5, 0, 0), 0),
+                            tp_money(probs, x = 0),
+                            tp_money(probs, x = 0.68)
+                            ),
+  `5-away, 7-away recube takepoint` = c(tp(5, 7, 2, met, last_roll = TRUE),
+                                 tp_info(5, 7, probs, 2, met)["tp_dead"],
+                                 tp_info(5, 7, probs, 2, met)["tp_real"])
+  )
+
+tp_table %>% 
+  mutate(across(where(is.numeric), round, 3),
+         Difference = `5-away, 7-away recube takepoint` - `Moneygame takepoint`) %>% 
+  kable("html") %>% 
+  column_spec(2:4, width = "3.5cm")
+```
 
 
 ## Checker plays
