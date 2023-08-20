@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lasse Hjorth Madsen">
-<meta name="dcterms.date" content="2023-08-17">
+<meta name="dcterms.date" content="2023-08-20">
 
 <title>Milestones III, 2023</title>
 <style>
@@ -144,6 +144,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#position-1" id="toc-position-1" class="nav-link" data-scroll-target="#position-1">Position 1</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul></li>
+  <li><a href="#checker-plays" id="toc-checker-plays" class="nav-link" data-scroll-target="#checker-plays">Checker plays</a>
+  <ul class="collapse">
+  <li><a href="#position-1-1" id="toc-position-1-1" class="nav-link" data-scroll-target="#position-1-1">Position 1</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -169,7 +173,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 17, 2023</p>
+      <p class="date">August 20, 2023</p>
     </div>
   </div>
   
@@ -472,6 +476,43 @@ Cubeful Equities:
 <li>An awkward ace-point blot can be a rather big liability</li>
 <li>Small things matter: One pip can make a it much easier to turn a strong position into a winning position.</li>
 </ul>
+</section>
+</section>
+<section id="checker-plays" class="level2">
+<h2 class="anchored" data-anchor-id="checker-plays">Checker plays</h2>
+<section id="position-1-1" class="level3">
+<h3 class="anchored" data-anchor-id="position-1-1">Position 1</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="384"></p>
+</div>
+</div>
+<p>Here, White has four reasonable options:</p>
+<ul>
+<li>13/11, 13/8, clearing the midpoint</li>
+<li>11/4, placing a spare on the 4-point</li>
+<li>11/6, 11/9, with spares on the 6- and 9-points</li>
+</ul>
+<p>Unwilling to bread the midpoint as long as reasonable alternatives existed, White played 11/4, wanting to leave fewer shots and cover more outfield, compared to 11/6, 11/9.</p>
+<p>It is not hard to accept that this can be a mistake:</p>
+<p>11/6, 11/9 also breaks the 11-point, but is more compact. It adds 63 to build the 3-point, slots the 9-point which could be useful, and only leaves 44 as an extra shot (a joker anyway).</p>
+<p>13/11, 13/8, clearing the midpoint, puts full emphasis on White’s all-important 5-point, leaves no shot, and makes it more dangerous for Black to split with a roll like 42.</p>
+<p>The interesting part is not that XG picks 13/11, 13/8, but the <em>magnitude</em> of the mistake is remarkable; anything but breaking the midpoint is a blunder:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>XG Roller++ 
+1. 13/11 13/8           eq:+0,026
+2. 11/9 11/6            eq:-0,065 (-0,090)
+3. 11/4                 eq:-0,131 (-0,157)</code></pre>
+</div>
+</div>
+<p>The key is, that after the top-play, 9 rolls make a full 5-prime, after the second best, only 4 rolls does that. Some rolls, 31 and 43, makes the 5-point but breaks the 8, which is not as strong. So the extra builders on the 11- and 8-points have real value.</p>
+<p>Note that White should break the 13-point with a lot of rolls: 54, 43, 62, 42, 32, 51, and the 52 in this position.</p>
+<p>51 deserves special mention, the funny looking 13/7 is probably slightly better than the aggressive slot: 11/5.</p>
+<p>The shots left in the outfield is not the main concern: 43 should be played 13/10 13/9 with lots of builders at the cost of 5 shots; 11/8 11/7 would be a blunder even though it also looks flexible.</p>
+<p>Likewise, with 32, 13/11, 13/10 is a lot better than 11/9, 11/8, since it creates four active builders for the 5-point rather than just three.</p>
+<p>Summing up, making the 5-point and a 5-point-prime is likely to win the game, so White can easily afford breaking the midpoint and leaving a few fly-shots to increase the probability of achieving that goal.</p>
+<p>Builders win – if they try to build something important, and if they are not very likely to get hit.</p>
 
 
 </section>
