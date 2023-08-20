@@ -10,6 +10,7 @@ website:
       - analyses/explore-emg.qmd
       - analyses/met-precision.qmd
       - analyses/janowski.qmd
+      - analyses/milestones-2023.qmd
     search: true
       
 format:
