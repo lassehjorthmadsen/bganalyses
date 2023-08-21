@@ -1,0 +1,30 @@
+---
+title: "Problems from Modern Backgammon"
+author: "Lasse Hjorth Madsen"
+date: today 
+format: 
+  html:
+    fig-width: 4
+    fig-height: 4
+toc: true
+toc-expand: true
+editor: source
+execute:
+  echo: false
+  warning: false
+---
+
+```{r setup}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+options(scipen = 9999)
+devtools::load_all(path = "../../backgammon")
+
+met_file <- devtools::package_file("data-raw/Kazaross XG2.met", path = "../../backgammon")
+met <- get_met(filename = met_file)
+```
+
+## Why this?
+
