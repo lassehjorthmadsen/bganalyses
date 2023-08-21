@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lasse Hjorth Madsen">
-<meta name="dcterms.date" content="2023-08-20">
+<meta name="dcterms.date" content="2023-08-21">
 
 <title>Milestones III, 2023</title>
 <style>
@@ -142,11 +142,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#cube-actions" id="toc-cube-actions" class="nav-link" data-scroll-target="#cube-actions">Cube actions</a>
   <ul class="collapse">
   <li><a href="#position-1" id="toc-position-1" class="nav-link" data-scroll-target="#position-1">Position 1</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#position-2" id="toc-position-2" class="nav-link" data-scroll-target="#position-2">Position 2</a></li>
   </ul></li>
   <li><a href="#checker-plays" id="toc-checker-plays" class="nav-link" data-scroll-target="#checker-plays">Checker plays</a>
   <ul class="collapse">
   <li><a href="#position-1-1" id="toc-position-1-1" class="nav-link" data-scroll-target="#position-1-1">Position 1</a></li>
+  <li><a href="#position-2a-2b" id="toc-position-2a-2b" class="nav-link" data-scroll-target="#position-2a-2b">Position 2a, 2b</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -173,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 20, 2023</p>
+      <p class="date">August 21, 2023</p>
     </div>
   </div>
   
@@ -467,15 +468,79 @@ Cubeful Equities:
 </div>
 </div>
 </div>
-</section>
-<section id="conclusion" class="level3">
-<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>Summing up:</p>
 <ul>
 <li>A two-point lead in a 7-point match matters, especially if you might face a recube when gammons are still possible.</li>
 <li>What seems to be a strong positional advantage, might not be so strong if there are also liabilities.</li>
 <li>An awkward ace-point blot can be a rather big liability</li>
 <li>Small things matter: One pip can make a it much easier to turn a strong position into a winning position.</li>
 </ul>
+</section>
+<section id="position-2" class="level3">
+<h3 class="anchored" data-anchor-id="position-2">Position 2</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="384"></p>
+</div>
+</div>
+<p>This is a good example of a bluff double: It might look like Black has a strong blitz double, but in fact the take is easy, and this is not even a double. In practice, it’s not impossible to get a pass.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,579
+Double/Take:   +0,534 (-0,045)
+Double/Pass:   +1,000 (+0,421)</code></pre>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,671 (-0,086)
+Double/Take:   +0,757
+Double/Pass:   +1,000 (+0,243)</code></pre>
+</div>
+</div>
+</div>
+<p>The ace-point slots make all the difference in the world. If we turn the slot into a builder Black can both blitz or prime; two strong game plans are much better than one:</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,865 (-0,135)
+Double/Take:   +1,067 (+0,067)
+Double/Pass:   +1,000</code></pre>
+</div>
+</div>
+</div>
+<p>Also, making it a bit easier for Black to jump his back checkers, turns the position into a borderline take.</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,784 (-0,211)
+Double/Take:   +0,996
+Double/Pass:   +1,000 (+0,004)</code></pre>
+</div>
+</div>
+</div>
+<p>In summary, it is the combination of having to jump a prime, without being on the edge, <em>and</em> being committed to a blitz, <em>and</em> being a little short on ammunition, that makes Black’s position weaker than it might appear.</p>
 </section>
 </section>
 <section id="checker-plays" class="level2">
@@ -484,7 +549,7 @@ Cubeful Equities:
 <h3 class="anchored" data-anchor-id="position-1-1">Position 1</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="384"></p>
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="384"></p>
 </div>
 </div>
 <p>Here, White has four reasonable options:</p>
@@ -506,13 +571,43 @@ Cubeful Equities:
 3. 11/4                 eq:-0,131 (-0,157)</code></pre>
 </div>
 </div>
-<p>The key is, that after the top-play, 9 rolls make a full 5-prime, after the second best, only 4 rolls does that. Some rolls, 31 and 43, makes the 5-point but breaks the 8, which is not as strong. So the extra builders on the 11- and 8-points have real value.</p>
+<p>The key is, that after the top-play, 9 rolls make a full 5-prime, after the second best, only 4 rolls do that. Some rolls, 31 and 43, makes the 5-point but breaks the 8, which is not as strong. So the extra builders on the 11- and 8-points have real value.</p>
 <p>Note that White should break the 13-point with a lot of rolls: 54, 43, 62, 42, 32, 51, and the 52 in this position.</p>
-<p>51 deserves special mention, the funny looking 13/7 is probably slightly better than the aggressive slot: 11/5.</p>
+<p>51 deserves special mention, the funny looking 13/7 is probably slightly better than the aggressive slot: 11/5, which accomplishes the same thing, but with a different risk/reward ratio.</p>
 <p>The shots left in the outfield is not the main concern: 43 should be played 13/10 13/9 with lots of builders at the cost of 5 shots; 11/8 11/7 would be a blunder even though it also looks flexible.</p>
 <p>Likewise, with 32, 13/11, 13/10 is a lot better than 11/9, 11/8, since it creates four active builders for the 5-point rather than just three.</p>
-<p>Summing up, making the 5-point and a 5-point-prime is likely to win the game, so White can easily afford breaking the midpoint and leaving a few fly-shots to increase the probability of achieving that goal.</p>
-<p>Builders win – if they try to build something important, and if they are not very likely to get hit.</p>
+<p>Summing up, making the 5-point and a 5-point-prime is likely to win the game, and White can easily afford to break the midpoint and leave a few fly-shots to increase the probability of achieving that goal.</p>
+<p>Builders win – <em>if</em> they try to build something important, and <em>if</em> they are not too likely to get hit.</p>
+</section>
+<section id="position-2a-2b" class="level3">
+<h3 class="anchored" data-anchor-id="position-2a-2b">Position 2a, 2b</h3>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-21-2.png" class="img-fluid" width="384"></p>
+</div>
+</div>
+</div>
+<p>These two positions, from the same match, share a common theme: The right play is hard to find for those of us who learned, back in the day, that the one thing you must never do in backgammon, is to make the ace-point.</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>XG Roller++ 
+1. 5/1* 3/1     eq:+0,266
+2. 8/6 5/1*     eq:+0,215 (-0,051)
+3. 7/1*         eq:+0,204 (-0,062)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>XG Roller++ 
+1. 6/1* 2/1     eq:-0,324
+2. 8/7 6/1*     eq:-0,361 (-0,037)
+3. 24/23 6/1*   eq:-0,413 (-0,089)</code></pre>
+</div>
+</div>
+</div>
 
 
 </section>
