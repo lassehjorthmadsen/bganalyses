@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lasse Hjorth Madsen">
-<meta name="dcterms.date" content="2023-08-21">
+<meta name="dcterms.date" content="2023-08-22">
 
 <title>Milestones III, 2023</title>
 <style>
@@ -174,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 21, 2023</p>
+      <p class="date">August 22, 2023</p>
     </div>
   </div>
   
@@ -483,7 +483,7 @@ Cubeful Equities:
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="384"></p>
 </div>
 </div>
-<p>This is a good example of a bluff double: It might look like Black has a strong blitz double, but in fact the take is easy, and this is not even a double. In practice, it’s not impossible to get a pass.</p>
+<p>This is another example of blitz that could work as a bluff double: It might look like White has a strong blitz going, but in fact the take is easy, and this is not even a double. In practice, it’s not impossible to get a pass. (Okay, I passed this, I admit.)</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Analyzed in XG Roller++
@@ -493,6 +493,7 @@ Double/Take:   +0,534 (-0,045)
 Double/Pass:   +1,000 (+0,421)</code></pre>
 </div>
 </div>
+<p>At the match score, the error from passing is gigantic, for money it is smaller but still big:</p>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -502,17 +503,56 @@ Double/Pass:   +1,000 (+0,421)</code></pre>
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
-No double:     +0,671 (-0,086)
-Double/Take:   +0,757
-Double/Pass:   +1,000 (+0,243)</code></pre>
+No double:     +0,664 (-0,078)
+Double/Take:   +0,742
+Double/Pass:   +1,000 (+0,258)</code></pre>
 </div>
 </div>
 </div>
-<p>The ace-point slots make all the difference in the world. If we turn the slot into a builder Black can both blitz or prime; two strong game plans are much better than one:</p>
+<p>To better understand why this score is so different from money, we can compare the takepoints for money and at the score, using different assumptions:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Cube assumptions</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Moneygame takepoint</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">7-away, 5-away takepoint</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Dead cube, no gammons</td>
+<td style="text-align: right; width: 3.5cm;">0.250</td>
+<td style="text-align: right; width: 3.5cm;">0.240</td>
+<td style="text-align: right; width: 3.5cm;">-0.010</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dead cube, gammons</td>
+<td style="text-align: right; width: 3.5cm;">0.369</td>
+<td style="text-align: right; width: 3.5cm;">0.368</td>
+<td style="text-align: right; width: 3.5cm;">-0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Both cube and gammons</td>
+<td style="text-align: right; width: 3.5cm;">0.330</td>
+<td style="text-align: right; width: 3.5cm;">0.288</td>
+<td style="text-align: right; width: 3.5cm;">-0.042</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>As in position 1, it is the powerful recube access that makes Black considerable more inclined to take at the score, compare to money game.</p>
+<p>Let’s keep the money game variant, and play with features of the position.</p>
+<p>The ace-point slots makes all the difference in the world, because it commits White to a blitz. If we turn the slot into a builder White can both blitz or prime, and two strong game plans are much better than one. As a result has a moderate sized pass in the variant below.</p>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="384"></p>
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="384"></p>
 </div>
 <div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>
@@ -524,11 +564,11 @@ Double/Pass:   +1,000</code></pre>
 </div>
 </div>
 </div>
-<p>Also, making it a bit easier for Black to jump his back checkers, turns the position into a borderline take.</p>
+<p>Also, making it a bit easier for White to jump his back checkers, turns the position into just a borderline take.</p>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="384"></p>
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="384"></p>
 </div>
 <div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>
@@ -540,7 +580,7 @@ Double/Pass:   +1,000 (+0,004)</code></pre>
 </div>
 </div>
 </div>
-<p>In summary, it is the combination of having to jump a prime, without being on the edge, <em>and</em> being committed to a blitz, <em>and</em> being a little short on ammunition, that makes Black’s position weaker than it might appear.</p>
+<p>In summary, it is the combination of having to jump a prime, without being on the edge, <em>and</em> being committed to a blitz, <em>and</em> being a little short on ammunition, that makes Whites’s position weaker than it might appear.</p>
 </section>
 </section>
 <section id="checker-plays" class="level2">
@@ -549,7 +589,7 @@ Double/Pass:   +1,000 (+0,004)</code></pre>
 <h3 class="anchored" data-anchor-id="position-1-1">Position 1</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="384"></p>
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="384"></p>
 </div>
 </div>
 <p>Here, White has four reasonable options:</p>
@@ -558,7 +598,7 @@ Double/Pass:   +1,000 (+0,004)</code></pre>
 <li>11/4, placing a spare on the 4-point</li>
 <li>11/6, 11/9, with spares on the 6- and 9-points</li>
 </ul>
-<p>Unwilling to bread the midpoint as long as reasonable alternatives existed, White played 11/4, wanting to leave fewer shots and cover more outfield, compared to 11/6, 11/9.</p>
+<p>Unwilling to break the midpoint as long as reasonable alternatives existed, White played 11/4, wanting to leave fewer shots and cover more outfield, compared to 11/6, 11/9.</p>
 <p>It is not hard to accept that this can be a mistake:</p>
 <p>11/6, 11/9 also breaks the 11-point, but is more compact. It adds 63 to build the 3-point, slots the 9-point which could be useful, and only leaves 44 as an extra shot (a joker anyway).</p>
 <p>13/11, 13/8, clearing the midpoint, puts full emphasis on White’s all-important 5-point, leaves no shot, and makes it more dangerous for Black to split with a roll like 42.</p>
@@ -572,22 +612,22 @@ Double/Pass:   +1,000 (+0,004)</code></pre>
 </div>
 </div>
 <p>The key is, that after the top-play, 9 rolls make a full 5-prime, after the second best, only 4 rolls do that. Some rolls, 31 and 43, makes the 5-point but breaks the 8, which is not as strong. So the extra builders on the 11- and 8-points have real value.</p>
-<p>Note that White should break the 13-point with a lot of rolls: 54, 43, 62, 42, 32, 51, and the 52 in this position.</p>
-<p>51 deserves special mention, the funny looking 13/7 is probably slightly better than the aggressive slot: 11/5, which accomplishes the same thing, but with a different risk/reward ratio.</p>
-<p>The shots left in the outfield is not the main concern: 43 should be played 13/10 13/9 with lots of builders at the cost of 5 shots; 11/8 11/7 would be a blunder even though it also looks flexible.</p>
+<p>Note that White should break the 13-point with a lot of rolls: 54, 43, 62, 42, 32, 51, and the 52 from the actual position.</p>
+<p>51 deserves special mention, the funny looking 13/7 is probably slightly better than the aggressive slot, 11/5, which accomplishes the same thing, but with a different risk/reward ratio: A lot more shots, and a lot more ways to make the 5-point if missed.</p>
+<p>The shots left in the outfield is not the main concern: 43 should be played 13/10 13/9 with lots of builders at the cost of 5 shots; 43: 11/8, 11/7 would be a blunder even though it looks flexible.</p>
 <p>Likewise, with 32, 13/11, 13/10 is a lot better than 11/9, 11/8, since it creates four active builders for the 5-point rather than just three.</p>
 <p>Summing up, making the 5-point and a 5-point-prime is likely to win the game, and White can easily afford to break the midpoint and leave a few fly-shots to increase the probability of achieving that goal.</p>
-<p>Builders win – <em>if</em> they try to build something important, and <em>if</em> they are not too likely to get hit.</p>
+<p>Builders win out – <em>if</em> they aim at something important, and <em>if</em> they are not too likely to get hit.</p>
 </section>
 <section id="position-2a-2b" class="level3">
 <h3 class="anchored" data-anchor-id="position-2a-2b">Position 2a, 2b</h3>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="384"></p>
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="384"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-21-2.png" class="img-fluid" width="384"></p>
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-23-2.png" class="img-fluid" width="384"></p>
 </div>
 </div>
 </div>
@@ -608,6 +648,8 @@ Double/Pass:   +1,000 (+0,004)</code></pre>
 </div>
 </div>
 </div>
+<p>In both cases White must hit, he has the stronger board and while it is not good to get hit back, Black can also do some damage if left alone.</p>
+<p>After hitting on the ace point, anything but switching point just leave another blot for no particular gain.</p>
 
 
 </section>
