@@ -268,9 +268,9 @@ Summing up:
 ### Position 2
 
 ```{r}
-ggboard("XGID=-Aaa-CCBBa--bB---babb--baB:0:0:-1:00:0:2:0:7:10")
+ggboard("XGID=bAB--BBAB---bB--Abbcc-AAa-:0:0:1:00:2:0:0:7:10")
 ```
-This is a good example of a bluff double: It might look like Black has a strong blitz double, but in fact the take is easy, and this is not even a double. In practice, it's not impossible to get a pass.
+This is another example of blitz that could work as a bluff double: It might look like White has a strong blitz going, but in fact the take is easy, and this is not even a double. In practice, it's not impossible to get a pass. (Okay, I passed this, I admit.)
 
 ```{r}
 "Analyzed in XG Roller++
@@ -281,24 +281,61 @@ Double/Pass:   +1,000 (+0,421)" %>%
   cat()
 ```
 
+At the match score, the error from passing is gigantic, for money it is smaller but still big:
 
 ```{r}
 #| layout-ncol: 2
-ggboard("XGID=-Aaa-CCBBa--bB---babb--baB:0:0:-1:00:0:0:0:0:10")
+ggboard("XGID=bAB--BBAB---bB--Abbcc-AAa-:0:0:1:00:0:0:0:0:10")
 
 "Analyzed in XG Roller++
 Cubeful Equities:
-No double:     +0,671 (-0,086)
-Double/Take:   +0,757
-Double/Pass:   +1,000 (+0,243)" %>% 
+No double:     +0,664 (-0,078)
+Double/Take:   +0,742
+Double/Pass:   +1,000 (+0,258)" %>% 
   cat("\n", ., sep = "")
 ```
 
-The ace-point slots make all the difference in the world. If we turn the slot into a builder Black can both blitz or prime; two strong game plans are much better than one:
+To better understand why this score is so different from money, we can compare the takepoints for money and at the score, using different assumptions:
+
+```{r}
+# Analyzed in XG Roller++
+# Player Winning Chances:   67,99% (G:36,77% B:1,15%)
+# Opponent Winning Chances: 32,01% (G:9,36% B:0,46%)
+
+probs <- outcome_probs(c(67.99, 36.77, 1.15, 32.01,9.36, 0.46)) %>% 
+  `/`(100) 
+
+probs_fliped <- c(probs[4:6], probs[1:3])
+```
+
+```{r}
+tp_table <- tibble(
+  `Cube assumptions` = c("Dead cube, no gammons", "Dead cube, gammons", "Both cube and gammons"),
+  `Moneygame takepoint` = c(tp_money(c(0.5, 0, 0, 0.5, 0, 0), 0),
+                            tp_money(probs_fliped, x = 0),
+                            tp_money(probs_fliped, x = 0.68)
+                            ),
+  `7-away, 5-away takepoint` = c(tp(7, 5, 1, met, last_roll = TRUE),
+                                 tp_info(7, 5, probs_fliped, 1, met)["tp_dead"],
+                                 tp_info(7, 5, probs_fliped, 1, met)["tp_real"])
+  )
+
+tp_table %>% 
+  mutate(across(where(is.numeric), round, 3),
+         Difference = `7-away, 5-away takepoint` - `Moneygame takepoint`) %>% 
+  kable("html") %>% 
+  column_spec(2:4, width = "3.5cm")
+```
+
+As in position 1, it is the powerful recube access that makes Black considerable more inclined to take at the score, compare to money game. 
+
+Let's keep the money game variant, and play with features of the position. 
+
+The ace-point slots makes all the difference in the world, because it commits White to a blitz. If we turn the slot into a builder White can both blitz or prime, and two strong game plans are much better than one. As a result has a moderate sized pass in the variant below. 
 
 ```{r}
 #| layout-ncol: 2
-ggboard("XGID=-Aaa-CCBBa--bB---bacb--b-B:0:0:-1:00:0:0:0:0:10")
+ggboard("XGID=b-B--BCAB---bB--Abbcc-AAa-:0:0:1:00:0:0:0:0:10")
 
 "Analyzed in XG Roller++
 Cubeful Equities:
@@ -308,11 +345,11 @@ Double/Pass:   +1,000" %>%
   cat("\n", ., sep = "")
 ```
 
-Also, making it a bit easier for Black to jump his back checkers, turns the position into a borderline take.
+Also, making it a bit easier for White to jump his back checkers, turns the position into just a borderline take.
 
 ```{r}
 #| layout-ncol: 2
-ggboard("XGID=-A-aaCCBBa--bB---babb--baB:0:0:-1:00:0:0:0:0:10")
+ggboard("XGID=bAB--BBAB---bB--AbbccAA-a-:0:0:1:00:0:0:0:0:10")
 
 "Analyzed in XG Roller++
 Cubeful Equities:
@@ -322,7 +359,7 @@ Double/Pass:   +1,000 (+0,004)" %>%
   cat("\n", ., sep = "")
 ```
 
-In summary, it is the combination of having to jump a prime, without being on the edge, *and* being committed to a blitz, *and* being a little short on ammunition, that makes Black's position weaker than it might appear.
+In summary, it is the combination of having to jump a prime, without being on the edge, *and* being committed to a blitz, *and* being a little short on ammunition, that makes Whites's position weaker than it might appear.
 
 ## Checker plays
 
@@ -338,7 +375,7 @@ Here, White has four reasonable options:
 - 11/4, placing a spare on the 4-point 
 - 11/6, 11/9, with spares on the 6- and 9-points 
 
-Unwilling to bread the midpoint as long as reasonable alternatives existed, White played 11/4, wanting to leave fewer shots and cover more outfield, compared to 11/6, 11/9.
+Unwilling to break the midpoint as long as reasonable alternatives existed, White played 11/4, wanting to leave fewer shots and cover more outfield, compared to 11/6, 11/9.
 
 It is not hard to accept that this can be a mistake:
 
@@ -358,17 +395,17 @@ The interesting part is not that XG picks 13/11, 13/8, but the *magnitude* of th
 
 The key is, that after the top-play, 9 rolls make a full 5-prime, after the second best, only 4 rolls do that. Some rolls, 31 and 43, makes the 5-point but breaks the 8, which is not as strong. So the extra builders on the 11- and 8-points have real value. 
 
-Note that White should break the 13-point with a lot of rolls: 54, 43, 62, 42, 32, 51, and the 52 in this position.
+Note that White should break the 13-point with a lot of rolls: 54, 43, 62, 42, 32, 51, and the 52 from the actual position.
 
-51 deserves special mention, the funny looking 13/7 is probably slightly better than the aggressive slot: 11/5, which accomplishes the same thing, but with a different risk/reward ratio.
+51 deserves special mention, the funny looking 13/7 is probably slightly better than the aggressive slot, 11/5, which accomplishes the same thing, but with a different risk/reward ratio: A lot more shots, and a lot more ways to make the 5-point if missed.
 
-The shots left in the outfield is not the main concern: 43 should be played 13/10 13/9 with lots of builders at the cost of 5 shots; 11/8 11/7 would be a blunder even though it also looks flexible.
+The shots left in the outfield is not the main concern: 43 should be played 13/10 13/9 with lots of builders at the cost of 5 shots; 43: 11/8, 11/7 would be a blunder even though it looks flexible.
 
 Likewise, with 32, 13/11, 13/10 is a lot better than 11/9, 11/8, since it creates four active builders for the 5-point rather than just three.
 
 Summing up, making the 5-point and a 5-point-prime is likely to win the game, and White can easily afford to break the midpoint and leave a few fly-shots to increase the probability of achieving that goal.
 
-Builders win -- *if* they try to build something important, and *if* they are not too likely to get hit.
+Builders win out -- *if* they aim at something important, and *if* they are not too likely to get hit.
 
 ### Position 2a, 2b
 
@@ -396,5 +433,6 @@ These two positions, from the same match, share a common theme: The right play i
 3. 24/23 6/1*   eq:-0,413 (-0,089)" %>% 
   cat()
 ```
+In both cases White must hit, he has the stronger board and while it is not good to get hit back, Black can also do some damage if left alone.
 
-
+After hitting on the ace point, anything but switching point just leave another blot for no particular gain.
