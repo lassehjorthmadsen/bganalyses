@@ -361,6 +361,20 @@ Double/Pass:   +1,000 (+0,004)" %>%
 
 In summary, it is the combination of having to jump a prime, without being on the edge, *and* being committed to a blitz, *and* being a little short on ammunition, that makes Whites's position weaker than it might appear.
 
+### Position 3
+
+```{r}
+ggboard("XGID=abB---CAB--AcCAa-c-e----B-:0:0:1:00:4:2:0:7:10")
+```
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=abB---CAB--AcCAa-c-e----B-:0:0:1:00:0:0:0:0:10")
+ggboard("XGID=ab-B--CAB--AcCAa-c-e----B-:0:0:1:00:0:0:0:0:10")
+```
+
+
+
 ## Checker plays
 
 ### Position 1
@@ -407,32 +421,141 @@ Summing up, making the 5-point and a 5-point-prime is likely to win the game, an
 
 Builders win out -- *if* they aim at something important, and *if* they are not too likely to get hit.
 
-### Position 2a, 2b
+### Positions 2a-2d
 
 ```{r}
 #| layout-ncol: 2
-
-ggboard("XGID=-a-BbCCBB-----c-Bcac-b-A--:1:1:1:42:3:0:0:7:10")
-ggboard("XGID=-aB--CC-C---bC--abbdc---A-:0:0:1:51:2:0:0:7:10")
+ggboard("XGID=-a-BbCCBB-----c-Bcac-b-A--:1:1:1:42:3:0:0:7:10") + 
+  labs(title = "Position 2a")
+ggboard("XGID=-aB--CC-C---bC--abbdc---A-:0:0:1:51:2:0:0:7:10") + 
+  labs(title = "Position 2b")
+ggboard("XGID=-ABbBBB-C---cB---c-cbA--b-:1:-1:1:21:0:0:0:7:10") + 
+  labs(title = "Position 2c")
+ggboard("XGID=aABaB-C-CA--cB---c-cbAa-a-:1:-1:1:41:0:0:0:7:10") + 
+  labs(title = "Position 2d")
 ```
-These two positions, from the same match, share a common theme: The right play is hard to find for those of us who learned, back in the day, that the one thing you must never do in backgammon, is to make the ace-point.
+These four positions share a common theme: The right play is hard to find for those of us who learned, back in the day, that the one thing you must never do in backgammon, is to make the ace-point.
+
 
 ```{r}
 #| layout-ncol: 2
 
-"XG Roller++ 
+"Position 2a
+XG Roller++ 
 1. 5/1* 3/1     eq:+0,266
 2. 8/6 5/1*     eq:+0,215 (-0,051)
 3. 7/1*         eq:+0,204 (-0,062)" %>% 
   cat()
 
-
-"XG Roller++ 
+"Position 2b
+XG Roller++ 
 1. 6/1* 2/1     eq:-0,324
 2. 8/7 6/1*     eq:-0,361 (-0,037)
 3. 24/23 6/1*   eq:-0,413 (-0,089)" %>% 
+  cat()
+
+"Position 2c
+XG Roller++ 
+1. 8/6 2/1      eq:+0,178
+2. 8/5          eq:+0,130 (-0,048)" %>% 
+  cat()
+
+"Position 2d
+XG Roller++ 
+1. 16/1         eq:+0,767
+2. 8/3*         eq:+0,754 (-0,013)
+3. 9/5 6/5      eq:+0,723 (-0,044)" %>% 
   cat()
 ```
 In both cases White must hit, he has the stronger board and while it is not good to get hit back, Black can also do some damage if left alone.
 
 After hitting on the ace point, anything but switching point just leave another blot for no particular gain.
+
+### Position 3
+
+```{r}
+ggboard("XGID=----A-FAB-A--C-----Adcaba-:1:1:1:64:0:0:0:0:10")
+```
+
+This is a technical play, where it is tempting to assume that all reasonable plays are close. Actually, they are not so close.
+
+Obviously the play is all about getting off the gammon. Over the board, White played 19/9, thinking that it hardly mattered, as long as he made crossovers and avoided wastage by playing past the 6-point.
+
+The gammon race is close. The probabilities that White will lose a gammon after the five best plays, are listed below. 
+
+```{r}
+"1. 13/7 10/6    53.93% 
+2. 19/13 10/6   55.07%
+3. 19/15 13/7   56.63%
+4. 19/9         57.74%
+5. 13/9 13/7    58,07%
+1296 Games rolled with Variance Reduction.
+Moves: 3-ply, cube decisions: XG Roller" %>% 
+  cat()
+```
+The actual play, 19/9, increases the risk of getting gammoned, by almost 4 percentage points, so for money that would be about a 0.04 mistake, costing 4 percent of the cube value -- a significant mistake.
+
+Why so much?
+
+The main concept in getting-off-the-gammon problems is to avoid "wasting" pips, by playing past the 6-point, those pips don't help saving the gammon. Playing 10/4 with the 4 does just that, so must be right. Indeed, 10/4 is part of both top plays. 
+
+This *is* quite important, especially when the gammon race is close.
+
+After 10/6 with the 4,  13/7 is best with the 6, simply because it creates a smaller stack: Two checkers on the 7- and 13-point, is better than one and four checkers.
+
+### Position 4
+
+```{r}
+ggboard("XGID=-----DF-C----A------A--be-:2:-1:1:31:0:0:0:7:10")
+```
+This one is from the same game as position 3, but Black has rolled well, so White is now a big favorite to get gammoned. The 31 White has to play is a little funny, because the correct play seem to violate basic principles for getting off the gammon: Make crossovers; don't waste pips.
+
+The right play is 8/5 8/7.
+
+```{r}
+"
+    1. Rollout¹    8/7 8/5                      eq:-1,814
+      Player:   0,00% (G:0,00% B:0,00%)
+      Opponent: 100,00% (G:89,63% B:0,00%)
+      Confidence: ±0,000 (-1,814..-1,813) - [100,0%]
+      Duration: 3,2 seconds
+
+    2. Rollout¹    13/12 8/5                    eq:-1,815 (-0,001)
+      Player:   0,00% (G:0,00% B:0,00%)
+      Opponent: 100,00% (G:89,78% B:1,35%)
+      Confidence: ±0,000 (-1,815..-1,815) - [0,0%]
+      Duration: 3,4 seconds
+
+    3. Rollout¹    20/19 8/5                    eq:-1,821 (-0,007)
+      Player:   0,00% (G:0,00% B:0,00%)
+      Opponent: 100,00% (G:90,42% B:0,06%)
+      Confidence: ±0,000 (-1,821..-1,821) - [0,0%]
+      Duration: 2,9 seconds
+
+    4. Rollout¹    8/4                          eq:-1,826 (-0,012)
+      Player:   0,00% (G:0,00% B:0,00%)
+      Opponent: 100,00% (G:90,99% B:0,52%)
+      Confidence: ±0,000 (-1,826..-1,826) - [0,0%]
+      Duration: 3,3 seconds
+
+    5. Rollout¹    20/16                        eq:-1,826 (-0,013)
+      Player:   0,00% (G:0,00% B:0,00%)
+      Opponent: 100,00% (G:91,03% B:0,00%)
+      Confidence: ±0,000 (-1,827..-1,826) - [0,0%]
+      Duration: 3,6 seconds
+
+    6. Rollout¹    20/19 13/10                  eq:-1,827 (-0,013)
+      Player:   0,00% (G:0,00% B:0,00%)
+      Opponent: 100,00% (G:91,09% B:0,09%)
+      Confidence: ±0,000 (-1,827..-1,827) - [0,0%]
+      Duration: 3,5 seconds
+
+    7. Rollout¹    20/17 13/12                  eq:-1,830 (-0,016)
+      Player:   0,00% (G:0,00% B:0,00%)
+      Opponent: 100,00% (G:91,39% B:0,00%)
+      Confidence: ±0,000 (-1,830..-1,829) - [0,0%]
+      Duration: 3,1 seconds
+
+"
+```
+
