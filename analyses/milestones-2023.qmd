@@ -12,10 +12,11 @@ editor: source
 execute:
   echo: false
   warning: false
-  cache: false
+  cache: true
 ---
 
 ```{r setup}
+#| cache: false
 library(tidyverse)
 library(knitr)
 library(kableExtra)
@@ -489,9 +490,9 @@ ggboard("XGID=-aa--BBBC-B-AB-b-bbeAb----:0:0:1:00:0:0:0:0:10")
 
 The market loss that White imagined was something like a 63: 22/13, which would indeed have lost White's market -- if Black was not allowed to roll. But Black gets to roll, and most rolls make some kind of improvement that allows Black to take, so true market losers are rare.
 
-But the big part of the mistake was about failing to account for the match score. It's easy to see how the ability to recube to 4 is a powerful thing for Black when trailing 7-away, 3-away. After a redouble/take, Black can win 4 points, possibly winning a gammon and the match, White can win only 3 points and can't benefit from gammons.
+But the big part of the mistake was failing to account for the match score. It's easy to see how the ability to recube to 4 is a powerful thing for Black when trailing 7-away, 3-away. After a redouble/take, Black can win 4 points, with the added possibility of winning a gammon and the match; White can win only 3 points and can't benefit from gammons.
 
-Let's line Black's take points up in a table and compare to money game:
+Let's line up Black's take points in a table and compare to money game:
 
 ```{r}
 # Analyzed in XG Roller++
@@ -514,10 +515,10 @@ Like we saw in an earlier problem, Black can take really deep at this score and 
 
 For money White can justify a cube on a sunny day; at the match score he needs a better position.
 
-The marginal money game take, for example, would still be a sizable no-double, even at the score:
+The variant that makes for a marginal money game take, for example, would still be a sizable no-double at the score:
 
 ```{r}
-#|layout-ncol: 2
+#| layout-ncol: 2
 
 ggboard("XGID=-aa--BBBC-B-AB-b-bbeAb----:0:0:1:00:4:0:0:7:10")
 
@@ -525,7 +526,8 @@ ggboard("XGID=-aa--BBBC-B-AB-b-bbeAb----:0:0:1:00:4:0:0:7:10")
 Cubeful Equities:
 No double:   +0,731
 Double/Take: +0,573 (-0,158)
-Double/Pass: +1,000 (+0,269)" %>%
+Double/Pass: +1,000 (+0,269)
+" %>%
   cat("\n", ., sep = "") 
 ```
 
@@ -561,7 +563,7 @@ The interesting part is not that XG picks 13/11, 13/8, but the *magnitude* of th
   cat()
 ```
 
-The key is, that after the top-play, 9 rolls make a full 5-prime, after the second best, only 4 rolls do that. Some rolls, 31 and 43, makes the 5-point but breaks the 8, which is not as strong. So the extra builders on the 11- and 8-points have real value. 
+The key is, that after the top play, 9 rolls make a full 5-prime. After the second best play, only 4 rolls do that. Some rolls, 31 and 43, makes the 5-point but breaks the 8, which is not as strong. So the extra builders on the 11- and 8-points have real value. 
 
 Note that White should break the 13-point with a lot of rolls: 54, 43, 62, 42, 32, 51, and the 52 from the actual position.
 
@@ -668,11 +670,11 @@ The actual play, 19/9, increases the risk of getting gammoned, by almost 4 perce
 
 Why so much?
 
-The main concept in getting-off-the-gammon problems is to avoid "wasting" pips, by playing past the 6-point, those pips don't help saving the gammon. Playing 10/4 with the 4 does just that, so must be right. Indeed, 10/4 is part of both top plays. 
+The main concept in getting-off-the-gammon problems is to avoid "wasting" pips, by playing past the 6-point, those pips don't help saving the gammon. Playing 10/6 with the 4 does just that, so must be right. Indeed, 10/6 is part of both top plays. 
 
 This *is* quite important, especially when the gammon race is close.
 
-After 10/6 with the 4,  13/7 is best with the 6, simply because it creates a smaller stack: Two checkers on the 7- and 13-point, is better than one and four checkers.
+After 10/6 with the 4,  13/7 is best with the 6, simply because it creates a smaller stack: Two checkers on the 7- and 13-point, is better than one and four checkers respectively.
 
 ### Position 4
 
@@ -685,12 +687,14 @@ The right play is 8/7 8/5, wasting a pip and failing to make two crossovers.
 
 A little reflection shows that White needs to cater to specific doubles. After any play White needs 7 or 8 crossovers in three rolls, so one of roll has to be a double to save the gammon. After 8/7 8/5 any double makes 4 crossover, which is not true for the other plays, so that is the winner.
 
-It's true, that if White makes two crossovers now, with 13/11 8/5, he only needs to generate three crossovers from future double. But 11 fails to do even that, so it loses a tiny bit there.
+It's true, that if White makes two crossovers now, with 13/12 8/5, he only needs to generate three crossovers from a future double. But 11 fails to do even that, so it loses a tiny bit there.
 
-The other two-crossover play, 20/17 13/12, also fails on 11, but plays worse on 55 and 44 as well.
+The other two-crossover play, played in the actual game, is 20/17 13/12 which also fails on 11, but plays worse on 55 and 44 as well.
+
+The probabilities of losing a gammon after the 7 best plays are:
 
 ```{r}
-"1. 8/7 8/5     89,63% 
+"1. 8/7 8/5      89,63% 
 2. 13/12 8/5    89,78% 
 3. 20/19 8/5    90,42% 
 4. 8/4          90,99% 
@@ -707,7 +711,6 @@ Moves: 3-ply, cube decisions: XG Roller" %>%
 ```{r}
 ggboard("XGID=-b---DC-C--AbB----acd-c-B-:1:1:1:64:0:0:0:7:10")
 ```
-
 
 This is a tough play. White has two reasonable but very different plays: Hitting with 24/18\*/14, or priming with 13/7 11/7. 
 
@@ -788,6 +791,16 @@ ggboard("XGID=-b---DC-C-A-bB----acd-c-B-:1:1:1:36:0:0:0:0:10")
 
 With a 61 to play, rather that a 64, priming performs better. Not so much because priming is better with 61, but because the alternative hitting plays are all worse than the hit-and-run-almost-home play available with 64.
 
-In the second variation, with the same kind of choice for a roll of 62, priming is now a stand-out. Both because hitting and running still doesn't run as far, *and* (I think more importantly) because hitting leaves an additional 2 very dangerous returns from the bar: 63 and 54.
+In the second variation, with the same kind of choice for a roll of 62, priming is now a stand-out. Both because hitting and running still doesn't run as far, *and* (I think more importantly) because hitting leaves an additional 4 very dangerous returns from the bar: 63 and 54.
 
-In the final variation, hitting is slightly right, likely because the 10-point would be valuable to make also, so that checkers works also as a slot. (Which may be covered with a 5 from the 15-point.) 
+In the final variation, hitting is slightly right, likely because the 10-point would be valuable to make also, so that checker works also as a slot. (Which may be covered with a 5 from the 15-point.) 
+
+## Conclusions
+
+Examining some errors from this Milestone Tournament, the findings that surprised me the most where:
+
+- I seem to *overestimate* some attacking positions
+- I grossly *underestimate* how much more careful the leader should be to double in middle game positions with gammons, when leading something like 3-away versus 5-away or 7-away. Likely because I failed to pay attention how impactful potential recubes are at these scores.
+- I tend to miss plays where making the ace-point is correct.
+
+I think I should dedicate another note to each of these.
