@@ -12,6 +12,7 @@ editor: source
 execute:
   echo: false
   warning: false
+  cache: false
 ---
 
 ```{r setup}
@@ -40,11 +41,11 @@ In some cases, I show also variations, to better understand what is going on. I 
 ggboard("XGID=bA-a-BBBB-A-cBb--c-dA-A-A-:0:0:1:00:2:0:0:7:10")
 ```
 
-Over the board, this looked to me like a strong double. White has an excellent forward structure, a fat racing lead, and a 4-point prime that can be extended from the back in relative safety, since Black has two checkers on the bar. The only weakness is White's blot on the ace point, but getting hit is not a big deal, so it can't be much of a liability.
+Over the board, this looked to White like a strong double. White has an excellent forward structure, a fat racing lead, and a 4-point prime that can be extended from the back in relative safety, since Black has two checkers on the bar. The only weakness is White's blot on the ace point, but getting hit is not a big deal, so it can't be much of a liability.
 
 Meanwhile, Black has made almost no progress; only the 11-point is made.
 
-My guess was a strong double, and a smallish take for Black. It is, however, the other way around: White has only a small double, Black has a huge take:
+White guessed this was a strong double, and a smallish take for Black. It is, however, the other way around: White has only a small double, Black has a huge take:
 
 ```{r}
 "Cubeful Equities:
@@ -79,7 +80,7 @@ probs %>%
   column_spec(2:5, width = "3.1cm")
 ```
 
-One thing that I might have overlooked here, is that White has very few real crushing frequencies, because he's a little short on ammo. Black will almost always make some kind of anchor, and then have some kind of counter play agains White's three back checkers.
+One thing that might be overlooked here, is that White has very few real crushing frequencies, because he's a little short on ammo. Black will almost always make some kind of anchor, and then have some kind of counter play agains White's three back checkers.
 
 To see if this result is match-score related, let's check the same position for money, and while we're at it, also check if XG Roller ++ (fast, truncated rollouts), gets it right, compared to a full rollout at strong settings.
 
@@ -89,75 +90,75 @@ To see if this result is match-score related, let's check the same position for 
 ggboard("XGID=bA-a-BBBB-A-cBb--c-dA-A-A-:0:0:1:00:0:0:0:0:10")
 
 "Cubeful Equities:
-       No double:     +0,800 (-0,120)
-       Double/Take:   +0,920
-       Double/Pass:   +1,000 (+0,080)
+No double:     +0,800 (-0,120)
+Double/Take:   +0,920
+Double/Pass:   +1,000 (+0,080)
 1296 Games rolled with Variance Reduction.
 Moves: 3-ply, cube decisions: XG Roller
 
 Analyzed in XG Roller++
-       No double:     +0,784 (-0,134)
-       Double/Take:   +0,918
-       Double/Pass:   +1,000 (+0,082)
+No double:     +0,784 (-0,134)
+Double/Take:   +0,918
+Double/Pass:   +1,000 (+0,082)
 " %>%
 cat("\n", ., sep = "") 
 ```
 
-For money, the double is bigger, and the take is smaller, so more in line with my first impression. It appears that the 2-point lead for White does make a difference.
+For money, the double is bigger, and the take is smaller, so more in line with White's first impression. It appears that the 2-point lead for White does make a difference.
 
 But why?
 
-The next table shows Black's takepoints under different assumption: No cube and no gammons (like a last-roll position); no cube and gammon rates from the table above; and finally taking both cube and gammons into account.
+The next table shows Black's take points under different assumption: a) No cube and no gammons (like a last-roll position); b) no cube and gammon rates from the table above; and c) taking both cube and gammons into account.
 
 ```{r}
 tp_table <- tibble(
   `Cube assumptions` = c("Dead cube, no gammons", "Dead cube, gammons", "Both cube and gammons"),
-  `Moneygame takepoint` = c(tp_money(c(0.5, 0, 0, 0.5, 0, 0), 0),
+  `money game take point` = c(tp_money(c(0.5, 0, 0, 0.5, 0, 0), 0),
                             tp_money(probs_fliped, x = 0),
                             tp_money(probs_fliped, x = 0.68)
                             ),
-  `7-away, 5-away takepoint` = c(tp(7, 5, 1, met, last_roll = TRUE),
+  `7-away, 5-away take point` = c(tp(7, 5, 1, met, last_roll = TRUE),
                                  tp_info(7, 5, probs_fliped, 1, met)["tp_dead"],
                                  tp_info(7, 5, probs_fliped, 1, met)["tp_real"])
   )
 
 tp_table %>% 
   mutate(across(where(is.numeric), round, 3),
-         Difference = `7-away, 5-away takepoint` - `Moneygame takepoint`) %>% 
+         Difference = `7-away, 5-away take point` - `money game take point`) %>% 
   kable("html") %>% 
   column_spec(2:4, width = "3.5cm")
 ```
 
-The last-roll takepoint is not too different from money at this score, and it also doesn't make much difference to factor in gammons. When we consider possible recubes, however, we see that Black's takepoint at the score, is somewhat lower than it would be for money.
+The last-roll take point is not too different from money at this score, and it also doesn't make much difference to factor in gammons. When we consider possible recubes, however, we see that Black's take point at the score, is somewhat lower than it would be for money.
 
-This is because he'll redouble more aggressively at the score. We can see why, by looking at *White's* takepoints for a potential recube, assuming the same gammon frequencies:
+This is because he'll redouble more aggressively at the score. We can see why, by looking at *White's* take points for a potential recube, assuming the same gammon frequencies:
 
 ```{r}
 tp_table <- tibble(
   `Cube assumptions` = c("Dead cube, no gammons", "Dead cube, gammons", "Both cube and gammons"),
-  `Moneygame takepoint` = c(tp_money(c(0.5, 0, 0, 0.5, 0, 0), 0),
+  `money game take point` = c(tp_money(c(0.5, 0, 0, 0.5, 0, 0), 0),
                             tp_money(probs, x = 0),
                             tp_money(probs, x = 0.68)
                             ),
-  `5-away, 7-away recube takepoint` = c(tp(5, 7, 2, met, last_roll = TRUE),
+  `5-away, 7-away recube take point` = c(tp(5, 7, 2, met, last_roll = TRUE),
                                  tp_info(5, 7, probs, 2, met)["tp_dead"],
                                  tp_info(5, 7, probs, 2, met)["tp_real"])
   )
 
 tp_table %>% 
   mutate(across(where(is.numeric), round, 3),
-         Difference = `5-away, 7-away recube takepoint` - `Moneygame takepoint`) %>% 
+         Difference = `5-away, 7-away recube take point` - `money game take point`) %>% 
   kable("html") %>% 
   column_spec(2:4, width = "3.5cm")
 ```
 
-So, it looks like a good part of my flawed evaluation of the original position, comes from the fact that Black can take somewhat more aggressively at the score; hence White needs more to have a really strong double.
+So, it looks like a good part of White's flawed evaluation of the original position, comes from the fact that Black can take somewhat more aggressively at the score; hence White needs more to have a really strong double.
 
-The reason for Black's lower takepoint at the score, lies mostly in the potential redouble in positions where gammons are possible: It's hard for White to accept a 4-cube at 5-away 7-away, where a gammon loss means is much more costly than a gammon win.
+The reason for Black's lower take point at the score, lies mostly in the potential redouble in positions where gammons are possible: It's hard for White to accept a 4-cube at 5-away 7-away, where a gammon loss is much more costly than a gammon win.
 
-Still, the position is also a clear take for money, so there's some reconsideration to do in that department too. What will it take to turn the position into a really tough take for money?
+Still, the position is also a clear take for money, so there's some reconsideration for White to do in that department too. What will it take to turn the position into a really tough take for money?
 
-If we activate the awkward spare on the ace-point, we suddenly have a big pass. Perhaps not surprising, since the liability turns into a big asset. But still:
+If we activate the awkward spare on the ace-point, we suddenly have a big pass. Perhaps not surprising, since we're turning a big liability into a big asset. But still:
 
 ```{r}
 #| layout-ncol: 2
@@ -165,9 +166,9 @@ ggboard("XGID=b--a-BCBB-A-cBb--c-dA-A-A-:0:0:1:00:0:0:0:0:10")
 
 "Analyzed in XG Roller++
 Cubeful Equities:
-       No double:     +0,979 (-0,021)
-       Double/Take:   +1,273 (+0,273)
-       Double/Pass:   +1,000" %>%
+No double:     +0,979 (-0,021)
+Double/Take:   +1,273 (+0,273)
+Double/Pass:   +1,000" %>%
 cat("\n", ., sep = "") 
 ```
 
@@ -179,9 +180,9 @@ ggboard("XGID=b--a-BBBB-A-cCb--c-dA-A-A-:0:0:1:00:0:0:0:0:10")
 
 "Analyzed in XG Roller++
 Cubeful Equities:
-       No double:     +0,929 (-0,071)
-       Double/Take:   +1,045 (+0,045)
-       Double/Pass:   +1,000" %>%
+No double:     +0,929 (-0,071)
+Double/Take:   +1,045 (+0,045)
+Double/Pass:   +1,000" %>%
 cat("\n", ., sep = "") 
 ```
 
@@ -193,9 +194,9 @@ ggboard("XGID=b--a-BBBB-A-cBb-Ac-dA-A-A-:0:0:1:00:0:0:0:0:10")
 
 "Analyzed in XG Roller++
 Cubeful Equities:
-       No double:     +0,913 (-0,087)
-       Double/Take:   +1,011 (+0,011)
-       Double/Pass:   +1,000" %>%
+No double:     +0,913 (-0,087)
+Double/Take:   +1,011 (+0,011)
+Double/Pass:   +1,000" %>%
 cat("\n", ., sep = "") 
 ```
 
@@ -207,9 +208,9 @@ ggboard("XGID=b--a-BBBB-A-cBb--c-dB-A-A-:0:0:1:00:0:0:0:0:10")
 
 "Analyzed in XG Roller++
 Cubeful Equities:
-       No double:     +0,874 (-0,072)
-       Double/Take:   +0,947
-       Double/Pass:   +1,000 (+0,053)" %>%
+No double:     +0,874 (-0,072)
+Double/Take:   +0,947
+Double/Pass:   +1,000 (+0,053)" %>%
 cat("\n", ., sep = "") 
 ```
 
@@ -223,14 +224,14 @@ ggboard("XGID=bA-a-BBBBA--cBb--c-dA-A-A-:0:0:1:00:0:0:0:0:10")
 
 "Analyzed in XG Roller++
 Cubeful Equities:
-       No double:     +0,856 (-0,144)
-       Double/Take:   +1,059 (+0,059)
-       Double/Pass:   +1,000
+No double:     +0,856 (-0,144)
+Double/Take:   +1,059 (+0,059)
+Double/Pass:   +1,000
 " %>%
 cat("\n", ., sep = "") 
 ```
 
-Another change in the same spirit is to bring in another builder for that important 9-point. It has about the samme effect as slotting:
+Another change in the same spirit is to bring in another builder for that important 9-point. It has about the same effect as slotting the 9-point:
 
 ```{r}
 #| layout-ncol: 2
@@ -238,9 +239,9 @@ ggboard("XGID=bA-a-BBBB-A-cBbA-c-d--A-A-:0:0:1:00:0:0:0:0:10")
 
 "Analyzed in XG Roller++
 Cubeful Equities:
-       No double:     +0,854 (-0,146)
-       Double/Take:   +1,065 (+0,065)
-       Double/Pass:   +1,000" %>%
+No double:     +0,854 (-0,146)
+Double/Take:   +1,065 (+0,065)
+Double/Pass:   +1,000" %>%
 cat("\n", ., sep = "") 
 ```
 
@@ -252,9 +253,9 @@ ggboard("XGID=b-Aa-BBBB-A-cBb--c-dA-A-A-:0:0:1:00:0:0:0:0:10")
 
 "Analyzed in XG Roller++
 Cubeful Equities:
-       No double:     +0,849 (-0,151)
-       Double/Take:   +1,062 (+0,062)
-       Double/Pass:   +1,000" %>%
+No double:     +0,849 (-0,151)
+Double/Take:   +1,062 (+0,062)
+Double/Pass:   +1,000" %>%
 cat("\n", ., sep = "") 
 ```
 
@@ -270,7 +271,7 @@ Summing up:
 ```{r}
 ggboard("XGID=bAB--BBAB---bB--Abbcc-AAa-:0:0:1:00:2:0:0:7:10")
 ```
-This is another example of blitz that could work as a bluff double: It might look like White has a strong blitz going, but in fact the take is easy, and this is not even a double. In practice, it's not impossible to get a pass. (Okay, I passed this, I admit.)
+This is another example of blitz that could work as a bluff double: It might look like White has a strong blitz going, but in fact the take is easy, and this is not even a double. In practice, it's not impossible to get a pass. (In the actual game, Black passed this.)
 
 ```{r}
 "Analyzed in XG Roller++
@@ -295,7 +296,7 @@ Double/Pass:   +1,000 (+0,258)" %>%
   cat("\n", ., sep = "")
 ```
 
-To better understand why this score is so different from money, we can compare the takepoints for money and at the score, using different assumptions:
+To better understand why this score is so different from money, we can compare the take points for money and at the score, using different assumptions:
 
 ```{r}
 # Analyzed in XG Roller++
@@ -309,20 +310,11 @@ probs_fliped <- c(probs[4:6], probs[1:3])
 ```
 
 ```{r}
-tp_table <- tibble(
-  `Cube assumptions` = c("Dead cube, no gammons", "Dead cube, gammons", "Both cube and gammons"),
-  `Moneygame takepoint` = c(tp_money(c(0.5, 0, 0, 0.5, 0, 0), 0),
-                            tp_money(probs_fliped, x = 0),
-                            tp_money(probs_fliped, x = 0.68)
-                            ),
-  `7-away, 5-away takepoint` = c(tp(7, 5, 1, met, last_roll = TRUE),
-                                 tp_info(7, 5, probs_fliped, 1, met)["tp_dead"],
-                                 tp_info(7, 5, probs_fliped, 1, met)["tp_real"])
-  )
+tp_tab <- tp_table(7, 5, probs_fliped, 1, met)
 
-tp_table %>% 
+tp_tab %>% 
   mutate(across(where(is.numeric), round, 3),
-         Difference = `7-away, 5-away takepoint` - `Moneygame takepoint`) %>% 
+         Difference = `7-away, 5-away take point` - `money game take point`) %>% 
   kable("html") %>% 
   column_spec(2:4, width = "3.5cm")
 ```
@@ -331,7 +323,7 @@ As in position 1, it is the powerful recube access that makes Black considerable
 
 Let's keep the money game variant, and play with features of the position. 
 
-The ace-point slots makes all the difference in the world, because it commits White to a blitz. If we turn the slot into a builder White can both blitz or prime, and two strong game plans are much better than one. As a result has a moderate sized pass in the variant below. 
+The ace-point slots makes all the difference in the world, because it commits White to a blitz. If we turn the slot into a builder White can both blitz or prime, and two strong game plans are much better than one. As a result Black has a moderate sized pass in the variant below. 
 
 ```{r}
 #| layout-ncol: 2
@@ -367,13 +359,175 @@ In summary, it is the combination of having to jump a prime, without being on th
 ggboard("XGID=abB---CAB--AcCAa-c-e----B-:0:0:1:00:4:2:0:7:10")
 ```
 
+White had a good start, and considered doubling, but must be mindful of the score, leading 3-away, 5-away. Is the position strong enough to double?
+
+No, doubling would be a big mistake:
+
+```{r}
+"Analyzed in XG Roller++
+No double:     +0,452
+Double/Take:   +0,160 (-0,292)
+Double/Pass:   +1,000 (+0,548)" %>% 
+  cat()
+```
+
+To better understand the position, consider two illustrative variants: Money game (left), and money game with White's 2-point switched back a pip (right) so it becomes the 3-point:
+
 ```{r}
 #| layout-ncol: 2
 ggboard("XGID=abB---CAB--AcCAa-c-e----B-:0:0:1:00:0:0:0:0:10")
 ggboard("XGID=ab-B--CAB--AcCAa-c-e----B-:0:0:1:00:0:0:0:0:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,619
+Double/Take:   +0,556 (-0,063)
+Double/Pass:   +1,000 (+0,381)" %>% 
+  cat()
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,731 (-0,011)
+Double/Take:   +0,742
+Double/Pass:   +1,000 (+0,258)" %>% 
+  cat()
 ```
 
+The original is still a no-double for money, although doubling is a much smaller mistake that at the score. Shifting to a better inner point makes a clear difference; now the decision to double is really close, and White has a small double. 
 
+Bringing in more ammunition *and* making the 11-point is required to turn the position into a solid double/take for money, although it would still be a clear no-double at the score:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=ab-B--CAC--BcB-a-c-e----B-:0:0:1:00:4:2:0:7:10")
+ggboard("XGID=ab-B--CAC--BcB-a-c-e----B-:0:0:1:00:0:0:0:0:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,686
+Double/Take:   +0,581 (-0,105)
+Double/Pass:   +1,000 (+0,314)" %>% 
+  cat()
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,838 (-0,082)
+Double/Take:   +0,920
+Double/Pass:   +1,000 (+0,080)" %>% 
+  cat()
+```
+
+Only if we in addition to the modifications above, *also* switch back to the much stronger 4-point, do we have a double at the score, but only just. For money, the position is now a big pass.
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=ab--B-CAC--BcB-a-c-e----B-:0:0:1:00:4:2:0:7:10")
+ggboard("XGID=ab--B-CAC--BcB-a-c-e----B-:0:0:1:00:0:0:0:0:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,847 (-0,011)
+Double/Take:   +0,859
+Double/Pass:   +1,000 (+0,141)" %>% 
+  cat()
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,939 (-0,061)
+Double/Take:   +1,164 (+0,164)
+Double/Pass:   +1,000" %>% 
+  cat()
+```
+
+Let's compare take points at the score and for money (using outcome probabilities from the original position) to see why cube action is so different at this score than for money:
+
+```{r}
+# Analyzed in XG Roller++
+# Player Winning Chances:   61,53% (G:26,11% B:3,01%)
+# Opponent Winning Chances: 38,47% (G:9,32% B:0,52%)
+
+probs <- outcome_probs(c(61.53, 26.11, 3.91, 38.47, 9.32, 0.52)) 
+probs_fliped <- c(probs[4:6], probs[1:3])
+
+tp_tab <- tp_table(5, 3, probs_fliped, 1, met)
+
+tp_tab %>% 
+  mutate(across(where(is.numeric), round, 3),
+         Difference = `5-away, 3-away take point` - `money game take point`) %>% 
+  kable("html") %>% 
+  column_spec(2:4, width = "3.5cm")
+```
+
+While it would actually be harder for Black to accept a double in a short race (a 4-roll position would be a pass), the ability to redouble makes all the difference.
+
+The take points are based on the below outcome probabilities from XG roller++. Note that Black has as much as 38 percent to win this game (in the original position):
+
+```{r}
+probs %>% 
+  probs_table() %>% 
+  kable("html") %>%
+  column_spec(2:5, width = "3.1cm")
+```
+
+In summary, when leading 3-away, 5-away, in a typical middle game position, the leader should have a position that is a clear money pass, to consider doubling. That potential re-cube is just too powerful to let your opponent have.
+
+### Position 4
+```{r}
+ggboard("XGID=-aa--BBBC--BAB-b-bbe-bA---:0:0:1:00:4:0:0:7:10")
+```
+
+Here, White figured that escaping with a 6 or making the 9- or 10-point, could lead to a market loss and doubled. White failed to pay enough attention to the match score, *and* overestimated the position a bit, the combination of which made the decision to double a 0.308 blunder.
+
+The three diagrams below show left to right: a) the position for money: A borderline double at best; b) The modification required to turn it into a solid double and a solid take; c) The closest variant that would make the position only a small take for money 
+
+```{r}
+#| layout-ncol: 3
+ggboard("XGID=-aa--BBBC--BAB-b-bbe-bA---:0:0:1:00:0:0:0:0:10")
+ggboard("XGID=-aa--BBBC-B-AB-b-bbe-bA---:0:0:1:00:0:0:0:0:10")
+ggboard("XGID=-aa--BBBC-B-AB-b-bbeAb----:0:0:1:00:0:0:0:0:10")
+```
+
+The market loss that White imagined was something like a 63: 22/13, which would indeed have lost White's market -- if Black was not allowed to roll. But Black gets to roll, and most rolls make some kind of improvement that allows Black to take, so true market losers are rare.
+
+But the big part of the mistake was about failing to account for the match score. It's easy to see how the ability to recube to 4 is a powerful thing for Black when trailing 7-away, 3-away. After a redouble/take, Black can win 4 points, possibly winning a gammon and the match, White can win only 3 points and can't benefit from gammons.
+
+Let's line Black's take points up in a table and compare to money game:
+
+```{r}
+# Analyzed in XG Roller++
+# Player Winning Chances:   69,98% (G:13,65% B:0,65%)
+# Opponent Winning Chances: 30,02% (G:7,14% B:0,23%)
+
+probs <- outcome_probs(c(69.98, 13.65, 0.65, 30.02, 7.14, 0.23)) 
+probs_fliped <- c(probs[4:6], probs[1:3])
+
+tp_tab <- tp_table(7, 3, probs_fliped, 1, met)
+
+tp_tab %>% 
+  mutate(across(where(is.numeric), round, 3),
+         Difference = `7-away, 3-away take point` - `money game take point`) %>% 
+  kable("html") %>% 
+  column_spec(2:4, width = "3.5cm")
+```
+
+Like we saw in an earlier problem, Black can take really deep at this score and these gammon frequencies -- take point all things considered is about 19%.
+
+For money White can justify a cube on a sunny day; at the match score he needs a better position.
+
+The marginal money game take, for example, would still be a sizable no-double, even at the score:
+
+```{r}
+#|layout-ncol: 2
+
+ggboard("XGID=-aa--BBBC-B-AB-b-bbeAb----:0:0:1:00:4:0:0:7:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:   +0,731
+Double/Take: +0,573 (-0,158)
+Double/Pass: +1,000 (+0,269)" %>%
+  cat("\n", ., sep = "") 
+```
 
 ## Checker plays
 
@@ -421,7 +575,7 @@ Summing up, making the 5-point and a 5-point-prime is likely to win the game, an
 
 Builders win out -- *if* they aim at something important, and *if* they are not too likely to get hit.
 
-### Positions 2a-2d
+### Positions 2a-2e
 
 ```{r}
 #| layout-ncol: 2
@@ -433,8 +587,10 @@ ggboard("XGID=-ABbBBB-C---cB---c-cbA--b-:1:-1:1:21:0:0:0:7:10") +
   labs(title = "Position 2c")
 ggboard("XGID=aABaB-C-CA--cB---c-cbAa-a-:1:-1:1:41:0:0:0:7:10") + 
   labs(title = "Position 2d")
+ggboard("XGID=aAaBBBB-B---bB-aAa-cbbb-A-:1:-1:1:11:0:0:0:7:10") + 
+  labs(title = "Position 2e")
 ```
-These four positions share a common theme: The right play is hard to find for those of us who learned, back in the day, that the one thing you must never do in backgammon, is to make the ace-point.
+These five positions share a common theme: The right play is hard to find for those of us who learned, back in the day, that the one thing you must never do in backgammon, is to make the ace-point.
 
 
 ```{r}
@@ -462,14 +618,29 @@ XG Roller++
 
 "Position 2d
 XG Roller++ 
-1. 16/1         eq:+0,767
+1. 6/1          eq:+0,767
 2. 8/3*         eq:+0,754 (-0,013)
 3. 9/5 6/5      eq:+0,723 (-0,044)" %>% 
   cat()
-```
-In both cases White must hit, he has the stronger board and while it is not good to get hit back, Black can also do some damage if left alone.
 
-After hitting on the ace point, anything but switching point just leave another blot for no particular gain.
+"Position 2e
+XG Roller++ 
+1. 24/23 16/15* 3/2* 2/1    eq:+0,909
+2. 24/23 16/15* 3/2*(2)     eq:+0,857 (-0,052)
+3. 16/15* 8/7 3/2*(2)       eq:+0,850 (-0,059)
+4. 16/15* 8/7 3/2* 2/1      eq:+0,818 (-0,091)
+5. 24/23 16/15* 8/7(2)      eq:+0,804 (-0,105)" %>% 
+  cat()
+```
+In position 2a and 2b White must hit, he has the stronger board and while it is not good to get hit back, Black can also do some damage if left alone. After hitting on the ace point, anything but switching point just leave another blot for no particular gain.
+
+In 2c White just overlooked switching -- an easy thing to do if you learned to play pre-neural nets. 
+
+2d is just a case of a classic blitz: It doesn't matter too much which points you make; in fact the ace-point may be better to make, since the higher points are easier to cover.
+
+2e is a little more tricky prime vs. prime kind of thing. The important part is to but three checkers on the bar -- then White might have time to recover even if hit back. It's also good to advance with 24/23. So after three mandatory aces: 24/23, 16/15\*, and 3/2\*, it is easier to see that 2/1 is the right final ace, since it leaves a direct cover for the slotted 3-point.
+
+The positional approach that White tried in the actual game, 24/23 16/15* 8/7(2), is no good; Black can both anchor or hit back. 
 
 ### Position 3
 
@@ -553,7 +724,7 @@ In the end, priming comes out slightly better:
   cat()
 ```
 
-Let's have a look at the moneygame variant, together with a very minimal one-pip modification:
+Let's have a look at the money game variant, together with a very minimal one-pip modification:
 
 ```{r}
 #| layout-ncol: 2
