@@ -526,10 +526,160 @@ ggboard("XGID=-aa--BBBC-B-AB-b-bbeAb----:0:0:1:00:4:0:0:7:10")
 Cubeful Equities:
 No double:   +0,731
 Double/Take: +0,573 (-0,158)
-Double/Pass: +1,000 (+0,269)
-" %>%
+Double/Pass: +1,000 (+0,269)" %>%
   cat("\n", ., sep = "") 
 ```
+
+### Position 5
+
+```{r}
+ggboard("XGID=aB-b-CB-C---bD--bb-ccA----:0:0:1:00:2:0:0:7:10")
+```
+
+This one is much the same theme as the previous position: White overestimated their winning chances and figured that escaping the back checker would be a clear market loss. In fact, this is a big no double:
+
+```{r}
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,385
+Double/Take:   +0,114 (-0,271)
+Double/Pass:   +1,000 (+0,615)" %>% 
+  cat()
+```
+
+The mistake is magnified by the score, but for money it is still a massive no-double:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=aB-b-CB-C---bD--bb-ccA----:0:0:1:00:0:0:0:0:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,488
+Double/Take:   +0,343 (-0,145)
+Double/Pass:   +1,000 (+0,512)" %>% 
+  cat("\n", ., sep = "") 
+```
+
+It is easy to see the mistake considering that escaping *and* having Black fan, will not even turn it into a double, much less a drop:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=aB-b-CB-C---bE--bb-cc-----:0:0:1:00:0:0:0:0:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,747
+Double/Take:   +0,713 (-0,035)
+Double/Pass:   +1,000 (+0,253)" %>%
+  cat("\n", ., sep = "")
+```
+
+In fact, to make this position a close take/pass decision, White needs pretty massive improvements, like this:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=aB-b-BCABB--bC--bb-cc-----:0:0:1:00:0:0:0:0:10")
+
+"Analyzed in Rollout
+Cubeful Equities:
+No double:     +0,913 (-0,076)
+Double/Take:   +0,989
+Double/Pass:   +1,000 (+0,011)" %>% 
+  cat("\n", ., sep = "") 
+```
+
+The weakness of White's position comes in large part from the the gap on the 4-point. If we close that (by sliding Black's anchor forward one pip), the the escape/fan-sequence is now a double/take. (The original position, of course, remains a no-double, even with the gap closed, since escape/fan is still not a market loss).
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=aB--bCB-C---bE--bb-cc-----:0:0:1:00:0:0:0:0:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,877 (-0,043)
+Double/Take:   +0,920
+Double/Pass:   +1,000 (+0,080)" %>% 
+  cat("\n", ., sep = "") 
+```
+
+### Position 6
+
+```{r}
+ggboard("XGID=-B----C-D-a-eCA--c-dbA--A-:0:0:-1:00:4:0:0:7:10")
+```
+
+In this position White underestimated an attacking position, *and* failed to take the match score into account, and so took a double that is a big pass: 
+
+```{r}
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,984 (-0,016)
+Double/Take:   +1,300 (+0,300)
+Double/Pass:   +1,000" %>% 
+  cat()
+```
+
+The fact that White can lose a costly gammon and can almost never redouble, is what makes the error really big. Black's gammon value after double/take is `r gammon_value(7, 3, 2, met) %>% round(2)`; White's gammon value is `r gammon_value(3, 7, 2, met) %>% round(2)`. Should White decide to redouble, Black can pass and get to match winning chance of `r mwc(7,1, met) %>% round(2)` or take and redouble if he is doing any better than that. So White can't get much benefit from the cube either.
+
+But the position itself is also quite bad, a clear money pass:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=-B----C-D-a-eCA--c-dbA--A-:0:0:-1:00:0:0:0:0:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,914 (-0,086)
+Double/Take:   +1,089 (+0,089)
+Double/Pass:   +1,000" %>% 
+  cat("\n", ., sep = "") 
+```
+
+Part of the problem with White's position is the made ace-point; sliding that point back to the 3-point results in a marginal take/pass:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=---B--C-D-a-eCA--c-dbA--A-:0:0:-1:00:0:0:0:0:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,884 (-0,112)
+Double/Take:   +0,996
+Double/Pass:   +1,000 (+0,004)" %>% 
+  cat("\n", ., sep = "") 
+```
+
+Of course, removing the annoying double shot that Black has in the outfield, also improves White's position a lot. Clear money-take here (although still a pass at the original score):
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=-B----C-D-a-eD---c-dbA--A-:0:0:-1:00:0:0:0:0:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,810 (-0,069)
+Double/Take:   +0,879
+Double/Pass:   +1,000 (+0,121)
+" %>% 
+  cat("\n", ., sep = "") 
+```
+
+To turn the position into a take at 3-away, 7-away, White needs a series of improvements: A big upgrade of the ace-point into the 5-point, removing the 14-point shot, *and* placing Black's escaped checker a little further from home:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=-----BC-Da--eD---c-dbA--A-:0:0:-1:00:4:0:0:7:10")
+
+"Analyzed in Rollout
+Cubeful Equities:
+No double:     +0,892 (-0,106)
+Double/Take:   +0,997
+Double/Pass:   +1,000 (+0,003)" %>% 
+  cat("\n", ., sep = "") 
+```
+
+Black is still a lot better off than White since he has nearly escaped both back checkers, and is well ahead in the race. Black wins about 70% of the games, but White can probably just squeeze out a very marginal take at the score.
 
 ## Checker plays
 
@@ -795,6 +945,52 @@ In the second variation, with the same kind of choice for a roll of 62, priming 
 
 In the final variation, hitting is slightly right, likely because the 10-point would be valuable to make also, so that checker works also as a slot. (Which may be covered with a 5 from the 15-point.) 
 
+### Position 6
+
+```{r}
+ggboard("XGID=-B-C-CC-A---a--bcd-eB-A---:0:0:1:43:2:4:0:7:10")
+```
+
+A technical play that White got wrong, by a surprising amount. White wanted to stay back, making it harder for Black to play safe, taking advantage of a stronger home board. The play made was 8/4 5/2, maintaing contact, trying to improve the home board fast.
+
+The key is, that White is ahead in the race, not behind, and would like to release the back checker to steer into a more race-like position. 
+
+Any good play involves 22/18 with the 4:
+
+```{r}
+"XG Roller++
+1. 22/18 5/2      eq:-0,274
+2. 22/18 8/5      eq:-0,274 (-0,001)
+3. 22/18 6/3      eq:-0,311 (-0,037)
+4. 6/2 5/2        eq:-0,429 (-0,155)
+5. 8/4 5/2        eq:-0,459 (-0,186)
+" %>% 
+  cat()
+```
+
+After 22/18, Black's best rolls are the ones that hit on his 7-point without leaving returns: 61, 62, 21, 11, 22, 33 equalizing the race, along with 66 and 55, taking the lead in the race.
+
+Black's *worst* roll, surprisingly, is the quiet 43: 13/10 6/2, the smallest roll that fails to hit, after which the game is more or less equal. Other below-average rolls are the ones that hit but leaves dangerous returns: 52, 51, 42, 41, 32, 64. Black can play safe with these rolls, but is better off taking a moderate risk to get ahead in the race.
+
+After the actual 8/4 5/2, Black's worst roll is 51, played 8/2, voluntarily leaving only 4 indirect shots. The point is that the supposedly contact-maintaining play generates a lot fewer immediate shots than the contact-breaking play.
+
+22/18 5/2 is so much better than 8/4 5/2 because it is better *both* for the race and for the hits.
+
+In this variant, where White is behind in the race, 22/18 is still correct, although not by such a big margin, since it doesn't have the added racing benefits:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=---C-CC-A--Ba--bcd-eB-A---:0:0:1:43:2:4:0:7:10")
+
+"XG Roller++
+1. 22/18 11/8        eq:-0,598
+2. 22/18 8/5         eq:-0,605 (-0,007)
+3. 22/18 5/2         eq:-0,608 (-0,011)
+4. 11/4              eq:-0,623 (-0,025)
+5. 22/18 6/3         eq:-0,626 (-0,028)" %>% 
+  cat("\n", ., sep = "") 
+```
+
 ## Conclusions
 
 Examining some errors from this Milestone Tournament, the findings that surprised me the most where:
@@ -802,5 +998,6 @@ Examining some errors from this Milestone Tournament, the findings that surprise
 - I seem to *overestimate* some attacking positions
 - I grossly *underestimate* how much more careful the leader should be to double in middle game positions with gammons, when leading something like 3-away versus 5-away or 7-away. Likely because I failed to pay attention how impactful potential recubes are at these scores.
 - I tend to miss plays where making the ace-point is correct.
+- Some technical positions can be deceptively tricky. 
 
-I think I should dedicate another note to each of these.
+I think I should dedicate another note to some of these themes.
