@@ -1,0 +1,20 @@
+{
+  "hash": "4601678594298251a4c232ac6adb60e5",
+  "result": {
+    "markdown": "---\ntitle: \"Exploring take points\"\nauthor: \"Lasse Hjorth Madsen\"\ndate: today \nformat: html\ntoc: true\ntoc-expand: true\neditor: visual\nexecute:\n  echo: false\n  warning: false\n---\n\n::: {.cell}\n\n:::\n\n\n\n## Why this?\n\nWhat is the lowest take point you can possibly have, with reasonable gammon frequencies? Not surprisingly, this happens when you're trailing 17-away, 17-away, the opponent holds a 16-cube and double to 32. If you pass, you have about 1 percentage chance of winning, so if you got that many winning chances, you can take.\n\nBut what about all the other take points; which ones are the most extreme?\n\n## A big plot\n\nThese are some assumed outcome probabilities, similar to the opening position:\n\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n::: {.cell-output-display}\n`````{=html}\n<table>\n <thead>\n  <tr>\n   <th style=\"text-align:left;\">   </th>\n   <th style=\"text-align:right;\"> Regular </th>\n   <th style=\"text-align:right;\"> Gammon </th>\n   <th style=\"text-align:right;\"> Backgammon </th>\n   <th style=\"text-align:right;\"> Sum </th>\n  </tr>\n </thead>\n<tbody>\n  <tr>\n   <td style=\"text-align:left;\"> Player wins </td>\n   <td style=\"text-align:right;width: 3.1cm; \"> 37 </td>\n   <td style=\"text-align:right;width: 3.1cm; \"> 12.5 </td>\n   <td style=\"text-align:right;width: 3.1cm; \"> 0.5 </td>\n   <td style=\"text-align:right;width: 3.1cm; \"> 50 </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:left;\"> Opponent wins </td>\n   <td style=\"text-align:right;width: 3.1cm; \"> 37 </td>\n   <td style=\"text-align:right;width: 3.1cm; \"> 12.5 </td>\n   <td style=\"text-align:right;width: 3.1cm; \"> 0.5 </td>\n   <td style=\"text-align:right;width: 3.1cm; \"> 50 </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:left;\"> Sum </td>\n   <td style=\"text-align:right;width: 3.1cm; \"> 74 </td>\n   <td style=\"text-align:right;width: 3.1cm; \"> 25.0 </td>\n   <td style=\"text-align:right;width: 3.1cm; \"> 1.0 </td>\n   <td style=\"text-align:right;width: 3.1cm; \"> 100 </td>\n  </tr>\n</tbody>\n</table>\n\n`````\n:::\n:::\n\n\nUsing those gammon and backgammon frequencies, here's a take point plot, for all possible scores and cube-values in a 17-point match. It's fun to explore and learn. Can you find that one purple 16-cube mentioned in the beginning?\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](many-takepoints_files/figure-html/plot-1.png){width=672}\n:::\n:::\n",
+    "supporting": [
+      "many-takepoints_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<script src=\"../site_libs/kePrint-0.0.1/kePrint.js\"></script>\r\n<link href=\"../site_libs/lightable-0.0.1/lightable.css\" rel=\"stylesheet\" />\r\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

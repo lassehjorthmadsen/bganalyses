@@ -1,0 +1,93 @@
+---
+title: "Exploring take points"
+author: "Lasse Hjorth Madsen"
+date: today 
+format: html
+toc: true
+toc-expand: true
+editor: visual
+execute:
+  echo: false
+  warning: false
+---
+
+```{r setup}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+devtools::load_all(path = "../../backgammon")
+
+theme_set(
+  theme_minimal() +
+    theme(
+      legend.position = c(1, 1),
+      legend.justification = c(1, 1),
+      legend.background = element_rect(fill = "white", color = NA)
+    )
+)
+```
+
+
+## Why this?
+
+What is the lowest take point you can possibly have, with reasonable gammon frequencies? Not surprisingly, this happens when you're trailing 17-away, 17-away, the opponent holds a 16-cube and double to 32. If you pass, you have about 1 percentage chance of winning, so if you got that many winning chances, you can take.
+
+But what about all the other take points; which ones are the most extreme?
+
+## A big plot
+
+These are some assumed outcome probabilities, similar to the opening position:
+
+```{r takepoints}
+met <- get_met()
+probs <- outcome_probs(c(50.0, 13.0, 0.5, 50.0, 13.0, 0.5))
+
+tps <- expand_grid(x = 2:17, y = 2:17, cube = c(1, 2, 4, 8, 16)) %>% 
+  rowwise() %>% 
+  mutate(tp = tp_info(x, y, probs, cube, met)["tp_real"]) %>% 
+  ungroup() %>% 
+  filter(tp > 0, cube < x) %>% 
+  mutate(score_label = paste0("-", x, ",-", y), tp) %>% 
+  arrange(-tp)
+```
+
+```{r assumptions}
+probs_table(probs) %>% 
+  round(1) %>% 
+  kable("html") %>%
+  column_spec(2:5, width = "3.1cm")
+```
+
+Using those gammon and backgammon frequencies, here's a take point plot, for all possible scores and cube-values in a 17-point match. It's fun to explore and learn. Can you find that one purple 16-cube mentioned in the beginning?
+
+```{r plot}
+#| fig-height: 28
+
+all_scores <- tps %>% 
+  filter(cube == 1) %>% 
+  arrange(-tp) 
+
+score_order <- all_scores %>% 
+  pull(score_label)
+
+score_color <- all_scores %>%
+  mutate(score_color = case_when(x > y ~ "darkred",
+                                 x < y ~ "darkblue",
+                                 TRUE ~ "black")) %>% 
+  pull(score_color)
+
+names(score_color) <- score_order
+
+tps %>% 
+  ggplot(aes(y = score_label, x = tp, group = score_label)) +
+  geom_point(aes(color = factor(cube))) +
+  geom_line(color = "grey") +
+  scale_y_discrete(limits = score_order) +
+  scale_x_continuous(breaks = seq(0, 1, 0.05), minor_breaks = NULL) +
+  labs(title = "Take points in 17-point matches, with medium gammon frequencies",
+       subtitle = "by score and cube level. First score is takers' score. Score colors indicate a lead/trail/tie",
+       x = "Take point", y = "Score", color = "Cube level") +
+  theme(axis.text.y = element_text(colour = score_color))
+```
+
