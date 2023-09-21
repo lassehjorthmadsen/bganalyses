@@ -9,7 +9,7 @@
 <meta name="author" content="Lasse Hjorth Madsen">
 <meta name="dcterms.date" content="2023-09-21">
 
-<title>Discovering the MET-formula</title>
+<title>Exploring take points</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,6 +62,9 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -75,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Discovering the MET-formula</li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Exploring take points</li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -136,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#why-this" id="toc-why-this" class="nav-link active" data-scroll-target="#why-this">Why this?</a></li>
-  <li><a href="#symbolic-regression" id="toc-symbolic-regression" class="nav-link" data-scroll-target="#symbolic-regression">Symbolic regression</a></li>
+  <li><a href="#a-big-plot" id="toc-a-big-plot" class="nav-link" data-scroll-target="#a-big-plot">A big plot</a></li>
   </ul>
 </nav>
     </div>
@@ -145,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Discovering the MET-formula</h1>
+<h1 class="title">Exploring take points</h1>
 </div>
 
 
@@ -174,10 +177,58 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="why-this" class="level2">
 <h2 class="anchored" data-anchor-id="why-this">Why this?</h2>
-<p>The most popular match equity tabel around is the Kazaross XG2 table. It is created empirically, by letting XG play against itself at all match scores up to 25 points. It would be fun to discover the actual formula underlying the table. There likely is one: Everything has a underlying mathematical structure.</p>
+<p>What is the lowest take point you can possibly have, with reasonable gammon frequencies? Not surprisingly, this happens when you’re trailing 17-away, 17-away, the opponent holds a 16-cube and double to 32. If you pass, you have about 1 percentage chance of winning, so if you got that many winning chances, you can take.</p>
+<p>But what about all the other take points; which ones are the most extreme?</p>
 </section>
-<section id="symbolic-regression" class="level1">
-<h1>Symbolic regression</h1>
+<section id="a-big-plot" class="level2">
+<h2 class="anchored" data-anchor-id="a-big-plot">A big plot</h2>
+<p>These are some assumed outcome probabilities, similar to the opening position:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Regular</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Gammon</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Backgammon</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Sum</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Player wins</td>
+<td style="text-align: right; width: 3.1cm;">37</td>
+<td style="text-align: right; width: 3.1cm;">12.5</td>
+<td style="text-align: right; width: 3.1cm;">0.5</td>
+<td style="text-align: right; width: 3.1cm;">50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Opponent wins</td>
+<td style="text-align: right; width: 3.1cm;">37</td>
+<td style="text-align: right; width: 3.1cm;">12.5</td>
+<td style="text-align: right; width: 3.1cm;">0.5</td>
+<td style="text-align: right; width: 3.1cm;">50</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sum</td>
+<td style="text-align: right; width: 3.1cm;">74</td>
+<td style="text-align: right; width: 3.1cm;">25.0</td>
+<td style="text-align: right; width: 3.1cm;">1.0</td>
+<td style="text-align: right; width: 3.1cm;">100</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>Using those gammon and backgammon frequencies, here’s a take point plot, for all possible scores and cube-values in a 17-point match. It’s fun to explore and learn. Can you find that one purple 16-cube mentioned in the beginning?</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="many-takepoints_files/figure-html/plot-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
 </section>
