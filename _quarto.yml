@@ -11,6 +11,7 @@ website:
       - analyses/met-precision.qmd
       - analyses/janowski.qmd
       - analyses/milestones-2023.qmd
+      - analyses/many-takepoints.qmd
     search: true
       
 format:
