@@ -13,31 +13,48 @@ execute:
 
 ```{r setup}
 library(tidyverse)
-library(knitr)
-library(kableExtra)
-options(scipen = 9999)
-options(knitr.table.format = "html")
 devtools::load_all(path = "../../backgammon")
 ```
 
+```{r subset}
+data("bgmoves")
+thresholds <- c(Inf, 0.2, 0.1, 0.05, 0.02)
+
+check <- bgmoves %>% 
+  filter(turn == "lasse", play == "Rolls", move_err < -min(thresholds)) %>% 
+  select(move_no, play, move_err, board, move_eq, xgid) %>% 
+  mutate(error_bin = cut(move_err, -thresholds)) %>% 
+  group_by(error_bin) %>% 
+  slice_sample(n = 5) %>% 
+  ungroup()
+```
+
+
 ## Why this?
 
-This is a collection of positions where I made some kind of mistake. They are collected from my own matches, at the moment mostly online matches at [Backgammon Galaxy](play.backgammongalaxy.com).
+This is a catalog of positions where I made some kind of mistake. They are collected from my own matches, at the moment mostly online matches at [Backgammon Galaxy](play.backgammongalaxy.com).
 
-I picked ones that I though had learning potential, i.e. where I made some sort of conceptual mistake. So no mistakes from oversights, mis-clicks, or general sloppiness.
+It is an automated report, first, using a Python script for GNU Backgammon to analyze my collection of matches, then my R-package `Backgammon` to turn the files with GNU BG analysis into a data frame, then this notebook with R-code to analyze that data. 
 
-For the most part, the positions are presented as money games, even if they originally were from matches. This is in order to focus on the *concepts* that I got wrong, not the particular matchscore. The exceptions are when I made a mistake *because* of the match score.
+I split the mistakes into checker plays and Cube actions.
 
-I will try to organize the positions into meaningful themes, and will try to include variations, to highlight certain ideas. 
+Checker plays are grouped by Extra Large, Large, Medium and Small errors, with each section listing all errors in descending order of error size. (Perhaps it should be in descending order by time, so I can spot new additions when I update this?)
 
+Cube actions are grouped by Double errors and Take errors, and again by Extra Large, Large, Medium and Small errors.
+ 
 ## Checker plays
 
-### Overplays
-### Underplays
+```{r}
+#| column: page-right
+#| layout-ncol: 2
+for (i in (1:nrow(check))) {
+  temp <- check %>% slice(i)
+  print(ggboard(temp$xgid))
+  temp$move_eq %>% 
+    str_remove_all("Cubeful ") %>%
+    cat("\n\n", ., "\n\n", temp$xgid, sep = "")
+}
+```
 
-## Cube descisions
 
-### Missed doubles
-### Wrong doubles
-
-## Match play mistakes
+## Cube actions

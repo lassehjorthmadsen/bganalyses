@@ -24,8 +24,7 @@ library(kableExtra)
 options(scipen = 9999)
 devtools::load_all(path = "../../backgammon")
 
-met_file <- devtools::package_file("data-raw/Kazaross XG2.met", path = "../../backgammon")
-met <- get_met(filename = met_file)
+met <- get_met()
 ```
 
 ## Why this?
@@ -680,6 +679,45 @@ Double/Pass:   +1,000 (+0,003)" %>%
 ```
 
 Black is still a lot better off than White since he has nearly escaped both back checkers, and is well ahead in the race. Black wins about 70% of the games, but White can probably just squeeze out a very marginal take at the score.
+
+### Position 7
+
+```{r}
+ggboard("XGID=--Bb-bECB-C-------bcbbb---:0:0:1:00:1:0:0:7:10")
+```
+
+This one, half backgame, half holding game, is a little unusual and can be hard to evaluate. Black is, of course miles behind in the race and need to hit a shot to win. On the positive side, Black has a great defensive structure to generate hits. Not right away, White has no shot-leaving rolls, but there likely will be later. Since this is not a deep backgame, the gammon danger isn't too great. 
+
+In the actual game, White doubled and Black took. It turns out to be  small no-double:
+
+```{r}
+"Analyzed in XG Roller++
+Cubeful Equities:
+       No double:     +0,706
+       Double/Take:   +0,672 (-0,034)
+       Double/Pass:   +1,000 (+0,294)
+" %>% 
+  cat("\n", ., sep = "") 
+```
+
+The market loss that White is hoping for, is something like 62. Then, if Black doesn't roll a very low number, the market will be lost. 
+
+Let's first confirm that this is not due to the match score: For money the no double is actually a little clearerr:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=--Bb-bECB-C-------bcbbb---:0:0:1:00:0:0:0:0:10")
+"Analyzed in XG Roller++
+Cubeful Equities:
+       No double:     +0,696
+       Double/Take:   +0,635 (-0,061)
+       Double/Pass:   +1,000 (+0,304)" %>% 
+  cat("\n", ., sep = "") 
+```
+
+
+
+
 
 ## Checker plays
 

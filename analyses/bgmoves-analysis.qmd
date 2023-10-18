@@ -1,0 +1,62 @@
+---
+title: "Moves and mistakes"
+author: "Lasse Hjorth Madsen"
+date: today 
+format: 
+  html:
+    fig-width: 7
+    fig-height: 4
+toc: true
+toc-expand: true
+editor: source
+execute:
+  echo: false
+  warning: false
+  cache: false
+---
+
+```{r setup}
+library(tidyverse)
+theme_set(theme_minimal())
+devtools::load_all(path = "../../backgammon")
+```
+
+```{r get_data}
+# Create a df with all available levels of analysis
+paths <- list.files("..\\..\\backgammon\\data-raw\\galaxy-matches\\analyzed\\", 
+                    full.names = TRUE) %>% 
+  set_names(str_extract(., "\\d.+$"))
+
+files <- paths %>% 
+  map(list.files, pattern = "*.txt", full.names = TRUE)
+
+df <- files %>% 
+  map(head, 7) %>% 
+  map(txt2df) %>% 
+  list_rbind(names_to = "ply")
+```
+
+## Why this?
+
+This is an exploratory analysis of a big chunk of my backgammon matches played on Backgammon Galaxy.
+
+## How are plies different?
+
+```{r aggregate_errors}
+costs <- df %>%
+  select(ply, turn, cube_err, move_err) %>% 
+  pivot_longer(cols = c(cube_err, move_err), names_to = "type", values_to = "cost") %>% 
+  mutate(turn = case_match(turn, 
+                              "lasse" ~ "My errors", 
+                              .default = "Opponent's errors")) %>% 
+  group_by(ply, turn) %>% 
+  summarise(error_sum = sum(cost, na.rm = TRUE), .groups = "drop") 
+```
+
+```{r plot_costs}
+costs %>% 
+  ggplot(aes(x = ply, y = error_sum, fill = turn)) +
+  geom_col(position = "dodge") +
+  labs(y = "Sum of errors", x = NULL, fill = NULL)
+```
+
