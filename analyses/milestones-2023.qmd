@@ -686,37 +686,232 @@ Black is still a lot better off than White since he has nearly escaped both back
 ggboard("XGID=--Bb-bECB-C-------bcbbb---:0:0:1:00:1:0:0:7:10")
 ```
 
-This one, half backgame, half holding game, is a little unusual and can be hard to evaluate. Black is, of course miles behind in the race and need to hit a shot to win. On the positive side, Black has a great defensive structure to generate hits. Not right away, White has no shot-leaving rolls, but there likely will be later. Since this is not a deep backgame, the gammon danger isn't too great. 
+This one, half backgame, half holding game, is a little unusual and can be hard to evaluate. Black is, of course, miles behind in the race and need to hit a shot to win. On the positive side, Black has a great defensive structure to generate hits. But not right away, White has no shot-leaving rolls, although there will be later. Since this is not a deep backgame, the gammon danger isn't too great. 
 
 In the actual game, White doubled and Black took. It turns out to be  small no-double:
 
 ```{r}
 "Analyzed in XG Roller++
 Cubeful Equities:
-       No double:     +0,706
-       Double/Take:   +0,672 (-0,034)
-       Double/Pass:   +1,000 (+0,294)
+No double:     +0,706
+Double/Take:   +0,672 (-0,034)
+Double/Pass:   +1,000 (+0,294)
 " %>% 
   cat("\n", ., sep = "") 
 ```
 
-The market loss that White is hoping for, is something like 62. Then, if Black doesn't roll a very low number, the market will be lost. 
-
-Let's first confirm that this is not due to the match score: For money the no double is actually a little clearerr:
+Let's first confirm that this is not due to the match score: For money the no-double is actually a little bigger:
 
 ```{r}
 #| layout-ncol: 2
 ggboard("XGID=--Bb-bECB-C-------bcbbb---:0:0:1:00:0:0:0:0:10")
 "Analyzed in XG Roller++
 Cubeful Equities:
-       No double:     +0,696
-       Double/Take:   +0,635 (-0,061)
-       Double/Pass:   +1,000 (+0,304)" %>% 
+No double:     +0,696
+Double/Take:   +0,635 (-0,061)
+Double/Pass:   +1,000 (+0,304)" %>% 
   cat("\n", ., sep = "") 
 ```
 
+The market loss that White is hoping for, is something like 62. Then, on average, the market will be lost, as Black needs to roll small to secure enough timing to gain a take. But this is a very good sequence for White, and the market loss is mostly small:
 
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=--Bb-bECB-C-------bcbbb---:0:0:1:26:0:0:0:0:10")
 
+"1. XG Roller++ 10/4 6/4     eq:+1,010
+Player:   76,61% (G:8,72% B:0,10%)
+Opponent: 23,39% (G:1,60% B:0,05%)" %>% 
+  cat("\n\n", ., sep = "") 
+```
+
+White's big issue is the 4-point gap. If we shift back the 2-point checkers to the 4-point, it's a whole other story; White is now borderline *too good* to double:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=---bBbECB-C-------bcbbb---:0:0:1:00:0:0:0:0:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +1,001
+Double/Take:   +1,089 (+0,088)
+Double/Pass:   +1,000 (-0,001)" %>% 
+  cat("\n\n", ., sep = "") 
+```
+
+Timing is another big issue; we can give Black back a take, even with the 4-point-modification, if also move White forward, improving Black's timing:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=--BbBbDCB-B-------bcbbb---:0:0:1:00:0:0:0:0:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,946 (-0,031)
+Double/Take:   +0,977
+Double/Pass:   +1,000 (+0,023)" %>% 
+  cat("\n\n", ., sep = "") 
+```
+
+Another timing experiment: If we in the original position (money game variant) move Black's spare back 14 pips, his position gets stronger so it becomes even more of a no-double. Note that Black is now also somewhat blocked and risk crunching, but the timing benefit outweigh this: 
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=--Bb-cECB-C-------bbbbb---:0:0:1:00:0:0:0:0:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,592
+Double/Take:   +0,482 (-0,110)
+Double/Pass:   +1,000 (+0,408)" %>% 
+  cat("\n\n", ., sep = "") 
+```
+
+Interestingly, clearing White's 10-point is *not* a big issue: If we clear the point in a very smooth way with lot's of new spares, White's position gets *worse*, not better, because Black's timing also improves in the process, and because White now has shot-leaving 3's, 31, 35, 36, and in general awkward 5's, in particular 54 and 55.
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=--Bb-bEDD---------bcbbb---:0:0:1:00:0:0:0:0:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,569
+Double/Take:   +0,456 (-0,113)
+Double/Pass:   +1,000 (+0,431)" %>% 
+  cat("\n\n", ., sep = "") 
+```
+
+### Position 8
+
+```{r}
+ggboard("XGID=--BAb-DBD----B--babbbbb---:0:0:1:00:4:2:0:7:10")
+```
+This one is from the same match and somewhat related to the previous position, but a more pure holding game. White has a big, but not decicive, 15-pips lead in the race. White's game is much improved compared to a standard holding game by the made 7-point, but the gap on the 5-point works the opposite direction, and to some extent cancels out that benefit.
+
+In the game White doubled, which is a significant mistake:
+
+```{r}
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,661
+Double/Take:   +0,560 (-0,101)
+Double/Pass:   +1,000 (+0,339)" %>% 
+  cat(., sep = "") 
+```
+
+As is often the case, the mistake is due to a combination of mis-evaluating the score, *and* the position. For money, it is still a no-double, but the mistake is smaller: 
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=--BAb-DBD----B--babbbbb---:0:0:1:00:0:0:0:0:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,673
+Double/Take:   +0,616 (-0,057)
+Double/Pass:   +1,000 (+0,327)
+
+Analyzed in Rollout
+Cubeful Equities:
+No double:     +0,694
+Double/Take:   +0,649 (-0,045)
+Double/Pass:   +1,000 (+0,306)
+1296 Games, variance reduction.
+Moves: 3-ply, cube: XG Roller" %>% 
+  cat("\n", ., sep = "") 
+```
+
+The above analysis includes a full rollout to make sure the truncated XG roller++ is not off. The difference is small.
+
+It's not hard to see that White, leading 3-away, 5-away, should be careful about doubling because a potential recube is powerful. On the other hand, the position has few gammons, and Black may have less recube vig than normal, as is often the case in holding games, where you go from no-double to huge pass after hitting a shot. So let's examine a bit more.
+
+The outcome probabilities, based on XG roller++, is as follows:
+
+```{r}
+# Analyzed in XG Roller++
+# Player Winning Chances:   69,66% (G:2,05% B:0,05%)
+# Opponent Winning Chances: 30,34% (G:1,74% B:0,03%)
+
+probs <- outcome_probs(c(69.66, 2.05, 0.05, 30.34, 1.74, 0.03)) %>% 
+  `/`(100) 
+
+probs_fliped <- c(probs[4:6], probs[1:3])
+
+probs %>% 
+  probs_table() %>% 
+  round(3) %>% 
+  kable("html") %>%
+  column_spec(2:5, width = "3.1cm")
+```
+
+Which yield the following take points, for money and at the score, under different assumptions. (Since gammons and backgammons are so few, it matters little if they are taken into account.)
+
+```{r}
+tp_table <- tibble(
+  `Cube assumptions` = c("Dead cube, no gammons", "Dead cube, gammons", "Both cube and gammons"),
+  `money game take point` = c(tp_money(c(0.5, 0, 0, 0.5, 0, 0), 0),
+                            tp_money(probs_fliped, x = 0),
+                            tp_money(probs_fliped, x = 0.68)
+                            ),
+  `5-away, 3-away take point` = c(tp(5, 3, 1, met, last_roll = TRUE),
+                                 tp_info(5, 3, probs_fliped, 1, met)["tp_dead"],
+                                 tp_info(5, 3, probs_fliped, 1, met)["tp_real"])
+  )
+
+tp_table %>% 
+  mutate(across(where(is.numeric), round, 3),
+         Difference = `5-away, 3-away take point` - `money game take point`) %>% 
+  kable("html") %>% 
+  column_spec(2:4, width = "3.5cm")
+```
+
+We see that the trailer has a rather high take point, but also a lot of cube levarage, so that the final take point, taking everything into account, is very similar to money game, for this close to gammonless position.
+
+So, the reason why doubling is a bigger mistake at the match score compared to money, is not that Black as much easier take. It is because there is more equity at stake, so close to the end of the match.
+
+Back to the position itself, in the money game variant.
+
+The 5-point-gap is enough of an asset for Black, that if we remove it, White now has s small money-double, even though the race lead is two pips smaller:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=--BA-bDBD----B--babbbbb---:0:0:1:00:0:0:0:0:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,702 (-0,011)
+Double/Take:   +0,714
+Double/Pass:   +1,000 (+0,286)" %>% 
+  cat("\n\n", ., sep = "") 
+```
+
+The racing equity is a big part of the story; if we give Black another 9 pip the we go from a huge take to a small pass:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=--BA-bDBD----B--bbcbbb----:0:0:1:00:0:0:0:0:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,951 (-0,049)
+Double/Take:   +1,047 (+0,047)
+Double/Pass:   +1,000" %>% 
+  cat("\n\n", ., sep = "") 
+```
+
+A combination of the two: Keeping the increased racing deficit but getting back the 5-point-gap, and we're back to a very small double. It looks like the 5-point gap just about makes it up for trailing an extra 9-pips:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=--BAb-DBD----B--bbcbbb----:0:0:1:00:0:0:0:0:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,808 (-0,012)
+Double/Take:   +0,819
+Double/Pass:   +1,000 (+0,181)" %>% 
+  cat("\n\n", ., sep = "") 
+```
 
 
 ## Checker plays
@@ -1026,6 +1221,164 @@ ggboard("XGID=---C-CC-A--Ba--bcd-eB-A---:0:0:1:43:2:4:0:7:10")
 3. 22/18 5/2         eq:-0,608 (-0,011)
 4. 11/4              eq:-0,623 (-0,025)
 5. 22/18 6/3         eq:-0,626 (-0,028)" %>% 
+  cat("\n", ., sep = "") 
+```
+
+### Position 7
+
+```{r}
+ggboard("XGID=-b--BBBB----eE---a-c-b-bB-:1:-1:1:64:1:2:0:7:10")
+```
+
+This one is a little tricky: On White's side of the board, White clearly has a priming position, so the indicated game plan would be to extend that prime. 13/7 13/9 is good for that, adding builders for both the 3-point and the 8-point.
+
+On the the other side of the board, things are not so clear. Black's position could be either for blitzing (three disjointed inside points) or for priming. If Black's position is considered more of a prime, that would be a motivation for White to jump the prime, if considered a blitz, White would be more inclined to keep the anchor.  
+
+One way to think about it: White's side of the board calls for a priming play, Black's side of the board is more ambiguous. So on balance, probably priming is better. Indeed, the nod goes to the priming play, 13/9 13/7, with the top three plays being reasonably close.
+
+```{r}
+"XG Roller++ 
+1. 13/9 13/7        eq:+0,379
+2. 24/20 13/7       eq:+0,365 (-0,013)
+3. 24/14            eq:+0,342 (-0,037)
+4. 24/18 13/9       eq:+0,323 (-0,056)
+5. 24/20 24/18      eq:+0,220 (-0,159)" %>% 
+  cat()
+```
+
+It's not too surprising that the 24/20 split is better than the 24/18 split, since the former tries for the better anchor, and gets more return shots if hit.
+
+As always, let's check if the play is affected by some match score related artifact. It is not:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=-b--BBBB----eE---a-c-b-bB-:1:-1:1:64:0:0:0:0:10")
+
+"XG Roller++
+1. 13/9 13/7        eq:+0,311
+2. 24/20 13/7       eq:+0,299 (-0,012)
+3. 24/14            eq:+0,276 (-0,035)
+4. 24/18 13/9       eq:+0,241 (-0,070)
+5. 24/20 24/18      eq:+0,136 (-0,175)" %>% 
+  cat("\n", ., sep = "") 
+```
+
+Let's play with the money game variant, and see how the preferred play changes, when we modify the position. 
+
+First, if we move one Black checker 13/8, Black has one more checker in the zone. The 8-point is not part of his prime, so overall Black's position gets more blitz-like. In that light, it is not surprising that the priming plays stands out a little more. The strongest alternative is now running, 24/10, because any split is more dangerous in a blitz-like situation.
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=-b--BBBB----dE---b-c-b-bB-:1:-1:1:64:0:0:0:0:10")
+
+"XG Roller++
+1. 13/9 13/7        eq:+0,266
+2. 24/14            eq:+0,232 (-0,034)
+3. 24/20 13/7       eq:+0,215 (-0,052)
+4. 24/18 13/9       eq:+0,181 (-0,086)" %>% 
+  cat("\n", ., sep = "") 
+```
+
+Likewise if we modify Black with 13/6, the position is now even more blitz-like, increasing also the threat on a potential white plot on Black's ace-point. The priming option is now clearly better.
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=-b--BBBB----dE---a-d-b-bB-:1:-1:1:46:0:0:0:0:10")
+
+"XG Roller++
+1. 13/9 13/7        eq:+0,310
+2. 24/14            eq:+0,233 (-0,077)
+3. 24/20 13/7       eq:+0,223 (-0,087)
+4. 24/18 13/9       eq:+0,169 (-0,140)" %>% 
+  cat("\n", ., sep = "") 
+```
+
+Next, suppose White has a 63 to play instead of 64. Now the strongest split, 24/20, is not available, so again priming stands out more clearly, even though the checker on the 10-point is not a builder for the 3-point. (On the positive side, it doesn't leave a joker fly-shot either.) 
+Running, 24/15, is now *not* a contender, because it leaves more shots, and is not as useful as the corresponding 64: 24/14 when missed.
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=-b--BBBB----eE---a-c-b-bB-:1:-1:1:63:0:0:0:0:10")
+
+"XG Roller++
+1. 13/10 13/7       eq:+0,304
+2. 13/4             eq:+0,255 (-0,049)
+3. 24/18 13/10      eq:+0,251 (-0,054)
+4. 24/15            eq:+0,223 (-0,082)" %>% 
+  cat("\n", ., sep = "") 
+```
+
+With 62 White now has the option of splitting with 24/22, which is as good as priming, while the running play is much worse, as expected.
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=-b--BBBB----eE---a-c-b-bB-:1:-1:1:62:0:0:0:0:10")
+
+"XG Roller++
+1. 13/11 13/7       eq:+0,315
+2. 24/22 13/7       eq:+0,311 (-0,004)
+3. 13/5             eq:+0,273 (-0,043)
+4. 24/18 13/11      eq:+0,255 (-0,060)
+5. 24/16            eq:+0,188 (-0,127)" %>% 
+  cat("\n", ., sep = "") 
+```
+
+If White had a 45 to play, priming stands out, since it directly slots the 8-point *and* the 9-point, threatening to make a full prime next turn. Well worth the price of 6 fly-shots.
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=-b--BBBB----eE---a-c-b-bB-:1:-1:1:45:0:0:0:0:10")
+
+"XG Roller++
+1. 13/9 13/8        eq:+0,351
+2. 24/20 13/8       eq:+0,271 (-0,081)
+3. 13/4             eq:+0,255 (-0,096)
+4. 24/15            eq:+0,223 (-0,129)" %>% 
+  cat("\n", ., sep = "") 
+```
+
+If we make Black's position *less* blitz-like, by moving the 6-point spare back to the 8-point, *now* splitting is correct. 
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=-b--BBBB----eE---b-b-b-bB-:1:-1:1:46:0:0:0:0:10")
+
+"XG Roller++
+1. 24/20 13/7       eq:+0,331
+2. 13/9 13/7        eq:+0,302 (-0,029)
+3. 24/14            eq:+0,296 (-0,035)
+4. 24/18 13/9       eq:+0,278 (-0,053)
+5. 24/20 24/18      eq:+0,186 (-0,145)" %>% 
+  cat("\n", ., sep = "") 
+```
+
+Also, if Black's back checkers are split, it's getting harder and more dangerous for White to extend his prime from the rear, so again splitting is slightly best.
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=-aa-BBBB----eE---a-c-b-bB-:1:-1:1:46:0:0:0:0:10")
+
+"XG Roller++
+1. 24/20 13/7       eq:+0,173
+2. 13/9 13/7        eq:+0,161 (-0,012)
+3. 24/14            eq:+0,136 (-0,037)
+4. 24/18 13/9       eq:+0,121 (-0,052)
+5. 24/20 24/18      eq:-0,006 (-0,179)" %>% 
+  cat("\n", ., sep = "") 
+```
+
+Finally, if we move Black's 8-point blot back to his 13-point, splitting is safer, and is now clearly correct. It is now more of a prime vs. prime situation, and the way to play those, is to either extend your own prime or jump the opponent's prime, depending on the dice roll. Here, White can potentially completely nullify Black's prime if the attempt for an advanced anchor works. In the light of that opportunity, extending White's own prime can wait.
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=-b--BBBB----fE-----c-b-bB-:1:-1:1:46:0:0:0:0:10")
+
+"XG Roller++
+1. 24/20 13/7       eq:+0,430
+2. 13/9 13/7        eq:+0,361 (-0,069)
+3. 24/18 13/9       eq:+0,355 (-0,075)
+4. 24/14            eq:+0,334 (-0,096)
+5. 24/20 24/18      eq:+0,312 (-0,118)" %>% 
   cat("\n", ., sep = "") 
 ```
 
