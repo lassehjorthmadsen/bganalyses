@@ -1,5 +1,5 @@
 ---
-title: "Mistake(n) statistics"
+title: "Mistake stats"
 author: "Lasse Hjorth Madsen"
 date: today 
 format: 
@@ -152,27 +152,45 @@ df <- df %>%
   mutate(diff = `cost_3-ply` - `cost_4-ply`) %>% 
   filter(diff != 0) %>% 
   group_by(type, diff > 0) %>% 
-  slice_max(order_by = abs(diff), n = 5) %>% 
+  slice_max(order_by = abs(diff), n = 5, with_ties = FALSE) %>% 
   ungroup()
+
+# Clean fixed width output so it renders correctly:
+# Fixed width must start with 4 white spaces
+df <- df %>% 
+  mutate(across(starts_with("cube_eq"), 
+         ~ paste0("    ", str_replace_all(.x, "\n", "\n    "))),
+         across(starts_with("move_eq"), 
+         ~ str_replace(.x, "\\n\\*\\s{4}", "\n    \\*"))
+         )
 ```
 
 ```{r plot_examples}
 #| layout-ncol: 1
-# results: asis
+#| results: asis
 
 for (i in 1:nrow(df)) { 
   temp <- df %>% slice(i)
   
-  # cat("\n\n", "#### Position ", i, ": ", temp$type, "\n\n", sep = "")
+  cat("\n\n", "#### Position ", i, ": ", temp$type, "\n\n", sep = "")
   
   ggboard(temp$xgid) %>% print()
-  cat("Discrepancy in size of error: ", temp$diff, "\n\n", sep = "")
+  
+  cat("\n\n",
+      "    Size of error, 3-ply: ", temp$`cost_3-ply`, "\n",
+      "    Size of error, 4-ply: ", temp$`cost_4-ply`, "\n",
+      "    Difference          : ", temp$diff, "\n\n", 
+      sep = "")
 
   if (temp$type == "Cube decision") { # Cube decision
-    cat(temp$`cube_eq_3-ply`, "\n\n", temp$`cube_eq_4-ply`, sep = "")
+    text3 <- temp$`cube_eq_3-ply` 
+    text4 <- temp$`cube_eq_4-ply` 
+    cat(text3, "\n\n", text4, sep = "")
     cat("\n\n")
   } else {                            # Checker play
-    cat(temp$`move_eq_3-ply`, "\n\n", temp$`move_eq_4-ply`, sep = "")
+    text3 <- temp$`move_eq_3-ply` 
+    text4 <- temp$`move_eq_4-ply` 
+    cat(text3, "\n\n", text4, "\n\n", sep = "")
     cat("\n\n")
   }
 }
