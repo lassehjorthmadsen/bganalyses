@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lasse Hjorth Madsen">
-<meta name="dcterms.date" content="2023-09-21">
+<meta name="dcterms.date" content="2023-10-24">
 
 <title>Mistakes Where Made</title>
 <style>
@@ -142,22 +142,13 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#why-this" id="toc-why-this" class="nav-link active" data-scroll-target="#why-this">Why this?</a></li>
-  <li><a href="#checker-plays" id="toc-checker-plays" class="nav-link" data-scroll-target="#checker-plays">Checker plays</a>
-  <ul class="collapse">
-  <li><a href="#overplays" id="toc-overplays" class="nav-link" data-scroll-target="#overplays">Overplays</a></li>
-  <li><a href="#underplays" id="toc-underplays" class="nav-link" data-scroll-target="#underplays">Underplays</a></li>
-  </ul></li>
-  <li><a href="#cube-descisions" id="toc-cube-descisions" class="nav-link" data-scroll-target="#cube-descisions">Cube descisions</a>
-  <ul class="collapse">
-  <li><a href="#missed-doubles" id="toc-missed-doubles" class="nav-link" data-scroll-target="#missed-doubles">Missed doubles</a></li>
-  <li><a href="#wrong-doubles" id="toc-wrong-doubles" class="nav-link" data-scroll-target="#wrong-doubles">Wrong doubles</a></li>
-  </ul></li>
-  <li><a href="#match-play-mistakes" id="toc-match-play-mistakes" class="nav-link" data-scroll-target="#match-play-mistakes">Match play mistakes</a></li>
+  <li><a href="#checker-plays" id="toc-checker-plays" class="nav-link" data-scroll-target="#checker-plays">Checker plays</a></li>
+  <li><a href="#cube-actions" id="toc-cube-actions" class="nav-link" data-scroll-target="#cube-actions">Cube actions</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -178,7 +169,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 21, 2023</p>
+      <p class="date">October 24, 2023</p>
     </div>
   </div>
   
@@ -190,31 +181,315 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="why-this" class="level2">
 <h2 class="anchored" data-anchor-id="why-this">Why this?</h2>
-<p>This is a collection of positions where I made some kind of mistake. They are collected from my own matches, at the moment mostly online matches at <a href="play.backgammongalaxy.com">Backgammon Galaxy</a>.</p>
-<p>I picked ones that I though had learning potential, i.e.&nbsp;where I made some sort of conceptual mistake. So no mistakes from oversights, mis-clicks, or general sloppiness.</p>
-<p>For the most part, the positions are presented as money games, even if they originally were from matches. This is in order to focus on the <em>concepts</em> that I got wrong, not the particular matchscore. The exceptions are when I made a mistake <em>because</em> of the match score.</p>
-<p>I will try to organize the positions into meaningful themes, and will try to include variations, to highlight certain ideas.</p>
+<p>This is a catalog of positions where I made some kind of mistake. They are collected from my own matches, at the moment mostly online matches at <a href="play.backgammongalaxy.com">Backgammon Galaxy</a>.</p>
+<p>It is an automated report, first, using a Python script for GNU Backgammon to analyze my collection of matches, then my R-package <code>Backgammon</code> to turn the files with GNU BG analysis into a data frame, then this notebook with R-code to analyze that data.</p>
+<p>I split the mistakes into checker plays and Cube actions.</p>
+<p>Checker plays are grouped by Extra Large, Large, Medium and Small errors, with each section listing all errors in descending order of error size. (Perhaps it should be in descending order by time, so I can spot new additions when I update this?)</p>
+<p>Cube actions are grouped by Double errors and Take errors, and again by Extra Large, Large, Medium and Small errors.</p>
 </section>
-<section id="checker-plays" class="level2">
+<section id="checker-plays" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="checker-plays">Checker plays</h2>
-<section id="overplays" class="level3">
-<h3 class="anchored" data-anchor-id="overplays">Overplays</h3>
+<div class="cell column-page-right quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    7/1* 5/1                     Eq.: +0.581
+*    2. 4-ply    10/6 10/4*                   Eq.: +0.234 (-0.346)
+     3. 2-ply    7/3 7/1*                     Eq.: +0.222 (-0.359)
+     4. 0-ply    10/4* 5/1*                   Eq.: +0.260 (-0.321)
+     5. 0-ply    10/6 7/1*                    Eq.: +0.198 (-0.383)
+
+XGID=-aDBaCBB--B-------acbbbba-:0:0:1:64:2:0:1:3:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    12/7 6/4*                    Eq.: +0.006
+     2. 4-ply    11/4*                        Eq.: +0.003 (-0.002)
+*    3. 4-ply    12/5                         Eq.: -0.204 (-0.209)
+     4. 0-ply    7/5 7/2                      Eq.: -0.258 (-0.264)
+     5. 0-ply    8/3 6/4*                     Eq.: -0.292 (-0.298)
+
+XGID=---BaBCBB--BB--a-aabbbbba-:1:1:1:52:1:0:0:3:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    11/10* 8/5                   Eq.: +0.841
+*    2. 4-ply    8/5 7/6                      Eq.: -0.218 (-1.059)
+     3. 0-ply    11/10*/7                     Eq.: +0.287 (-0.554)
+     4. 0-ply    11/10* 5/2                   Eq.: +0.276 (-0.565)
+     5. 0-ply    11/10* 7/4                   Eq.: +0.119 (-0.723)
+
+XGID=--BBBACAB-aB--a-b--cb-bbb-:1:-1:1:31:2:2:0:5:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-4.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    7/4* 6/4                     Eq.: +0.772
+*    2. 4-ply    9/4*                         Eq.: +0.259 (-0.513)
+     3. 2-ply    13/10 6/4*                   Eq.: +0.407 (-0.365)
+     4. 0-ply    6/4* 6/3                     Eq.: +0.137 (-0.635)
+     5. 0-ply    8/5 6/4*                     Eq.: +0.065 (-0.707)
+
+XGID=----aBDBBA--bB---e-ccB-a--:0:0:1:32:0:0:0:3:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-5.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    bar/21* 13/10*               Eq.: -0.357
+*    2. 4-ply    bar/21*/18                   Eq.: -0.722 (-0.364)
+     3. 0-ply    bar/21* 6/3                  Eq.: -0.992 (-0.635)
+     4. 0-ply    bar/21* 9/6                  Eq.: -1.000 (-0.643)
+     5. 0-ply    bar/21* 7/4                  Eq.: -1.079 (-0.722)
+
+XGID=-Aa---EBBBa-bB--ab-cbab--A:1:-1:1:43:2:0:0:5:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-6.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    7/off                        Eq.: +0.775
+*    2. 4-ply    7/5 6/1                      Eq.: +0.618 (-0.157)
+     3. 2-ply    7/2 6/4                      Eq.: +0.521 (-0.254)
+     4. 2-ply    6/1 4/2                      Eq.: +0.487 (-0.288)
+     5. 2-ply    7/2 4/2                      Eq.: +0.465 (-0.310)
+
+XGID=aBBBCBCA---------------bf-:1:1:1:52:1:0:0:5:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-7.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    bar/23* 8/4                  Eq.: +0.139
+*    2. 4-ply    bar/23* 7/3                  Eq.: +0.028 (-0.112)
+     3. 0-ply    bar/23* 5/1*                 Eq.: -0.183 (-0.322)
+     4. 0-ply    bar/23* 6/2                  Eq.: -0.331 (-0.470)
+
+XGID=-aBD-BBBB-------a--bbccabA:0:0:1:42:2:2:0:3:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-8.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    bar/22 13/8                  Eq.: +0.487
+     2. 4-ply    bar/20 8/5                   Eq.: +0.470 (-0.016)
+     3. 4-ply    bar/20 9/6                   Eq.: +0.402 (-0.084)
+*    4. 4-ply    bar/20 24/21                 Eq.: +0.351 (-0.136)
+     5. 2-ply    bar/20 13/10                 Eq.: +0.332 (-0.154)
+
+XGID=-aa-BBBBAA--cB--ad-cA--bAA:1:-1:1:53:0:0:0:5:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-9.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    13/8 11/7                    Eq.: +0.722
+*    2. 4-ply    18/14 18/13                  Eq.: +0.596 (-0.126)
+     3. 2-ply    13/4                         Eq.: +0.566 (-0.155)
+     4. 2-ply    13/9 11/6                    Eq.: +0.456 (-0.266)
+     5. 2-ply    13/8 6/2                     Eq.: +0.419 (-0.303)
+
+XGID=-b--B-EBB--AcA---bBcbab---:0:0:1:54:2:2:0:5:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-10.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    8/2                          Eq.: -0.458
+     2. 4-ply    11/5                         Eq.: -0.510 (-0.052)
+*    3. 4-ply    24/23 11/6                   Eq.: -0.607 (-0.149)
+     4. 2-ply    11/6 8/7                     Eq.: -0.579 (-0.121)
+     5. 2-ply    6/1 2/1                      Eq.: -0.583 (-0.124)
+
+XGID=--A-aBCBC--C--a--bbfa-b-A-:1:-1:1:51:1:0:0:7:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-11.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    13/11 8/6 4/2*(2)            Eq.: +0.547
+     2. 4-ply    13/11(2) 4/2*(2)             Eq.: +0.540 (-0.008)
+     3. 4-ply    13/9 4/2*(2)                 Eq.: +0.538 (-0.009)
+     4. 4-ply    24/22 8/6 4/2*(2)            Eq.: +0.527 (-0.020)
+*    5. 4-ply    13/7* 8/6                    Eq.: +0.488 (-0.059)
+
+XGID=aBa-B-BaC-A-dD---c-e----A-:0:0:1:22:2:2:0:3:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-12.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    13/11 4/3                    Eq.: -0.118
+     2. 4-ply    7/5 4/3                      Eq.: -0.164 (-0.045)
+     3. 4-ply    4/2 3/2                      Eq.: -0.183 (-0.064)
+*    4. 4-ply    23/21 4/3                    Eq.: -0.188 (-0.069)
+     5. 2-ply    13/10                        Eq.: -0.261 (-0.143)
+
+XGID=---ACBBB----bB---bBbf-bAa-:0:0:1:21:2:6:1:7:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-13.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    21/15                        Eq.: -0.041
+*    2. 4-ply    21/16 10/9                   Eq.: -0.091 (-0.050)
+     3. 4-ply    10/5 2/1                     Eq.: -0.093 (-0.051)
+     4. 4-ply    21/16 2/1                    Eq.: -0.098 (-0.057)
+     5. 2-ply    10/4                         Eq.: -0.129 (-0.088)
+
+XGID=--CBBBBb--A--B----cdcA-ab-:1:-1:1:51:0:0:0:8:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-14.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    11/5 8/5                     Eq.: -0.499
+*    2. 4-ply    9/3 6/3                      Eq.: -0.572 (-0.073)
+     3. 2-ply    11/8 9/3                     Eq.: -0.661 (-0.163)
+     4. 2-ply    11/5 9/6                     Eq.: -0.706 (-0.207)
+     5. 2-ply    24/21 9/3                    Eq.: -0.710 (-0.211)
+
+XGID=----b-E-CA-AeC-----db--bB-:0:0:1:63:2:2:0:5:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-15.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    bar/14                       Eq.: -0.839
+*    2. 4-ply    bar/20 19/13                 Eq.: -0.890 (-0.052)
+     3. 4-ply    bar/20 12/6                  Eq.: -0.909 (-0.071)
+     4. 4-ply    bar/20 18/12                 Eq.: -0.911 (-0.072)
+     5. 2-ply    bar/19 18/13                 Eq.: -0.936 (-0.097)
+
+XGID=--aBBBBB----A-A---AA----bA:1:1:1:65:0:0:0:7:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-16.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    6/5(2) 4/3 1/off             Eq.: +2.397
+     2. 4-ply    6/5(2) 4/2                   Eq.: +2.373 (-0.024)
+*    3. 4-ply    6/5(2) 1/off(2)              Eq.: +2.351 (-0.046)
+     4. 4-ply    6/5(2) 3/2 1/off             Eq.: +2.322 (-0.075)
+     5. 2-ply    4/2 1/off(2)                 Eq.: +2.347 (-0.050)
+
+XGID=cDBDC-B-----b----bbdb-----:1:-1:1:11:0:2:0:5:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-17.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    24/22 13/10                  Eq.: -0.326
+*    2. 4-ply    13/11 13/10                  Eq.: -0.355 (-0.029)
+     3. 4-ply    13/8                         Eq.: -0.378 (-0.052)
+     4. 2-ply    13/11 8/5                    Eq.: -0.418 (-0.092)
+     5. 2-ply    13/10 6/4                    Eq.: -0.421 (-0.095)
+
+XGID=-b----E-C---eE---b-d-b--B-:0:0:1:32:0:0:0:3:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-18.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    7/3(3) 6/2                   Eq.: -0.974
+*    2. 4-ply    13/9(3) 6/2                  Eq.: -1.000 (-0.026)
+     3. 4-ply    13/9 7/3(2) 6/2              Eq.: -1.000 (-0.026)
+     4. 4-ply    13/9(3) 7/3                  Eq.: -1.000 (-0.026)
+     5. 2-ply    7/3(2) 6/2(2)                Eq.: -1.000 (-0.026)
+
+XGID=--A-BbDC----bC--aa-cb-bbB-:0:0:1:44:0:0:0:5:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-19.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    5/off 4/off                  Eq.: +1.237
+*    2. 4-ply    5/1 5/off                    Eq.: +1.192 (-0.045)
+
+XGID=aCCCCB--a-------------gcc-:0:0:1:64:0:0:0:3:10</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="mistakes_files/figure-html/unnamed-chunk-1-20.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>
+     1. 4-ply    13/7* 8/6                    Eq.: +0.307
+*    2. 4-ply    13/11 13/7*                  Eq.: +0.281 (-0.026)
+     3. 4-ply    13/7*/5                      Eq.: +0.264 (-0.042)
+     4. 0-ply    13/7* 3/1                    Eq.: -0.165 (-0.472)
+     5. 0-ply    13/7* 5/3                    Eq.: -0.196 (-0.503)
+
+XGID=--BB-BBaC---bB---bbcB--cb-:0:0:1:62:6:0:1:7:10</code></pre>
+</div>
+</div>
+</div>
 </section>
-<section id="underplays" class="level3">
-<h3 class="anchored" data-anchor-id="underplays">Underplays</h3>
-</section>
-</section>
-<section id="cube-descisions" class="level2">
-<h2 class="anchored" data-anchor-id="cube-descisions">Cube descisions</h2>
-<section id="missed-doubles" class="level3">
-<h3 class="anchored" data-anchor-id="missed-doubles">Missed doubles</h3>
-</section>
-<section id="wrong-doubles" class="level3">
-<h3 class="anchored" data-anchor-id="wrong-doubles">Wrong doubles</h3>
-</section>
-</section>
-<section id="match-play-mistakes" class="level2">
-<h2 class="anchored" data-anchor-id="match-play-mistakes">Match play mistakes</h2>
+<section id="cube-actions" class="level2">
+<h2 class="anchored" data-anchor-id="cube-actions">Cube actions</h2>
 
 
 </section>
