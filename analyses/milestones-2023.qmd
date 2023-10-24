@@ -1382,6 +1382,37 @@ ggboard("XGID=-b--BBBB----fE-----c-b-bB-:1:-1:1:46:0:0:0:0:10")
   cat("\n", ., sep = "") 
 ```
 
+### Position 8
+
+```{r}
+ggboard("XGID=-BBB-bCB---B------Bbbdcb--:0:0:1:53:1:0:0:7:10")
+```
+
+Here's a technical play that caused White some trouble. White's thoughts over the board where something like this: "A hit is fatal, and since outfield control is decent already, there's no pressing need to leave any indirect shot, so the play is 7/4 7/2. Ugly, but safe."
+
+What's missing is the fact that White is behind in the race, not ahead. In fact, the game is just about equal, so it is quite important to hit Black when he is forced off the anchor, and it is important not to leave too many return shots when that happens.
+
+The best plays are:
+
+```{r}
+"XG Roller++
+1. 18/13 6/3        eq:+0,025
+2. 18/15 6/1        eq:+0,011 (-0,013)
+3. 18/15 18/13      eq:-0,001 (-0,026)
+4. 7/4 7/2          eq:-0,072 (-0,097)" %>%
+  cat(sep = "")
+```
+
+So any play that splits off the 18-point is reasonable; the actual play is a blunder.
+
+After 18/13 6/3 White is of course unhappy on the three deadly hits, 53 and 44, but basically on *any* other roll this play gains over the 'safe' play, often a lot. Some rolls like 41, 51, 52, will allow Black to run off the anchor in response to 7/4 7/2, but that would be too dangerous after 18/13 6/3, and he will be forced to crunch his board. These are huge gains for 18/13 6/3.
+
+Rolls where Black must leave the anchor in any case, like 63, 64, 65, is also a big gain for the split. 
+
+Also rolls that stay put, like 32, 21, 11, works in favor of the split, since White as more flexibility.
+
+Some things about White's reasoning was right: Ugliness can be tolerated. After 18/13 there's no reason to leave an additional three extra flyshots with 18/15 for the 3. 6/3 is uglier but better. 
+
 ## Conclusions
 
 Examining some errors from this Milestone Tournament, the findings that surprised me the most where:
