@@ -45,14 +45,15 @@ Cube actions are grouped by Double errors and Take errors, and again by Extra La
 ## Checker plays
 
 ```{r}
-#| column: page-right
+#| column: page
 #| layout-ncol: 2
+
 for (i in (1:nrow(check))) {
   temp <- check %>% slice(i)
   print(ggboard(temp$xgid))
   temp$move_eq %>% 
-    str_remove_all("Cubeful ") %>%
-    cat("\n\n", ., "\n\n", temp$xgid, sep = "")
+    str_remove_all("Cubeful |Eq.: ") %>%
+    cat("\n\n\n\n", ., "\n\n\n\n", temp$xgid, sep = "")
 }
 ```
 
