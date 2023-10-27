@@ -21,6 +21,225 @@ theme_set(theme_minimal())
 devtools::load_all(path = "../../backgammon")
 ```
 
+
+## Why this?
+
+This is an exploratory analysis of a big chunk of my backgammon matches played on Backgammon Galaxy.
+
+## Shopping list
+
+- Sum of errors by opponent, checker/cube (did I outplay opps or vice versa?)
+- My sum and count of errors by checker/cube (Are checker plays more costly just because they are more frequent?)
+- My sum and count of errors by proper cube action (What kind of cube decision errors are most costly for me?)
+- Sum of checker/cube mistakes by size: Does the occasional quadruple blunder matter a lot? Is there a lot to gain by better focus, by getting rid of oversights and mis-clicks?
+- My sum and count of errors by move no. (How much is given up in the opening?)
+- Sum of error by doubling when too good, vs. gain when opp takes too good doubles. Does it pay to double when too good?
+- Sum of error by doubling when not good enough, vs. gain when opp passes no doubles. Does it pay to double a little too early?
+- Examples of the rare bird: Too good and not good enough.
+- Are higher plies worth the extra compute time?
+
+
+```{r subset_and_clean}
+
+cost_breaks <- c(seq(0, 0.3, 0.05), Inf)
+cost_labels <- paste0(">", cost_breaks)[-length(cost_breaks)] %>% rev()
+
+move_breaks <- c(0, 3, 10, 15, 20, 30, Inf) %>% rev()
+move_labels <- paste0(">", move_breaks)[-1] 
+
+df <- bgmoves %>% 
+  select(file, move_no, play, turn, proper_ca, move_err, cube_err, xgid) %>% 
+  pivot_longer(cols = c(cube_err, move_err), names_to = "type", values_to = "cost") %>% 
+  filter(!is.na(cost), cost < 0) %>% 
+  mutate(turn = case_match(turn,  "lasse" ~ "Me", .default = "Opponent"),
+         type = case_match(type, "cube_err" ~ "Cube decision", "move_err" ~ "Checker play"),
+         proper_ca = str_replace_all(proper_ca, c(" double" = " (re)double",
+                                                  "Double" = "(Re)double",
+                                                  "redouble" = "(re)double",
+                                                  "Redouble" = "(Re)double"),
+                                     ),
+         cost_bin = fct_rev(cut(.$cost, -cost_breaks, right = FALSE, labels = cost_labels)), 
+         move_bin = fct_rev(cut(.$move_no, move_breaks, right = FALSE, labels = move_labels))
+         ) 
+```
+
+# The data
+
+Quick overview of the data I have collected:
+
+- In total, the dataset contains `r nrow(bgmoves)` decisions. Some decisions (like opening plays) appear several times; the total number of unique positions in the data set is `r bgmoves %>% distinct(xgid) %>% nrow()` 
+
+- The positions are taken from a total of `r n_distinct(bgmoves$file)` games, from a total of `r bgmoves %>% filter(!str_detect(file, "_")) %>% distinct(file) %>% nrow()` matches.
+
+- The number of actual errors, that we will consider here, are the decisions where someone (me or my opponent) made a checker play error or cube decision error. This comes to a total of `r nrow(df)` mistakes, `r df %>% filter(turn == "lasse") %>% nrow()` of which was made by me, `r df %>% filter(turn != "lasse") %>% nrow()` by one of my `r nrow(distinct(df, turn)) - 1` opponents.
+
+The data is available on [GitHub](https://github.com/lassehjorthmadsen/backgammon).
+
+## Me vs The Galaxy
+
+First, let's just count, sum, and average all the errors, to see how they split by cube/checker play and by me/opponents. 
+
+```{r}
+plot_data <- df %>% 
+  group_by(turn, type) %>% 
+  summarise(`Count of errors` = n(), 
+            `Sum of errors` = sum(cost), 
+            `Average error` = `Sum of errors` / `Count of errors`, 
+            .groups = "drop") %>% 
+  pivot_longer(cols = c(`Count of errors`, `Sum of errors`, `Average error`), names_to = "metric") %>% 
+  mutate(metric = fct(metric, levels = c("Count of errors", "Sum of errors", "Average error")),
+         type = str_replace(type, " ", "\n"))
+  
+plot_data %>% 
+  ggplot(aes(x = type, y = value, fill = turn)) +
+  geom_col(position = "dodge") +
+  facet_wrap(facets = vars(metric), scales = "free") +
+  labs(fill = NULL, x = NULL, y = "Value")
+
+```
+
+## My errors by size
+
+
+```{r}
+plot_data <- df %>% 
+  filter(turn == "Me") %>% 
+  group_by(type, cost_bin) %>% 
+  summarise(`Count of errors` = n(), 
+            `Sum of errors` = sum(cost), 
+            `Average error` = `Sum of errors` / `Count of errors`, 
+            .groups = "drop") %>% 
+  pivot_longer(cols = c(`Count of errors`, `Sum of errors`, `Average error`), names_to = "metric") %>% 
+  mutate(metric = fct(metric, levels = c("Count of errors", "Sum of errors", "Average error")))
+  
+plot_data %>% 
+  ggplot(aes(x = cost_bin, y = value, fill = type)) +
+  geom_col(position = "dodge", show.legend = FALSE) +
+  facet_grid(rows = vars(metric), cols = vars(type), scales = "free_y") +
+  labs(fill = NULL, x = NULL, y = "Value") 
+
+```
+
+## My cube errors
+
+Next, let's focus on my cube errors, and split by what GNU Backgammon think the proper cube action is. 
+
+```{r}
+plot_data <- df %>% 
+  filter(turn == "Me", type == "Cube decision") %>% 
+  group_by(proper_ca) %>% 
+  summarise(`Count of errors` = n(), 
+            `Sum of errors` = sum(cost), 
+            `Average error` = `Sum of errors` / `Count of errors`, 
+            .groups = "drop") %>% 
+  pivot_longer(cols = c(`Count of errors`, `Sum of errors`, `Average error`), names_to = "metric") %>% 
+  mutate(metric = fct(metric, levels = c("Count of errors", "Sum of errors", "Average error")))
+  
+plot_data %>% 
+  ggplot(aes(x = proper_ca, y = value)) +
+  geom_col(position = "dodge", fill = "steelblue") +
+  facet_wrap(facets = vars(metric), scales = "free") +
+  labs(fill = NULL, x = NULL, y = "Value") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+```
+
+So, bit chunck of my cube-related errors, comes from positions where the proper cube action is no-double, take (where no-redouble and no-double are lumped together). That class of cube errors are both frequent and with large, average errors. The mistake, however, can be both me doubling when I shouldn't, or me passing a no-double (which of course is always very bad).  
+
+Let's further split by what the actual action was, so try to nail it better.
+
+```{r}
+plot_data <- df %>% 
+  filter(turn == "Me", type == "Cube decision") %>% 
+  group_by(play, proper_ca) %>% 
+  summarise(`Count of errors` = n(), 
+            `Sum of errors` = sum(cost), 
+            `Average error` = `Sum of errors` / `Count of errors`, 
+            .groups = "drop") %>% 
+  pivot_longer(cols = c(`Count of errors`, `Sum of errors`, `Average error`), names_to = "metric") %>% 
+  mutate(metric = fct(metric, levels = c("Count of errors", "Sum of errors", "Average error")))
+  
+plot_data %>% 
+  ggplot(aes(x = proper_ca, y = value, fill = play)) +
+  geom_col() +
+  facet_wrap(facets = vars(metric), scales = "free") +
+  labs(fill = "Actual play", x = NULL, y = "Value") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+```
+
+
+## My checker play errors
+
+Checker play errors are a bit harder to categorize that cube errors. I'm planing on doing a algorithm to determine position type, but until then, we need to go simple. Let's look at move number, to distinguish between errors early and late in the game.
+
+
+```{r}
+plot_data <- df %>% 
+  filter(turn == "Me", type == "Checker play") %>% 
+  group_by(move_no) %>% 
+  summarise(`Count of errors` = n(), 
+            `Sum of errors` = sum(cost), 
+            `Average error` = `Sum of errors` / `Count of errors`, 
+            .groups = "drop") %>% 
+  pivot_longer(cols = c(`Count of errors`, `Sum of errors`, `Average error`), names_to = "metric") %>% 
+  mutate(metric = fct(metric, levels = c("Count of errors", "Sum of errors", "Average error")))
+  
+plot_data %>% 
+  ggplot(aes(x = move_no, y = value)) +
+  geom_col(position = "dodge", fill = "steelblue") +
+  facet_wrap(facets = vars(metric), scales = "free") +
+  labs(fill = NULL, x = "Move number", y = "Value") 
+```
+
+```{r}
+plot_data <- df %>% 
+  filter(turn == "Me", type == "Checker play") %>% 
+  group_by(move_bin) %>% 
+  summarise(`Count of errors` = n(), 
+            `Sum of errors` = sum(cost), 
+            `Average error` = `Sum of errors` / `Count of errors`, 
+            .groups = "drop") %>% 
+  pivot_longer(cols = c(`Count of errors`, `Sum of errors`, `Average error`), names_to = "metric") %>% 
+  mutate(metric = fct(metric, levels = c("Count of errors", "Sum of errors", "Average error")))
+  
+plot_data %>% 
+  ggplot(aes(x = move_bin, y = value)) +
+  geom_col(position = "dodge", fill = "steelblue") +
+  facet_wrap(facets = vars(metric), scales = "free") +
+  labs(fill = NULL, x = "Move number", y = "Value") 
+```
+
+
+
+So, bit chunck of my cube-related errors, comes from positions where the proper cube action is no-double, take (where no-redouble and no-double are lumped together). That class of cube errors are both frequent and with large, average errors. The mistake, however, can be both me doubling when I shouldn't, or me passing a no-double (which of course is always very bad).  
+
+Let's further split by what the actual action was, so try to nail it better.
+
+```{r}
+plot_data <- df %>% 
+  filter(turn == "Me", type == "Cube decision") %>% 
+  group_by(play, proper_ca) %>% 
+  summarise(`Count of errors` = n(), 
+            `Sum of errors` = sum(cost), 
+            `Average error` = `Sum of errors` / `Count of errors`, 
+            .groups = "drop") %>% 
+  pivot_longer(cols = c(`Count of errors`, `Sum of errors`, `Average error`), names_to = "metric") %>% 
+  mutate(metric = fct(metric, levels = c("Count of errors", "Sum of errors", "Average error")))
+  
+plot_data %>% 
+  ggplot(aes(x = proper_ca, y = value, fill = play)) +
+  geom_col() +
+  facet_wrap(facets = vars(metric), scales = "free") +
+  labs(fill = "Actual play", x = NULL, y = "Value") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+```
+
+
+## Are higher plies worth it?
+
+### Compare some overall results
+
 ```{r get_data}
 # Create a df like bgmoves, but with all available
 # levels of analysis, i.e. 0-ply, 1-ply ... 4-ply
@@ -44,26 +263,6 @@ if (file.exists("data/plies.rds")) {
 }
 ```
 
-## Why this?
-
-This is an exploratory analysis of a big chunk of my backgammon matches played on Backgammon Galaxy.
-
-## Shopping list
-
-- Sum of errors by opponent, checker/cube (did I outplay opps or vice versa?)
-- My sum and count of errors by checker/cube (Are checker plays more costly just because they are more frequent?)
-- My sum and count of errors by proper cube action (What kind of cube decision errors are most costly for me?)
-- Sum of checker/cube mistakes by size: Does the occasional quadruple blunder matter a lot? Is there a lot to gain by better focus, by getting rid of oversights and mis-clicks?
-- My sum and count of errors by move no. (How much is given up in the opening?)
-- Sum of error by doubling when too good, vs. gain when opp takes too good doubles. Does it pay to double when too good?
-- Sum of error by doubling when not good enough, vs. gain when opp passes no doubles. Does it pay to double a little too early?
-- Examples of the rare bird: Too good and not good enough.
-- Are higher plies worth the extra compute time?
-
-
-## Are higher plies worth it?
-
-### Compare some overall results
 
 ```{r aggregate_errors}
 costs <- plies %>%
