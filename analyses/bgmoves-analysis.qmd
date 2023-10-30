@@ -1,5 +1,5 @@
 ---
-title: "Mistake stats"
+title: "Mistake, errors and statistics"
 author: "Lasse Hjorth Madsen"
 date: today 
 format: 
@@ -52,11 +52,11 @@ df <- bgmoves %>%
          ) 
 ```
 
-# The data
+## The data
 
 Quick overview of the data I have collected:
 
-- In total, the data set contains `r nrow(bgmoves)` decisions. Some decisions (like opening plays) appear several times; the total number of unique positions is `r bgmoves %>% distinct(xgid) %>% nrow()` 
+- In total, the data set contains `r nrow(bgmoves)` positions. Some positions (like opening plays) appear several times; the total number of *unique* positions is `r bgmoves %>% distinct(xgid) %>% nrow()` 
 
 - The positions are taken from a total of `r n_distinct(bgmoves$file)` games, from a total of `r bgmoves %>% filter(!str_detect(file, "_")) %>% distinct(file) %>% nrow()` matches.
 
@@ -88,7 +88,7 @@ plot_data %>%
   labs(fill = NULL, x = NULL, y = "Value")
 ```
 
-Luckily, it looks like I make fewer and smaller errors than my opponents on Backgammon Galaxy, but that is not surprising: I never use a rating filter, and therefore play opponents of all skill levels, including beginners. 
+Luckily, it looks like I make fewer and smaller errors than my opponents on Backgammon Galaxy, but that is not surprising: I never use a rating filter, and therefore my opponents are of all skill levels, including beginners. 
 
 Note that the errors are not directly comparable to the performance rating, PR, that Galaxy reports. The averages shown are the average size of *errors*, not averages across all non-obvious plays like XG defines it. 
 
@@ -123,11 +123,11 @@ plot_data %>%
 
 ```
 
-The single interval of checker play errors, that contribute the most the the total cost of errors, is medium-sized on, errors between 0.05 and 0.1. And about half the checker play errors could be eliminated if I didn't make blunder at 0.1 and above. Presumably the biggest ones are the easiest to get rid of, so it makes sense to focus on blunders, as many players do.
+The single interval of checker play errors, that contribute the most to the total cost of errors, is the medium-sized one, errors between 0.05 and 0.1. And about half the checker play errors could be eliminated if I didn't make blunder at 0.1 and above. Presumably the biggest ones are the easiest to get rid of, so it makes sense to focus on blunders, as many players do.
 
-Note, there's a significat fat tail of blunders at 0.3 and above. Many of those may have to do with oversights, mis-clicks, time-pressure, losing interest, etc. So perhaps a low haning fruit would be to just inprove focus and concentration. 
+Note that there's a significant fat tail of blunders at 0.3 and above. Many of those may have to do with oversights, misclicks, time-pressure, losing interest, etc. So perhaps a low hanging fruit would be to just improve focus and concentration. 
 
-Similar for cube actions; there seem to be a good chunk of huge blunders that I should be able to get rid of. The small cube errors are maybe not worth worrying too much about. One reason is that in case of doubles, sometimes it pays to play the opponent (more on incorrect takes/passes from opponents later).
+Similar for cube actions; there seem to be a good chunk of huge blunders that I should be able to get rid of. The small cube errors are maybe not worth worrying too much about. One reason is that in case of doubles, sometimes it pays to play the opponent: A incorrect double can be profitable if the opponent responds by an even bigger error. (More on incorrect takes/passes from opponents later).
 
 ## My cube errors
 
@@ -176,11 +176,17 @@ plot_data %>%
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
 ```
 
-I looks like the single biggest contributer to my cube mistakes, is me doubling or re-doubling when the position isn't strong enough. (The big green bar in the middle panel.) So do I double too aggressively? Maybe a little, but on the other hand if you add together the cases where I rolled but should have doubled (the two purple bars in the middle panel) they represent also a big sum. But not quite as big as the wrong doubles. I might have to be a bit less trigger happy with the cube.
+I looks like the single biggest contributor to my cube mistakes, is me doubling or re-doubling when the position isn't strong enough. (The big green bar in the middle panel.) Do I double too aggressively? Maybe, but on the other hand if you add together the cases where I rolled but should have doubled (the two purple bars in the middle panel) they represent also a big sum, so sometimes I miss a good double double too. 
+
+Still, the wrong doubles, contribute more to the total sum of errors that the missed doubles.
+
+Also, my wrong passes are relatively few and small: I lose more by incorrectly taking, than by incorrectly passing. In other words I might be a bit too optimistic about my own position: Taking too much rather than too little, and doubling a bit too early rather that too late.  
+
+All in all I might have to be a bit more conservative with the cube. (But don't overdo it now, I don't need more wrong passes or late doubles.)
 
 ## My checker play errors
 
-Checker play errors are a bit harder to categorize that cube errors. I'm planing on doing a algorithm to determine position type, but until then, we need to go simple. Let's look at move number, to distinguish between errors early and late in the game.
+Checker play errors are a bit harder to categorize that cube errors. I'm planing on doing a algorithm to determine position type, but until then, we need to go simple. Let's look at move number, to distinguish between errors early and late in the game. (Note that GNU BG use a move number for every player's decision, so a double/take/play sequence would be *three* moves with the same position.) 
 
 
 ```{r}
@@ -203,7 +209,7 @@ plot_data %>%
 
 Not surprisingly, most checker play errors come early in the game, since all games have a beginning, but not all games are long.
 
-Let's bin the move number into a fewer intervals, so we can better talk about opening and later.
+Let's bin the move number into a fewer intervals, so we can better talk about opening game and later game errors.
 
 ```{r}
 plot_data <- df %>% 
@@ -222,13 +228,11 @@ plot_data %>%
   facet_wrap(facets = vars(metric), scales = "free") +
   labs(fill = NULL, x = "Move number", y = "Value") 
 ```
-Perhaps a bit surprising, the bigger part of checker play errors
-
+Perhaps a bit surprising, the bigger part of checker play errors are within move 1-3. Although the errors are small on average, they sum up to a lot. The middle and late game plays (move 20-30) also contribute a lot of errors.
 
 ## When it pays to be wrong
 
-This is an interesting class of mistakes, is when I double positions that I shouldn't have, but are then rewarded when the opponent incorrectly passes a no-double, or takes a too-good-double. 
-
+This is an interesting class of mistakes, when I double positions that I shouldn't have, but are then rewarded when my opponent incorrectly passes a no-double, or takes a too-good-double. 
 ### Too good
 
 ```{r}
@@ -239,7 +243,7 @@ my_avr_error <- plot_data$cost %>% mean() %>% round(2)
 opp_avr_error <- plot_data$next_cube_err %>% mean() %>% round(2)
 ```
 
-The data has `r nrow(plot_data)` examples of me doubling a position that is technically too good. The average error in these cases, is `r my_avr_error`. However, in `r sum(plot_data$next_play == "Accepts")` of those cases, my opponent accepted, for a huge, average error of `r plot_data %>% filter(next_play == "Accepts") %>% summarise(avr = mean(next_cube_err)) %>% pull(avr) %>% round(2)`. That makes the total, average error made by my opponents after I incorrectly double a too-good position `r opp_avr_error`. It is a very small sample, but it appears that those `r nrow(plot_data)` errors could have been profitable overall.
+The data has `r nrow(plot_data)` examples of me doubling a position that is technically too good. The average error in these cases is `r my_avr_error`. However, in `r sum(plot_data$next_play == "Accepts")` of those cases, my opponent accepted, for a huge, average error of `r plot_data %>% filter(next_play == "Accepts") %>% summarise(avr = mean(next_cube_err)) %>% pull(avr) %>% round(2)`. That makes the total, average error made by my opponents after I incorrectly double a too-good position `r opp_avr_error`. It is a very small sample, but it appears that those `r nrow(plot_data)` errors could have been profitable overall.
 
 We could do statistical tests to better access if this result is just noise, but it is more fun to plot the data to get a feel for how to interpret it.
 
@@ -262,7 +266,7 @@ plot_data %>%
   scale_color_discrete(guide = 'none')
 ```
 
-Another way would be to plot the size of my error of doubling, against the error of my opponent. In case of a correct response, a pass, that error would just be zero. Like this:
+Another way to look at it would be to plot the size of my error of doubling, against the error of my opponent. In case of a correct response, a pass, that error would just be zero. Like this:
 
 ```{r}
 plot_data %>% 
@@ -276,7 +280,7 @@ plot_data %>%
        subtitle = "Each dot represent one pair of decisions in too-good situations. Grey lines are averages")
 ```
 
-The point here is, that the bigger the no-double is, the bigger is also the potential gain from an erroneous take. While those big take-blunders may be less likely, the gain when they do happen is also bigger. The plot shows one outlier, buttom left corner, of a really big no-double that was accepted for a big gain.
+The point here is, that the bigger the no-double is, the bigger is also the potential gain from an erroneous take. While those big take-blunders may be less likely, the gain when they do happen is also bigger. The plot shows one outlier, bottom left corner, of a really big no-double that was accepted for a big gain.
 
 It's possible that best practical strategy is to *never* play on for too-good, unless it is absolutely obvious, like when you're cruising home with a couple of opponent checkers closed out. It will most often cost something to double, because usually the opponent correctly passes, but the occasional big blunder take might outweigh that.
 
@@ -290,7 +294,7 @@ my_avr_error <- plot_data$cost %>% mean() %>% round(2)
 opp_avr_error <- plot_data$next_cube_err %>% mean() %>% round(2)
 ```
 
-For these pair of decisions, the data has `r nrow(plot_data)` examples of me doubling a position that is technically not good enough. The average error in these cases, is `r my_avr_error`. In `r sum(plot_data$next_play == "Rejects")` of those cases, my opponent passed, for an average error of `r plot_data %>% filter(next_play == "Rejects") %>% summarise(avr = mean(next_cube_err)) %>% pull(avr) %>% round(2)`. That makes the total, average error made by my opponents after I incorrectly double a too-good position `r opp_avr_error`. It is still a small sample, but it appears that those `r nrow(plot_data)` errors was not justified by a subsequent opponent error.
+For these pair of decisions, the data has `r nrow(plot_data)` examples of me doubling a position that is technically not good enough. The average error in these cases is `r my_avr_error`. In `r sum(plot_data$next_play == "Rejects")` of those cases, my opponent passed, for an average error of `r plot_data %>% filter(next_play == "Rejects") %>% summarise(avr = mean(next_cube_err)) %>% pull(avr) %>% round(2)`. That makes the total, average error made by my opponents after I incorrectly double a no-double position `r opp_avr_error`. It is still a small sample, but it appears that those `r nrow(plot_data)` errors was not justified by a subsequent opponent error.
 
 Let's do plot similar to before. First, the estimated density distributions of errors:
 
@@ -325,11 +329,21 @@ plot_data %>%
        subtitle = "Each dot represent one pair of decisions in not-good-enough situations. Grey lines are averages")
 ```
 
+## Conclusions
+
+So, how should I use this information to improve my game?
+
+- First, focus on checker play blunders in common situations.
+- Then, establish a set of good, common benchmark positions for minimal doubles, mostly to avoid doubling too early but also to not double too late.
+- Then, create a set of minimal take benchmarks to avoid taking too much.
+- Finally, look at too-good situations, get benchmarks to avoid cashing too much.
 
 
-## Are higher plies worth it?
+## Appendix: Compare plies
 
-### Compare some overall results
+When you analyze this many positions, computing time is an issue. Are higher plies worth the extra time spent? Do we get different results between 0-ply and 4-ply? Can it be worthwhile to go 5-ply?
+
+### Some overall results
 
 ```{r get_data}
 # Create a df like bgmoves, but with all available
@@ -372,6 +386,7 @@ plies <- plies %>%
          )
 ```
 
+Let's reproduce the first three charts from this report, split by ply, and inspect the results. First we have the overall results (like in the *Me vs The Galaxy*-section). For readability, instead of splitting on me vs opponent, we look at just my errors, but split by ply number.
 
 ```{r}
 plot_data <- plies %>% 
@@ -390,9 +405,13 @@ plot_data %>%
   geom_col(position = "dodge") +
   facet_wrap(facets = vars(metric), scales = "free") +
   labs(fill = NULL, x = NULL, y = "Value")
-
 ```
 
+From casual inspection, it looks like 0- and 1-ply are different, but 2-, 3-, and 4-ply produce mostly similar results on the aggregated level. 4-ply does have a slightly lower *count* of cube errors than 3-ply, and so a bit higher *average* cube error.
+
+It's hard to see that as a systematic sign of *better* evaluations, though. But the average estimated cube error does seem to grow by ply, with the exception of 3-ply.
+
+Same overall impression from the split by error size: 0- and 1-ply stand out a bit; otherwise little noticeable difference.
 
 ```{r}
 plot_data <- plies %>% 
@@ -413,6 +432,7 @@ plot_data %>%
   theme(legend.position = "bottom")
 ```
 
+In the cube-error plot again 0- and 1-ply stand out, and in general the bars look a little more noisy -- but that is to be expected as the data set for cube actions is considerably smaller.
 
 ```{r}
 plot_data <- plies %>% 
@@ -434,24 +454,28 @@ plot_data %>%
         legend.position = "bottom")
 ```
 
-### Examples
+All-in all no obvious reasons to invest computer time in doing 5-ply. The 4-ply analysis took abut 3 days, so a 5-ply would take months -- we really would need a tangible reason to do that.
+
+For fun, let's examine some cases where 3-ply and 4-ply disagree the most. We pull out 20 examples, 10 checker play mistakes and 10 cube errors, in each case with 5 positions where 3-ply says the error made is bigger than 4-ply thinks, and 5 cases vice versa.
+
+The stand-out pattern is, that we have many backgame position types. Other than that, there's not a signal there that I can easily spot.
 
 ```{r compare_positions}
 # Create df to compare 3-ply and 4-ply analysis
 
 # Subset, pivot longer, and clean
-df <- plies %>% 
+df2 <- plies %>% 
   select(ply, type, cost, cube_eq, move_eq, xgid) %>% 
   filter(ply %in% c("3-ply", "4-ply")) %>% 
   distinct(xgid, ply, type, .keep_all = TRUE) %>% 
   split(.$ply)
 
 # Join 3-ply and 4-ply dfs to one
-df <- df[[1]] %>% 
-  left_join(df[[2]], by = c("xgid", "type"), suffix = c("_3-ply", "_4-ply"))
+df2 <- df2[[1]] %>% 
+  left_join(df2[[2]], by = c("xgid", "type"), suffix = c("_3-ply", "_4-ply"))
 
 # Compute diffs, pick largest
-df <- df %>% 
+df2 <- df2 %>% 
   select(-starts_with("ply_")) %>% 
   mutate(diff = `cost_3-ply` - `cost_4-ply`) %>% 
   filter(diff != 0) %>% 
@@ -461,7 +485,7 @@ df <- df %>%
 
 # Clean fixed width output so it renders correctly:
 # Fixed width must start with 4 white spaces
-df <- df %>% 
+df2 <- df2 %>% 
   mutate(across(starts_with("cube_eq"), 
          ~ paste0("    ", str_replace_all(.x, "\n", "\n    "))),
          across(starts_with("move_eq"), 
@@ -473,8 +497,8 @@ df <- df %>%
 #| layout-ncol: 1
 #| results: asis
 
-for (i in 1:nrow(df)) { 
-  temp <- df %>% slice(i)
+for (i in 1:nrow(df2)) { 
+  temp <- df2 %>% slice(i)
   
   cat("\n\n", "#### Position ", i, ": ", temp$type, "\n\n", sep = "")
   
@@ -483,7 +507,8 @@ for (i in 1:nrow(df)) {
   cat("\n\n",
       "    Size of error, 3-ply: ", temp$`cost_3-ply`, "\n",
       "    Size of error, 4-ply: ", temp$`cost_4-ply`, "\n",
-      "    Difference          : ", temp$diff, "\n\n", 
+      "    Difference          : ", temp$diff, "\n",
+      "    XGID                : ", temp$xgid, "\n\n",   
       sep = "")
 
   if (temp$type == "Cube decision") { # Cube decision

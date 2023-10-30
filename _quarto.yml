@@ -12,6 +12,7 @@ website:
       - analyses/janowski.qmd
       - analyses/milestones-2023.qmd
       - analyses/many-takepoints.qmd
+      - analyses/bgmoves-analysis.qmd
     search: true
       
 format:
