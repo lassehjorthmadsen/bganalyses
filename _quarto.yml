@@ -6,13 +6,18 @@ website:
     style: "floating"
     contents:
       - href: index.qmd
-        text: Home
-      - analyses/explore-emg.qmd
-      - analyses/met-precision.qmd
-      - analyses/janowski.qmd
-      - analyses/milestones-2023.qmd
-      - analyses/many-takepoints.qmd
-      - analyses/bgmoves-analysis.qmd
+        text: HOME
+      - section: "THEORY"
+        contents:
+        - analyses/explore-emg.qmd
+        - analyses/met-precision.qmd
+        - analyses/janowski.qmd
+        - analyses/many-takepoints.qmd
+        - analyses/bgmoves-analysis.qmd
+      - section: "PRAXIS"
+        contents:
+        - analyses/milestones-2023.qmd
+
     search: true
       
 format:
