@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lasse Hjorth Madsen">
-<meta name="dcterms.date" content="2023-10-26">
+<meta name="dcterms.date" content="2023-10-30">
 
-<title>Mistake stats</title>
+<title>Mistake, errors and statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -75,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Mistake stats</li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analyses/bgmoves-analysis.html">Mistake, errors and statistics</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -131,6 +131,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Exploring take points</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/bgmoves-analysis.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Mistake, errors and statistics</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -142,11 +148,20 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#why-this" id="toc-why-this" class="nav-link active" data-scroll-target="#why-this">Why this?</a></li>
-  <li><a href="#shopping-list" id="toc-shopping-list" class="nav-link" data-scroll-target="#shopping-list">Shopping list</a></li>
-  <li><a href="#are-higher-plies-worth-it" id="toc-are-higher-plies-worth-it" class="nav-link" data-scroll-target="#are-higher-plies-worth-it">Are higher plies worth it?</a>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
+  <li><a href="#me-vs-the-galaxy" id="toc-me-vs-the-galaxy" class="nav-link" data-scroll-target="#me-vs-the-galaxy">Me vs The Galaxy</a></li>
+  <li><a href="#my-errors-by-size" id="toc-my-errors-by-size" class="nav-link" data-scroll-target="#my-errors-by-size">My errors by size</a></li>
+  <li><a href="#my-cube-errors" id="toc-my-cube-errors" class="nav-link" data-scroll-target="#my-cube-errors">My cube errors</a></li>
+  <li><a href="#my-checker-play-errors" id="toc-my-checker-play-errors" class="nav-link" data-scroll-target="#my-checker-play-errors">My checker play errors</a></li>
+  <li><a href="#when-it-pays-to-be-wrong" id="toc-when-it-pays-to-be-wrong" class="nav-link" data-scroll-target="#when-it-pays-to-be-wrong">When it pays to be wrong</a>
   <ul class="collapse">
-  <li><a href="#compare-some-overall-results" id="toc-compare-some-overall-results" class="nav-link" data-scroll-target="#compare-some-overall-results">Compare some overall results</a></li>
-  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
+  <li><a href="#too-good" id="toc-too-good" class="nav-link" data-scroll-target="#too-good">Too good</a></li>
+  <li><a href="#not-good-enough" id="toc-not-good-enough" class="nav-link" data-scroll-target="#not-good-enough">Not good enough</a></li>
+  </ul></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  <li><a href="#appendix-compare-plies" id="toc-appendix-compare-plies" class="nav-link" data-scroll-target="#appendix-compare-plies">Appendix: Compare plies</a>
+  <ul class="collapse">
+  <li><a href="#some-overall-results" id="toc-some-overall-results" class="nav-link" data-scroll-target="#some-overall-results">Some overall results</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -156,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Mistake stats</h1>
+<h1 class="title">Mistake, errors and statistics</h1>
 </div>
 
 
@@ -173,7 +188,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 26, 2023</p>
+      <p class="date">October 30, 2023</p>
     </div>
   </div>
   
@@ -185,44 +200,160 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="why-this" class="level2">
 <h2 class="anchored" data-anchor-id="why-this">Why this?</h2>
-<p>This is an exploratory analysis of a big chunk of my backgammon matches played on Backgammon Galaxy.</p>
+<p>This is an exploratory analysis of a big chunk of my backgammon matches played on Backgammon Galaxy. Maybe I can spot some interesting patterns, to help better focus my learning.</p>
 </section>
-<section id="shopping-list" class="level2">
-<h2 class="anchored" data-anchor-id="shopping-list">Shopping list</h2>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data">The data</h2>
+<p>Quick overview of the data I have collected:</p>
 <ul>
-<li>Sum of errors by opponent, checker/cube (did I outplay opps or vice versa?)</li>
-<li>My sum and count of errors by checker/cube (Are checker plays more costly just because they are more frequent?)</li>
-<li>My sum and count of errors by proper cube action (What kind of cube decision errors are most costly for me?)</li>
-<li>Sum of checker/cube mistakes by size: Does the occasional quadruple blunder matter a lot? Is there a lot to gain by better focus, by getting rid of oversights and mis-clicks?</li>
-<li>My sum and count of errors by move no. (How much is given up in the opening?)</li>
-<li>Sum of error by doubling when too good, vs.&nbsp;gain when opp takes too good doubles. Does it pay to double when too good?</li>
-<li>Sum of error by doubling when not good enough, vs.&nbsp;gain when opp passes no doubles. Does it pay to double a little too early?</li>
-<li>Examples of the rare bird: Too good and not good enough.</li>
-<li>Are higher plies worth the extra compute time?</li>
+<li><p>In total, the data set contains 39690 positions. Some positions (like opening plays) appear several times; the total number of <em>unique</em> positions is 39261</p></li>
+<li><p>The positions are taken from a total of 892 games, from a total of 343 matches.</p></li>
+<li><p>The number of actual errors, the positions that we will consider here, are the decisions where someone (me or my opponent) made a checker play error or cube decision error. This comes to a total of 9460 mistakes, 4120 of which was made by me, 5340 by one of my 280 opponents.</p></li>
+</ul>
+<p>All positions have been analyzed by GNU Backgammon 4-ply (equivalent to eXtreme Gammon 5-ply).</p>
+<p>The data is available on <a href="https://github.com/lassehjorthmadsen/backgammon">GitHub</a>, as a part of an R-package that I use as toolbox for backgammon related analyses.</p>
+</section>
+<section id="me-vs-the-galaxy" class="level2">
+<h2 class="anchored" data-anchor-id="me-vs-the-galaxy">Me vs The Galaxy</h2>
+<p>First, let’s just count, sum, and average all the errors, to see how they split by cube/checker play and by me/opponents. The left, middle, and right panel in the plot below shows counts, sums, and averages.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Luckily, it looks like I make fewer and smaller errors than my opponents on Backgammon Galaxy, but that is not surprising: I never use a rating filter, and therefore my opponents are of all skill levels, including beginners.</p>
+<p>Note that the errors are not directly comparable to the performance rating, PR, that Galaxy reports. The averages shown are the average size of <em>errors</em>, not averages across all non-obvious plays like XG defines it.</p>
+<p>Anyway, it does look like I have plenty of room for improvement. Can we figure out what areas to focus on?</p>
+<p>For one thing, checker play errors taken together, seem to sum to a lot more than all cube errors. This is because there are so many checker play decisions, many of them resulting in small errors. The <em>average</em> cube error is more than double of the average checker play error.</p>
+<p>Given that it would be hard to weed out all the checker plays that GNU BG considers small errors, it might be just as good to focus on the fewer but heavier cube errors.</p>
+<p>Let’s split by <em>size</em> of the error made, to see just how much the many small errors account for, compared to the fewer biggies.</p>
+</section>
+<section id="my-errors-by-size" class="level2">
+<h2 class="anchored" data-anchor-id="my-errors-by-size">My errors by size</h2>
+<p>Is the total sum of errors mostly from many small errors, or a few big blunders?</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The single interval of checker play errors, that contribute the most to the total cost of errors, is the medium-sized one, errors between 0.05 and 0.1. And about half the checker play errors could be eliminated if I didn’t make blunder at 0.1 and above. Presumably the biggest ones are the easiest to get rid of, so it makes sense to focus on blunders, as many players do.</p>
+<p>Note that there’s a significant fat tail of blunders at 0.3 and above. Many of those may have to do with oversights, misclicks, time-pressure, losing interest, etc. So perhaps a low hanging fruit would be to just improve focus and concentration.</p>
+<p>Similar for cube actions; there seem to be a good chunk of huge blunders that I should be able to get rid of. The small cube errors are maybe not worth worrying too much about. One reason is that in case of doubles, sometimes it pays to play the opponent: A incorrect double can be profitable if the opponent responds by an even bigger error. (More on incorrect takes/passes from opponents later).</p>
+</section>
+<section id="my-cube-errors" class="level2">
+<h2 class="anchored" data-anchor-id="my-cube-errors">My cube errors</h2>
+<p>Next, let’s focus on my cube errors, and split by what GNU Backgammon think the proper cube action is.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The biggest class of my cube-related errors, comes from positions where the proper cube action is no (re)double, take (where no-redouble and no-double are lumped together). That class of cube positions are both frequent and with large, average errors. The mistake, however, can be both me doubling when I shouldn’t, or me passing a no-double (which of course is always very bad).</p>
+<p>Let’s further split by what the actual action was, so try to nail it better.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>I looks like the single biggest contributor to my cube mistakes, is me doubling or re-doubling when the position isn’t strong enough. (The big green bar in the middle panel.) Do I double too aggressively? Maybe, but on the other hand if you add together the cases where I rolled but should have doubled (the two purple bars in the middle panel) they represent also a big sum, so sometimes I miss a good double double too.</p>
+<p>Still, the wrong doubles, contribute more to the total sum of errors that the missed doubles.</p>
+<p>Also, my wrong passes are relatively few and small: I lose more by incorrectly taking, than by incorrectly passing. In other words I might be a bit too optimistic about my own position: Taking too much rather than too little, and doubling a bit too early rather that too late.</p>
+<p>All in all I might have to be a bit more conservative with the cube. (But don’t overdo it now, I don’t need more wrong passes or late doubles.)</p>
+</section>
+<section id="my-checker-play-errors" class="level2">
+<h2 class="anchored" data-anchor-id="my-checker-play-errors">My checker play errors</h2>
+<p>Checker play errors are a bit harder to categorize that cube errors. I’m planing on doing a algorithm to determine position type, but until then, we need to go simple. Let’s look at move number, to distinguish between errors early and late in the game. (Note that GNU BG use a move number for every player’s decision, so a double/take/play sequence would be <em>three</em> moves with the same position.)</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Not surprisingly, most checker play errors come early in the game, since all games have a beginning, but not all games are long.</p>
+<p>Let’s bin the move number into a fewer intervals, so we can better talk about opening game and later game errors.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Perhaps a bit surprising, the bigger part of checker play errors are within move 1-3. Although the errors are small on average, they sum up to a lot. The middle and late game plays (move 20-30) also contribute a lot of errors.</p>
+</section>
+<section id="when-it-pays-to-be-wrong" class="level2">
+<h2 class="anchored" data-anchor-id="when-it-pays-to-be-wrong">When it pays to be wrong</h2>
+<p>This is an interesting class of mistakes, is when I double positions that I shouldn’t have, but are then rewarded when the opponent incorrectly passes a no-double, or takes a too-good-double.</p>
+<section id="too-good" class="level3">
+<h3 class="anchored" data-anchor-id="too-good">Too good</h3>
+<p>The data has 39 examples of me doubling a position that is technically too good. The average error in these cases is -0.13. However, in 8 of those cases, my opponent accepted, for a huge, average error of -0.75. That makes the total, average error made by my opponents after I incorrectly double a too-good position -0.15. It is a very small sample, but it appears that those 39 errors could have been profitable overall.</p>
+<p>We could do statistical tests to better access if this result is just noise, but it is more fun to plot the data to get a feel for how to interpret it.</p>
+<p>One way to visualize the distribution of my double-errors vs my opponent’s take-errors, is to plot the estimated density distributions of errors like this:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Another way to look at it would be to plot the size of my error of doubling, against the error of my opponent. In case of a correct response, a pass, that error would just be zero. Like this:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The point here is, that the bigger the no-double is, the bigger is also the potential gain from an erroneous take. While those big take-blunders may be less likely, the gain when they do happen is also bigger. The plot shows one outlier, bottom left corner, of a really big no-double that was accepted for a big gain.</p>
+<p>It’s possible that best practical strategy is to <em>never</em> play on for too-good, unless it is absolutely obvious, like when you’re cruising home with a couple of opponent checkers closed out. It will most often cost something to double, because usually the opponent correctly passes, but the occasional big blunder take might outweigh that.</p>
+</section>
+<section id="not-good-enough" class="level3">
+<h3 class="anchored" data-anchor-id="not-good-enough">Not good enough</h3>
+<p>For these pair of decisions, the data has 95 examples of me doubling a position that is technically not good enough. The average error in these cases is -0.14. In 9 of those cases, my opponent passed, for an average error of -0.36. That makes the total, average error made by my opponents after I incorrectly double a no-double position -0.03. It is still a small sample, but it appears that those 95 errors was not justified by a subsequent opponent error.</p>
+<p>Let’s do plot similar to before. First, the estimated density distributions of errors:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Next, the scatter plot:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
+<p>So, how should I use this information to improve my game?</p>
+<ul>
+<li>First, focus on checker play blunders in common situations.</li>
+<li>Then, establish a set of good, common benchmark positions for minimal doubles, mostly to avoid doubling too early but also to not double too late.</li>
+<li>Then, create a set of minimal take benchmarks to avoid taking too much.</li>
+<li>Finally, look at too-good situations, get benchmarks to avoid cashing too much.</li>
 </ul>
 </section>
-<section id="are-higher-plies-worth-it" class="level2">
-<h2 class="anchored" data-anchor-id="are-higher-plies-worth-it">Are higher plies worth it?</h2>
-<section id="compare-some-overall-results" class="level3">
-<h3 class="anchored" data-anchor-id="compare-some-overall-results">Compare some overall results</h3>
+<section id="appendix-compare-plies" class="level2">
+<h2 class="anchored" data-anchor-id="appendix-compare-plies">Appendix: Compare plies</h2>
+<p>When you analyze this many positions, computing time is an issue. Are higher plies worth the extra time spent? Do we get different results between 0-ply and 4-ply? Can it be worthwhile to go 5-ply?</p>
+<section id="some-overall-results" class="level3">
+<h3 class="anchored" data-anchor-id="some-overall-results">Some overall results</h3>
+<p>Let’s reproduce the first three charts from this report, split by ply, and inspect the results. First we have the overall results (like in the <em>Me vs The Galaxy</em>-section). For readability, instead of splitting on me vs opponent, we look at just my errors, but split by ply number.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="bgmoves-analysis_files/figure-html/plot_costs-1.png" class="img-fluid" width="672"></p>
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>From casual inspection, it looks like 0- and 1-ply are different, but 2-, 3-, and 4-ply produce mostly similar results on the aggregated level. 4-ply does have a slightly lower <em>count</em> of cube errors than 3-ply, and so a bit higher <em>average</em> cube error.</p>
+<p>It’s hard to see that as a systematic sign of <em>better</em> evaluations, though. But the average estimated cube error does seem to grow by ply, with the exception of 3-ply.</p>
+<p>Same overall impression from the split by error size: 0- and 1-ply stand out a bit; otherwise little noticeable difference.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="bgmoves-analysis_files/figure-html/plot_costs_pct-1.png" class="img-fluid" width="672"></p>
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>In the cube-error plot again 0- and 1-ply stand out, and in general the bars look a little more noisy – but that is to be expected as the data set for cube actions is considerably smaller.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="bgmoves-analysis_files/figure-html/plot_costs_type-1.png" class="img-fluid" width="672"></p>
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section>
-<section id="examples" class="level3">
-<h3 class="anchored" data-anchor-id="examples">Examples</h3>
+<p>All-in all no obvious reasons to invest computer time in doing 5-ply. The 4-ply analysis took abut 3 days, so a 5-ply would take months – we really would need a tangible reason to do that.</p>
+<p>For fun, let’s examine some cases where 3-ply and 4-ply disagree the most. We pull out 20 examples, 10 checker play mistakes and 10 cube errors, in each case with 5 positions where 3-ply says the error made is bigger than 4-ply thinks, and 5 cases vice versa.</p>
+<p>The stand-out pattern is, that we have many backgame position types. Other than that, there’s not a signal there that I can easily spot.</p>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <section id="position-1-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
@@ -235,6 +366,7 @@ ul.task-list li input[type="checkbox"] {
 <pre><code>Size of error, 3-ply: -0.259
 Size of error, 4-ply: -0.16
 Difference          : -0.099
+XGID                : XGID=--aBBBDbA---ca----bcc-B-B-:0:0:-1:21:0:2:0:5:10
 
  1. Cubeful 3-ply    6/4 5/4                      Eq.: +0.568
 *2. Cubeful 3-ply    18/17* 18/16                 Eq.: +0.309 (-0.259)
@@ -260,6 +392,7 @@ Difference          : -0.099
 <pre><code>Size of error, 3-ply: -0.191
 Size of error, 4-ply: -0.103
 Difference          : -0.088
+XGID                : XGID=------B-D----C-abcdcb-CBA-:1:1:-1:61:0:0:0:3:10
 
  1. Cubeful 3-ply    10/4 7/6                     Eq.: -0.027
  2. Cubeful 3-ply    10/4 6/5                     Eq.: -0.064 (-0.037)
@@ -285,6 +418,7 @@ Difference          : -0.088
 <pre><code>Size of error, 3-ply: -0.147
 Size of error, 4-ply: -0.07
 Difference          : -0.077
+XGID                : XGID=-aabb-EBE-A-baA--b-d--A---:0:0:1:54:0:0:0:5:10
 
  1. Cubeful 3-ply    6/2* 6/1*                    Eq.: +0.122
  2. Cubeful 3-ply    14/10 6/1*                   Eq.: +0.080 (-0.042)
@@ -310,6 +444,7 @@ Difference          : -0.077
 <pre><code>Size of error, 3-ply: -0.258
 Size of error, 4-ply: -0.185
 Difference          : -0.073
+XGID                : XGID=-dbCBBCA-A--c----bBb-Aa-a-:1:-1:-1:62:0:0:0:3:10
 
  1. Cubeful 3-ply    24/18* 3/1                   Eq.: -0.617
 *2. Cubeful 3-ply    24/18*/16*                   Eq.: -0.875 (-0.258)
@@ -335,6 +470,7 @@ Difference          : -0.073
 <pre><code>Size of error, 3-ply: -0.181
 Size of error, 4-ply: -0.109
 Difference          : -0.072
+XGID                : XGID=----BAE-BA--dB-b-aBc--bab-:0:0:-1:62:0:3:0:5:10
 
  1. Cubeful 3-ply    10/8 10/4                    Eq.: +0.726
 *2. Cubeful 3-ply    8/2 6/4                      Eq.: +0.545 (-0.181)
@@ -357,30 +493,10 @@ Difference          : -0.072
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<pre><code>Size of error, 3-ply: 0
-Size of error, 4-ply: -0.129
-Difference          : 0.129
-
- 1. Cubeful 3-ply    bar/22 7/1                   Eq.: -1.000
- 2. Cubeful 3-ply    bar/22 8/2                   Eq.: -1.000 (-0.000)
-*3. Cubeful 3-ply    bar/22 21/15                 Eq.: -1.000 (-0.000)
-
- 1. Cubeful 4-ply    bar/22 8/2                   Eq.: -0.871
- 2. Cubeful 4-ply    bar/22 7/1                   Eq.: -0.946 (-0.075)
-*3. Cubeful 4-ply    bar/22 21/15                 Eq.: -1.000 (-0.129)</code></pre>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<section id="position-7-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<h4 class="anchored" data-anchor-id="position-7-checker-play">Position 7: Checker play</h4>
-<p><img src="bgmoves-analysis_files/figure-html/plot_examples-7.png" class="img-fluid" width="672"></p>
-</section>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <pre><code>Size of error, 3-ply: -0.016
 Size of error, 4-ply: -0.116
 Difference          : 0.1
+XGID                : XGID=-----BBA-B---a----dbdcCCaB:0:0:-1:53:0:0:0:3:10
 
  1. Cubeful 3-ply    12/4                         Eq.: +0.678
 *2. Cubeful 3-ply    12/7 4/1                     Eq.: +0.662 (-0.016)
@@ -396,9 +512,9 @@ Difference          : 0.1
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
-<section id="position-8-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<h4 class="anchored" data-anchor-id="position-8-checker-play">Position 8: Checker play</h4>
-<p><img src="bgmoves-analysis_files/figure-html/plot_examples-8.png" class="img-fluid" width="672"></p>
+<section id="position-7-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<h4 class="anchored" data-anchor-id="position-7-checker-play">Position 7: Checker play</h4>
+<p><img src="bgmoves-analysis_files/figure-html/plot_examples-7.png" class="img-fluid" width="672"></p>
 </section>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
@@ -406,6 +522,7 @@ Difference          : 0.1
 <pre><code>Size of error, 3-ply: -0.315
 Size of error, 4-ply: -0.405
 Difference          : 0.09
+XGID                : XGID=aba-BCD-CA--cA---b-fA-----:1:-1:-1:31:0:0:0:5:10
 
  1. Cubeful 3-ply    bar/22 23/22                 Eq.: -0.524
 *2. Cubeful 3-ply    bar/22 13/12*                Eq.: -0.839 (-0.315)
@@ -421,9 +538,9 @@ Difference          : 0.09
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
-<section id="position-9-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<h4 class="anchored" data-anchor-id="position-9-checker-play">Position 9: Checker play</h4>
-<p><img src="bgmoves-analysis_files/figure-html/plot_examples-9.png" class="img-fluid" width="672"></p>
+<section id="position-8-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<h4 class="anchored" data-anchor-id="position-8-checker-play">Position 8: Checker play</h4>
+<p><img src="bgmoves-analysis_files/figure-html/plot_examples-8.png" class="img-fluid" width="672"></p>
 </section>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
@@ -431,6 +548,7 @@ Difference          : 0.09
 <pre><code>Size of error, 3-ply: -0.139
 Size of error, 4-ply: -0.226
 Difference          : 0.087
+XGID                : XGID=--aBCBCbB--Ba--a---cbab-bA:0:0:-1:33:0:0:0:3:10
 
  1. Cubeful 3-ply    18/12 10/4                   Eq.: +0.308
  2. Cubeful 3-ply    18/15(2) 10/4                Eq.: +0.297 (-0.011)
@@ -446,9 +564,9 @@ Difference          : 0.087
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
-<section id="position-10-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<h4 class="anchored" data-anchor-id="position-10-checker-play">Position 10: Checker play</h4>
-<p><img src="bgmoves-analysis_files/figure-html/plot_examples-10.png" class="img-fluid" width="672"></p>
+<section id="position-9-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<h4 class="anchored" data-anchor-id="position-9-checker-play">Position 9: Checker play</h4>
+<p><img src="bgmoves-analysis_files/figure-html/plot_examples-9.png" class="img-fluid" width="672"></p>
 </section>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
@@ -456,6 +574,7 @@ Difference          : 0.087
 <pre><code>Size of error, 3-ply: -0.116
 Size of error, 4-ply: -0.201
 Difference          : 0.085
+XGID                : XGID=-b-CBCCB--------bcccb-B---:1:-1:-1:41:2:3:0:7:10
 
  1. Cubeful 3-ply    24/23 6/2                    Eq.: +0.334
  2. Cubeful 3-ply    24/23 8/4                    Eq.: +0.267 (-0.067)
@@ -471,6 +590,32 @@ Difference          : 0.085
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
+<section id="position-10-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<h4 class="anchored" data-anchor-id="position-10-checker-play">Position 10: Checker play</h4>
+<p><img src="bgmoves-analysis_files/figure-html/plot_examples-10.png" class="img-fluid" width="672"></p>
+</section>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<pre><code>Size of error, 3-ply: -0.046
+Size of error, 4-ply: -0.129
+Difference          : 0.083
+XGID                : XGID=-BBBACB-----c-B-ac-bbbbA--:1:-1:1:51:0:0:0:5:10
+
+ 1. Cubeful 3-ply    23/18 5/4                    Eq.: -0.954
+*2. Cubeful 3-ply    6/1 5/4                      Eq.: -1.000 (-0.046)
+ 3. Cubeful 2-ply    23/18 4/3                    Eq.: -1.000 (-0.046)
+ 4. Cubeful 0-ply    14/9 5/4                     Eq.: -1.000 (-0.046)
+ 5. Cubeful 0-ply    14/13 14/9                   Eq.: -1.000 (-0.046)
+
+ 1. Cubeful 4-ply    23/18 5/4                    Eq.: -0.871
+*2. Cubeful 4-ply    6/1 5/4                      Eq.: -1.000 (-0.129)
+ 3. Cubeful 2-ply    23/18 4/3                    Eq.: -1.000 (-0.129)
+ 4. Cubeful 0-ply    14/9 5/4                     Eq.: -1.000 (-0.129)
+ 5. Cubeful 0-ply    14/13 14/9                   Eq.: -1.000 (-0.129)</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
 <section id="position-11-cube-decision" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-11-cube-decision">Position 11: Cube decision</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-11.png" class="img-fluid" width="672"></p>
@@ -481,6 +626,7 @@ Difference          : 0.085
 <pre><code>Size of error, 3-ply: -0.619
 Size of error, 4-ply: -0.514
 Difference          : -0.105
+XGID                : XGID=aB-a-BDb-A-BaCa---bbc--Ab-:0:0:-1:D:0:0:0:3:10
 
 Cube analysis
 3-ply cubeless equity -0.972 (Money: -0.769)
@@ -512,6 +658,7 @@ Proper cube action: Too good to double, pass (5.2%)</code></pre>
 <pre><code>Size of error, 3-ply: -0.93
 Size of error, 4-ply: -0.851
 Difference          : -0.079
+XGID                : XGID=a---dCD-B----D-aA-adbb-A--:1:1:-1:D:0:3:0:7:10
 
 Cube analysis
 3-ply cubeless equity -0.737 (Money: -0.695)
@@ -543,6 +690,7 @@ Proper cube action: Too good to redouble, pass (9.6%)</code></pre>
 <pre><code>Size of error, 3-ply: -0.134
 Size of error, 4-ply: -0.063
 Difference          : -0.071
+XGID                : XGID=-a-BB-BBA--BdB----AbbbcaA-:0:0:1:D:0:1:0:5:10
 
 Cube analysis
 3-ply cubeless equity -0.682 (Money: -0.553)
@@ -574,6 +722,7 @@ Proper cube action: Double, pass</code></pre>
 <pre><code>Size of error, 3-ply: -0.403
 Size of error, 4-ply: -0.332
 Difference          : -0.071
+XGID                : XGID=-b---BCBBB---B---b-bbbcBb-:0:0:-1:D:0:1:0:7:10
 
 Cube analysis
 3-ply cubeless equity -0.726 (Money: -0.723)
@@ -605,6 +754,7 @@ Proper cube action: Double, pass</code></pre>
 <pre><code>Size of error, 3-ply: -0.376
 Size of error, 4-ply: -0.308
 Difference          : -0.068
+XGID                : XGID=---BB-D-Bc-AdD----acb--b--:0:0:-1:D:0:0:0:3:10
 
 Cube analysis
 3-ply cubeless equity -0.635 (Money: -0.630)
@@ -636,6 +786,7 @@ Proper cube action: Double, pass</code></pre>
 <pre><code>Size of error, 3-ply: -0.2
 Size of error, 4-ply: -0.271
 Difference          : 0.071
+XGID                : XGID=---aabEBC---bE----bbabb---:0:0:1:00:1:0:0:3:10
 
 Cube analysis
 3-ply cubeless equity +0.465 (Money: +0.389)
@@ -667,6 +818,7 @@ Proper cube action: No double, take (41.5%)</code></pre>
 <pre><code>Size of error, 3-ply: -0.215
 Size of error, 4-ply: -0.285
 Difference          : 0.07
+XGID                : XGID=--aabBBBBA--bB--b-AcA-bbAA:1:-1:1:D:3:0:0:7:10
 
 Cube analysis
 3-ply cubeless equity -0.411 (Money: -0.338)
@@ -698,6 +850,7 @@ Proper cube action: Redouble, pass</code></pre>
 <pre><code>Size of error, 3-ply: -0.073
 Size of error, 4-ply: -0.137
 Difference          : 0.064
+XGID                : XGID=----bBDDC---a--abb-cbbB---:0:0:-1:00:0:0:0:3:10
 
 Cube analysis
 3-ply cubeless equity +0.346 (Money: +0.325)
@@ -729,6 +882,7 @@ Proper cube action: No double, take (21.7%)</code></pre>
 <pre><code>Size of error, 3-ply: -0.174
 Size of error, 4-ply: -0.238
 Difference          : 0.064
+XGID                : XGID=-----BDBB-b-bB-a-b-bd-Bb-A:0:0:1:D:1:0:0:5:10
 
 Cube analysis
 3-ply cubeless equity -0.493 (Money: -0.514)
@@ -760,6 +914,7 @@ Proper cube action: Double, take</code></pre>
 <pre><code>Size of error, 3-ply: -0.161
 Size of error, 4-ply: -0.22
 Difference          : 0.059
+XGID                : XGID=---BBBBA-B-------e-eaBbBb-:0:0:1:00:0:2:0:5:10
 
 Cube analysis
 3-ply cubeless equity +0.048 (Money: +0.087)
