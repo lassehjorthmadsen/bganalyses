@@ -16,46 +16,129 @@ library(tidyverse)
 devtools::load_all(path = "../../backgammon")
 ```
 
-```{r subset}
-data("bgmoves")
-thresholds <- c(Inf, 0.2, 0.1, 0.05, 0.02)
+```{r subset_and_clean}
+cost_breaks <- c(0.05, 0.10, 0.20, 0.3, Inf) %>% sort()
+cost_labels <- paste0(">", cost_breaks)[-length(cost_breaks)] %>% rev()
 
-check <- bgmoves %>% 
-  filter(turn == "lasse", play == "Rolls", move_err < -min(thresholds)) %>% 
-  select(move_no, play, move_err, board, move_eq, xgid) %>% 
-  mutate(error_bin = cut(move_err, -thresholds)) %>% 
-  group_by(error_bin) %>% 
-  slice_sample(n = 5) %>% 
-  ungroup()
+move_breaks <- c(0, 5, 15, Inf) 
+move_labels <- paste0(">", move_breaks)[-length(move_breaks)] 
+
+df <- bgmoves %>% 
+  select(file, move_no, play, turn, proper_ca, move_err, cube_err, xgid) %>% 
+  pivot_longer(cols = c(cube_err, move_err), names_to = "type", values_to = "cost") %>% 
+  filter(!is.na(cost), cost <= -min(cost_breaks), turn == "lasse") %>% 
+  mutate(turn = case_match(turn,  "lasse" ~ "Me", .default = "Opponent"),
+         type = case_match(type, "cube_err" ~ "Cube decision", "move_err" ~ "Checker play"),
+         cost_bin = fct_rev(cut(.$cost, -cost_breaks, right = FALSE, labels = cost_labels)), 
+         move_bin = cut(.$move_no, move_breaks, right = TRUE, labels = move_labels),
+         mistake_type = case_when(
+           type == "Cube decision" & play == "Rejects" & str_detect(proper_ca, "take") ~ "Wrong pass",
+           type == "Cube decision" & play == "Accepts" & str_detect(proper_ca, "pass") ~ "Wrong take",
+           type == "Cube decision" & play == "Doubles" & str_detect(proper_ca, "No") ~ "Wrong double",
+           type == "Cube decision" & play == "Rolls" & str_detect(proper_ca, "Double|Redouble") ~ "Missed double",
+           type == "Cube decision" & play == "Doubles" & str_detect(proper_ca, "Too") ~ "Wrong cash")) 
 ```
-
 
 ## Why this?
 
-This is a catalog of positions where I made some kind of mistake. They are collected from my own matches, at the moment mostly online matches at [Backgammon Galaxy](play.backgammongalaxy.com).
+This is a catalog of positions where I made some kind of mistake. They are collected from my online matches at [Backgammon Galaxy](play.backgammongalaxy.com).
 
-It is an automated report, first, using a Python script for GNU Backgammon to analyze my collection of matches, then my R-package `Backgammon` to turn the files with GNU BG analysis into a data frame, then this notebook with R-code to analyze that data. 
+It is an automated report created like this: First, I use a Python script for GNU Backgammon to analyze my collection of matches at 4-ply. Then, my R-package `Backgammon` contains a function turn the GNU BG analysis files into a data frame that can be analyzed using normal statistical tools. Finally, this Quarto notebook with R-code analyzes that data. 
 
-I split the mistakes into checker plays and Cube actions.
+I split the mistakes into a structure like this:
 
-Checker plays are grouped by Extra Large, Large, Medium and Small errors, with each section listing all errors in descending order of error size. (Perhaps it should be in descending order by time, so I can spot new additions when I update this?)
+  1. Checker play errors
+  - Greater than 0.05
+  - Greater than 0.10
+  - Greater than 0.20
+  - Greater than 0.30
 
-Cube actions are grouped by Double errors and Take errors, and again by Extra Large, Large, Medium and Small errors.
- 
-## Checker plays
+  2. Cube actions
+  - Wrong takes
+  - Wrong passes
+  - Wrong doubles 
+  - Missed doubles
+  - Wrong cash (when too good)
+  - ... with all five categories split into the same error sizes as for checker plays 
+   
+```{r}
+#| results: asis
+max_examples <- 3
+
+mistake_types <- unique(df$mistake_type)
+mistake_types <- mistake_types[!is.na(mistake_types)]
+
+cost_bins <- unique(df$cost_bin)
+cost_bins <- cost_bins[!is.na(cost_bins)]
+
+move_bins <- unique(df$move_bin)
+
+for (type in unique(df$type)) {
+  cat("## ", type, "\n")
+  
+  if (str_detect(type, "Cube")) {
+    mistake_types <- unique(df$mistake_type)
+    mistake_types <- mistake_types[!is.na(mistake_types)]
+                            
+    for (mistake_type in mistake_types) {
+      cat("\n### ", mistake_type)
+      
+      for (cost_bin in levels(cost_bins)) {
+        cat("\n#### Error", cost_bin)
+        
+        temp <- df %>%
+          filter(type == type, mistake_type == mistake_type, cost_bin == cost_bin) %>%
+          slice_sample(n = max_examples)
+        
+        for (i in 1:3) {
+          cat("\n##### Position ", i)
+          ggboard(temp$xgid[i]) %>% print()
+        }
+        
+      }
+    }
+  }
+  
+  if (str_detect(type, "Checker")) {
+    for (move_bin in levels(move_bins)) {
+      cat("\n### Move no. ", move_bin)
+      
+      for (cost_bin in cost_bins) {
+        cat("\n#### Error", cost_bin)
+
+        temp <- df %>%
+          filter(type == type, move_bin == move_bin, cost_bin == cost_bin) %>%
+          slice_sample(n = max_examples)
+
+        for (i in 1:3) {
+          cat("\n##### Position ", i)
+          ggboard(temp$xgid[i]) %>% print()
+
+        }
+      }
+    }
+  }
+}
+
+```
+
 
 ```{r}
 #| column: page
 #| layout-ncol: 2
 
-for (i in (1:nrow(check))) {
-  temp <- check %>% slice(i)
-  print(ggboard(temp$xgid))
-  temp$move_eq %>% 
-    str_remove_all("Cubeful |Eq.: ") %>%
-    cat("\n\n\n\n", ., "\n\n\n\n", temp$xgid, sep = "")
-}
+# temp <- df %>% 
+#   group_by(type, mistake_type, cost_bin) %>% 
+#   slice_sample(n = 1) %>% 
+#   ungroup()
+
+
+#for (i in (1:nrow(temp))) {
+  #id <- temp %>% slice(i)
+  # print(ggboard(id$xgid))
+  # temp$move_eq %>% 
+  #   str_remove_all("Cubeful |Eq.: ") %>%
+  #   cat("\n\n\n\n", ., "\n\n\n\n", temp$xgid, sep = "")
+#}
 ```
 
-
-## Cube actions

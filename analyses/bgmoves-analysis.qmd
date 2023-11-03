@@ -29,8 +29,8 @@ This is an exploratory analysis of a big chunk of my backgammon matches played o
 cost_breaks <- c(0.02, seq(0, 0.3, 0.05), Inf) %>% sort()
 cost_labels <- paste0(">", cost_breaks)[-length(cost_breaks)] %>% rev()
 
-move_breaks <- c(0, 3, 10, 15, 20, 30, Inf) %>% rev()
-move_labels <- paste0(">", move_breaks)[-1] 
+move_breaks <- c(0, 5, 15, 30, Inf) 
+move_labels <- paste0(">", move_breaks)[-length(move_breaks)] 
 
 df <- bgmoves %>% 
   select(file, move_no, play, turn, proper_ca, move_err, cube_err, xgid) %>% 
@@ -48,7 +48,7 @@ df <- bgmoves %>%
                                                   "Redouble" = "(Re)double"),
                                      ),
          cost_bin = fct_rev(cut(.$cost, -cost_breaks, right = FALSE, labels = cost_labels)), 
-         move_bin = fct_rev(cut(.$move_no, move_breaks, right = FALSE, labels = move_labels))
+         move_bin = cut(.$move_no, move_breaks, right = TRUE, labels = move_labels)
          ) 
 ```
 
@@ -209,7 +209,7 @@ plot_data %>%
 
 Not surprisingly, most checker play errors come early in the game, since all games have a beginning, but not all games are long.
 
-Let's bin the move number into a fewer intervals, so we can better talk about opening game and later game errors.
+Let's bin the move number into a fewer intervals, so we can better identify opening game and later game errors.
 
 ```{r}
 plot_data <- df %>% 
@@ -228,7 +228,7 @@ plot_data %>%
   facet_wrap(facets = vars(metric), scales = "free") +
   labs(fill = NULL, x = "Move number", y = "Value") 
 ```
-Perhaps a bit surprising, the bigger part of checker play errors are within move 1-3. Although the errors are small on average, they sum up to a lot. The middle and late game plays (move 20-30) also contribute a lot of errors.
+The bigger part of checker play errors are from within move 6-15. The errors are both large on average and frequent, so they sum up to a lot.
 
 ## When it pays to be wrong
 
