@@ -17,6 +17,7 @@ website:
       - section: "PRAXIS"
         contents:
         - analyses/milestones-2023.qmd
+        - analyses/mistakes.qmd
 
     search: true
       
