@@ -1,0 +1,78 @@
+---
+title: "Cluster backgammon positions"
+author: "Lasse Hjorth Madsen"
+date: today 
+format: html
+toc: true
+toc-expand: true
+toc-depth: 3
+editor: source
+execute:
+  echo: false
+  warning: false
+  cache: false
+---
+
+```{r setup}
+library(tidyverse)
+devtools::load_all(path = "../../backgammon")
+```
+
+
+```{r subset}
+df <- bgmoves %>% distinct(pos_id, .keep_all = TRUE)
+```
+
+## Why this?
+
+```{r kmeans}
+#| cache: true
+k <-  7
+
+no_features <- df$xgid[1] %>% xgid2vec() %>% length()
+
+pos <-  
+  map2(.x = df$xgid, .y = (df$turn != "lasse"), .f= xgid2vec, .progress = "Converting xgid's to vectors") %>% 
+  unlist() %>% 
+  matrix(ncol = no_features, byrow = TRUE) %>% 
+  scale()
+ 
+kclusters <- kmeans(pos, centers = k, nstart = 10, iter.max = 1000)
+
+df$cluster <- kclusters$cluster
+
+centers <- kclusters$centers
+clusters <- kclusters$cluster
+
+# Compute distances to cluster centers
+distances <- sapply(1:nrow(pos), function(i) sqrt(sum((pos[i, ] - centers[clusters[i], ]) ^ 2)))
+
+df$center_dist <- distances
+```
+
+
+```{r typical_positions}
+typicals <- df %>% 
+  group_by(cluster) %>% 
+  slice_min(center_dist, n = 10, with_ties = FALSE) %>% 
+  ungroup() %>% 
+  arrange(cluster, center_dist) %>% 
+  select(xgid, cluster, center_dist)
+```
+
+
+```{r plot_positions}
+#| results: asis
+current_cluster <- 0
+
+for (i in 1:nrow(typicals)) {
+  clust <- typicals$cluster[i]
+  if (clust > current_cluster) {
+    cat("\n\n### Cluster:", clust, "\n")
+    current_cluster <- clust
+  }
+  print(ggboard(typicals$xgid[i]))
+}
+
+```
+
