@@ -18,7 +18,6 @@ library(tidyverse)
 devtools::load_all(path = "../../backgammon")
 ```
 
-
 ```{r subset}
 df <- bgmoves %>% distinct(pos_id, .keep_all = TRUE)
 ```
@@ -26,7 +25,7 @@ df <- bgmoves %>% distinct(pos_id, .keep_all = TRUE)
 ## Why this?
 
 ```{r kmeans}
-#| cache: true
+#| cache: false
 k <-  7
 
 no_features <- df$xgid[1] %>% xgid2vec() %>% length()
@@ -73,6 +72,29 @@ for (i in 1:nrow(typicals)) {
   }
   print(ggboard(typicals$xgid[i]))
 }
+```
 
+```{r}
+#| eval: false
+
+xgid <- "XGID=-b----E-C---eE---c-e----B-:0:0:1:52:0:0:3:0:10"
+xgid %>% ggboard()
+xgid %>% xgid2vec()
+
+xgid <- "XGID=--b---E-C---eE---c-e----B-:0:0:1:52:0:0:3:0:10"
+xgid %>% ggboard()
+xgid %>% xgid2vec()
+
+xgid <- "XGID=-a--BBCBB--A-C----bbdbb-b-:1:1:1:00:2:0:0:5:10"
+xgid %>% ggboard()
+xgid %>% xgid2vec()
+
+xgid <- "XGID=-----FI------------fd-----:3:-1:1:52:0:0:3:0:10"
+xgid %>% ggboard()
+xgid %>% xgid2vec()
+
+xgid <- "XGID=-b---FI------------fd-----:3:-1:1:52:0:0:3:0:10"
+xgid %>% ggboard()
+xgid %>% xgid2vec()
 ```
 
