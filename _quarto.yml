@@ -18,6 +18,7 @@ website:
         contents:
         - analyses/milestones-2023.qmd
         - analyses/mistakes.qmd
+        - analyses/opening-mistakes.qmd
 
     search: true
       

@@ -1,0 +1,72 @@
+---
+title: "Opening checker play errors"
+author: "Lasse Hjorth Madsen"
+date: today 
+format: html
+toc: true
+toc-expand: true
+toc-depth: 4
+editor: source
+execute:
+  echo: false
+  warning: false
+  cache: false
+---
+
+```{r setup}
+library(tidyverse)
+devtools::load_all(path = "../../backgammon")
+
+top_examples <- 20
+```
+
+```{r subset_and_clean}
+df <- bgmoves %>% 
+  distinct(xgid, .keep_all = TRUE) %>%
+  select(file, move_no, play, turn, move_err, move_eq, xgid) %>% 
+  filter(turn == "lasse", move_no <= 6, play == "Rolls", move_err < 0) %>% 
+  mutate(turn = case_match(turn,  "lasse" ~ "Me", .default = "Opponent"),
+         play_no = ceiling(move_no / 2)) %>%
+  arrange(move_no, play_no, move_err)
+```
+
+## Why this?
+
+This is a catalog of positions from the opening, here defined as the first 6 moves, where I made a checker play mistake. So that means either on my first, second or third play -- since I play either move 1, 3, 5 or 2, 4, 6, depending on who wins the opening roll.  
+
+I split the mistakes into a simple structure: Positions are grouped by move number, and shown in descending order by the magnitude of the error. So the first example will the biggest error I ever made on the opening move -- the last example will be the smallest error on the 6th move of the game (my third play after losing the opening roll). To limit the number of positions a bit, I pick only the top `r top_examples` errors within each move number.
+
+It is an automated report, based on a collection of my online matches at [Backgammon Galaxy](play.backgammongalaxy.com).
+
+The data was generated like this: First, I use a Python script for GNU Backgammon to analyze my collection of matches at 4-ply. Then, my R-package `Backgammon` contains a function turn the GNU BG analysis files into a data frame that can be analyzed using normal statistical tools. Finally, this Quarto notebook with R-code displays diagrams based on a subset of that data. 
+
+## Opening mistakes
+
+```{r checker}
+#| results: asis
+for (j in seq(1, 6)) {
+  cat("\n### Move no. ", j)
+
+  temp <- df %>%
+    filter(move_no == j) %>%
+    slice_min(move_err, n = top_examples, with_ties = FALSE)
+  
+  if (nrow(temp) > 0) {
+    for (i in 1:nrow(temp)) {
+      cat("\n##### Position ", i)
+      ggboard(temp$xgid[i]) %>% print()
+      
+      evaluation <- temp$move_eq[i] %>% 
+        read_lines() %>% 
+        str_remove_all("Cubeful ") %>% 
+        paste(rep("   ", length(.)), .) %>% 
+        paste(collapse = "\n")
+      
+      cat("\n\n", evaluation, 
+          "\n\n    ", temp$xgid[i], 
+          "\n    File: ", temp$file[i], 
+          "\n\n", sep = "")
+    }
+  }
+}
+```
