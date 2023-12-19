@@ -913,6 +913,13 @@ Double/Pass:   +1,000 (+0,181)" %>%
   cat("\n\n", ., sep = "") 
 ```
 
+### Position 9
+
+```{r}
+ggboard("XGID=---BaBC-a---dE---d-daA--AA:0:0:1:00:4:4:0:7:10")
+```
+
+This position is interesting because both players made a huge error: White by doubling, Black by passing. 
 
 ## Checker plays
 
@@ -1413,12 +1420,60 @@ Also rolls that stay put, like 32, 21, 11, works in favor of the split, since Wh
 
 Some things about White's reasoning was right: Ugliness can be tolerated. After 18/13 there's no reason to leave an additional three extra flyshots with 18/15 for the 3. 6/3 is uglier but better. 
 
+### Positions 9a-9b
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=-b-B-BDB----bB--bc-e-B-aA-:0:0:1:32:4:0:0:7:10")
+ggboard("XGID=-b-B-BDB--AA--b--cbe-B-aA-:0:0:1:52:4:0:0:7:10")
+```
+
+Here's a pair of consequtive plays where White got it wrong twice. 
+
+Before we get to the plays, note that because of the score White can't yet double, even though both positions would be passes for money. (The first one a small pass, the second a clear pass.) Also, the 22 that Black played in between was also a clear mistake: Since the 11-point doesn't block anything 9/5(2), making a much needed inner point, would have been better. 
+
+In the *first* position, with a 32 to play for White, it may seem reasonable to improve quietly with 13/11 13/10, and watch Black struggle to improve his inflexible position. 7/4 6/4, making the 4-point, is much better. 
+
+It's not that 13/11 13/10 is such an awful play, it's just that making the 4-point is so strong that it is hard to beat.
+
+In fact, White kind of just overlooked the best play, since one wouldn't normally be inclined to give up the very strong barpoint here. White *did* consider the slotting plays, but 6/4 24/21 leaves Blacks blot on his 2-point alone, and 6/4 13/10 is a little rich.
+
+7/4 6/4 is not hard to play once you see it. The risk is small to moderate: While 6's are good for Black, they hardly turn around the game (except the 66 joker). On any other Black roll (like the actual 22 or a nice roll of 31, for example), White is much better of with the made 4-point and the threat of remaking the barpoint for a winning prime.
+
+But you can't make the right play if you don't consider it.
+
+The *second* position, a roll later, looks similar but really isn't. This time White slotted with 10/5 6/4, recognizing that that the risk isn't that great. 10/5 is correct, but the right two is now 24/22.
+
+The key is to see that slotting the 4-point is not the same as making it. Black would like to split to the 21-point, and if he can do so while hitting, that's much stronger. Rolls like 53 or 32 play the same way after the actual slotting play and after the better and quieter 10/5 24/22. 53 goes 24/16 and 32 plays 24/21 8/6 either way -- but hitting at the same time if White slots, which is much stronger.
+
+The truncated rollouts for the two positions:
+
+```{r}
+#| layout-ncol: 2
+
+"White to play 32:
+1. 7/4 6/4       eq:+0,615
+2. 13/11 13/10   eq:+0,510 (-0,105)
+3. 24/21 6/4     eq:+0,507 (-0,108)
+4. 24/21 13/11   eq:+0,496 (-0,119)
+5. 24/22 13/10   eq:+0,477 (-0,138)" %>% 
+  cat()
+
+"White to play 52:
+1. 24/22 10/5   eq:+0,553
+2. 11/9 10/5    eq:+0,507 (-0,046)
+3. 10/5 6/4     eq:+0,447 (-0,106)
+4. 11/4         eq:+0,437 (-0,116)
+5. 24/22 11/6   eq:+0,419 (-0,133)" %>% 
+  cat()
+```
+
 ## Conclusions
 
 Examining some errors from this Milestone Tournament, the findings that surprised me the most where:
 
 - I seem to *overestimate* some attacking positions
-- I grossly *underestimate* how much more careful the leader should be to double in middle game positions with gammons, when leading something like 3-away versus 5-away or 7-away. Likely because I failed to pay attention how impactful potential recubes are at these scores.
+- I grossly *underestimate* how much more careful the leader should be to double in middle game positions with gammons, when leading something like 3-away versus 5-away or 7-away. Likely because I failed to pay attention to how impactful potential recubes are at these scores.
 - I tend to miss plays where making the ace-point is correct.
 - Some technical positions can be deceptively tricky. 
 
