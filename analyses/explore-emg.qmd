@@ -13,11 +13,9 @@ execute:
 ```{r setup}
 library(tidyverse)
 library(ggrepel)
-devtools::load_all(path = "../../backgammon")
+devtools::load_all(path = "../../bglab")
 
-met_file <- devtools::package_file("data-raw/Kazaross XG2.met", path = "../../backgammon")
-
-met <- get_met(filename = met_file)
+met <- get_met()
 pwin3 <- 5/6*1/6*5/6 + 5/6*5/6*5/6*1/6
 take_error = 4 * pwin3 - 1
 theme_set(theme_minimal())

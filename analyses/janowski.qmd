@@ -21,10 +21,8 @@ library(ggrepel)
 options(scipen = 9999)
 options(knitr.table.format = "html")
 
-devtools::load_all(path = "../../backgammon")
-
-met_file <- devtools::package_file("data-raw/Kazaross XG2.met", path = "../../backgammon")
-met <- get_met(filename = met_file)
+devtools::load_all(path = "../../bglab")
+met <- get_met()
 ```
 
 ## Why this?

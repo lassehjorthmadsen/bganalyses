@@ -1,5 +1,5 @@
 {
-  "hash": "3115db0a4161ef3443fd9fb16d513e28",
+  "hash": "e6d0b46ccb6bc91995cbd3a091c6973d",
   "result": {
     "markdown": "---\ntitle: \"Prime vs. prime\"\nauthor: \"Lasse Hjorth Madsen\"\ndate: today \nformat: \n  html:\n    fig-width: 4\n    fig-height: 4\ntoc: true\ntoc-expand: true\neditor: source\nexecute:\n  echo: false\n  warning: false\n---\n\n::: {.cell}\n\n:::\n\n\n## Why this?\n\n",
     "supporting": [],

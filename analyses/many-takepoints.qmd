@@ -16,7 +16,7 @@ library(tidyverse)
 library(knitr)
 library(kableExtra)
 
-devtools::load_all(path = "../../backgammon")
+devtools::load_all(path = "../../bglab")
 
 theme_set(
   theme_minimal() +
@@ -27,7 +27,6 @@ theme_set(
     )
 )
 ```
-
 
 ## Why this?
 
@@ -90,4 +89,3 @@ tps %>%
        x = "Take point", y = "Score", color = "Cube level") +
   theme(axis.text.y = element_text(colour = score_color))
 ```
-

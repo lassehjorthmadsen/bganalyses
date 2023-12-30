@@ -22,7 +22,7 @@ library(knitr)
 library(kableExtra)
 
 options(scipen = 9999)
-devtools::load_all(path = "../../backgammon")
+devtools::load_all(path = "../../bglab")
 
 met <- get_met()
 ```

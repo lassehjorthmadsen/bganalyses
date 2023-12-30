@@ -20,10 +20,9 @@ library(knitr)
 library(kableExtra)
 
 options(scipen = 9999)
-devtools::load_all(path = "../../backgammon")
+devtools::load_all(path = "../../bglab")
 
-met_file <- devtools::package_file("data-raw/Kazaross XG2.met", path = "../../backgammon")
-met <- get_met(filename = met_file)
+met <- get_met()
 ```
 
 ## Why this?

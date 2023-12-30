@@ -13,7 +13,7 @@ execute:
 
 ```{r setup}
 library(tidyverse)
-devtools::load_all(path = "../../backgammon")
+devtools::load_all(path = "../../bglab")
 
 theme_set(
   theme_minimal() +
