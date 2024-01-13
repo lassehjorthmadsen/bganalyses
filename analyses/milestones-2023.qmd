@@ -113,7 +113,7 @@ The next table shows Black's take points under different assumption: a) No cube 
 ```{r}
 tp_table <- tibble(
   `Cube assumptions` = c("Dead cube, no gammons", "Dead cube, gammons", "Both cube and gammons"),
-  `money game take point` = c(tp_money(c(0.5, 0, 0, 0.5, 0, 0), 0),
+  `Money game take point` = c(tp_money(c(0.5, 0, 0, 0.5, 0, 0), 0),
                             tp_money(probs_fliped, x = 0),
                             tp_money(probs_fliped, x = 0.68)
                             ),
@@ -124,7 +124,7 @@ tp_table <- tibble(
 
 tp_table %>% 
   mutate(across(where(is.numeric), round, 3),
-         Difference = `7-away, 5-away take point` - `money game take point`) %>% 
+         Difference = `7-away, 5-away take point` - `Money game take point`) %>% 
   kable("html") %>% 
   column_spec(2:4, width = "3.5cm")
 ```
@@ -136,7 +136,7 @@ This is because he'll redouble more aggressively at the score. We can see why, b
 ```{r}
 tp_table <- tibble(
   `Cube assumptions` = c("Dead cube, no gammons", "Dead cube, gammons", "Both cube and gammons"),
-  `money game take point` = c(tp_money(c(0.5, 0, 0, 0.5, 0, 0), 0),
+  `Money game take point` = c(tp_money(c(0.5, 0, 0, 0.5, 0, 0), 0),
                             tp_money(probs, x = 0),
                             tp_money(probs, x = 0.68)
                             ),
@@ -147,7 +147,7 @@ tp_table <- tibble(
 
 tp_table %>% 
   mutate(across(where(is.numeric), round, 3),
-         Difference = `5-away, 7-away recube take point` - `money game take point`) %>% 
+         Difference = `5-away, 7-away recube take point` - `Money game take point`) %>% 
   kable("html") %>% 
   column_spec(2:4, width = "3.5cm")
 ```
@@ -271,6 +271,7 @@ Summing up:
 ```{r}
 ggboard("XGID=bAB--BBAB---bB--Abbcc-AAa-:0:0:1:00:2:0:0:7:10")
 ```
+
 This is another example of blitz that could work as a bluff double: It might look like White has a strong blitz going, but in fact the take is easy, and this is not even a double. In practice, it's not impossible to get a pass. (In the actual game, Black passed this.)
 
 ```{r}
@@ -314,16 +315,16 @@ tp_tab <- tp_table(7, 5, probs_fliped, 1, met)
 
 tp_tab %>% 
   mutate(across(where(is.numeric), round, 3),
-         Difference = `7-away, 5-away take point` - `money game take point`) %>% 
+         Difference = `7-away, 5-away take point` - `Money game take point`) %>% 
   kable("html") %>% 
   column_spec(2:4, width = "3.5cm")
 ```
 
-As in position 1, it is the powerful recube access that makes Black considerable more inclined to take at the score, compare to money game. 
+As in position 1, it is the powerful recube access that makes Black considerable more inclined to take at the score, compare to money game.
 
-Let's keep the money game variant, and play with features of the position. 
+Let's keep the money game variant, and play with features of the position.
 
-The ace-point slots makes all the difference in the world, because it commits White to a blitz. If we turn the slot into a builder White can both blitz or prime, and two strong game plans are much better than one. As a result Black has a moderate sized pass in the variant below. 
+The ace-point slots makes all the difference in the world, because it commits White to a blitz. If we turn the slot into a builder White can both blitz or prime, and two strong game plans are much better than one. As a result Black has a moderate sized pass in the variant below.
 
 ```{r}
 #| layout-ncol: 2
@@ -393,7 +394,7 @@ Double/Pass:   +1,000 (+0,258)" %>%
   cat()
 ```
 
-The original is still a no-double for money, although doubling is a much smaller mistake that at the score. Shifting to a better inner point makes a clear difference; now the decision to double is really close, and White has a small double. 
+The original is still a no-double for money, although doubling is a much smaller mistake that at the score. Shifting to a better inner point makes a clear difference; now the decision to double is really close, and White has a small double.
 
 Bringing in more ammunition *and* making the 11-point is required to turn the position into a solid double/take for money, although it would still be a clear no-double at the score:
 
@@ -453,7 +454,7 @@ tp_tab <- tp_table(5, 3, probs_fliped, 1, met)
 
 tp_tab %>% 
   mutate(across(where(is.numeric), round, 3),
-         Difference = `5-away, 3-away take point` - `money game take point`) %>% 
+         Difference = `5-away, 3-away take point` - `Money game take point`) %>% 
   kable("html") %>% 
   column_spec(2:4, width = "3.5cm")
 ```
@@ -472,13 +473,14 @@ probs %>%
 In summary, when leading 3-away, 5-away, in a typical middle game position, the leader should have a position that is a clear money pass, to consider doubling. That potential re-cube is just too powerful to let your opponent have.
 
 ### Position 4
+
 ```{r}
 ggboard("XGID=-aa--BBBC--BAB-b-bbe-bA---:0:0:1:00:4:0:0:7:10")
 ```
 
 Here, White figured that escaping with a 6 or making the 9- or 10-point, could lead to a market loss and doubled. White failed to pay enough attention to the match score, *and* overestimated the position a bit, the combination of which made the decision to double a 0.308 blunder.
 
-The three diagrams below show left to right: a) the position for money: A borderline double at best; b) The modification required to turn it into a solid double and a solid take; c) The closest variant that would make the position only a small take for money 
+The three diagrams below show left to right: a) the position for money: A borderline double at best; b) The modification required to turn it into a solid double and a solid take; c) The closest variant that would make the position only a small take for money
 
 ```{r}
 #| layout-ncol: 3
@@ -505,7 +507,7 @@ tp_tab <- tp_table(7, 3, probs_fliped, 1, met)
 
 tp_tab %>% 
   mutate(across(where(is.numeric), round, 3),
-         Difference = `7-away, 3-away take point` - `money game take point`) %>% 
+         Difference = `7-away, 3-away take point` - `Money game take point`) %>% 
   kable("html") %>% 
   column_spec(2:4, width = "3.5cm")
 ```
@@ -608,7 +610,7 @@ Double/Pass:   +1,000 (+0,080)" %>%
 ggboard("XGID=-B----C-D-a-eCA--c-dbA--A-:0:0:-1:00:4:0:0:7:10")
 ```
 
-In this position White underestimated an attacking position, *and* failed to take the match score into account, and so took a double that is a big pass: 
+In this position White underestimated an attacking position, *and* failed to take the match score into account, and so took a double that is a big pass:
 
 ```{r}
 "Analyzed in XG Roller++
@@ -686,9 +688,9 @@ Black is still a lot better off than White since he has nearly escaped both back
 ggboard("XGID=--Bb-bECB-C-------bcbbb---:0:0:1:00:1:0:0:7:10")
 ```
 
-This one, half backgame, half holding game, is a little unusual and can be hard to evaluate. Black is, of course, miles behind in the race and need to hit a shot to win. On the positive side, Black has a great defensive structure to generate hits. But not right away, White has no shot-leaving rolls, although there will be later. Since this is not a deep backgame, the gammon danger isn't too great. 
+This one, half backgame, half holding game, is a little unusual and can be hard to evaluate. Black is, of course, miles behind in the race and need to hit a shot to win. On the positive side, Black has a great defensive structure to generate hits. But not right away, White has no shot-leaving rolls, although there will be later. Since this is not a deep backgame, the gammon danger isn't too great.
 
-In the actual game, White doubled and Black took. It turns out to be  small no-double:
+In the actual game, White doubled and Black took. It turns out to be small no-double:
 
 ```{r}
 "Analyzed in XG Roller++
@@ -753,7 +755,7 @@ Double/Pass:   +1,000 (+0,023)" %>%
   cat("\n\n", ., sep = "") 
 ```
 
-Another timing experiment: If we in the original position (money game variant) move Black's spare back 14 pips, his position gets stronger so it becomes even more of a no-double. Note that Black is now also somewhat blocked and risk crunching, but the timing benefit outweigh this: 
+Another timing experiment: If we in the original position (money game variant) move Black's spare back 14 pips, his position gets stronger so it becomes even more of a no-double. Note that Black is now also somewhat blocked and risk crunching, but the timing benefit outweigh this:
 
 ```{r}
 #| layout-ncol: 2
@@ -786,6 +788,7 @@ Double/Pass:   +1,000 (+0,431)" %>%
 ```{r}
 ggboard("XGID=--BAb-DBD----B--babbbbb---:0:0:1:00:4:2:0:7:10")
 ```
+
 This one is from the same match and somewhat related to the previous position, but a more pure holding game. White has a big, but not decicive, 15-pips lead in the race. White's game is much improved compared to a standard holding game by the made 7-point, but the gap on the 5-point works the opposite direction, and to some extent cancels out that benefit.
 
 In the game White doubled, which is a significant mistake:
@@ -799,7 +802,7 @@ Double/Pass:   +1,000 (+0,339)" %>%
   cat(., sep = "") 
 ```
 
-As is often the case, the mistake is due to a combination of mis-evaluating the score, *and* the position. For money, it is still a no-double, but the mistake is smaller: 
+As is often the case, the mistake is due to a combination of mis-evaluating the score, *and* the position. For money, it is still a no-double, but the mistake is smaller:
 
 ```{r}
 #| layout-ncol: 2
@@ -849,7 +852,7 @@ Which yield the following take points, for money and at the score, under differe
 ```{r}
 tp_table <- tibble(
   `Cube assumptions` = c("Dead cube, no gammons", "Dead cube, gammons", "Both cube and gammons"),
-  `money game take point` = c(tp_money(c(0.5, 0, 0, 0.5, 0, 0), 0),
+  `Money game take point` = c(tp_money(c(0.5, 0, 0, 0.5, 0, 0), 0),
                             tp_money(probs_fliped, x = 0),
                             tp_money(probs_fliped, x = 0.68)
                             ),
@@ -860,7 +863,7 @@ tp_table <- tibble(
 
 tp_table %>% 
   mutate(across(where(is.numeric), round, 3),
-         Difference = `5-away, 3-away take point` - `money game take point`) %>% 
+         Difference = `5-away, 3-away take point` - `Money game take point`) %>% 
   kable("html") %>% 
   column_spec(2:4, width = "3.5cm")
 ```
@@ -919,7 +922,144 @@ Double/Pass:   +1,000 (+0,181)" %>%
 ggboard("XGID=---BaBC-a---dE---d-daA--AA:0:0:1:00:4:4:0:7:10")
 ```
 
-This position is interesting because both players made a huge error: White by doubling, Black by passing. 
+This position is interesting because both players made a huge error: White by doubling, Black by passing.
+
+It's easy to see that White has a ton of shots (27 rolls hit somewhere), and that Blacks position is badly underdeveloped.
+
+It is perhaps less easy to realize that White's position overall is not all that strong: He is behind in the race, on the bar, and short on attack material. He has 9 bad sixes that doesn't hit anything, after which Black has at least an even position.
+
+Bottom line is big no double/take:
+
+```{r}
+"Analyzed in XG Roller++
+Player Winning Chances:   56,23% (G:20,52% B:1,00%)
+Opponent Winning Chances: 43,77% (G:9,54% B:0,42%)
+Cubeful Equities:
+No double:     +0,375
+Double/Take:   +0,161 (-0,213)
+Double/Pass:   +1,000 (+0,625)" %>% 
+  cat()
+```
+
+White being on the bar is a really big deal: If we move that checker to the 15-point, White no longer has the 9 bad sixes, and the race is closer. Result is a smallish double, and a clear take for Black:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=---BaBC-a---dE-A-d-daA--A-:0:0:1:00:4:4:0:7:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,666 (-0,059)
+Double/Take:   +0,724
+Double/Pass:   +1,000 (+0,276)" %>% 
+  cat("\n", .)
+```
+
+If we move the same checker just another 4 pips forward, White now has a double shot on the vulnerable Black checker on the 8-point and more ammunition closer to the key 4-point. It now becomes a strong double, and a borderline pass:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=---BaBC-a--AdE---d-daA--A-:0:0:1:00:4:4:0:7:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,804 (-0,196)
+Double/Take:   +1,001 (+0,001)
+Double/Pass:   +1,000" %>% 
+  cat("\n", .)
+```
+
+### Position 10
+
+```{r}
+ggboard("XGID=--B-ABD------------bbbc-a-:2:-1:-1:00:0:0:0:7:10")
+```
+
+A straight race, a rare 8-cube. If you know that White has about 24% match winning chances if he passes and trails 3-away, 7-away, it is easy to see that this is also the take point at this score and this cube value.
+
+I you don't know this by heart, a bit of reasoning will do: Doubling here doesn't quite double stakes, since after double/take the game will be for 7 points, not 8. True, the 3 additional points are worth a lot, so doubling increases the stake by more than 75%, but still less than the normal 100% increase after double/take in a money game.
+
+Therefore, the takepoint is a bit smaller that the ordinary 25% dead-cube-no-gammon-takepoint for money.
+
+```{r}
+dp <- met[7, 3] %>% round(3)
+dp_opp <- 1 - dp
+diff = dp_opp - dp
+```
+
+Checking the numbers, we see that the difference between winning and losing with the cube at 4 would be $`r dp_opp` - `r dp` = `r diff`$, and the difference between winning and losing with the cube at 8 would be $1-0=1$. So the stake doesn't quite double at this score and this cube level, but almost, hence the slightly lower take point.
+
+In the position, White trails by two pips, so the take should be clear. The double is also okay, Black *is* a clear favorite, he is not giving away anything since the cube will be dead, and short races like this are always volatile.
+
+The XG-numbers:
+
+```{r}
+"Analyzed in Rollout
+No redouble
+  Player Winning Chances:   68,49% (G:0,00% B:0,00%)
+  Opponent Winning Chances: 31,51% (G:0,00% B:0,00%)
+Redouble/Take
+  Player Winning Chances:   68,42% (G:0,00% B:0,00%)
+  Opponent Winning Chances: 31,58% (G:0,00% B:0,00%)
+
+Cubeful Equities:
+No redouble:     +0,668 (-0,035)
+Redouble/Take:   +0,703
+Redouble/Pass:   +1,000 (+0,297)" %>% 
+  cat()
+```
+
+### Position 11
+
+```{r}
+ggboard("XGID=--ABABBba---bE---bAdbb-A--:0:0:-1:00:0:0:0:7:10")
+```
+
+It's tempting to take this cube as White. There's a lot of contact left, and White has a 3-point board, just like Black, as well as racing chances. Still, the take is quite wrong.
+
+White is likely to be hit next turn, and must hope to hit back in order to win. Whites big weakness is the two inner board blots; they make the potential return hits a double edged sword.
+
+As we see, the result of having those blots is a devastating number of gammons lost, making the position a clear pass:
+
+```{r}
+"Analyzed in XG Roller+
+Player Winning Chances:   69,58% (G:37,05% B:1,66%)
+Opponent Winning Chances: 30,42% (G:8,14% B:0,37%)
+
+Cubeful Equities:
+No double:     +0,894 (-0,106)
+Double/Take:   +1,197 (+0,197)
+Double/Pass:   +1,000" %>% 
+  cat()
+```
+
+Naturally, it is a whole other story if we remove just one of the blots and turn it into a builder. From a big pass to a close take:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=---BABCba---bE---bAdbb-A--:0:0:-1:00:0:0:0:7:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,757 (-0,210)
+Double/Take:   +0,966
+Double/Pass:   +1,000 (+0,034)" %>% 
+  cat()
+```
+
+If we improve further, by giving White a powerful board, the position is not even a double:
+
+```{r}
+#| layout-ncol: 2
+ggboard("XGID=---BBBBba---bE---bAdbb-A--:0:0:-1:00:0:0:0:7:10")
+
+"Analyzed in XG Roller++
+Cubeful Equities:
+No double:     +0,528
+Double/Take:   +0,492 (-0,036)
+Double/Pass:   +1,000 (+0,472)" %>% 
+  cat()
+```
 
 ## Checker plays
 
@@ -931,9 +1071,9 @@ ggboard("XGID=-b--B-CBB--BcB-b---db-b-B-:0:0:1:52:2:1:0:7:10")
 
 Here, White has four reasonable options:
 
-- 13/11, 13/8, clearing the midpoint
-- 11/4, placing a spare on the 4-point 
-- 11/6, 11/9, with spares on the 6- and 9-points 
+-   13/11, 13/8, clearing the midpoint
+-   11/4, placing a spare on the 4-point
+-   11/6, 11/9, with spares on the 6- and 9-points
 
 Unwilling to break the midpoint as long as reasonable alternatives existed, White played 11/4, wanting to leave fewer shots and cover more outfield, compared to 11/6, 11/9.
 
@@ -941,9 +1081,9 @@ It is not hard to accept that this can be a mistake:
 
 11/6, 11/9 also breaks the 11-point, but is more compact. It adds 63 to build the 3-point, slots the 9-point which could be useful, and only leaves 44 as an extra shot (a joker anyway).
 
-13/11, 13/8, clearing the midpoint, puts full emphasis on White's all-important 5-point, leaves no shot, and makes it more dangerous for Black to split with a roll like 42. 
- 
-The interesting part is not that XG picks 13/11, 13/8, but the *magnitude* of the mistake is remarkable; anything but breaking the midpoint is a blunder: 
+13/11, 13/8, clearing the midpoint, puts full emphasis on White's all-important 5-point, leaves no shot, and makes it more dangerous for Black to split with a roll like 42.
+
+The interesting part is not that XG picks 13/11, 13/8, but the *magnitude* of the mistake is remarkable; anything but breaking the midpoint is a blunder:
 
 ```{r}
 "XG Roller++ 
@@ -953,7 +1093,7 @@ The interesting part is not that XG picks 13/11, 13/8, but the *magnitude* of th
   cat()
 ```
 
-The key is, that after the top play, 9 rolls make a full 5-prime. After the second best play, only 4 rolls do that. Some rolls, 31 and 43, makes the 5-point but breaks the 8, which is not as strong. So the extra builders on the 11- and 8-points have real value. 
+The key is, that after the top play, 9 rolls make a full 5-prime. After the second best play, only 4 rolls do that. Some rolls, 31 and 43, makes the 5-point but breaks the 8, which is not as strong. So the extra builders on the 11- and 8-points have real value.
 
 Note that White should break the 13-point with a lot of rolls: 54, 43, 62, 42, 32, 51, and the 52 from the actual position.
 
@@ -982,8 +1122,8 @@ ggboard("XGID=aABaB-C-CA--cB---c-cbAa-a-:1:-1:1:41:0:0:0:7:10") +
 ggboard("XGID=aAaBBBB-B---bB-aAa-cbbb-A-:1:-1:1:11:0:0:0:7:10") + 
   labs(title = "Position 2e")
 ```
-These five positions share a common theme: The right play is hard to find for those of us who learned, back in the day, that the one thing you must never do in backgammon, is to make the ace-point.
 
+These five positions share a common theme: The right play is hard to find for those of us who learned, back in the day, that the one thing you must never do in backgammon, is to make the ace-point.
 
 ```{r}
 #| layout-ncol: 2
@@ -1024,15 +1164,16 @@ XG Roller++
 5. 24/23 16/15* 8/7(2)      eq:+0,804 (-0,105)" %>% 
   cat()
 ```
+
 In position 2a and 2b White must hit, he has the stronger board and while it is not good to get hit back, Black can also do some damage if left alone. After hitting on the ace point, anything but switching point just leave another blot for no particular gain.
 
-In 2c White just overlooked switching -- an easy thing to do if you learned to play pre-neural nets. 
+In 2c White just overlooked switching -- an easy thing to do if you learned to play pre-neural nets.
 
 2d is just a case of a classic blitz: It doesn't matter too much which points you make; in fact the ace-point may be better to make, since the higher points are easier to cover.
 
 2e is a little more tricky prime vs. prime kind of thing. The important part is to but three checkers on the bar -- then White might have time to recover even if hit back. It's also good to advance with 24/23. So after three mandatory aces: 24/23, 16/15\*, and 3/2\*, it is easier to see that 2/1 is the right final ace, since it leaves a direct cover for the slotted 3-point.
 
-The positional approach that White tried in the actual game, 24/23 16/15* 8/7(2), is no good; Black can both anchor or hit back. 
+The positional approach that White tried in the actual game, 24/23 16/15\* 8/7(2), is no good; Black can both anchor or hit back.
 
 ### Position 3
 
@@ -1044,7 +1185,7 @@ This is a technical play, where it is tempting to assume that all reasonable pla
 
 Obviously the play is all about getting off the gammon. Over the board, White played 19/9, thinking that it hardly mattered, as long as he made crossovers and avoided wastage by playing past the 6-point.
 
-The gammon race is close. The probabilities that White will lose a gammon after the five best plays, are listed below. 
+The gammon race is close. The probabilities that White will lose a gammon after the five best plays, are listed below.
 
 ```{r}
 "1. 13/7 10/6    53.93% 
@@ -1056,30 +1197,32 @@ The gammon race is close. The probabilities that White will lose a gammon after 
 Moves: 3-ply, cube decisions: XG Roller" %>% 
   cat()
 ```
+
 The actual play, 19/9, increases the risk of getting gammoned, by almost 4 percentage points, so for money that would be about a 0.04 mistake, costing 4 percent of the cube value -- a significant mistake.
 
 Why so much?
 
-The main concept in getting-off-the-gammon problems is to avoid "wasting" pips, by playing past the 6-point, those pips don't help saving the gammon. Playing 10/6 with the 4 does just that, so must be right. Indeed, 10/6 is part of both top plays. 
+The main concept in getting-off-the-gammon problems is to avoid "wasting" pips, by playing past the 6-point, those pips don't help saving the gammon. Playing 10/6 with the 4 does just that, so must be right. Indeed, 10/6 is part of both top plays.
 
 This *is* quite important, especially when the gammon race is close.
 
-After 10/6 with the 4,  13/7 is best with the 6, simply because it creates a smaller stack: Two checkers on the 7- and 13-point, is better than one and four checkers respectively.
+After 10/6 with the 4, 13/7 is best with the 6, simply because it creates a smaller stack: Two checkers on the 7- and 13-point, is better than one and four checkers respectively.
 
 ### Position 4
 
 ```{r}
 ggboard("XGID=-----DF-C----A------A--be-:2:-1:1:31:0:0:0:7:10")
 ```
+
 This one is from the same game as position 3, but Black has rolled well, so White is now a big favorite to get gammoned. The 31 White has to play is a little funny, because the correct play seem to violate basic principles for getting off the gammon: Make crossovers; don't waste pips.
 
 The right play is 8/7 8/5, wasting a pip and failing to make two crossovers.
 
-A little reflection shows that White needs to cater to specific doubles. After any play White needs 7 or 8 crossovers in three rolls, so one of roll has to be a double to save the gammon. After 8/7 8/5 any double makes 4 crossover, which is not true for the other plays, so that is the winner.
+A little reflection shows that White needs to cater to specific doubles. After any play White needs 7 or 8 crossovers in three rolls, so one of those rolls has to be a double to save the gammon. After 8/7 8/5 any double makes 4 crossover, which is not true for the other plays, so that is the winner.
 
 It's true, that if White makes two crossovers now, with 13/12 8/5, he only needs to generate three crossovers from a future double. But 11 fails to do even that, so it loses a tiny bit there.
 
-The other two-crossover play, played in the actual game, is 20/17 13/12 which also fails on 11, but plays worse on 55 and 44 as well.
+The other two-crossover play, played in the actual game, is 20/17 13/12 which also fails on 11, and plays worse on 55 and 44 as well.
 
 The probabilities of losing a gammon after the 7 best plays are:
 
@@ -1102,11 +1245,11 @@ Moves: 3-ply, cube decisions: XG Roller" %>%
 ggboard("XGID=-b---DC-C--AbB----acd-c-B-:1:1:1:64:0:0:0:7:10")
 ```
 
-This is a tough play. White has two reasonable but very different plays: Hitting with 24/18\*/14, or priming with 13/7 11/7. 
+This is a tough play. White has two reasonable but very different plays: Hitting with 24/18\*/14, or priming with 13/7 11/7.
 
-Hitting has big upsides and big downsides. Black hits back on fully 18 rolls, but also has some bad rolls, 4 dancing rolls, and an additional 8 bad sixes. Some hitting rolls, like 51, aren't too happy either. 
+Hitting has big upsides and big downsides. Black hits back on fully 18 rolls, but also has some bad rolls, 4 dancing rolls, and an additional 8 bad sixes. Some hitting rolls, like 51, aren't too happy either.
 
-Priming could work, since White is behind in the race. It leaves Black a few immediate horror rolls, 55 and 44, but also some pretty strong hitting aces. 
+Priming could work, since White is behind in the race. It leaves Black a few immediate horror rolls, 55 and 44, but also some pretty strong hitting aces.
 
 In the end, priming comes out slightly better:
 
@@ -1135,9 +1278,9 @@ ggboard("XGID=-b---DC-C--AbB----adc-c-B-:1:1:1:46:0:0:0:0:10")
   cat()
 ```
 
-For money priming is still right, but now super close; the two plays are basically a photo finish. 
+For money priming is still right, but now super close; the two plays are basically a photo finish.
 
-But why the (small) difference compare to 7-away, 7-away score? The reason is, that the hitting play loses a bit more gammons than the priming play. At the score, the gammon value with the cube at two is `r gammon_value(7, 7, 2, met) %>% round(2)`, compare to 0.5 for money, so gammons are slightly more costly. For that reason, the hit is a bit more attractive for money, making the two plays even closer. 
+But why the (small) difference compare to 7-away, 7-away score? The reason is, that the hitting play loses a bit more gammons than the priming play. At the score, the gammon value with the cube at two is `r gammon_value(7, 7, 2, met) %>% round(2)`, compare to 0.5 for money, so gammons are slightly more costly. For that reason, the hit is a bit more attractive for money, making the two plays even closer.
 
 The real mystery, however, is the variation on the right, where one Black checker from the 5-point has moved back a pip to the 6-point. This seemingly very minor modification makes the hitting play correct by a small but a meaningful amount: 0.024.
 
@@ -1145,7 +1288,7 @@ The reason is, probably, that the change is not so small after all. Note that th
 
 Also, and perhaps more importantly, in a priming battle Black can use the extra spare on the 6-point to play future 4s, since that number is blocked on the other side of the board. For example, imagine White makes the priming play in both variations, and Black then rolls 54, making the 2-point. Now, the position with two spares on the 5-point really looks a lot worse than the variant with a spare on each of the 5- and 6-point. (And it is, evaluations confirm.)
 
-Bottom line is that Black is better set-up for priming in the right-hand position, so White should chose another gameplan. 
+Bottom line is that Black is better set-up for priming in the right-hand position, so White should chose another gameplan.
 
 Small differences often are not so small.
 
@@ -1183,7 +1326,7 @@ With a 61 to play, rather that a 64, priming performs better. Not so much becaus
 
 In the second variation, with the same kind of choice for a roll of 62, priming is now a stand-out. Both because hitting and running still doesn't run as far, *and* (I think more importantly) because hitting leaves an additional 4 very dangerous returns from the bar: 63 and 54.
 
-In the final variation, hitting is slightly right, likely because the 10-point would be valuable to make also, so that checker works also as a slot. (Which may be covered with a 5 from the 15-point.) 
+In the final variation, hitting is slightly right, likely because the 10-point would be valuable to make also, so that checker works also as a slot. (Which may be covered with a 5 from the 15-point.)
 
 ### Position 6
 
@@ -1193,7 +1336,7 @@ ggboard("XGID=-B-C-CC-A---a--bcd-eB-A---:0:0:1:43:2:4:0:7:10")
 
 A technical play that White got wrong, by a surprising amount. White wanted to stay back, making it harder for Black to play safe, taking advantage of a stronger home board. The play made was 8/4 5/2, maintaing contact, trying to improve the home board fast.
 
-The key is, that White is ahead in the race, not behind, and would like to release the back checker to steer into a more race-like position. 
+The key is, that White is ahead in the race, not behind, and would like to release the back checker to steer into a more race-like position.
 
 Any good play involves 22/18 with the 4:
 
@@ -1239,7 +1382,7 @@ ggboard("XGID=-b--BBBB----eE---a-c-b-bB-:1:-1:1:64:1:2:0:7:10")
 
 This one is a little tricky: On White's side of the board, White clearly has a priming position, so the indicated game plan would be to extend that prime. 13/7 13/9 is good for that, adding builders for both the 3-point and the 8-point.
 
-On the the other side of the board, things are not so clear. Black's position could be either for blitzing (three disjointed inside points) or for priming. If Black's position is considered more of a prime, that would be a motivation for White to jump the prime, if considered a blitz, White would be more inclined to keep the anchor.  
+On the the other side of the board, things are not so clear. Black's position could be either for blitzing (three disjointed inside points) or for priming. If Black's position is considered more of a prime, that would be a motivation for White to jump the prime, if considered a blitz, White would be more inclined to keep the anchor.
 
 One way to think about it: White's side of the board calls for a priming play, Black's side of the board is more ambiguous. So on balance, probably priming is better. Indeed, the nod goes to the priming play, 13/9 13/7, with the top three plays being reasonably close.
 
@@ -1270,7 +1413,7 @@ ggboard("XGID=-b--BBBB----eE---a-c-b-bB-:1:-1:1:64:0:0:0:0:10")
   cat("\n", ., sep = "") 
 ```
 
-Let's play with the money game variant, and see how the preferred play changes, when we modify the position. 
+Let's play with the money game variant, and see how the preferred play changes, when we modify the position.
 
 First, if we move one Black checker 13/8, Black has one more checker in the zone. The 8-point is not part of his prime, so overall Black's position gets more blitz-like. In that light, it is not surprising that the priming plays stands out a little more. The strongest alternative is now running, 24/10, because any split is more dangerous in a blitz-like situation.
 
@@ -1300,8 +1443,7 @@ ggboard("XGID=-b--BBBB----dE---a-d-b-bB-:1:-1:1:46:0:0:0:0:10")
   cat("\n", ., sep = "") 
 ```
 
-Next, suppose White has a 63 to play instead of 64. Now the strongest split, 24/20, is not available, so again priming stands out more clearly, even though the checker on the 10-point is not a builder for the 3-point. (On the positive side, it doesn't leave a joker fly-shot either.) 
-Running, 24/15, is now *not* a contender, because it leaves more shots, and is not as useful as the corresponding 64: 24/14 when missed.
+Next, suppose White has a 63 to play instead of 64. Now the strongest split, 24/20, is not available, so again priming stands out more clearly, even though the checker on the 10-point is not a builder for the 3-point. (On the positive side, it doesn't leave a joker fly-shot either.) Running, 24/15, is now *not* a contender, because it leaves more shots, and is not as useful as the corresponding 64: 24/14 when missed.
 
 ```{r}
 #| layout-ncol: 2
@@ -1344,7 +1486,7 @@ ggboard("XGID=-b--BBBB----eE---a-c-b-bB-:1:-1:1:45:0:0:0:0:10")
   cat("\n", ., sep = "") 
 ```
 
-If we make Black's position *less* blitz-like, by moving the 6-point spare back to the 8-point, *now* splitting is correct. 
+If we make Black's position *less* blitz-like, by moving the 6-point spare back to the 8-point, *now* splitting is correct.
 
 ```{r}
 #| layout-ncol: 2
@@ -1414,11 +1556,11 @@ So any play that splits off the 18-point is reasonable; the actual play is a blu
 
 After 18/13 6/3 White is of course unhappy on the three deadly hits, 53 and 44, but basically on *any* other roll this play gains over the 'safe' play, often a lot. Some rolls like 41, 51, 52, will allow Black to run off the anchor in response to 7/4 7/2, but that would be too dangerous after 18/13 6/3, and he will be forced to crunch his board. These are huge gains for 18/13 6/3.
 
-Rolls where Black must leave the anchor in any case, like 63, 64, 65, is also a big gain for the split. 
+Rolls where Black must leave the anchor in any case, like 63, 64, 65, is also a big gain for the split.
 
 Also rolls that stay put, like 32, 21, 11, works in favor of the split, since White as more flexibility.
 
-Some things about White's reasoning was right: Ugliness can be tolerated. After 18/13 there's no reason to leave an additional three extra flyshots with 18/15 for the 3. 6/3 is uglier but better. 
+Some things about White's reasoning was right: Ugliness can be tolerated. After 18/13 there's no reason to leave an additional three extra flyshots with 18/15 for the 3. 6/3 is uglier but better.
 
 ### Positions 9a-9b
 
@@ -1428,11 +1570,11 @@ ggboard("XGID=-b-B-BDB----bB--bc-e-B-aA-:0:0:1:32:4:0:0:7:10")
 ggboard("XGID=-b-B-BDB--AA--b--cbe-B-aA-:0:0:1:52:4:0:0:7:10")
 ```
 
-Here's a pair of consequtive plays where White got it wrong twice. 
+Here's a pair of consequtive plays where White got it wrong twice.
 
-Before we get to the plays, note that because of the score White can't yet double, even though both positions would be passes for money. (The first one a small pass, the second a clear pass.) Also, the 22 that Black played in between was also a clear mistake: Since the 11-point doesn't block anything 9/5(2), making a much needed inner point, would have been better. 
+Before we get to the plays, note that because of the score White can't yet double, even though both positions would be passes for money. (The first one a small pass, the second a clear pass.) Also, the 22 that Black played in between was also a clear mistake: Since the 11-point doesn't block anything 9/5(2), making a much needed inner point, would have been better.
 
-In the *first* position, with a 32 to play for White, it may seem reasonable to improve quietly with 13/11 13/10, and watch Black struggle to improve his inflexible position. 7/4 6/4, making the 4-point, is much better. 
+In the *first* position, with a 32 to play for White, it may seem reasonable to improve quietly with 13/11 13/10, and watch Black struggle to improve his inflexible position. 7/4 6/4, making the 4-point, is much better.
 
 It's not that 13/11 13/10 is such an awful play, it's just that making the 4-point is so strong that it is hard to beat.
 
@@ -1472,9 +1614,9 @@ The truncated rollouts for the two positions:
 
 Examining some errors from this Milestone Tournament, the findings that surprised me the most where:
 
-- I seem to *overestimate* some attacking positions
-- I grossly *underestimate* how much more careful the leader should be to double in middle game positions with gammons, when leading something like 3-away versus 5-away or 7-away. Likely because I failed to pay attention to how impactful potential recubes are at these scores.
-- I tend to miss plays where making the ace-point is correct.
-- Some technical positions can be deceptively tricky. 
+-   I seem to *overestimate* some attacking positions
+-   I grossly *underestimate* how much more careful the leader should be to double in middle game positions with gammons, when leading something like 3-away versus 5-away or 7-away. Likely because I failed to pay attention to how impactful potential recubes are at these scores.
+-   I tend to miss plays where making the ace-point is correct.
+-   Some technical positions can be deceptively tricky.
 
 I think I should dedicate another note to some of these themes.
