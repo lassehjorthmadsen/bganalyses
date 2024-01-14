@@ -1,0 +1,70 @@
+---
+title: "Middle game cube benchmark"
+author: "Lasse Hjorth Madsen"
+date: today 
+format: html
+toc: true
+toc-expand: true
+toc-depth: 4
+editor: source
+execute:
+  echo: false
+  warning: false
+  cache: false
+---
+
+```{r setup}
+library(tidyverse)
+devtools::load_all(path = "../../bglab")
+max_move <- 12
+error_threshold <- 0.07
+```
+
+```{r subset_and_clean}
+df <- bgmoves %>% 
+  distinct(xgid, .keep_all = TRUE) %>%
+  filter(move_no <= max_move, 
+         score1 == 0, score2 == 0, 
+         proper_ca == "Double, take") %>% 
+  # We don't want both the double and the subsequent take decision:
+  mutate(duplet = file == lag(file) & move_no - 1 == lag(move_no)) %>% 
+  filter(is.na(duplet) | !duplet) %>% 
+  rowwise() %>% 
+  # Extract the size of pass and no double errors
+  mutate(pass_error = read_lines(cube_eq)[6],
+         no_double_error = read_lines(cube_eq)[7]) %>% 
+  ungroup() %>% 
+  mutate(across(c(pass_error, no_double_error), 
+                ~ str_extract(., "\\(.+\\)$") %>% 
+                  str_remove_all("\\(|\\)") %>% 
+                  as.numeric())) %>% 
+  filter(pass_error > error_threshold, no_double_error < -error_threshold) %>% 
+  select(file, move_no, player1, player2, cube_eq, xgid)  
+```
+
+## Why this?
+
+This is a collection of positions that are solid double/takes, all from the early middle game (here defined as move number `r max_move` at the most, counting both sides). The intention is to help establish a feel for how good doubles and good takes look like for this common class of positions.
+
+For all positions, I present the main one which is a clear double/take, meaning that both not doubling and passing would be at least a `r error_threshold`` error.
+
+All positions are taken from a collection of my online matches at [Backgammon Galaxy](play.backgammongalaxy.com).
+
+## Double/take positions
+
+```{r checker}
+#| results: asis
+for (i in 1:nrow(df)) {
+  cat("\n## Position ", i)
+  ggboard(df$xgid[i]) %>% print()
+  
+  evaluation <- df$cube_eq[i] %>% 
+    read_lines() %>% 
+    paste(rep("   ", length(.)), .) %>% 
+    paste(collapse = "\n")
+  
+  cat("\n\n", evaluation, 
+      "\n\n    ", df$xgid[i], 
+      "\n\n", sep = "")
+}
+```
