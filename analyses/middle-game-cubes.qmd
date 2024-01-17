@@ -52,8 +52,117 @@ All positions are taken from a collection of my online matches at [Backgammon Ga
 
 ## Double/take positions
 
-```{r checker}
+### Position 1
+```{r}
+ggboard("XGID=---BBBC-B---bB--b-bcBc-c--:0:0:-1:00:0:0:0:0:10")
+```
+
+### Position 2
+```{r}
+ggboard("XGID=-aa---EBB-AAbC---d-fa---A-:0:0:1:00:0:0:0:0:10")
+```
+
+### Position 3
+```{r}
+ggboard("XGID=-a-B--D-B---dD---dAdb--AA-:0:0:-1:00:0:0:0:0:10")
+```
+
+### Position 4
+```{r}
+ggboard("XGID=---BBBC-A---gC---a-cbb--AA:0:0:-1:00:0:0:0:0:10")
+```
+
+### Position 5
+```{r}
+ggboard("XGID=-a---CDBBa--dB---c-d-Ab-A-:0:0:1:00:0:0:0:0:10")
+```
+
+### Position 6
+```{r}
+ggboard("XGID=-a-BBBD-Aa--bB---c-cc--bB-:0:0:1:00:0:0:0:0:10")
+```
+
+### Position 7
+```{r}
+ggboard("XGID=aa----EBDA--bA---c-dbb-B--:0:0:-1:00:0:0:0:0:10")
+```
+
+### Position 8
+```{r}
+ggboard("XGID=---BaCC---C-cCab-c-c--b-A-:0:0:1:00:0:0:0:0:10")
+```
+
+### Position 9
+```{r}
+ggboard("XGID=-a--aBEBB---dBa--c-e----B-:0:0:1:00:0:0:0:0:10")
+```
+
+### Position 10
+```{r}
+ggboard("XGID=-a-BB-D-AA--eC---c-cB-c---:0:0:1:00:0:0:0:0:10")
+```
+
+### Position 11
+```{r}
+ggboard("XGID=aa--ABBBA--AcD---cbe--A-A-:0:0:1:00:0:0:0:0:10")
+```
+
+### Position 12
+```{r}
+ggboard("XGID=-ba-AAE-Ca--dD---b-eA-----:0:0:1:00:0:0:0:0:10")
+```
+
+### Position 13
+```{r}
+ggboard("XGID=-aa-aBDAB---dD---b-dBb----:0:0:1:00:0:0:0:0:10")
+```
+
+### Position 14
+```{r}
+ggboard("XGID=---b--EDC---a---bbceA--AA-:0:0:-1:00:0:0:0:0:10")
+```
+
+### Position 15
+```{r}
+ggboard("XGID=-a-aBBDBBA--c----b-cc-b-B-:0:0:1:00:0:0:0:0:10")
+```
+
+### Position 16
+```{r}
+ggboard("XGID=-a-aBAD-B--AdCa--b-ca-bAA-:0:0:1:00:0:0:0:0:10")
+```
+
+### Position 17
+```{r}
+ggboard("XGID=aA--A-CbC---dE-a-Abcb---A-:0:0:-1:00:0:0:0:0:10")
+```
+
+### Position 18
+```{r}
+ggboard("XGID=-baB--D-BAA-bC---abc-B-bb-:0:0:1:00:0:0:0:0:10")
+```
+
+### Position 19
+```{r}
+ggboard("XGID=--B-B-DBA---gB---c-dB---a-:0:0:1:00:0:0:0:0:10")
+```
+
+### Position 20
+```{r}
+ggboard("XGID=----A-EbC---dD---b-cbAA-b-:0:0:-1:00:0:0:0:0:10")
+```
+
+### Position 21
+```{r}
+ggboard("XGID=-B-B-bC-B--BbB--ac-cAAbb--:0:0:-1:00:0:0:0:0:10")
+```
+
+
+```{r show}
 #| results: asis
+#| include: false
+
+# Print all positions that we found
 for (i in 1:nrow(df)) {
   cat("\n## Position ", i)
   ggboard(df$xgid[i]) %>% print()
@@ -68,3 +177,16 @@ for (i in 1:nrow(df)) {
       "\n\n", sep = "")
 }
 ```
+
+```{r save}
+#| include: false
+
+# Save the moneygame variant of all positions 
+df$xgid %>% 
+  str_split(":") %>% 
+  map(~ replace(.x, 5, "00")) %>%  # Turn cube decision
+  map(~ replace(.x, 9, "0")) %>%   # Turn into money game
+  map_chr(~ paste(.x, collapse = ":")) %>% 
+  write_lines(file = "data/good-cube-ids.txt")
+```
+
