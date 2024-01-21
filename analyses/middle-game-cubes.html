@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Lasse Hjorth Madsen">
+<meta name="dcterms.date" content="2024-01-21">
+
+<title>Middle game cube benchmark</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analyses/milestones-2023.html">PRAXIS</a></li><li class="breadcrumb-item"><a href="../analyses/middle-game-cubes.html">Middle game cube benchmark</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HOME</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">THEORY</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/explore-emg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explore EMG Normalization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/met-precision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Match Equity Precision</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/janowski.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Janowski Formulars</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/many-takepoints.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exploring take points</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/bgmoves-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mistake, errors and statistics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">PRAXIS</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/milestones-2023.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Milestones III, 2023</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/mistakes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mistakes were made</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/opening-mistakes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Opening checker play errors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/middle-game-cubes.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Middle game cube benchmark</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Middle game cube benchmark</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Lasse Hjorth Madsen </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 21, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="why-this" class="level2">
+<h2 class="anchored" data-anchor-id="why-this">Why this?</h2>
+<p>At <a href="play.backgammongalaxy.com">Backgammon Galaxy</a>, I play mostly 3-point matches, because this is the match length where getting a game is easiest. But correct cube action at the beginning of 3-point matches is different than from money, so I’m a bit concerned that playing so many 3-pointers will bias my cube strategy in longer matches.</p>
+<p>To get a better feel for the difference, this is a collection of backgammon positions that GNU Backgammon 4-ply considered solid double/takes at 3-away, 3-away, but not necessarily for money and longer matches. The positions are all from the early middle game (here defined as move number 12 at the most, counting both sides). By ‘solid double/take’ I mean, that both not doubling and passing would be at least a 0.07 error.</p>
+<p>The positions are extracted semi-automatically from my database of games, analyzed by GNU Backgammon. For that reason sometimes they are shown as checker plays – this happens when one player failed to double. For the same reason, sometimes Black is on roll, sometimes White.</p>
+<p>Finally, while GNU Backgammon at 4-ply thought all positions where clear double/take at 3-away, 3-away, the XG rollouts sometimes come to a different conclusion: One side has a pass, or a no-double.</p>
+</section>
+<section id="a-bit-of-theory" class="level2">
+<h2 class="anchored" data-anchor-id="a-bit-of-theory">A bit of theory</h2>
+<p>Let’s revisit how and why the cube actions are different at 3-away, 3-away than for money. The 3-point match equity table looks like this:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>      1     2     3
+1 0.500 0.677 0.751
+2 0.323 0.500 0.599
+3 0.249 0.401 0.500</code></pre>
+</div>
+</div>
+<p>In the simple case, not considering gammons and recubes, when we pass an initial double we get to 0.401 match winning chances, losing about 10 percentage points compared to when the game began. If we take, a loss is expensive, we get to 0.249 match winning chances, an additional loss of about 15 percentage points.</p>
+<p>So the <em>risk</em> from taking and winning is 0.151, and the potential <em>gain</em> from taking and winning is 0.35 for a take point of 0.302, based on the standard formula: <span class="math inline">\(TP= \frac{Risk}{Gain + Risk}\)</span>. So a pure 4-roll position, for example, would be a pass.</p>
+<p>After taking, the <em>gammon value</em> with the cube at 2, is 0.497, not much different from the money gammon value of 0.5, so adding gammons into the mix has about the same effect as in money game.</p>
+<p>After taking, the opponent’s take point for a future redouble, is just 0.249 which is <em>higher</em> than for money, since the cube would be dead. That means that the cube is a little <em>more</em> valuable to us than for money, because we don’t have to improve quite as much to use it efficiently.</p>
+<p>For illustration purposes, let’s assume gammon- and backgammon probabilities that are similar to the opening position for money, like this:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Regular</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Gammon</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Backgammon</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Sum</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Player wins</td>
+<td style="text-align: right; width: 3.1cm;">0.36</td>
+<td style="text-align: right; width: 3.1cm;">0.134</td>
+<td style="text-align: right; width: 3.1cm;">0.006</td>
+<td style="text-align: right; width: 3.1cm;">0.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Opponent wins</td>
+<td style="text-align: right; width: 3.1cm;">0.36</td>
+<td style="text-align: right; width: 3.1cm;">0.134</td>
+<td style="text-align: right; width: 3.1cm;">0.006</td>
+<td style="text-align: right; width: 3.1cm;">0.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sum</td>
+<td style="text-align: right; width: 3.1cm;">0.72</td>
+<td style="text-align: right; width: 3.1cm;">0.268</td>
+<td style="text-align: right; width: 3.1cm;">0.012</td>
+<td style="text-align: right; width: 3.1cm;">1.0</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>Then, putting it all together, we can calculate take points under different assumptions, and compare to money in a nice table like this:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Cube assumptions</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Money game take point</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">3-away, 3-away take point</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Dead cube, no gammons</td>
+<td style="text-align: right; width: 3.5cm;">0.250</td>
+<td style="text-align: right; width: 3.5cm;">0.302</td>
+<td style="text-align: right; width: 3.5cm;">0.052</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dead cube, gammons</td>
+<td style="text-align: right; width: 3.5cm;">0.307</td>
+<td style="text-align: right; width: 3.5cm;">0.345</td>
+<td style="text-align: right; width: 3.5cm;">0.038</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Both cube and gammons</td>
+<td style="text-align: right; width: 3.5cm;">0.271</td>
+<td style="text-align: right; width: 3.5cm;">0.286</td>
+<td style="text-align: right; width: 3.5cm;">0.015</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>Sure enough, the table shows that the ‘simple’ take point (no gammons, no cube) that we just discussed, is significant higher at the score than for money. A little bit of the difference disappear when we introduce gammons; somewhat more when we introduce the cube.</p>
+<p>The end result is that the take point at 3-away 3-away is about 1.5 percentage point higher than for money. It may not sound as much, but the difference is quite real, as the examples below will show.</p>
+</section>
+<section id="doubletake-positions" class="level2">
+<h2 class="anchored" data-anchor-id="doubletake-positions">Double/take positions</h2>
+<p>Below are 21 positions rolled out at 3-away, 3-away and for money. Although many of the examples are double/take both at the score and for money, the side on roll is always more inclined to double at the match score than for money. The side not on roll, is always closer to a pass at the score than for money.</p>
+<p>Studying the positions can be useful to reinforce one’s impression of what it takes to have a sound double, and what a takeable position looks like – for money and at 3-away, 3-away.</p>
+<section id="position-1" class="level3">
+<h3 class="anchored" data-anchor-id="position-1">Position 1</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   73,84% (G:3,02% B:0,10%)
+  Opponent: 26,16% (G:2,68% B:0,08%)
+Double/Take
+  Player:   74,11% (G:3,04% B:0,07%)
+  Opponent: 25,89% (G:2,71% B:0,08%)
+
+Cubeful Equities:
+       No double:     +0,871 (-0,129)
+       Double/Take:   +1,053 (+0,053)
+       Double/Pass:   +1,000
+
+Best Cube action: Double / Pass
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   73,86% (G:3,02% B:0,04%)
+  Opponent: 26,14% (G:2,52% B:0,08%)
+Double/Take
+  Player:   74,13% (G:2,95% B:0,04%)
+  Opponent: 25,87% (G:2,52% B:0,09%)
+
+Cubeful Equities:
+       No double:     +0,754 (-0,095)
+       Double/Take:   +0,849
+       Double/Pass:   +1,000 (+0,151)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-2" class="level3">
+<h3 class="anchored" data-anchor-id="position-2">Position 2</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   68,34% (G:20,05% B:2,05%)
+  Opponent: 31,66% (G:8,13% B:0,65%)
+Double/Take
+  Player:   68,54% (G:20,65% B:2,80%)
+  Opponent: 31,46% (G:8,91% B:1,01%)
+
+Cubeful Equities:
+       No double:     +0,834 (-0,152)
+       Double/Take:   +0,986
+       Double/Pass:   +1,000 (+0,014)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   73,86% (G:3,02% B:0,04%)
+  Opponent: 26,14% (G:2,52% B:0,08%)
+Double/Take
+  Player:   74,13% (G:2,95% B:0,04%)
+  Opponent: 25,87% (G:2,52% B:0,09%)
+
+Cubeful Equities:
+       No double:     +0,754 (-0,095)
+       Double/Take:   +0,849
+       Double/Pass:   +1,000 (+0,151)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-3" class="level3">
+<h3 class="anchored" data-anchor-id="position-3">Position 3</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   65,91% (G:24,59% B:2,02%)
+  Opponent: 34,09% (G:7,59% B:0,48%)
+Double/Take
+  Player:   65,57% (G:25,68% B:4,39%)
+  Opponent: 34,43% (G:8,14% B:0,72%)
+
+Cubeful Equities:
+       No double:     +0,799 (-0,097)
+       Double/Take:   +0,896
+       Double/Pass:   +1,000 (+0,104)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   65,97% (G:24,76% B:1,34%)
+  Opponent: 34,03% (G:7,63% B:0,27%)
+Double/Take
+  Player:   66,16% (G:24,55% B:1,29%)
+  Opponent: 33,84% (G:7,49% B:0,27%)
+
+Cubeful Equities:
+       No double:     +0,718 (-0,027)
+       Double/Take:   +0,746
+       Double/Pass:   +1,000 (+0,254)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-4" class="level3">
+<h3 class="anchored" data-anchor-id="position-4">Position 4</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   69,13% (G:13,40% B:0,47%)
+  Opponent: 30,87% (G:6,28% B:0,25%)
+Double/Take
+  Player:   69,29% (G:13,98% B:0,63%)
+  Opponent: 30,71% (G:6,63% B:0,40%)
+
+Cubeful Equities:
+       No double:     +0,793 (-0,113)
+       Double/Take:   +0,906
+       Double/Pass:   +1,000 (+0,094)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   69,19% (G:12,98% B:0,36%)
+  Opponent: 30,81% (G:6,15% B:0,15%)
+Double/Take
+  Player:   69,37% (G:13,52% B:0,33%)
+  Opponent: 30,63% (G:6,22% B:0,16%)
+
+Cubeful Equities:
+       No double:     +0,730
+       Double/Take:   +0,721 (-0,010)
+       Double/Pass:   +1,000 (+0,270)
+
+Best Cube action: No double / Take
+Percentage of wrong pass needed to make the double decision right: 3,4%
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-5" class="level3">
+<h3 class="anchored" data-anchor-id="position-5">Position 5</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   64,86% (G:25,92% B:1,39%)
+  Opponent: 35,14% (G:8,94% B:0,78%)
+Double/Take
+  Player:   64,47% (G:27,45% B:2,06%)
+  Opponent: 35,53% (G:9,55% B:1,00%)
+
+Cubeful Equities:
+       No double:     +0,762 (-0,095)
+       Double/Take:   +0,857
+       Double/Pass:   +1,000 (+0,143)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   64,69% (G:26,19% B:0,95%)
+  Opponent: 35,31% (G:8,21% B:0,39%)
+Double/Take
+  Player:   64,76% (G:26,94% B:0,92%)
+  Opponent: 35,24% (G:8,47% B:0,42%)
+
+Cubeful Equities:
+       No double:     +0,671 (-0,040)
+       Double/Take:   +0,711
+       Double/Pass:   +1,000 (+0,289)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-6" class="level3">
+<h3 class="anchored" data-anchor-id="position-6">Position 6</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   62,31% (G:33,81% B:1,43%)
+  Opponent: 37,69% (G:12,75% B:1,34%)
+Double/Take
+  Player:   62,46% (G:34,40% B:2,25%)
+  Opponent: 37,54% (G:13,77% B:1,78%)
+
+Cubeful Equities:
+       No double:     +0,615 (-0,248)
+       Double/Take:   +0,864
+       Double/Pass:   +1,000 (+0,136)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   62,26% (G:33,32% B:0,93%)
+  Opponent: 37,74% (G:12,35% B:0,95%)
+Double/Take
+  Player:   62,46% (G:34,17% B:0,99%)
+  Opponent: 37,54% (G:12,63% B:1,02%)
+
+Cubeful Equities:
+       No double:     +0,542 (-0,091)
+       Double/Take:   +0,634
+       Double/Pass:   +1,000 (+0,366)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-7" class="level3">
+<h3 class="anchored" data-anchor-id="position-7">Position 7</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   67,45% (G:21,24% B:2,26%)
+  Opponent: 32,55% (G:8,05% B:0,75%)
+Double/Take
+  Player:   66,74% (G:22,62% B:5,39%)
+  Opponent: 33,26% (G:8,67% B:0,89%)
+
+Cubeful Equities:
+       No double:     +0,784 (-0,094)
+       Double/Take:   +0,879
+       Double/Pass:   +1,000 (+0,121)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   67,20% (G:21,36% B:1,24%)
+  Opponent: 32,80% (G:7,89% B:0,39%)
+Double/Take
+  Player:   67,05% (G:21,78% B:1,40%)
+  Opponent: 32,95% (G:7,85% B:0,36%)
+
+Cubeful Equities:
+       No double:     +0,703 (-0,026)
+       Double/Take:   +0,729
+       Double/Pass:   +1,000 (+0,271)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-8" class="level3">
+<h3 class="anchored" data-anchor-id="position-8">Position 8</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   63,32% (G:28,35% B:0,77%)
+  Opponent: 36,68% (G:7,68% B:0,49%)
+Double/Take
+  Player:   63,76% (G:29,33% B:1,20%)
+  Opponent: 36,24% (G:8,17% B:0,79%)
+
+Cubeful Equities:
+       No double:     +0,704 (-0,154)
+       Double/Take:   +0,858
+       Double/Pass:   +1,000 (+0,142)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   63,34% (G:28,13% B:0,58%)
+  Opponent: 36,66% (G:6,89% B:0,35%)
+Double/Take
+  Player:   63,68% (G:28,77% B:0,67%)
+  Opponent: 36,32% (G:7,35% B:0,37%)
+
+Cubeful Equities:
+       No double:     +0,632 (-0,053)
+       Double/Take:   +0,686
+       Double/Pass:   +1,000 (+0,314)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-9" class="level3">
+<h3 class="anchored" data-anchor-id="position-9">Position 9</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   66,26% (G:28,97% B:2,59%)
+  Opponent: 33,74% (G:8,04% B:0,66%)
+Double/Take
+  Player:   66,09% (G:30,01% B:4,18%)
+  Opponent: 33,91% (G:8,92% B:1,15%)
+
+Cubeful Equities:
+       No double:     +0,831 (-0,169)
+       Double/Take:   +1,031 (+0,031)
+       Double/Pass:   +1,000
+
+Best Cube action: Double / Pass
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   66,56% (G:27,73% B:1,42%)
+  Opponent: 33,44% (G:7,32% B:0,36%)
+Double/Take
+  Player:   66,55% (G:28,81% B:1,45%)
+  Opponent: 33,45% (G:7,60% B:0,39%)
+
+Cubeful Equities:
+       No double:     +0,740 (-0,104)
+       Double/Take:   +0,844
+       Double/Pass:   +1,000 (+0,156)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-10" class="level3">
+<h3 class="anchored" data-anchor-id="position-10">Position 10</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   66,26% (G:28,97% B:2,59%)
+  Opponent: 33,74% (G:8,04% B:0,66%)
+Double/Take
+  Player:   66,09% (G:30,01% B:4,18%)
+  Opponent: 33,91% (G:8,92% B:1,15%)
+
+Cubeful Equities:
+       No double:     +0,831 (-0,169)
+       Double/Take:   +1,031 (+0,031)
+       Double/Pass:   +1,000
+
+Best Cube action: Double / Pass
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   66,20% (G:23,68% B:0,31%)
+  Opponent: 33,80% (G:4,38% B:0,18%)
+Double/Take
+  Player:   66,51% (G:23,88% B:0,35%)
+  Opponent: 33,49% (G:4,56% B:0,18%)
+
+Cubeful Equities:
+       No double:     +0,750 (-0,034)
+       Double/Take:   +0,784
+       Double/Pass:   +1,000 (+0,216)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-11" class="level3">
+<h3 class="anchored" data-anchor-id="position-11">Position 11</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   66,56% (G:22,17% B:1,86%)
+  Opponent: 33,44% (G:8,37% B:0,63%)
+Double/Take
+  Player:   66,63% (G:22,94% B:3,48%)
+  Opponent: 33,37% (G:9,39% B:0,89%)
+
+Cubeful Equities:
+       No double:     +0,778 (-0,117)
+       Double/Take:   +0,896
+       Double/Pass:   +1,000 (+0,104)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   66,75% (G:22,02% B:0,99%)
+  Opponent: 33,25% (G:7,98% B:0,40%)
+Double/Take
+  Player:   66,87% (G:22,39% B:1,02%)
+  Opponent: 33,13% (G:8,18% B:0,40%)
+
+Cubeful Equities:
+       No double:     +0,721
+       Double/Take:   +0,712 (-0,008)
+       Double/Pass:   +1,000 (+0,279)
+
+Best Cube action: No double / Take
+Percentage of wrong pass needed to make the double decision right: 2,8%
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-12" class="level3">
+<h3 class="anchored" data-anchor-id="position-12">Position 12</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   65,19% (G:27,99% B:5,46%)
+  Opponent: 34,81% (G:6,60% B:0,33%)
+Double/Take
+  Player:   64,35% (G:28,90% B:10,63%)
+  Opponent: 35,65% (G:7,02% B:0,51%)
+
+Cubeful Equities:
+       No double:     +0,792 (-0,075)
+       Double/Take:   +0,868
+       Double/Pass:   +1,000 (+0,132)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   65,39% (G:27,20% B:2,73%)
+  Opponent: 34,61% (G:6,62% B:0,25%)
+Double/Take
+  Player:   65,26% (G:27,59% B:2,93%)
+  Opponent: 34,74% (G:6,89% B:0,32%)
+
+Cubeful Equities:
+       No double:     +0,743 (-0,041)
+       Double/Take:   +0,784
+       Double/Pass:   +1,000 (+0,216)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-13" class="level3">
+<h3 class="anchored" data-anchor-id="position-13">Position 13</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   66,66% (G:21,87% B:1,78%)
+  Opponent: 33,34% (G:6,59% B:0,27%)
+Double/Take
+  Player:   66,45% (G:22,98% B:3,21%)
+  Opponent: 33,55% (G:7,23% B:0,60%)
+
+Cubeful Equities:
+       No double:     +0,797 (-0,107)
+       Double/Take:   +0,904
+       Double/Pass:   +1,000 (+0,096)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   66,58% (G:21,88% B:1,17%)
+  Opponent: 33,42% (G:6,14% B:0,22%)
+Double/Take
+  Player:   66,89% (G:21,88% B:1,19%)
+  Opponent: 33,11% (G:6,25% B:0,22%)
+
+Cubeful Equities:
+       No double:     +0,734 (-0,034)
+       Double/Take:   +0,769
+       Double/Pass:   +1,000 (+0,231)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-14" class="level3">
+<h3 class="anchored" data-anchor-id="position-14">Position 14</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   67,40% (G:19,51% B:1,69%)
+  Opponent: 32,60% (G:7,86% B:0,76%)
+Double/Take
+  Player:   67,48% (G:20,06% B:3,62%)
+  Opponent: 32,52% (G:9,25% B:0,94%)
+
+Cubeful Equities:
+       No double:     +0,752 (-0,141)
+       Double/Take:   +0,894
+       Double/Pass:   +1,000 (+0,106)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   67,56% (G:19,29% B:1,00%)
+  Opponent: 32,44% (G:7,87% B:0,35%)
+Double/Take
+  Player:   67,55% (G:19,48% B:1,05%)
+  Opponent: 32,45% (G:7,89% B:0,35%)
+
+Cubeful Equities:
+       No double:     +0,671 (-0,034)
+       Double/Take:   +0,705
+       Double/Pass:   +1,000 (+0,295)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-15" class="level3">
+<h3 class="anchored" data-anchor-id="position-15">Position 15</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   64,07% (G:35,22% B:2,06%)
+  Opponent: 35,93% (G:11,02% B:1,72%)
+Double/Take
+  Player:   64,39% (G:35,84% B:3,37%)
+  Opponent: 35,61% (G:12,54% B:2,23%)
+
+Cubeful Equities:
+       No double:     +0,732 (-0,268)
+       Double/Take:   +1,035 (+0,035)
+       Double/Pass:   +1,000
+
+Best Cube action: Double / Pass
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   64,28% (G:34,84% B:1,18%)
+  Opponent: 35,72% (G:10,98% B:0,81%)
+Double/Take
+  Player:   64,54% (G:35,15% B:1,12%)
+  Opponent: 35,46% (G:10,94% B:0,80%)
+
+Cubeful Equities:
+       No double:     +0,655 (-0,146)
+       Double/Take:   +0,802
+       Double/Pass:   +1,000 (+0,198)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-16" class="level3">
+<h3 class="anchored" data-anchor-id="position-16">Position 16</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   63,42% (G:30,48% B:4,32%)
+  Opponent: 36,58% (G:10,19% B:1,62%)
+Double/Take
+  Player:   63,19% (G:30,89% B:7,60%)
+  Opponent: 36,81% (G:11,54% B:1,57%)
+
+Cubeful Equities:
+       No double:     +0,750 (-0,094)
+       Double/Take:   +0,844
+       Double/Pass:   +1,000 (+0,156)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   63,29% (G:29,95% B:2,95%)
+  Opponent: 36,71% (G:9,95% B:0,59%)
+Double/Take
+  Player:   63,34% (G:30,18% B:3,12%)
+  Opponent: 36,66% (G:10,11% B:0,64%)
+
+Cubeful Equities:
+       No double:     +0,642 (-0,054)
+       Double/Take:   +0,697
+       Double/Pass:   +1,000 (+0,303)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-17" class="level3">
+<h3 class="anchored" data-anchor-id="position-17">Position 17</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   66,15% (G:24,46% B:2,49%)
+  Opponent: 33,85% (G:7,38% B:0,49%)
+Double/Take
+  Player:   66,17% (G:25,61% B:5,05%)
+  Opponent: 33,83% (G:8,13% B:0,86%)
+
+Cubeful Equities:
+       No double:     +0,820 (-0,110)
+       Double/Take:   +0,930
+       Double/Pass:   +1,000 (+0,070)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   66,33% (G:23,87% B:1,69%)
+  Opponent: 33,67% (G:7,25% B:0,23%)
+Double/Take
+  Player:   66,56% (G:24,47% B:1,81%)
+  Opponent: 33,44% (G:7,38% B:0,24%)
+
+Cubeful Equities:
+       No double:     +0,753 (-0,031)
+       Double/Take:   +0,784
+       Double/Pass:   +1,000 (+0,216)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-18" class="level3">
+<h3 class="anchored" data-anchor-id="position-18">Position 18</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   66,97% (G:24,43% B:2,58%)
+  Opponent: 33,03% (G:10,30% B:0,56%)
+Double/Take
+  Player:   67,02% (G:24,87% B:4,92%)
+  Opponent: 32,98% (G:11,48% B:0,61%)
+
+Cubeful Equities:
+       No double:     +0,810 (-0,153)
+       Double/Take:   +0,963
+       Double/Pass:   +1,000 (+0,037)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   66,87% (G:24,43% B:1,77%)
+  Opponent: 33,13% (G:9,69% B:0,23%)
+Double/Take
+  Player:   66,90% (G:25,01% B:1,87%)
+  Opponent: 33,10% (G:9,86% B:0,24%)
+
+Cubeful Equities:
+       No double:     +0,728 (-0,042)
+       Double/Take:   +0,770
+       Double/Pass:   +1,000 (+0,230)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-19" class="level3">
+<h3 class="anchored" data-anchor-id="position-19">Position 19</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   73,91% (G:5,95% B:0,08%)
+  Opponent: 26,09% (G:1,39% B:0,06%)
+Double/Take
+  Player:   74,50% (G:6,10% B:0,12%)
+  Opponent: 25,50% (G:1,28% B:0,07%)
+
+Cubeful Equities:
+       No double:     +0,873 (-0,127)
+       Double/Take:   +1,073 (+0,073)
+       Double/Pass:   +1,000
+
+Best Cube action: Double / Pass
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   74,32% (G:5,85% B:0,08%)
+  Opponent: 25,68% (G:1,38% B:0,04%)
+Double/Take
+  Player:   74,68% (G:5,67% B:0,08%)
+  Opponent: 25,32% (G:1,36% B:0,04%)
+
+Cubeful Equities:
+       No double:     +0,820 (-0,075)
+       Double/Take:   +0,894
+       Double/Pass:   +1,000 (+0,106)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-20" class="level3">
+<h3 class="anchored" data-anchor-id="position-20">Position 20</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   66,52% (G:29,61% B:1,02%)
+  Opponent: 33,48% (G:7,47% B:0,42%)
+Double/Take
+  Player:   66,45% (G:30,52% B:1,42%)
+  Opponent: 33,55% (G:7,93% B:0,52%)
+
+Cubeful Equities:
+       No double:     +0,849 (-0,151)
+       Double/Take:   +1,085 (+0,085)
+       Double/Pass:   +1,000
+
+Best Cube action: Double / Pass
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   66,50% (G:28,75% B:0,63%)
+  Opponent: 33,50% (G:7,23% B:0,29%)
+Double/Take
+  Player:   66,58% (G:30,08% B:0,64%)
+  Opponent: 33,42% (G:7,36% B:0,30%)
+
+Cubeful Equities:
+       No double:     +0,729 (-0,151)
+       Double/Take:   +0,879
+       Double/Pass:   +1,000 (+0,121)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="position-21" class="level3">
+<h3 class="anchored" data-anchor-id="position-21">Position 21</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="middle-game-cubes_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>3-away, 3-away
+Analyzed in Rollout
+No double
+  Player:   61,69% (G:28,96% B:0,79%)
+  Opponent: 38,31% (G:9,37% B:0,49%)
+Double/Take
+  Player:   61,99% (G:29,19% B:1,65%)
+  Opponent: 38,01% (G:11,08% B:0,61%)
+
+Cubeful Equities:
+       No double:     +0,588 (-0,152)
+       Double/Take:   +0,741
+       Double/Pass:   +1,000 (+0,259)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>Moneygame
+Analyzed in Rollout
+No double
+  Player:   61,56% (G:28,46% B:0,72%)
+  Opponent: 38,44% (G:8,96% B:0,30%)
+Double/Take
+  Player:   61,93% (G:28,83% B:0,67%)
+  Opponent: 38,07% (G:8,85% B:0,32%)
+
+Cubeful Equities:
+       No double:     +0,517 (-0,085)
+       Double/Take:   +0,602
+       Double/Pass:   +1,000 (+0,398)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.</code></pre>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

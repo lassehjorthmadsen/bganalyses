@@ -2,66 +2,70 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/index.html</loc>
-    <lastmod>2024-01-13T22:45:55.979Z</lastmod>
+    <lastmod>2024-01-21T20:23:24.789Z</lastmod>
   </url>
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/prime-vs-prime.html</loc>
-    <lastmod>2024-01-13T22:45:54.903Z</lastmod>
+    <lastmod>2024-01-21T20:23:23.691Z</lastmod>
   </url>
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/modern-backgammon.html</loc>
-    <lastmod>2024-01-13T22:45:53.468Z</lastmod>
+    <lastmod>2024-01-21T20:23:21.937Z</lastmod>
   </url>
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/milestones-2023.html</loc>
-    <lastmod>2024-01-13T22:45:49.721Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/met-precision.html</loc>
-    <lastmod>2024-01-13T22:45:44.640Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/julekalender-2023.html</loc>
-    <lastmod>2024-01-13T22:45:43.053Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/explore-emg.html</loc>
-    <lastmod>2024-01-13T22:45:39.413Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/bgmoves-analysis.html</loc>
-    <lastmod>2024-01-13T22:45:37.881Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lassehjorthmadsen.github.io/bganalyses/about.html</loc>
-    <lastmod>2024-01-13T22:45:36.528Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/clusters.html</loc>
-    <lastmod>2024-01-13T22:45:38.475Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/janowski.html</loc>
-    <lastmod>2024-01-13T22:45:41.678Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/many-takepoints.html</loc>
-    <lastmod>2024-01-13T22:45:43.728Z</lastmod>
+    <lastmod>2024-01-21T20:23:17.950Z</lastmod>
   </url>
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/met-regression.html</loc>
-    <lastmod>2024-01-13T22:45:45.134Z</lastmod>
+    <lastmod>2024-01-21T20:22:47.417Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/many-takepoints.html</loc>
+    <lastmod>2024-01-21T20:22:45.871Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/janowski.html</loc>
+    <lastmod>2024-01-21T20:22:43.558Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/clusters.html</loc>
+    <lastmod>2024-01-21T20:22:40.079Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lassehjorthmadsen.github.io/bganalyses/about.html</loc>
+    <lastmod>2024-01-21T20:22:37.848Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/bgmoves-analysis.html</loc>
+    <lastmod>2024-01-21T20:22:39.292Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/explore-emg.html</loc>
+    <lastmod>2024-01-21T20:22:41.117Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/julekalender-2023.html</loc>
+    <lastmod>2024-01-21T20:22:45.177Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/met-precision.html</loc>
+    <lastmod>2024-01-21T20:22:46.877Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/middle-game-cubes.html</loc>
+    <lastmod>2024-01-21T20:23:12.902Z</lastmod>
   </url>
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/mistakes.html</loc>
-    <lastmod>2024-01-13T22:45:52.918Z</lastmod>
+    <lastmod>2024-01-21T20:23:21.351Z</lastmod>
   </url>
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/opening-mistakes.html</loc>
-    <lastmod>2024-01-13T22:45:54.455Z</lastmod>
+    <lastmod>2024-01-21T20:23:23.128Z</lastmod>
   </url>
   <url>
     <loc>https://lassehjorthmadsen.github.io/bganalyses/analyses/three-pointers.html</loc>
-    <lastmod>2024-01-13T22:45:55.459Z</lastmod>
+    <lastmod>2024-01-21T20:23:24.273Z</lastmod>
   </url>
 </urlset>
