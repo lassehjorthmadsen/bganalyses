@@ -19,6 +19,7 @@ website:
         - analyses/milestones-2023.qmd
         - analyses/mistakes.qmd
         - analyses/opening-mistakes.qmd
+        - analyses/middle-game-cubes.qmd
 
     search: true
       

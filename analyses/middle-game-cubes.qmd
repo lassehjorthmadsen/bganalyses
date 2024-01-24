@@ -3,7 +3,7 @@ title: "Middle game cube benchmark"
 author: "Lasse Hjorth Madsen"
 date: today 
 format: html
-toc: true
+toc: false
 toc-expand: true
 toc-depth: 4
 editor: source
@@ -15,9 +15,18 @@ execute:
 
 ```{r setup}
 library(tidyverse)
+library(stringr)
+library(kableExtra)
 devtools::load_all(path = "../../bglab")
 max_move <- 12
 error_threshold <- 0.07
+met <- get_met()
+
+remove_stuff <- function(text) {
+  text %>% 
+  str_remove_all(" Winning Chances") %>% 
+  str_remove("\nCubeless Equities.*\n") 
+}
 ```
 
 ```{r subset_and_clean}
@@ -44,123 +53,1229 @@ df <- bgmoves %>%
 
 ## Why this?
 
-This is a collection of positions that are solid double/takes, all from the early middle game (here defined as move number `r max_move` at the most, counting both sides). The intention is to help establish a feel for how good doubles and good takes look like for this common class of positions.
+At [Backgammon Galaxy](play.backgammongalaxy.com), I play mostly 3-point matches, because this is the match length where getting a game is easiest. But correct cube action at the beginning of 3-point matches is different than from money, so I'm a bit concerned that playing so many 3-pointers will bias my cube strategy in longer matches.
 
-For all positions, I present the main one which is a clear double/take, meaning that both not doubling and passing would be at least a `r error_threshold`` error.
+To get a better feel for the difference, this is a collection of backgammon positions that GNU Backgammon 4-ply considered solid double/takes at 3-away, 3-away, but not necessarily for money and longer matches. The positions are all from the early middle game (here defined as move number `r max_move` at the most, counting both sides). By 'solid double/take' I mean, that both not doubling and passing would be at least a `r error_threshold` error.
 
-All positions are taken from a collection of my online matches at [Backgammon Galaxy](play.backgammongalaxy.com).
+The positions are extracted semi-automatically from my database of games, analyzed by GNU Backgammon. For that reason sometimes they are shown as checker plays -- this happens when one player failed to double. For the same reason, sometimes Black is on roll, sometimes White.
+
+Finally, while GNU Backgammon at 4-ply thought all positions where clear double/take at 3-away, 3-away, the XG rollouts sometimes come to a different conclusion: One side has a pass, or a no-double.
+
+## A bit of theory
+
+Let's revisit how and why the cube actions are different at 3-away, 3-away than for money. The 3-point match equity table looks like this:
+
+```{r}
+met[1:3, 1:3] %>% round(3)
+info <- tp_info(3, 3, c(0.5, 0, 0, 0.5, 0, 0 ), 1, met)
+```
+
+In the simple case, not considering gammons and recubes, when we pass an initial double we get to `r met[3,2] %>% round(3)` match winning chances, losing about 10 percentage points compared to when the game began. If we take, a loss is expensive, we get to `r met[3,1] %>% round(3)` match winning chances, an additional loss of about 15 percentage points.
+
+So the *risk* from taking and winning is `r info["risk"] %>% round(3)`, and the potential *gain* from taking and winning is `r info["gain"] %>% round(3)` for a take point of `r info["tp_dead"] %>% round(3)`, based on the standard formula: $TP= \frac{Risk}{Gain + Risk}$. So a pure 4-roll position, for example, would be a pass.
+
+After taking, the *gammon value* with the cube at 2, is `r gammon_value(3, 3, 2, met) %>% round(3)`, not much different from the money gammon value of 0.5, so adding gammons into the mix has about the same effect as in money game.
+
+After taking, the opponent's take point for a future redouble, is just `r met[3,1] %>% round(3)` which is *higher* than for money, since the cube would be dead. That means that the cube is a little *more* valuable to us than for money, because we don't have to improve quite as much to use it efficiently.
+
+For illustration purposes, let's assume gammon- and backgammon probabilities that are similar to the opening position for money, like this:
+
+```{r}
+probs <- outcome_probs(c(50, 14, 0.6, 50, 14, 0.6)) %>% `/`(100) 
+
+probs %>% 
+  probs_table() %>% 
+  kable("html") %>%
+  column_spec(2:5, width = "3.1cm") 
+```
+
+Then, putting it all together, we can calculate take points under different assumptions, and compare to money in a nice table like this:
+
+```{r}
+tp_tab <- tp_table(3, 3, probs, 1, met)
+
+tp_tab %>% 
+  mutate(across(where(is.numeric), \(x) round(x, digits = 3)),
+         Difference = `3-away, 3-away take point` - `Money game take point`) %>% 
+  kable("html") %>% 
+  column_spec(2:4, width = "3.5cm")
+```
+
+Sure enough, the table shows that the 'simple' take point (no gammons, no cube) that we just discussed, is significant higher at the score than for money. A little bit of the difference disappear when we introduce gammons; somewhat more when we introduce the cube.
+
+The end result is that the take point at 3-away 3-away is about 1.5 percentage point higher than for money. It may not sound as much, but the difference is quite real, as the examples below will show.
 
 ## Double/take positions
 
+Below are 21 positions rolled out at 3-away, 3-away and for money. Although many of the examples are double/take both at the score and for money, the side on roll is always more inclined to double at the match score than for money. The side not on roll, is always closer to a pass at the score than for money.
+
+Studying the positions can be useful to reinforce one's impression of what it takes to have a sound double, and what a takeable position looks like -- for money and at 3-away, 3-away. 
+
 ### Position 1
+
 ```{r}
 ggboard("XGID=---BBBC-B---bB--b-bcBc-c--:0:0:-1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   73,84% (G:3,02% B:0,10%)
+  Opponent Winning Chances: 26,16% (G:2,68% B:0,08%)
+Double/Take
+  Player Winning Chances:   74,11% (G:3,04% B:0,07%)
+  Opponent Winning Chances: 25,89% (G:2,71% B:0,08%)
+
+Cubeless Equities: No Double=+0,482, Double=+1,224
+
+Cubeful Equities:
+       No double:     +0,871 (-0,129)
+       Double/Take:   +1,053 (+0,053)
+       Double/Pass:   +1,000
+
+Best Cube action: Double / Pass
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   73,86% (G:3,02% B:0,04%)
+  Opponent Winning Chances: 26,14% (G:2,52% B:0,08%)
+Double/Take
+  Player Winning Chances:   74,13% (G:2,95% B:0,04%)
+  Opponent Winning Chances: 25,87% (G:2,52% B:0,09%)
+
+Cubeless Equities: No Double=+0,482, Double=+0,973
+
+Cubeful Equities:
+       No double:     +0,754 (-0,095)
+       Double/Take:   +0,849
+       Double/Pass:   +1,000 (+0,151)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 2
+
 ```{r}
 ggboard("XGID=-aa---EBB-AAbC---d-fa---A-:0:0:1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   68,34% (G:20,05% B:2,05%)
+  Opponent Winning Chances: 31,66% (G:8,13% B:0,65%)
+Double/Take
+  Player Winning Chances:   68,54% (G:20,65% B:2,80%)
+  Opponent Winning Chances: 31,46% (G:8,91% B:1,01%)
+
+Cubeless Equities: No Double=+0,583, Double=+1,229
+
+Cubeful Equities:
+       No double:     +0,834 (-0,152)
+       Double/Take:   +0,986
+       Double/Pass:   +1,000 (+0,014)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   73,86% (G:3,02% B:0,04%)
+  Opponent Winning Chances: 26,14% (G:2,52% B:0,08%)
+Double/Take
+  Player Winning Chances:   74,13% (G:2,95% B:0,04%)
+  Opponent Winning Chances: 25,87% (G:2,52% B:0,09%)
+
+Cubeless Equities: No Double=+0,482, Double=+0,973
+
+Cubeful Equities:
+       No double:     +0,754 (-0,095)
+       Double/Take:   +0,849
+       Double/Pass:   +1,000 (+0,151)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 3
+
 ```{r}
 ggboard("XGID=-a-B--D-B---dD---dAdb--AA-:0:0:-1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   65,91% (G:24,59% B:2,02%)
+  Opponent Winning Chances: 34,09% (G:7,59% B:0,48%)
+Double/Take
+  Player Winning Chances:   65,57% (G:25,68% B:4,39%)
+  Opponent Winning Chances: 34,43% (G:8,14% B:0,72%)
+
+Cubeless Equities: No Double=+0,615, Double=+1,225
+
+Cubeful Equities:
+       No double:     +0,799 (-0,097)
+       Double/Take:   +0,896
+       Double/Pass:   +1,000 (+0,104)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   65,97% (G:24,76% B:1,34%)
+  Opponent Winning Chances: 34,03% (G:7,63% B:0,27%)
+Double/Take
+  Player Winning Chances:   66,16% (G:24,55% B:1,29%)
+  Opponent Winning Chances: 33,84% (G:7,49% B:0,27%)
+
+Cubeless Equities: No Double=+0,501, Double=+1,008
+
+Cubeful Equities:
+       No double:     +0,718 (-0,027)
+       Double/Take:   +0,746
+       Double/Pass:   +1,000 (+0,254)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 4
+
 ```{r}
 ggboard("XGID=---BBBC-A---gC---a-cbb--AA:0:0:-1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   69,13% (G:13,40% B:0,47%)
+  Opponent Winning Chances: 30,87% (G:6,28% B:0,25%)
+Double/Take
+  Player Winning Chances:   69,29% (G:13,98% B:0,63%)
+  Opponent Winning Chances: 30,71% (G:6,63% B:0,40%)
+
+Cubeless Equities: No Double=+0,496, Double=+1,157
+
+Cubeful Equities:
+       No double:     +0,793 (-0,113)
+       Double/Take:   +0,906
+       Double/Pass:   +1,000 (+0,094)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   69,19% (G:12,98% B:0,36%)
+  Opponent Winning Chances: 30,81% (G:6,15% B:0,15%)
+Double/Take
+  Player Winning Chances:   69,37% (G:13,52% B:0,33%)
+  Opponent Winning Chances: 30,63% (G:6,22% B:0,16%)
+
+Cubeless Equities: No Double=+0,454, Double=+0,924
+
+Cubeful Equities:
+       No double:     +0,730
+       Double/Take:   +0,721 (-0,010)
+       Double/Pass:   +1,000 (+0,270)
+
+Best Cube action: No double / Take
+Percentage of wrong pass needed to make the double decision right: 3,4%
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 5
+
 ```{r}
 ggboard("XGID=-a---CDBBa--dB---c-d-Ab-A-:0:0:1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   64,86% (G:25,92% B:1,39%)
+  Opponent Winning Chances: 35,14% (G:8,94% B:0,78%)
+Double/Take
+  Player Winning Chances:   64,47% (G:27,45% B:2,06%)
+  Opponent Winning Chances: 35,53% (G:9,55% B:1,00%)
+
+Cubeless Equities: No Double=+0,571, Double=+1,178
+
+Cubeful Equities:
+       No double:     +0,762 (-0,095)
+       Double/Take:   +0,857
+       Double/Pass:   +1,000 (+0,143)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   64,69% (G:26,19% B:0,95%)
+  Opponent Winning Chances: 35,31% (G:8,21% B:0,39%)
+Double/Take
+  Player Winning Chances:   64,76% (G:26,94% B:0,92%)
+  Opponent Winning Chances: 35,24% (G:8,47% B:0,42%)
+
+Cubeless Equities: No Double=+0,479, Double=+0,970
+
+Cubeful Equities:
+       No double:     +0,671 (-0,040)
+       Double/Take:   +0,711
+       Double/Pass:   +1,000 (+0,289)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 6
+
 ```{r}
 ggboard("XGID=-a-BBBD-Aa--bB---c-cc--bB-:0:0:1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   62,31% (G:33,81% B:1,43%)
+  Opponent Winning Chances: 37,69% (G:12,75% B:1,34%)
+Double/Take
+  Player Winning Chances:   62,46% (G:34,40% B:2,25%)
+  Opponent Winning Chances: 37,54% (G:13,77% B:1,78%)
+
+Cubeless Equities: No Double=+0,569, Double=+1,145
+
+Cubeful Equities:
+       No double:     +0,615 (-0,248)
+       Double/Take:   +0,864
+       Double/Pass:   +1,000 (+0,136)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   62,26% (G:33,32% B:0,93%)
+  Opponent Winning Chances: 37,74% (G:12,35% B:0,95%)
+Double/Take
+  Player Winning Chances:   62,46% (G:34,17% B:0,99%)
+  Opponent Winning Chances: 37,54% (G:12,63% B:1,02%)
+
+Cubeless Equities: No Double=+0,455, Double=+0,929
+
+Cubeful Equities:
+       No double:     +0,542 (-0,091)
+       Double/Take:   +0,634
+       Double/Pass:   +1,000 (+0,366)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.
+" %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 7
+
 ```{r}
 ggboard("XGID=aa----EBDA--bA---c-dbb-B--:0:0:-1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   67,45% (G:21,24% B:2,26%)
+  Opponent Winning Chances: 32,55% (G:8,05% B:0,75%)
+Double/Take
+  Player Winning Chances:   66,74% (G:22,62% B:5,39%)
+  Opponent Winning Chances: 33,26% (G:8,67% B:0,89%)
+
+Cubeless Equities: No Double=+0,587, Double=+1,194
+
+Cubeful Equities:
+       No double:     +0,784 (-0,094)
+       Double/Take:   +0,879
+       Double/Pass:   +1,000 (+0,121)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   67,20% (G:21,36% B:1,24%)
+  Opponent Winning Chances: 32,80% (G:7,89% B:0,39%)
+Double/Take
+  Player Winning Chances:   67,05% (G:21,78% B:1,40%)
+  Opponent Winning Chances: 32,95% (G:7,85% B:0,36%)
+
+Cubeless Equities: No Double=+0,487, Double=+0,982
+
+Cubeful Equities:
+       No double:     +0,703 (-0,026)
+       Double/Take:   +0,729
+       Double/Pass:   +1,000 (+0,271)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 8
+
 ```{r}
 ggboard("XGID=---BaCC---C-cCab-c-c--b-A-:0:0:1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   63,32% (G:28,35% B:0,77%)
+  Opponent Winning Chances: 36,68% (G:7,68% B:0,49%)
+Double/Take
+  Player Winning Chances:   63,76% (G:29,33% B:1,20%)
+  Opponent Winning Chances: 36,24% (G:8,17% B:0,79%)
+
+Cubeless Equities: No Double=+0,588, Double=+1,224
+
+Cubeful Equities:
+       No double:     +0,704 (-0,154)
+       Double/Take:   +0,858
+       Double/Pass:   +1,000 (+0,142)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   63,34% (G:28,13% B:0,58%)
+  Opponent Winning Chances: 36,66% (G:6,89% B:0,35%)
+Double/Take
+  Player Winning Chances:   63,68% (G:28,77% B:0,67%)
+  Opponent Winning Chances: 36,32% (G:7,35% B:0,37%)
+
+Cubeless Equities: No Double=+0,481, Double=+0,982
+
+Cubeful Equities:
+       No double:     +0,632 (-0,053)
+       Double/Take:   +0,686
+       Double/Pass:   +1,000 (+0,314)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 9
+
 ```{r}
 ggboard("XGID=-a--aBEBB---dBa--c-e----B-:0:0:1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   66,26% (G:28,97% B:2,59%)
+  Opponent Winning Chances: 33,74% (G:8,04% B:0,66%)
+Double/Take
+  Player Winning Chances:   66,09% (G:30,01% B:4,18%)
+  Opponent Winning Chances: 33,91% (G:8,92% B:1,15%)
+
+Cubeless Equities: No Double=+0,692, Double=+1,340
+
+Cubeful Equities:
+       No double:     +0,831 (-0,169)
+       Double/Take:   +1,031 (+0,031)
+       Double/Pass:   +1,000
+
+Best Cube action: Double / Pass
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   66,56% (G:27,73% B:1,42%)
+  Opponent Winning Chances: 33,44% (G:7,32% B:0,36%)
+Double/Take
+  Player Winning Chances:   66,55% (G:28,81% B:1,45%)
+  Opponent Winning Chances: 33,45% (G:7,60% B:0,39%)
+
+Cubeless Equities: No Double=+0,546, Double=+1,107
+
+Cubeful Equities:
+       No double:     +0,740 (-0,104)
+       Double/Take:   +0,844
+       Double/Pass:   +1,000 (+0,156)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 10
+
 ```{r}
 ggboard("XGID=-a-BB-D-AA--eC---c-cB-c---:0:0:1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   66,26% (G:28,97% B:2,59%)
+  Opponent Winning Chances: 33,74% (G:8,04% B:0,66%)
+Double/Take
+  Player Winning Chances:   66,09% (G:30,01% B:4,18%)
+  Opponent Winning Chances: 33,91% (G:8,92% B:1,15%)
+
+Cubeless Equities: No Double=+0,692, Double=+1,340
+
+Cubeful Equities:
+       No double:     +0,831 (-0,169)
+       Double/Take:   +1,031 (+0,031)
+       Double/Pass:   +1,000
+
+Best Cube action: Double / Pass
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   66,20% (G:23,68% B:0,31%)
+  Opponent Winning Chances: 33,80% (G:4,38% B:0,18%)
+Double/Take
+  Player Winning Chances:   66,51% (G:23,88% B:0,35%)
+  Opponent Winning Chances: 33,49% (G:4,56% B:0,18%)
+
+Cubeless Equities: No Double=+0,518, Double=+1,050
+
+Cubeful Equities:
+       No double:     +0,750 (-0,034)
+       Double/Take:   +0,784
+       Double/Pass:   +1,000 (+0,216)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 11
+
 ```{r}
 ggboard("XGID=aa--ABBBA--AcD---cbe--A-A-:0:0:1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   66,56% (G:22,17% B:1,86%)
+  Opponent Winning Chances: 33,44% (G:8,37% B:0,63%)
+Double/Take
+  Player Winning Chances:   66,63% (G:22,94% B:3,48%)
+  Opponent Winning Chances: 33,37% (G:9,39% B:0,89%)
+
+Cubeless Equities: No Double=+0,572, Double=+1,178
+
+Cubeful Equities:
+       No double:     +0,778 (-0,117)
+       Double/Take:   +0,896
+       Double/Pass:   +1,000 (+0,104)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   66,75% (G:22,02% B:0,99%)
+  Opponent Winning Chances: 33,25% (G:7,98% B:0,40%)
+Double/Take
+  Player Winning Chances:   66,87% (G:22,39% B:1,02%)
+  Opponent Winning Chances: 33,13% (G:8,18% B:0,40%)
+
+Cubeless Equities: No Double=+0,481, Double=+0,971
+
+Cubeful Equities:
+       No double:     +0,721
+       Double/Take:   +0,712 (-0,008)
+       Double/Pass:   +1,000 (+0,279)
+
+Best Cube action: No double / Take
+Percentage of wrong pass needed to make the double decision right: 2,8%
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 12
+
 ```{r}
 ggboard("XGID=-ba-AAE-Ca--dD---b-eA-----:0:0:1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   65,19% (G:27,99% B:5,46%)
+  Opponent Winning Chances: 34,81% (G:6,60% B:0,33%)
+Double/Take
+  Player Winning Chances:   64,35% (G:28,90% B:10,63%)
+  Opponent Winning Chances: 35,65% (G:7,02% B:0,51%)
+
+Cubeless Equities: No Double=+0,758, Double=+1,272
+
+Cubeful Equities:
+       No double:     +0,792 (-0,075)
+       Double/Take:   +0,868
+       Double/Pass:   +1,000 (+0,132)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction.
+" %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   65,39% (G:27,20% B:2,73%)
+  Opponent Winning Chances: 34,61% (G:6,62% B:0,25%)
+Double/Take
+  Player Winning Chances:   65,26% (G:27,59% B:2,93%)
+  Opponent Winning Chances: 34,74% (G:6,89% B:0,32%)
+
+Cubeless Equities: No Double=+0,538, Double=+1,077
+
+Cubeful Equities:
+       No double:     +0,743 (-0,041)
+       Double/Take:   +0,784
+       Double/Pass:   +1,000 (+0,216)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 13
+
 ```{r}
 ggboard("XGID=-aa-aBDAB---dD---b-dBb----:0:0:1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   66,66% (G:21,87% B:1,78%)
+  Opponent Winning Chances: 33,34% (G:6,59% B:0,27%)
+Double/Take
+  Player Winning Chances:   66,45% (G:22,98% B:3,21%)
+  Opponent Winning Chances: 33,55% (G:7,23% B:0,60%)
+
+Cubeless Equities: No Double=+0,604, Double=+1,224
+
+Cubeful Equities:
+       No double:     +0,797 (-0,107)
+       Double/Take:   +0,904
+       Double/Pass:   +1,000 (+0,096)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   66,58% (G:21,88% B:1,17%)
+  Opponent Winning Chances: 33,42% (G:6,14% B:0,22%)
+Double/Take
+  Player Winning Chances:   66,89% (G:21,88% B:1,19%)
+  Opponent Winning Chances: 33,11% (G:6,25% B:0,22%)
+
+Cubeless Equities: No Double=+0,498, Double=+1,007
+
+Cubeful Equities:
+       No double:     +0,734 (-0,034)
+       Double/Take:   +0,769
+       Double/Pass:   +1,000 (+0,231)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 14
+
 ```{r}
 ggboard("XGID=---b--EDC---a---bbceA--AA-:0:0:-1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   67,40% (G:19,51% B:1,69%)
+  Opponent Winning Chances: 32,60% (G:7,86% B:0,76%)
+Double/Take
+  Player Winning Chances:   67,48% (G:20,06% B:3,62%)
+  Opponent Winning Chances: 32,52% (G:9,25% B:0,94%)
+
+Cubeless Equities: No Double=+0,549, Double=+1,152
+
+Cubeful Equities:
+       No double:     +0,752 (-0,141)
+       Double/Take:   +0,894
+       Double/Pass:   +1,000 (+0,106)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   67,56% (G:19,29% B:1,00%)
+  Opponent Winning Chances: 32,44% (G:7,87% B:0,35%)
+Double/Take
+  Player Winning Chances:   67,55% (G:19,48% B:1,05%)
+  Opponent Winning Chances: 32,45% (G:7,89% B:0,35%)
+
+Cubeless Equities: No Double=+0,472, Double=+0,948
+
+Cubeful Equities:
+       No double:     +0,671 (-0,034)
+       Double/Take:   +0,705
+       Double/Pass:   +1,000 (+0,295)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 15
+
 ```{r}
 ggboard("XGID=-a-aBBDBBA--c----b-cc-b-B-:0:0:1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   64,07% (G:35,22% B:2,06%)
+  Opponent Winning Chances: 35,93% (G:11,02% B:1,72%)
+Double/Take
+  Player Winning Chances:   64,39% (G:35,84% B:3,37%)
+  Opponent Winning Chances: 35,61% (G:12,54% B:2,23%)
+
+Cubeless Equities: No Double=+0,658, Double=+1,309
+
+Cubeful Equities:
+       No double:     +0,732 (-0,268)
+       Double/Take:   +1,035 (+0,035)
+       Double/Pass:   +1,000
+
+Best Cube action: Double / Pass
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   64,28% (G:34,84% B:1,18%)
+  Opponent Winning Chances: 35,72% (G:10,98% B:0,81%)
+Double/Take
+  Player Winning Chances:   64,54% (G:35,15% B:1,12%)
+  Opponent Winning Chances: 35,46% (G:10,94% B:0,80%)
+
+Cubeless Equities: No Double=+0,528, Double=+1,072
+
+Cubeful Equities:
+       No double:     +0,655 (-0,146)
+       Double/Take:   +0,802
+       Double/Pass:   +1,000 (+0,198)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 16
+
 ```{r}
 ggboard("XGID=-a-aBAD-B--AdCa--b-ca-bAA-:0:0:1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   63,42% (G:30,48% B:4,32%)
+  Opponent Winning Chances: 36,58% (G:10,19% B:1,62%)
+Double/Take
+  Player Winning Chances:   63,19% (G:30,89% B:7,60%)
+  Opponent Winning Chances: 36,81% (G:11,54% B:1,57%)
+
+Cubeless Equities: No Double=+0,645, Double=+1,150
+
+Cubeful Equities:
+       No double:     +0,750 (-0,094)
+       Double/Take:   +0,844
+       Double/Pass:   +1,000 (+0,156)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   63,29% (G:29,95% B:2,95%)
+  Opponent Winning Chances: 36,71% (G:9,95% B:0,59%)
+Double/Take
+  Player Winning Chances:   63,34% (G:30,18% B:3,12%)
+  Opponent Winning Chances: 36,66% (G:10,11% B:0,64%)
+
+Cubeless Equities: No Double=+0,489, Double=+0,985
+
+Cubeful Equities:
+       No double:     +0,642 (-0,054)
+       Double/Take:   +0,697
+       Double/Pass:   +1,000 (+0,303)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 17
+
 ```{r}
 ggboard("XGID=aA--A-CbC---dE-a-Abcb---A-:0:0:-1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   66,15% (G:24,46% B:2,49%)
+  Opponent Winning Chances: 33,85% (G:7,38% B:0,49%)
+Double/Take
+  Player Winning Chances:   66,17% (G:25,61% B:5,05%)
+  Opponent Winning Chances: 33,83% (G:8,13% B:0,86%)
+
+Cubeless Equities: No Double=+0,633, Double=+1,253
+
+Cubeful Equities:
+       No double:     +0,820 (-0,110)
+       Double/Take:   +0,930
+       Double/Pass:   +1,000 (+0,070)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   66,33% (G:23,87% B:1,69%)
+  Opponent Winning Chances: 33,67% (G:7,25% B:0,23%)
+Double/Take
+  Player Winning Chances:   66,56% (G:24,47% B:1,81%)
+  Opponent Winning Chances: 33,44% (G:7,38% B:0,24%)
+
+Cubeless Equities: No Double=+0,507, Double=+1,036
+
+Cubeful Equities:
+       No double:     +0,753 (-0,031)
+       Double/Take:   +0,784
+       Double/Pass:   +1,000 (+0,216)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 18
+
 ```{r}
 ggboard("XGID=-baB--D-BAA-bC---abc-B-bb-:0:0:1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   66,97% (G:24,43% B:2,58%)
+  Opponent Winning Chances: 33,03% (G:10,30% B:0,56%)
+Double/Take
+  Player Winning Chances:   67,02% (G:24,87% B:4,92%)
+  Opponent Winning Chances: 32,98% (G:11,48% B:0,61%)
+
+Cubeless Equities: No Double=+0,605, Double=+1,194
+
+Cubeful Equities:
+       No double:     +0,810 (-0,153)
+       Double/Take:   +0,963
+       Double/Pass:   +1,000 (+0,037)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   66,87% (G:24,43% B:1,77%)
+  Opponent Winning Chances: 33,13% (G:9,69% B:0,23%)
+Double/Take
+  Player Winning Chances:   66,90% (G:25,01% B:1,87%)
+  Opponent Winning Chances: 33,10% (G:9,86% B:0,24%)
+
+Cubeless Equities: No Double=+0,500, Double=+1,012
+
+Cubeful Equities:
+       No double:     +0,728 (-0,042)
+       Double/Take:   +0,770
+       Double/Pass:   +1,000 (+0,230)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 19
+
 ```{r}
 ggboard("XGID=--B-B-DBA---gB---c-dB---a-:0:0:1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   73,91% (G:5,95% B:0,08%)
+  Opponent Winning Chances: 26,09% (G:1,39% B:0,06%)
+Double/Take
+  Player Winning Chances:   74,50% (G:6,10% B:0,12%)
+  Opponent Winning Chances: 25,50% (G:1,28% B:0,07%)
+
+Cubeless Equities: No Double=+0,548, Double=+1,356
+
+Cubeful Equities:
+       No double:     +0,873 (-0,127)
+       Double/Take:   +1,073 (+0,073)
+       Double/Pass:   +1,000
+
+Best Cube action: Double / Pass
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   74,32% (G:5,85% B:0,08%)
+  Opponent Winning Chances: 25,68% (G:1,38% B:0,04%)
+Double/Take
+  Player Winning Chances:   74,68% (G:5,67% B:0,08%)
+  Opponent Winning Chances: 25,32% (G:1,36% B:0,04%)
+
+Cubeless Equities: No Double=+0,532, Double=+1,074
+
+Cubeful Equities:
+       No double:     +0,820 (-0,075)
+       Double/Take:   +0,894
+       Double/Pass:   +1,000 (+0,106)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 20
+
 ```{r}
 ggboard("XGID=----A-EbC---dD---b-cbAA-b-:0:0:-1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   66,52% (G:29,61% B:1,02%)
+  Opponent Winning Chances: 33,48% (G:7,47% B:0,42%)
+Double/Take
+  Player Winning Chances:   66,45% (G:30,52% B:1,42%)
+  Opponent Winning Chances: 33,55% (G:7,93% B:0,52%)
+
+Cubeless Equities: No Double=+0,682, Double=+1,395
+
+Cubeful Equities:
+       No double:     +0,849 (-0,151)
+       Double/Take:   +1,085 (+0,085)
+       Double/Pass:   +1,000
+
+Best Cube action: Double / Pass
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   66,50% (G:28,75% B:0,63%)
+  Opponent Winning Chances: 33,50% (G:7,23% B:0,29%)
+Double/Take
+  Player Winning Chances:   66,58% (G:30,08% B:0,64%)
+  Opponent Winning Chances: 33,42% (G:7,36% B:0,30%)
+
+Cubeless Equities: No Double=+0,549, Double=+1,125
+
+Cubeful Equities:
+       No double:     +0,729 (-0,151)
+       Double/Take:   +0,879
+       Double/Pass:   +1,000 (+0,121)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
+
 ### Position 21
+
 ```{r}
 ggboard("XGID=-B-B-bC-B--BbB--ac-cAAbb--:0:0:-1:00:0:0:0:0:10")
 ```
 
+```{r}
+#| layout-ncol: 2
+"3-away, 3-away
+Analyzed in Rollout
+No double
+  Player Winning Chances:   61,69% (G:28,96% B:0,79%)
+  Opponent Winning Chances: 38,31% (G:9,37% B:0,49%)
+Double/Take
+  Player Winning Chances:   61,99% (G:29,19% B:1,65%)
+  Opponent Winning Chances: 38,01% (G:11,08% B:0,61%)
+
+Cubeless Equities: No Double=+0,539, Double=+1,058
+
+Cubeful Equities:
+       No double:     +0,588 (-0,152)
+       Double/Take:   +0,741
+       Double/Pass:   +1,000 (+0,259)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+
+"Moneygame
+Analyzed in Rollout
+No double
+  Player Winning Chances:   61,56% (G:28,46% B:0,72%)
+  Opponent Winning Chances: 38,44% (G:8,96% B:0,30%)
+Double/Take
+  Player Winning Chances:   61,93% (G:28,83% B:0,67%)
+  Opponent Winning Chances: 38,07% (G:8,85% B:0,32%)
+
+Cubeless Equities: No Double=+0,430, Double=+0,884
+
+Cubeful Equities:
+       No double:     +0,517 (-0,085)
+       Double/Take:   +0,602
+       Double/Pass:   +1,000 (+0,398)
+
+Best Cube action: Double / Take
+
+Rollout:
+  1296 Games rolled with Variance Reduction." %>% 
+  remove_stuff() %>% 
+  cat()
+```
 
 ```{r show}
 #| results: asis
 #| include: false
+#| eval: false
+
 
 # Print all positions that we found
 for (i in 1:nrow(df)) {
@@ -180,6 +1295,7 @@ for (i in 1:nrow(df)) {
 
 ```{r save}
 #| include: false
+#| eval: false
 
 # Save the moneygame variant of all positions 
 df$xgid %>% 
@@ -189,4 +1305,3 @@ df$xgid %>%
   map_chr(~ paste(.x, collapse = ":")) %>% 
   write_lines(file = "data/good-cube-ids.txt")
 ```
-

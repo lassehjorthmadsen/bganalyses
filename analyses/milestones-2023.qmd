@@ -80,7 +80,7 @@ probs %>%
   column_spec(2:5, width = "3.1cm")
 ```
 
-One thing that might be overlooked here, is that White has very few real crushing frequencies, because he's a little short on ammo. Black will almost always make some kind of anchor, and then have some kind of counter play agains White's three back checkers.
+One thing that might be overlooked here, is that White has very few real crushing sequences, because he's a little short on ammo. Black will almost always make some kind of anchor, and then have some kind of counter play agains White's three back checkers.
 
 To see if this result is match-score related, let's check the same position for money, and while we're at it, also check if XG Roller ++ (fast, truncated rollouts), gets it right, compared to a full rollout at strong settings.
 
