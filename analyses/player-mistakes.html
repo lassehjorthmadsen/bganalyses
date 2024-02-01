@@ -1,0 +1,3679 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Lasse Hjorth Madsen">
+<meta name="dcterms.date" content="2024-02-01">
+
+<title>Mistakes were made by r params$player_name</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Mistakes were made by Llabba</li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HOME</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">THEORY</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/explore-emg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explore EMG Normalization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/met-precision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Match Equity Precision</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/janowski.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Janowski Formulars</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/many-takepoints.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exploring take points</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/bgmoves-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mistake, errors and statistics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">PRAXIS</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/milestones-2023.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Milestones III, 2023</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/mistakes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mistakes were made</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/opening-mistakes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Opening checker play errors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/middle-game-cubes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Middle game cube benchmark</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-is-this" id="toc-what-is-this" class="nav-link active" data-scroll-target="#what-is-this">What is this?</a></li>
+  <li><a href="#abut-the-data" id="toc-abut-the-data" class="nav-link" data-scroll-target="#abut-the-data">Abut the data</a></li>
+  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics">Summary statistics</a></li>
+  <li><a href="#cube-decisions" id="toc-cube-decisions" class="nav-link" data-scroll-target="#cube-decisions">Cube decisions</a></li>
+  <li><a href="#checker-plays" id="toc-checker-plays" class="nav-link" data-scroll-target="#checker-plays">Checker plays</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Mistakes were made by Llabba</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Lasse Hjorth Madsen </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 1, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="what-is-this" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-this">What is this?</h2>
+<p>This is a automated report of backgammon positions where Llabba made some kind of mistake. It is intended as a learning tool, a help to identify areas where a player may benefit from study.</p>
+<p>By design, this report displays the biggest errors made over a long series of matches, while skipping over all the brilliant plays made. Therefore, it says nothing abut the <em>level</em> of play; it only suggests what typical mistakes might look like.</p>
+<p>Even the best players from time to time make huge mistakes. If for no other reason because of oversight, fatigue, or mis-clicks in online games. Likely, there are some big mistakes included here: Look at them as a learning opportunity, not a wall-of-shame.</p>
+<p>The mistakes are split into a structure like this:</p>
+<ul>
+<li>Cube decisions
+<ul>
+<li>Wrong takes</li>
+<li>Wrong passes</li>
+<li>Wrong doubles</li>
+<li>Missed doubles</li>
+<li>Wrong cash (when too good)</li>
+</ul></li>
+<li>Checker plays
+<ul>
+<li>Moves 1-5 (early game)</li>
+<li>Moves 6-15 (middle game)</li>
+<li>Moves 16+ (end game)</li>
+</ul></li>
+</ul>
+<p>All categories are then split into the same error sizes intervals like this:</p>
+<ul>
+<li>Error &gt; 0.05 (significant error)</li>
+<li>Error &gt; 0.1 (big error)</li>
+<li>Error &gt; 0.2 (huge error)</li>
+<li>Error &gt; 0.3 (gigantic blunder, possibly an oversight or mis-click)</li>
+</ul>
+</section>
+<section id="abut-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="abut-the-data">Abut the data</h2>
+<p>The report was created like this: First, I use a Python script for GNU Backgammon to analyze a collection of matches at 4-ply. Then, my R-package <a href="https://lassehjorthmadsen.github.io/bglab/index.html"><code>bglab</code></a> contains tools to turn the GNU BG analysis files into a data frame that can be analyzed using descriptive statistics. Finally, this Quarto notebook (part of my <a href="https://lassehjorthmadsen.github.io/bganalyses/">Backgammon Playground</a> with R-code analyzes that data.</p>
+<p>The data are build from a set of 629 matches played by the nick Llabba. The matches contains of a total of 26943 decisions, from which we look at the subset of 587 decisions by Llabba, that GNU BG thought was in error.</p>
+<p>In order to not create a phone book of a document, we display here only a maximum of 20 from each of the above mentioned categories.</p>
+</section>
+<section id="summary-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="summary-statistics">Summary statistics</h2>
+<p>A few statistical summaries might be useful. For cube handling errors, the chart below shows:</p>
+<ul>
+<li>The number of cube errors made</li>
+<li>The sum all cube errors</li>
+<li>The average size of cube errors</li>
+</ul>
+<p>With all of the above split by type of error (wrong double, wrong take, etc.) and compared to a benchmark player.</p>
+<div class="cell" data-hash="player-mistakes_cache/html/unnamed-chunk-1_3549a37dc92af9c30f78326b82311336">
+<div class="cell-output-display">
+<p><img src="player-mistakes_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+<p>The checker play errors are grouped by move number (counting each player’s turn as a move) so we can roughly isolate opening errors and endgame errors.</p>
+<div class="cell" data-hash="player-mistakes_cache/html/unnamed-chunk-2_8a2422a7f8b43ec3b66640cb89c35ca0">
+<div class="cell-output-display">
+<p><img src="player-mistakes_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>And now, the time has finally come to show actual positions. Without further ado, here’s the Big Catalog of Errors.</p>
+</section>
+<section id="cube-decisions" class="level2">
+<h2 class="anchored" data-anchor-id="cube-decisions">Cube decisions</h2>
+<div class="cell" data-hash="player-mistakes_cache/html/cubes_e85bd3df32a4ead77ba51e766a47c4ac">
+<section id="wrong-double" class="level3">
+<h3 class="anchored" data-anchor-id="wrong-double">Wrong double</h3>
+<section id="error-0.05" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.05">Error &gt;0.05</h4>
+<section id="position-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-1">Position 1<img src="player-mistakes_files/figure-html/cubes-1.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.364 (Money: +0.385)
+  0.673 0.101 0.002 - 0.327 0.062 0.001
+Cubeful equities:
+1. No double           +0.530
+2. Double, pass        +1.000  (+0.470)
+3. Double, take        +0.475  (-0.056)
+Proper cube action: No double, take (10.6%)
+
+XGID=-Bb-B-D-B--AbB-B-bad-b--b-:0:0:1:00:8:9:0:13:10
+File: Llabba - Hodgey 13pt Backgammon Studio 2023_08_05 10_15_37_011.txt
+Move: 13</code></pre>
+</section>
+<section id="position-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-2">Position 2<img src="player-mistakes_files/figure-html/cubes-2.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.289 (Money: +0.283)
+  0.635 0.080 0.001 - 0.365 0.068 0.001
+Cubeful equities:
+1. No double           +0.423
+2. Double, pass        +1.000  (+0.577)
+3. Double, take        +0.339  (-0.084)
+Proper cube action: No double, take (12.7%)
+
+XGID=-aBCB-CB----b---Ca-cbbbb--:0:0:1:00:5:4:0:13:10
+File: Llabba - Mayfwriter 13pt Backgammon Studio 2023_11_13 21_03_15_005.txt
+Move: 24</code></pre>
+</section>
+<section id="position-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-3">Position 3<img src="player-mistakes_files/figure-html/cubes-3.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.291 (Money: +0.290)
+  0.591 0.206 0.022 - 0.409 0.115 0.004
+Cubeful equities:
+1. No double           +0.413
+2. Double, pass        +1.000  (+0.587)
+3. Double, take        +0.330  (-0.083)
+Proper cube action: No double, take (12.4%)
+
+XGID=--aBa-D-B---bF---caeaa---A:0:0:1:00:0:1:0:13:10
+File: Gibraltar_Mike - Llabba 13pt Backgammon Studio 2023_03_22 21_22_47_002.txt
+Move: 9</code></pre>
+</section>
+<section id="position-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-4">Position 4<img src="player-mistakes_files/figure-html/cubes-4.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.364 (Money: +0.379)
+  0.627 0.215 0.008 - 0.373 0.097 0.001
+Cubeful equities:
+1. No double           +0.467
+2. Double, pass        +1.000  (+0.533)
+3. Double, take        +0.396  (-0.071)
+Proper cube action: No double, take (11.8%)
+
+XGID=-aB-BBC----aBAb---bcCb-bb-:0:0:1:00:4:3:0:9:10
+File: Moderntavla31 - Llabba 9pt Backgammon Studio 2023_09_20 21_30_21_005.txt
+Move: 32</code></pre>
+</section>
+<section id="position-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-5">Position 5<img src="player-mistakes_files/figure-html/cubes-5.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.340 (Money: +0.340)
+  0.666 0.038 0.000 - 0.334 0.032 0.000
+Cubeful equities:
+1. No double           +0.482
+2. Double, pass        +1.000  (+0.518)
+3. Double, take        +0.425  (-0.057)
+Proper cube action: No double, take (9.9%)
+
+XGID=-BC-aBC-C---bB-----bccbb--:0:0:1:00:2:0:0:13:10
+File: Llabba - gorkipelin 13pt Backgammon Studio 2023_08_16 10_36_52_003.txt
+Move: 24</code></pre>
+</section>
+<section id="position-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-6">Position 6<img src="player-mistakes_files/figure-html/cubes-6.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.409 (Money: +0.364)
+  0.671 0.049 0.000 - 0.329 0.027 0.000
+Cubeful equities:
+1. No double           +0.557
+2. Double, pass        +1.000  (+0.443)
+3. Double, take        +0.493  (-0.064)
+Proper cube action: No double, take (12.6%)
+
+XGID=-DBbB-C-D------aaaacbbb---:0:0:1:00:11:8:0:13:10
+File: GitteD - Llabba 13pt Backgammon Studio 2023_01_08 15_39_15_013.txt
+Move: 26</code></pre>
+</section>
+</section>
+<section id="error-0.1" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.1">Error &gt;0.1</h4>
+<section id="position-1-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-1">Position 1<img src="player-mistakes_files/figure-html/cubes-7.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.539 (Money: +0.550)
+  0.671 0.306 0.004 - 0.329 0.100 0.001
+Cubeful equities:
+1. No double           +0.655
+2. Double, pass        +1.000  (+0.345)
+3. Double, take        +0.489  (-0.166)
+Proper cube action: No redouble, take (32.5%)
+
+XGID=aBBaB-BAA-C-b----B-cbbbb--:1:1:1:00:3:0:0:13:10
+File: Llabba - Lucky Lux 13pt Backgammon Studio 2023_01_23 20_22_56_003.txt
+Move: 24</code></pre>
+</section>
+<section id="position-2-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-1">Position 2<img src="player-mistakes_files/figure-html/cubes-8.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.257 (Money: +0.241)
+  0.569 0.249 0.007 - 0.431 0.146 0.008
+Cubeful equities:
+1. No double           +0.345
+2. Double, pass        +1.000  (+0.655)
+3. Double, take        +0.209  (-0.136)
+Proper cube action: No double, take (17.2%)
+
+XGID=aAABBBBa-A---B---bbcbbBb--:0:0:1:00:7:7:0:13:10
+File: Daisy - Llabba 13pt Backgammon Studio 2023_09_28 12_45_23_008.txt
+Move: 24</code></pre>
+</section>
+<section id="position-3-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-1">Position 3<img src="player-mistakes_files/figure-html/cubes-9.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.318 (Money: +0.316)
+  0.634 0.105 0.002 - 0.366 0.058 0.001
+Cubeful equities:
+1. No double           +0.536
+2. Double, pass        +1.000  (+0.464)
+3. Double, take        +0.389  (-0.147)
+Proper cube action: No redouble, take (24.0%)
+
+XGID=aCBCABB------------acbbfB-:1:1:1:00:0:0:0:13:10
+File: Greathumics - Llabba 13pt Backgammon Studio 2023_01_29 19_57_58.txt
+Move: 58</code></pre>
+</section>
+<section id="position-4-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-4-1">Position 4<img src="player-mistakes_files/figure-html/cubes-10.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.265 (Money: +0.264)
+  0.548 0.291 0.006 - 0.452 0.123 0.005
+Cubeful equities:
+1. No double           +0.360
+2. Double, pass        +1.000  (+0.640)
+3. Double, take        +0.243  (-0.117)
+Proper cube action: No double, take (15.4%)
+
+XGID=-Ba-CBB-B--abB---cbbAbbA--:0:0:1:00:0:1:0:13:10
+File: Seiferdrengen - Llabba 13pt Backgammon Studio 2023_01_04 14_23_00_002.txt
+Move: 12</code></pre>
+</section>
+<section id="position-5-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-5-1">Position 5<img src="player-mistakes_files/figure-html/cubes-11.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.228 (Money: +0.229)
+  0.571 0.192 0.007 - 0.429 0.107 0.004
+Cubeful equities:
+1. No double           +0.350
+2. Double, pass        +1.000  (+0.650)
+3. Double, take        +0.244  (-0.106)
+Proper cube action: No double, take (14.0%)
+
+XGID=aaB-A-C-B---cE--Acbe----A-:0:0:1:00:0:2:0:13:10
+File: Llabba - Breum  13pt Backgammon Studio 2023_01_09 20_28_11_002.txt
+Move: 8</code></pre>
+</section>
+<section id="position-6-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-6-1">Position 6<img src="player-mistakes_files/figure-html/cubes-12.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.588 (Money: +0.537)
+  0.650 0.303 0.005 - 0.350 0.065 0.004
+Cubeful equities:
+1. No double           +0.558
+2. Double, pass        +1.000  (+0.442)
+3. Double, take        +0.432  (-0.126)
+Proper cube action: No double, take (22.1%)
+
+XGID=-BBBBcB-----dC--Ac-da----A:0:0:1:00:10:7:0:13:10
+File: Llabba - accr66 13pt Backgammon Studio 2023_01_25 20_19_48_011.txt
+Move: 18</code></pre>
+</section>
+<section id="position-7" class="level5">
+<h5 class="anchored" data-anchor-id="position-7">Position 7<img src="player-mistakes_files/figure-html/cubes-13.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.795 (Money: +0.822)
+  0.708 0.433 0.005 - 0.292 0.032 0.000
+Cubeful equities:
+1. No double           +0.797
+2. Double, pass        +1.000  (+0.203)
+3. Double, take        +0.671  (-0.127)
+Proper cube action: No redouble, take (38.5%)
+
+XGID=aB-DCBB---A-a-a-bbbbcA-a--:1:1:1:00:5:0:0:13:10
+File: Llabba - grahamd 13pt Backgammon Studio 2023_05_20 19_06_17_004.txt
+Move: 28</code></pre>
+</section>
+<section id="position-8" class="level5">
+<h5 class="anchored" data-anchor-id="position-8">Position 8<img src="player-mistakes_files/figure-html/cubes-14.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.160 (Money: +0.160)
+  0.579 0.024 0.000 - 0.421 0.022 0.000
+Cubeful equities:
+1. No double           +0.234
+2. Double, pass        +1.000  (+0.766)
+3. Double, take        +0.034  (-0.200)
+Proper cube action: No double, take (20.7%)
+
+XGID=--BBB-BAAb-BaC----acbcc---:0:0:1:00:0:0:0:13:10
+File: Llabba - DiablodelDados 13pt Backgammon Studio 2023_06_18 17_32_21.txt
+Move: 17</code></pre>
+</section>
+<section id="position-9" class="level5">
+<h5 class="anchored" data-anchor-id="position-9">Position 9<img src="player-mistakes_files/figure-html/cubes-15.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.272 (Money: +0.301)
+  0.596 0.187 0.004 - 0.404 0.080 0.001
+Cubeful equities:
+1. No double           +0.403
+2. Double, pass        +1.000  (+0.597)
+3. Double, take        +0.276  (-0.126)
+Proper cube action: No double, take (17.5%)
+
+XGID=-a-CB-B-EA-ad----bBcbb----:0:0:1:00:8:9:0:13:10
+File: Llabba - grahamd 13pt Backgammon Studio 2023_05_20 19_06_17_011.txt
+Move: 16</code></pre>
+</section>
+<section id="position-10" class="level5">
+<h5 class="anchored" data-anchor-id="position-10">Position 10<img src="player-mistakes_files/figure-html/cubes-16.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.399 (Money: +0.397)
+  0.675 0.055 0.001 - 0.325 0.008 0.000
+Cubeful equities:
+1. No double           +0.606
+2. Double, pass        +1.000  (+0.394)
+3. Double, take        +0.485  (-0.120)
+Proper cube action: No redouble, take (23.4%)
+
+XGID=-BBCBBB-------a-A-A-aacde-:1:1:1:00:3:2:0:13:10
+File: aiueow - Llabba 13pt Backgammon Studio 2023_05_24 10_56_06_005.txt
+Move: 28</code></pre>
+</section>
+<section id="position-11" class="level5">
+<h5 class="anchored" data-anchor-id="position-11">Position 11<img src="player-mistakes_files/figure-html/cubes-17.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.442 (Money: +0.444)
+  0.691 0.185 0.007 - 0.309 0.125 0.005
+Cubeful equities:
+1. No double           +0.490
+2. Double, pass        +1.000  (+0.510)
+3. Double, take        +0.329  (-0.161)
+Proper cube action: No double, take (24.0%)
+
+XGID=-a--BBBBA-A------bebCbaBb-:0:0:1:00:8:5:0:13:10
+File: GitteD - Llabba 13pt Backgammon Studio 2023_01_08 15_39_15_009.txt
+Move: 23</code></pre>
+</section>
+<section id="position-12" class="level5">
+<h5 class="anchored" data-anchor-id="position-12">Position 12<img src="player-mistakes_files/figure-html/cubes-18.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.277 (Money: +0.274)
+  0.569 0.155 0.001 - 0.431 0.019 0.001
+Cubeful equities:
+1. No double           +0.366
+2. Double, pass        +1.000  (+0.634)
+3. Double, take        +0.244  (-0.122)
+Proper cube action: No double, take (16.1%)
+
+XGID=--BBBBDAA---b----c-eab--bA:0:0:1:00:0:0:0:13:10
+File: Llabba - Iandaurca 13pt Backgammon Studio 2023_03_24 12_56_54.txt
+Move: 15</code></pre>
+</section>
+</section>
+<section id="error-0.2" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.2">Error &gt;0.2</h4>
+<section id="position-1-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-2">Position 1<img src="player-mistakes_files/figure-html/cubes-19.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.172 (Money: +0.170)
+  0.556 0.207 0.019 - 0.444 0.160 0.008
+Cubeful equities:
+1. No double           +0.235
+2. Double, pass        +1.000  (+0.765)
+3. Double, take        +0.028  (-0.207)
+Proper cube action: No double, take (21.3%)
+
+XGID=aaA-B-C-C---aC-ab--cbBbbA-:0:0:1:00:0:0:0:13:10
+File: Ophris - Llabba 13pt Backgammon Studio 2023_06_26 21_00_46.txt
+Move: 22</code></pre>
+</section>
+</section>
+<section id="error-0.3" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.3">Error &gt;0.3</h4>
+<section id="position-1-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-3">Position 1<img src="player-mistakes_files/figure-html/cubes-20.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.139 (Money: +0.139)
+  0.544 0.098 0.003 - 0.456 0.049 0.001
+Cubeful equities:
+1. No double           +0.305
+2. Double, pass        +1.000  (+0.695)
+3. Double, take        -0.141  (-0.446)
+Proper cube action: No redouble, take (39.1%)
+
+XGID=-BBBB-D-----aA---a-eccB-b-:1:1:1:00:1:0:0:13:10
+File: Llabba - Ciuffo 13pt Backgammon Studio 2023_02_09 15_19_56_002.txt
+Move: 34</code></pre>
+</section>
+</section>
+</section>
+<section id="missed-double" class="level3">
+<h3 class="anchored" data-anchor-id="missed-double">Missed double</h3>
+<section id="error-0.05-1" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.05-1">Error &gt;0.05</h4>
+<section id="position-1-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-4">Position 1<img src="player-mistakes_files/figure-html/cubes-21.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.260 (Money: +0.265)
+  0.605 0.150 0.005 - 0.395 0.096 0.004
+Cubeful equities:
+1. Double, take        +0.593
+2. Double, pass        +1.000  (+0.407)
+3. No double           +0.541  (-0.053)
+Proper cube action: Double, take
+
+XGID=--ab--E-C-AAdC--Ac-e----A-:0:0:1:44:6:10:0:13:10
+File: Llabba - Ciuffo 13pt Backgammon Studio 2023_02_09 15_19_56_007.txt
+Move: 5</code></pre>
+</section>
+<section id="position-2-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-2">Position 2<img src="player-mistakes_files/figure-html/cubes-22.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.014 (Money: -0.132)
+  0.494 0.126 0.009 - 0.506 0.229 0.026
+Cubeful equities:
+1. Double, take        +0.241
+2. Double, pass        +1.000  (+0.759)
+3. No double           +0.168  (-0.073)
+Proper cube action: Double, take
+
+XGID=-a--aBB-D---aD--aabd-b-bC-:0:0:1:32:2:10:0:11:10
+File: Llabba - petruhl 11pt Backgammon Studio 2023_03_03 18_42_33_006.txt
+Move: 10</code></pre>
+</section>
+<section id="position-3-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-2">Position 3<img src="player-mistakes_files/figure-html/cubes-23.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.457 (Money: +0.460)
+  0.631 0.263 0.014 - 0.369 0.076 0.003
+Cubeful equities:
+1. Double, take        +0.693
+2. Double, pass        +1.000  (+0.307)
+3. No double           +0.635  (-0.058)
+Proper cube action: Double, take
+
+XGID=-BcB--BAC--abC--AcbdA-----:0:0:1:54:4:5:0:13:10
+File: ZicoBlack - Llabba 13pt Backgammon Studio 2023_09_25 16_35_22_004.txt
+Move: 11</code></pre>
+</section>
+<section id="position-4-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-4-2">Position 4<img src="player-mistakes_files/figure-html/cubes-24.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.455 (Money: +0.457)
+  0.719 0.042 0.001 - 0.281 0.023 0.000
+Cubeful equities:
+1. Double, take        +0.725
+2. Double, pass        +1.000  (+0.275)
+3. No double           +0.662  (-0.064)
+Proper cube action: Double, take
+
+XGID=---bC-DBC--AbB----abcab-b-:0:0:1:54:4:5:0:13:10
+File: Selbs - Llabba 13pt Backgammon Studio 2023_03_24 18_10_57_008.txt
+Move: 20</code></pre>
+</section>
+<section id="position-5-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-5-2">Position 5<img src="player-mistakes_files/figure-html/cubes-25.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.672 (Money: +0.619)
+  0.723 0.228 0.012 - 0.277 0.065 0.002
+Cubeful equities:
+1. Double, take        +0.869
+2. Double, pass        +1.000  (+0.131)
+3. No double           +0.775  (-0.094)
+Proper cube action: Double, take
+
+XGID=--c--BCBB---cC--bc-b-B-bA-:0:0:1:62:6:4:0:9:10
+File: GrigoryRevaz - Llabba 9pt Backgammon Studio 2023_09_14 09_36_55_006.txt
+Move: 11</code></pre>
+</section>
+<section id="position-6-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-6-2">Position 6<img src="player-mistakes_files/figure-html/cubes-26.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.855 (Money: +0.920)
+  0.794 0.318 0.040 - 0.206 0.025 0.000
+Cubeful equities:
+1. Double, take        +0.929
+2. Double, pass        +1.000  (+0.071)
+3. No double           +0.868  (-0.061)
+Proper cube action: Double, take
+
+XGID=-c-BBCCA----cB---c-bBca---:0:0:1:22:10:2:0:13:10
+File: heretik - Llabba 13pt Backgammon Studio 2023_10_12 14_25_44_006.txt
+Move: 17</code></pre>
+</section>
+<section id="position-7-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-7-1">Position 7<img src="player-mistakes_files/figure-html/cubes-27.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.441 (Money: +0.441)
+  0.659 0.187 0.009 - 0.341 0.071 0.002
+Cubeful equities:
+1. Double, take        +0.716
+2. Double, pass        +1.000  (+0.284)
+3. No double           +0.647  (-0.069)
+Proper cube action: Double, take
+
+XGID=--b--BDaB---dE--Ac-e----A-:0:0:1:61:0:2:0:13:10
+File: Bulgakov - Llabba 13pt Backgammon Studio 2023_09_12 13_54_06_002.txt
+Move: 5</code></pre>
+</section>
+<section id="position-8-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-8-1">Position 8<img src="player-mistakes_files/figure-html/cubes-28.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.184 (Money: +0.189)
+  0.569 0.180 0.008 - 0.431 0.133 0.004
+Cubeful equities:
+1. Double, take        +0.566
+2. Double, pass        +1.000  (+0.434)
+3. No double           +0.503  (-0.063)
+Proper cube action: Double, take
+
+XGID=-b--BAC-B---dC---BcccAA---:0:0:1:42:4:10:0:13:10
+File: gsh07 - Llabba 13pt Backgammon Studio 2023_09_29 08_05_24_009.txt
+Move: 14</code></pre>
+</section>
+<section id="position-9-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-9-1">Position 9<img src="player-mistakes_files/figure-html/cubes-29.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.539 (Money: +0.538)
+  0.746 0.078 0.001 - 0.254 0.033 0.000
+Cubeful equities:
+1. Double, take        +0.768
+2. Double, pass        +1.000  (+0.232)
+3. No double           +0.704  (-0.064)
+Proper cube action: Double, take
+
+XGID=---b-BCBBB--bB--Babc-ab-b-:0:0:1:32:6:0:0:13:10
+File: Minchy - Llabba 13pt Backgammon Studio 2023_02_24 19_44_27_004.txt
+Move: 10</code></pre>
+</section>
+<section id="position-10-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-10-1">Position 10<img src="player-mistakes_files/figure-html/cubes-30.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.188 (Money: +0.254)
+  0.575 0.201 0.010 - 0.425 0.103 0.004
+Cubeful equities:
+1. Double, take        +0.632
+2. Double, pass        +1.000  (+0.368)
+3. No double           +0.565  (-0.067)
+Proper cube action: Double, take
+
+XGID=-a---BDaB---dE-a-c-e----B-:0:0:1:66:4:11:0:13:10
+File: Llabba - emperor 13pt Backgammon Studio 2023_11_07 15_53_55_009.txt
+Move: 3</code></pre>
+</section>
+<section id="position-11-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-11-1">Position 11<img src="player-mistakes_files/figure-html/cubes-31.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.646 (Money: -0.887)
+  0.295 0.063 0.002 - 0.705 0.517 0.025
+Cubeful equities:
+1. Double, take        -0.191
+2. Double, pass        +1.000  (+1.191)
+3. No double           -0.286  (-0.094)
+Proper cube action: Redouble, take
+
+XGID=----BaC-B--adB---C-bb-bbaC:1:1:1:66:4:10:0:13:10
+File: gsh07 - Llabba 13pt Backgammon Studio 2023_09_29 08_05_24_009.txt
+Move: 22</code></pre>
+</section>
+<section id="position-12-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-12-1">Position 12<img src="player-mistakes_files/figure-html/cubes-32.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.033 (Money: -0.034)
+  0.480 0.113 0.001 - 0.520 0.104 0.003
+Cubeful equities:
+1. Double, take        +0.214
+2. Double, pass        +1.000  (+0.786)
+3. No double           +0.135  (-0.079)
+Proper cube action: Double, take
+
+XGID=-----CCbC---dD---d-e----B-:0:0:1:51:8:10:0:11:10
+File: Llabba - petruhl 11pt Backgammon Studio 2023_03_03 18_42_33_008.txt
+Move: 5</code></pre>
+</section>
+<section id="position-13" class="level5">
+<h5 class="anchored" data-anchor-id="position-13">Position 13<img src="player-mistakes_files/figure-html/cubes-33.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.158 (Money: +0.158)
+  0.567 0.156 0.006 - 0.433 0.131 0.006
+Cubeful equities:
+1. Double, take        +0.536
+2. Double, pass        +1.000  (+0.464)
+3. No double           +0.472  (-0.064)
+Proper cube action: Double, take
+
+XGID=--a-BbDACa--aC---b-cAcb-A-:0:0:1:52:1:10:0:13:10
+File: Llabba - Jaflo 13pt Backgammon Studio 2023_10_24 19_07_37_008.txt
+Move: 17</code></pre>
+</section>
+<section id="position-14" class="level5">
+<h5 class="anchored" data-anchor-id="position-14">Position 14<img src="player-mistakes_files/figure-html/cubes-34.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.441 (Money: +0.440)
+  0.705 0.064 0.001 - 0.295 0.034 0.001
+Cubeful equities:
+1. Double, take        +0.690
+2. Double, pass        +1.000  (+0.310)
+3. No double           +0.638  (-0.052)
+Proper cube action: Double, take
+
+XGID=---bB-D-B--BbD--Aeae------:0:0:1:52:0:0:0:13:10
+File: branco1304 - Llabba 13pt Backgammon Studio 2023_10_19 19_02_52.txt
+Move: 10</code></pre>
+</section>
+<section id="position-15" class="level5">
+<h5 class="anchored" data-anchor-id="position-15">Position 15<img src="player-mistakes_files/figure-html/cubes-35.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.461 (Money: +0.456)
+  0.691 0.187 0.009 - 0.309 0.120 0.003
+Cubeful equities:
+1. Double, take        +0.769
+2. Double, pass        +1.000  (+0.231)
+3. No double           +0.718  (-0.051)
+Proper cube action: Redouble, take
+
+XGID=-b--BBB-B-A--D-a---ccbbBb-:1:1:1:63:4:4:0:13:10
+File: Greathumics - Llabba 13pt Backgammon Studio 2023_01_29 19_57_58_003.txt
+Move: 12</code></pre>
+</section>
+<section id="position-16" class="level5">
+<h5 class="anchored" data-anchor-id="position-16">Position 16<img src="player-mistakes_files/figure-html/cubes-36.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.173 (Money: +0.113)
+  0.550 0.109 0.000 - 0.450 0.094 0.002
+Cubeful equities:
+1. Double, take        +0.649
+2. Double, pass        +1.000  (+0.351)
+3. No double           +0.556  (-0.092)
+Proper cube action: Redouble, take
+
+XGID=--BBBBCc----bB---A-ccbA-b-:1:1:1:54:2:4:0:7:10
+File: Llabba - Pasiphae 7pt Backgammon Studio 2023_10_25 08_23_43_003.txt
+Move: 27</code></pre>
+</section>
+<section id="position-17" class="level5">
+<h5 class="anchored" data-anchor-id="position-17">Position 17<img src="player-mistakes_files/figure-html/cubes-37.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.863 (Money: +0.757)
+  0.777 0.228 0.022 - 0.223 0.046 0.000
+Cubeful equities:
+1. Double, take        +0.928
+2. Double, pass        +1.000  (+0.072)
+3. No double           +0.859  (-0.069)
+Proper cube action: Double, take
+
+XGID=-b-B-BEBA---bA---abcBa-bb-:0:0:1:31:11:7:0:13:10
+File: Gibraltar_Mike - Llabba 13pt Backgammon Studio 2023_03_22 21_22_47_011.txt
+Move: 9</code></pre>
+</section>
+<section id="position-18" class="level5">
+<h5 class="anchored" data-anchor-id="position-18">Position 18<img src="player-mistakes_files/figure-html/cubes-38.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.442 (Money: +0.442)
+  0.709 0.050 0.001 - 0.291 0.027 0.001
+Cubeful equities:
+1. Double, take        +0.696
+2. Double, pass        +1.000  (+0.304)
+3. No double           +0.642  (-0.054)
+Proper cube action: Double, take
+
+XGID=---bB-D-B--DbC---caea--a--:0:0:1:42:0:0:0:13:10
+File: branco1304 - Llabba 13pt Backgammon Studio 2023_10_19 19_02_52.txt
+Move: 12</code></pre>
+</section>
+<section id="position-19" class="level5">
+<h5 class="anchored" data-anchor-id="position-19">Position 19<img src="player-mistakes_files/figure-html/cubes-39.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.503 (Money: +0.480)
+  0.643 0.246 0.024 - 0.357 0.073 0.003
+Cubeful equities:
+1. Double, take        +0.723
+2. Double, pass        +1.000  (+0.277)
+3. No double           +0.658  (-0.065)
+Proper cube action: Double, take
+
+XGID=-baB-bDBB---AB--Abbe-a--A-:0:0:1:66:5:4:0:13:10
+File: Llabba - DrVirus 13pt Backgammon Studio 2023_04_17 14_13_25_006.txt
+Move: 13</code></pre>
+</section>
+<section id="position-20" class="level5">
+<h5 class="anchored" data-anchor-id="position-20">Position 20<img src="player-mistakes_files/figure-html/cubes-40.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.466 (Money: +0.463)
+  0.639 0.260 0.009 - 0.361 0.081 0.003
+Cubeful equities:
+1. Double, take        +0.713
+2. Double, pass        +1.000  (+0.287)
+3. No double           +0.648  (-0.065)
+Proper cube action: Double, take
+
+XGID=-a-BBBB-----dE-a-d-e----B-:0:0:1:42:0:1:0:13:10
+File: Llabba - FARHANG 13pt Backgammon Studio 2023_02_17 14_56_01_002.txt
+Move: 5</code></pre>
+</section>
+</section>
+<section id="error-0.1-1" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.1-1">Error &gt;0.1</h4>
+<section id="position-1-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-5">Position 1<img src="player-mistakes_files/figure-html/cubes-41.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.091 (Money: +0.091)
+  0.546 0.000 0.000 - 0.454 0.000 0.000
+Cubeful equities:
+1. Double, take        +0.625
+2. Double, pass        +1.000  (+0.375)
+3. No double           +0.455  (-0.170)
+Proper cube action: Redouble, take
+
+XGID=-BBBCCA------------c--ec--:2:1:1:31:5:7:0:13:10
+File: Llabba - DiablodelDados 13pt Backgammon Studio 2023_06_18 17_32_21_006.txt
+Move: 38</code></pre>
+</section>
+<section id="position-2-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-3">Position 2<img src="player-mistakes_files/figure-html/cubes-42.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.043 (Money: +0.134)
+  0.543 0.172 0.011 - 0.457 0.128 0.008
+Cubeful equities:
+1. Double, take        +0.602
+2. Double, pass        +1.000  (+0.398)
+3. No double           +0.485  (-0.118)
+Proper cube action: Double, take
+
+XGID=-b-B--D-B---cEa--d-e----B-:0:0:1:31:9:11:0:13:10
+File: Llabba - prpascha 13pt Backgammon Studio 2023_05_21 21_45_59_013.txt
+Move: 3</code></pre>
+</section>
+<section id="position-3-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-3">Position 3<img src="player-mistakes_files/figure-html/cubes-43.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.634 (Money: +0.636)
+  0.819 0.000 0.000 - 0.181 0.001 0.000
+Cubeful equities:
+1. Double, pass        +1.000
+2. Double, take        +1.020  (+0.020)
+3. No double           +0.883  (-0.117)
+Proper cube action: Redouble, pass
+
+XGID=aBBBCCBA------------bbbba-:1:1:1:66:10:9:0:13:10
+File: joro1313 - Llabba 13pt Backgammon Studio 2023_11_21 20_13_25_010.txt
+Move: 82</code></pre>
+</section>
+<section id="position-4-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-4-3">Position 4<img src="player-mistakes_files/figure-html/cubes-44.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.392 (Money: +0.377)
+  0.673 0.071 0.001 - 0.327 0.039 0.001
+Cubeful equities:
+1. Double, take        +0.934
+2. Double, pass        +1.000  (+0.066)
+3. No double           +0.778  (-0.156)
+Proper cube action: Redouble, take
+
+XGID=--a-C-D-C--CbB---bccbb----:1:1:1:22:8:9:0:13:10
+File: joro1313 - Llabba 13pt Backgammon Studio 2023_11_21 20_13_25_009.txt
+Move: 19</code></pre>
+</section>
+<section id="position-5-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-5-3">Position 5<img src="player-mistakes_files/figure-html/cubes-45.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.491 (Money: +0.495)
+  0.675 0.190 0.007 - 0.325 0.052 0.001
+Cubeful equities:
+1. Double, take        +0.902
+2. Double, pass        +1.000  (+0.098)
+3. No double           +0.761  (-0.140)
+Proper cube action: Double, take
+
+XGID=-b-BBBCBBA-------bcccb-A--:0:0:1:32:0:5:0:13:10
+File: Llabba - Hodgey 13pt Backgammon Studio 2023_08_05 10_15_37_003.txt
+Move: 17</code></pre>
+</section>
+<section id="position-6-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-6-3">Position 6<img src="player-mistakes_files/figure-html/cubes-46.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.492 (Money: +0.498)
+  0.689 0.187 0.007 - 0.311 0.071 0.002
+Cubeful equities:
+1. Double, take        +0.932
+2. Double, pass        +1.000  (+0.068)
+3. No double           +0.781  (-0.151)
+Proper cube action: Double, take
+
+XGID=-b-BBBCBA----B---cccbb-A--:0:0:1:54:0:5:0:13:10
+File: Llabba - Hodgey 13pt Backgammon Studio 2023_08_05 10_15_37_003.txt
+Move: 15</code></pre>
+</section>
+<section id="position-7-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-7-2">Position 7<img src="player-mistakes_files/figure-html/cubes-47.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.464 (Money: +0.460)
+  0.649 0.242 0.019 - 0.351 0.094 0.005
+Cubeful equities:
+1. Double, take        +0.947
+2. Double, pass        +1.000  (+0.053)
+3. No double           +0.783  (-0.165)
+Proper cube action: Double, take
+
+XGID=-b---BD-CA--bCb--c-e---aB-:0:0:1:41:1:4:0:9:10
+File: GrigoryRevaz - Llabba 9pt Backgammon Studio 2023_09_14 09_36_55_004.txt
+Move: 5</code></pre>
+</section>
+<section id="position-8-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-8-2">Position 8<img src="player-mistakes_files/figure-html/cubes-48.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.600 (Money: +0.604)
+  0.705 0.268 0.011 - 0.295 0.081 0.004
+Cubeful equities:
+1. Double, pass        +1.000
+2. Double, take        +1.053  (+0.053)
+3. No double           +0.855  (-0.145)
+Proper cube action: Double, pass
+
+XGID=--bBdBB-CA---B----Bbbcb-A-:0:0:1:43:4:5:0:13:10
+File: Daisy - Llabba 13pt Backgammon Studio 2023_09_28 12_45_23_005.txt
+Move: 26</code></pre>
+</section>
+<section id="position-9-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-9-2">Position 9<img src="player-mistakes_files/figure-html/cubes-49.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.493 (Money: +0.480)
+  0.712 0.097 0.001 - 0.288 0.041 0.002
+Cubeful equities:
+1. Double, take        +0.819
+2. Double, pass        +1.000  (+0.181)
+3. No double           +0.710  (-0.109)
+Proper cube action: Double, take
+
+XGID=aB---bFB--B-C---bbbc-b-a--:0:0:1:31:7:6:0:13:10
+File: Llabba - accr66 13pt Backgammon Studio 2023_01_25 20_19_48_008.txt
+Move: 18</code></pre>
+</section>
+<section id="position-10-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-10-2">Position 10<img src="player-mistakes_files/figure-html/cubes-50.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.317 (Money: +0.361)
+  0.626 0.190 0.007 - 0.374 0.085 0.004
+Cubeful equities:
+1. Double, take        +0.840
+2. Double, pass        +1.000  (+0.160)
+3. No double           +0.701  (-0.139)
+Proper cube action: Double, take
+
+XGID=-a--b-EBCB-aeB-----cc---A-:0:0:1:51:1:11:0:13:10
+File: Llabba - Jaflo 13pt Backgammon Studio 2023_10_24 19_07_37_009.txt
+Move: 9</code></pre>
+</section>
+<section id="position-11-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-11-2">Position 11<img src="player-mistakes_files/figure-html/cubes-51.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.650 (Money: +0.646)
+  0.747 0.218 0.014 - 0.253 0.078 0.002
+Cubeful equities:
+1. Double, pass        +1.000
+2. Double, take        +1.141  (+0.141)
+3. No double           +0.895  (-0.105)
+Proper cube action: Double, pass
+
+XGID=-b---BCCB-A-bB----adbbB-b-:0:0:1:52:0:0:0:13:10
+File: TheOscar - Llabba 13pt Backgammon Studio 2023_09_22 20_15_24.txt
+Move: 8</code></pre>
+</section>
+<section id="position-12-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-12-2">Position 12<img src="player-mistakes_files/figure-html/cubes-52.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.624 (Money: +0.626)
+  0.814 0.000 0.000 - 0.186 0.002 0.000
+Cubeful equities:
+1. Double, take        +0.999
+2. Double, pass        +1.000  (+0.001)
+3. No double           +0.879  (-0.120)
+Proper cube action: Redouble, take
+
+XGID=aBBBCBBA---A--------bbbba-:1:1:1:42:10:9:0:13:10
+File: joro1313 - Llabba 13pt Backgammon Studio 2023_11_21 20_13_25_010.txt
+Move: 80</code></pre>
+</section>
+<section id="position-13-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-13-1">Position 13<img src="player-mistakes_files/figure-html/cubes-53.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.111 (Money: +0.108)
+  0.553 0.004 0.000 - 0.447 0.002 0.000
+Cubeful equities:
+1. Double, take        +0.654
+2. Double, pass        +1.000  (+0.346)
+3. No double           +0.525  (-0.129)
+Proper cube action: Redouble, take
+
+XGID=-BBBCCB----------bbcA-dbb-:2:1:1:51:5:7:0:13:10
+File: Llabba - DiablodelDados 13pt Backgammon Studio 2023_06_18 17_32_21_006.txt
+Move: 32</code></pre>
+</section>
+<section id="position-14-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-14-1">Position 14<img src="player-mistakes_files/figure-html/cubes-54.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.489 (Money: +0.493)
+  0.716 0.095 0.001 - 0.284 0.034 0.000
+Cubeful equities:
+1. Double, take        +0.913
+2. Double, pass        +1.000  (+0.087)
+3. No double           +0.774  (-0.140)
+Proper cube action: Double, take
+
+XGID=--AbBBC-BC-------bBbbbe---:0:0:1:41:1:7:0:13:10
+File: Llabba - Hodgey 13pt Backgammon Studio 2023_08_05 10_15_37_005.txt
+Move: 15</code></pre>
+</section>
+<section id="position-15-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-15-1">Position 15<img src="player-mistakes_files/figure-html/cubes-55.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.225 (Money: +0.279)
+  0.581 0.214 0.021 - 0.419 0.113 0.004
+Cubeful equities:
+1. Double, take        +0.766
+2. Double, pass        +1.000  (+0.234)
+3. No double           +0.637  (-0.129)
+Proper cube action: Double, take
+
+XGID=-a--a-EBCB-acBaa--acc----A:0:0:1:43:1:11:0:13:10
+File: Llabba - Jaflo 13pt Backgammon Studio 2023_10_24 19_07_37_009.txt
+Move: 13</code></pre>
+</section>
+<section id="position-16-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-16-1">Position 16<img src="player-mistakes_files/figure-html/cubes-56.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.792 (Money: +0.704)
+  0.704 0.339 0.012 - 0.296 0.053 0.002
+Cubeful equities:
+1. Double, take        +0.924
+2. Double, pass        +1.000  (+0.076)
+3. No double           +0.815  (-0.109)
+Proper cube action: Double, take
+
+XGID=aa--BBD-B---bCb--d-cBb----:0:0:1:44:9:3:0:13:10
+File: Llabba - gorkipelin 13pt Backgammon Studio 2023_08_16 10_36_52_008.txt
+Move: 8</code></pre>
+</section>
+<section id="position-17-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-17-1">Position 17<img src="player-mistakes_files/figure-html/cubes-57.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.399 (Money: +0.411)
+  0.640 0.207 0.017 - 0.360 0.089 0.004
+Cubeful equities:
+1. Double, take        +0.848
+2. Double, pass        +1.000  (+0.152)
+3. No double           +0.719  (-0.129)
+Proper cube action: Double, take
+
+XGID=-b--BaC-C--BbC---cbe-A-A--:0:0:1:54:0:7:0:13:10
+File: Llabba - Jaflo 13pt Backgammon Studio 2023_10_24 19_07_37_005.txt
+Move: 7</code></pre>
+</section>
+<section id="position-18-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-18-1">Position 18<img src="player-mistakes_files/figure-html/cubes-58.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.130 (Money: +0.158)
+  0.554 0.172 0.007 - 0.446 0.121 0.007
+Cubeful equities:
+1. Double, take        +0.487
+2. Double, pass        +1.000  (+0.513)
+3. No double           +0.373  (-0.114)
+Proper cube action: Double, take
+
+XGID=-aa--AD-C--AdD---d-e----B-:0:0:1:61:8:10:0:11:10
+File: Llabba - petruhl 11pt Backgammon Studio 2023_03_03 18_42_33_008.txt
+Move: 3</code></pre>
+</section>
+<section id="position-19-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-19-1">Position 19<img src="player-mistakes_files/figure-html/cubes-59.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.563 (Money: +0.491)
+  0.661 0.220 0.015 - 0.339 0.066 0.002
+Cubeful equities:
+1. Double, take        +0.937
+2. Double, pass        +1.000  (+0.063)
+3. No double           +0.756  (-0.181)
+Proper cube action: Double, take
+
+XGID=-b---BEBBA--e----c-bbC--a-:0:0:1:21:5:4:0:9:10
+File: GrigoryRevaz - Llabba 9pt Backgammon Studio 2023_09_14 09_36_55_005.txt
+Move: 14</code></pre>
+</section>
+<section id="position-20-1" class="level5">
+<h5 class="anchored" data-anchor-id="position-20-1">Position 20<img src="player-mistakes_files/figure-html/cubes-60.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.072 (Money: +0.161)
+  0.536 0.236 0.030 - 0.464 0.163 0.014
+Cubeful equities:
+1. Double, take        +0.637
+2. Double, pass        +1.000  (+0.363)
+3. No double           +0.532  (-0.105)
+Proper cube action: Double, take
+
+XGID=--aaBADABa--aB-b-cacAb--AA:0:0:1:65:4:11:0:13:10
+File: Llabba - Jaflo 13pt Backgammon Studio 2023_10_24 19_07_37_011.txt
+Move: 10</code></pre>
+</section>
+</section>
+<section id="error-0.2-1" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.2-1">Error &gt;0.2</h4>
+<section id="position-1-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-6">Position 1<img src="player-mistakes_files/figure-html/cubes-61.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.768 (Money: +0.768)
+  0.884 0.000 0.000 - 0.116 0.000 0.000
+Cubeful equities:
+1. Double, pass        +1.000
+2. Double, take        +1.162  (+0.162)
+3. No double           +0.768  (-0.232)
+Proper cube action: Redouble, pass
+
+XGID=-D--------------------a-b-:1:1:1:51:10:5:0:13:10
+File: Llabba - Iandaurca 13pt Backgammon Studio 2023_03_24 12_56_54_008.txt
+Move: 68</code></pre>
+</section>
+<section id="position-2-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-4">Position 2<img src="player-mistakes_files/figure-html/cubes-62.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.216 (Money: +0.309)
+  0.614 0.209 0.014 - 0.386 0.132 0.009
+Cubeful equities:
+1. Double, pass        +1.000
+2. Double, take        +1.098  (+0.098)
+3. No double           +0.758  (-0.242)
+Proper cube action: Double, pass
+
+XGID=-b-B-BC-A---bEa--b-e--c-B-:0:0:1:53:9:11:0:13:10
+File: Llabba - prpascha 13pt Backgammon Studio 2023_05_21 21_45_59_013.txt
+Move: 5</code></pre>
+</section>
+<section id="position-3-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-4">Position 3<img src="player-mistakes_files/figure-html/cubes-63.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.291 (Money: +0.291)
+  0.645 0.000 0.000 - 0.355 0.000 0.000
+Cubeful equities:
+1. Double, pass        +1.000
+2. Double, take        +1.010  (+0.010)
+3. No double           +0.716  (-0.284)
+Proper cube action: Redouble, pass
+
+XGID=-ABACB-------------b--db--:2:1:1:54:5:7:0:13:10
+File: Llabba - DiablodelDados 13pt Backgammon Studio 2023_06_18 17_32_21_006.txt
+Move: 42</code></pre>
+</section>
+<section id="position-4-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-4-4">Position 4<img src="player-mistakes_files/figure-html/cubes-64.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.195 (Money: +0.290)
+  0.604 0.211 0.019 - 0.396 0.140 0.010
+Cubeful equities:
+1. Double, pass        +1.000
+2. Double, take        +1.068  (+0.068)
+3. No double           +0.749  (-0.251)
+Proper cube action: Double, pass
+
+XGID=-b-B-BC-B-A-bCa--a-db-c-B-:0:0:1:53:9:11:0:13:10
+File: Llabba - prpascha 13pt Backgammon Studio 2023_05_21 21_45_59_013.txt
+Move: 7</code></pre>
+</section>
+</section>
+<section id="error-0.3-1" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.3-1">Error &gt;0.3</h4>
+</section>
+</section>
+<section id="wrong-take" class="level3">
+<h3 class="anchored" data-anchor-id="wrong-take">Wrong take</h3>
+<section id="error-0.05-2" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.05-2">Error &gt;0.05</h4>
+<section id="position-1-7" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-7">Position 1<img src="player-mistakes_files/figure-html/cubes-65.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.649 (Money: -0.606)
+  0.340 0.084 0.006 - 0.660 0.366 0.010
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.068  (-0.068)
+3. No double           -0.856  (+0.144)
+Proper cube action: Double, pass
+
+XGID=-a-BaCBa--a-BB--b--bbBcb-B:0:0:1:D:1:1:0:7:10
+File: kris - Llabba 7pt Backgammon Studio 2023_06_18 16_27_48_003.txt
+Move: 34</code></pre>
+</section>
+<section id="position-2-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-5">Position 2<img src="player-mistakes_files/figure-html/cubes-66.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.597 (Money: -0.606)
+  0.311 0.062 0.001 - 0.689 0.286 0.007
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.089  (-0.089)
+3. No double           -0.873  (+0.127)
+Proper cube action: Double, pass
+
+XGID=--Aaa-E-C---cE--ab-cbb-A--:0:0:1:D:6:4:0:13:10
+File: Llabba - aiueow 13pt Backgammon Studio 2023_03_13 21_37_10_007.txt
+Move: 10</code></pre>
+</section>
+<section id="position-3-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-5">Position 3<img src="player-mistakes_files/figure-html/cubes-67.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.521 (Money: -0.532)
+  0.366 0.069 0.002 - 0.634 0.329 0.007
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.064  (-0.064)
+3. No double           -0.850  (+0.150)
+Proper cube action: Double, pass
+
+XGID=--BBBcB--B--AC--ab-cbbA-b-:0:0:1:D:6:0:0:13:10
+File: TheOscar - Llabba 13pt Backgammon Studio 2023_09_22 20_15_24_005.txt
+Move: 22</code></pre>
+</section>
+<section id="position-4-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-4-5">Position 4<img src="player-mistakes_files/figure-html/cubes-68.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.159 (Money: -0.088)
+  0.501 0.152 0.011 - 0.499 0.241 0.012
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.068  (-0.068)
+3. No double           -0.740  (+0.260)
+Proper cube action: Redouble, pass
+
+XGID=-aaBBCCBa--------cabb-AbbB:1:-1:1:D:9:4:0:13:10
+File: Llabba - Ophris 13pt Backgammon Studio 2023_10_09 19_40_36_008.txt
+Move: 47</code></pre>
+</section>
+<section id="position-5-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-5-4">Position 5<img src="player-mistakes_files/figure-html/cubes-69.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.617 (Money: -0.613)
+  0.282 0.077 0.002 - 0.718 0.248 0.007
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.057  (-0.057)
+3. No double           -0.859  (+0.141)
+Proper cube action: Double, pass
+
+XGID=-D-cCBB--B--------bcbcAbA-:0:0:1:D:0:0:0:7:10
+File: crayon - Llabba 7pt Backgammon Studio 2023_05_23 13_07_53.txt
+Move: 22</code></pre>
+</section>
+<section id="position-6-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-6-4">Position 6<img src="player-mistakes_files/figure-html/cubes-70.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.251 (Money: -0.320)
+  0.421 0.078 0.002 - 0.579 0.239 0.004
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.076  (-0.076)
+3. No double           -0.767  (+0.233)
+Proper cube action: Double, pass
+
+XGID=-a--b-E-CB--cD-a-a-c-bb--A:0:0:1:D:11:9:0:13:10
+File: Llabba - Hodgey 13pt Backgammon Studio 2023_08_05 10_15_37_013.txt
+Move: 11</code></pre>
+</section>
+<section id="position-7-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-7-3">Position 7<img src="player-mistakes_files/figure-html/cubes-71.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.564 (Money: -0.568)
+  0.258 0.044 0.001 - 0.742 0.128 0.001
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.086  (-0.086)
+3. No double           -0.865  (+0.135)
+Proper cube action: Double, pass
+
+XGID=--BACBB-----bB---ccbBabAb-:0:0:1:D:6:0:0:13:10
+File: Llabba - Iandaurca 13pt Backgammon Studio 2023_03_24 12_56_54_003.txt
+Move: 24</code></pre>
+</section>
+</section>
+<section id="error-0.1-2" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.1-2">Error &gt;0.1</h4>
+<section id="position-1-8" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-8">Position 1<img src="player-mistakes_files/figure-html/cubes-72.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.558 (Money: -0.568)
+  0.342 0.069 0.003 - 0.658 0.315 0.010
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.146  (-0.146)
+3. No double           -0.875  (+0.125)
+Proper cube action: Double, pass
+
+XGID=-a---aD-D---cE-aab-cb--AaA:0:0:1:D:6:0:0:13:10
+File: lionheart - Llabba 13pt Backgammon Studio 2023_06_29 12_55_23_004.txt
+Move: 8</code></pre>
+</section>
+<section id="position-2-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-6">Position 2<img src="player-mistakes_files/figure-html/cubes-73.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.631 (Money: -0.622)
+  0.215 0.012 0.000 - 0.785 0.065 0.000
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.185  (-0.185)
+3. No double           -0.887  (+0.113)
+Proper cube action: Double, pass
+
+XGID=-ABBABB-B----a---bcbc-Cbb-:0:0:1:D:6:7:0:13:10
+File: Llabba - DrVirus 13pt Backgammon Studio 2023_04_17 14_13_25_009.txt
+Move: 30</code></pre>
+</section>
+<section id="position-3-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-6">Position 3<img src="player-mistakes_files/figure-html/cubes-74.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.626 (Money: -0.625)
+  0.208 0.018 0.001 - 0.792 0.057 0.003
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.125  (-0.125)
+3. No double           -0.883  (+0.117)
+Proper cube action: Double, pass
+
+XGID=-B-BBBCA-A---Ab--a-cebAb--:0:0:1:D:0:0:0:13:10
+File: CroatianFish - Llabba 13pt Backgammon Studio 2023_07_23 18_59_01.txt
+Move: 24</code></pre>
+</section>
+<section id="position-4-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-4-6">Position 4<img src="player-mistakes_files/figure-html/cubes-75.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.504 (Money: -0.515)
+  0.356 0.093 0.004 - 0.644 0.298 0.027
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.183  (-0.183)
+3. No double           -0.868  (+0.132)
+Proper cube action: Double, pass
+
+XGID=a-A--CBbB---bDA--bacbAb-A-:0:0:1:D:8:0:0:13:10
+File: lionheart - Llabba 13pt Backgammon Studio 2023_06_29 12_55_23_005.txt
+Move: 11</code></pre>
+</section>
+<section id="position-5-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-5-5">Position 5<img src="player-mistakes_files/figure-html/cubes-76.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.625 (Money: -0.621)
+  0.279 0.050 0.001 - 0.721 0.228 0.004
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.168  (-0.168)
+3. No double           -0.893  (+0.107)
+Proper cube action: Double, pass
+
+XGID=----B-EBB-a-dA---c-bbB-abA:0:0:1:D:4:1:0:13:10
+File: Selbs - Llabba 13pt Backgammon Studio 2023_03_24 18_10_57_005.txt
+Move: 17</code></pre>
+</section>
+<section id="position-6-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-6-5">Position 6<img src="player-mistakes_files/figure-html/cubes-77.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.636 (Money: -0.634)
+  0.218 0.025 0.000 - 0.782 0.095 0.001
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.107  (-0.107)
+3. No double           -0.885  (+0.115)
+Proper cube action: Double, pass
+
+XGID=-A-DBBB-A-----c-bc-bbB-baA:0:0:1:D:0:2:0:13:10
+File: Llabba - Jaflo 13pt Backgammon Studio 2023_10_24 19_07_37_002.txt
+Move: 20</code></pre>
+</section>
+</section>
+<section id="error-0.2-2" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.2-2">Error &gt;0.2</h4>
+<section id="position-1-9" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-9">Position 1<img src="player-mistakes_files/figure-html/cubes-78.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.697 (Money: -0.677)
+  0.324 0.066 0.004 - 0.676 0.344 0.051
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.272  (-0.272)
+3. No double           -0.934  (+0.066)
+Proper cube action: Double, pass
+
+XGID=-b--BaD-----cE---c-cbaAAAA:0:0:1:D:5:3:0:13:10
+File: Gibraltar_Mike - Llabba 13pt Backgammon Studio 2023_03_22 21_22_47_006.txt
+Move: 20</code></pre>
+</section>
+<section id="position-2-7" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-7">Position 2<img src="player-mistakes_files/figure-html/cubes-79.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.662 (Money: -0.673)
+  0.303 0.058 0.002 - 0.697 0.333 0.004
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.231  (-0.231)
+3. No double           -0.916  (+0.084)
+Proper cube action: Double, pass
+
+XGID=-a----FbD---bD---a-cbb-bA-:0:0:1:D:6:4:0:13:10
+File: Llabba - Arkhimedes 13pt Backgammon Studio 2023_11_10 13_57_19_004.txt
+Move: 10</code></pre>
+</section>
+<section id="position-3-7" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-7">Position 3<img src="player-mistakes_files/figure-html/cubes-80.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.573 (Money: -0.582)
+  0.279 0.078 0.001 - 0.721 0.205 0.014
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.240  (-0.240)
+3. No double           -0.891  (+0.109)
+Proper cube action: Double, pass
+
+XGID=-A-bC-CCBA--c-a--bcbb--AA-:0:0:1:D:9:5:0:13:10
+File: Llabba - prpascha 13pt Backgammon Studio 2023_05_21 21_45_59_009.txt
+Move: 18</code></pre>
+</section>
+<section id="position-4-7" class="level5">
+<h5 class="anchored" data-anchor-id="position-4-7">Position 4<img src="player-mistakes_files/figure-html/cubes-81.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.515 (Money: -0.553)
+  0.318 0.072 0.002 - 0.682 0.257 0.007
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.245  (-0.245)
+3. No double           -0.877  (+0.123)
+Proper cube action: Double, pass
+
+XGID=-a-B--DbC---bD---cbcb-A--A:0:0:1:D:11:6:0:13:10
+File: Llabba - Djmarek 13pt Backgammon Studio 2023_03_26 13_56_31_008.txt
+Move: 9</code></pre>
+</section>
+<section id="position-5-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-5-6">Position 5<img src="player-mistakes_files/figure-html/cubes-82.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.656 (Money: -0.649)
+  0.308 0.049 0.001 - 0.692 0.286 0.031
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.241  (-0.241)
+3. No double           -0.916  (+0.084)
+Proper cube action: Double, pass
+
+XGID=----BbC-C---cDa-aa-cb--bBA:0:0:1:D:2:0:0:7:10
+File: Llabba - gorkipelin 7pt Backgammon Studio 2023_08_29 10_23_07_003.txt
+Move: 10</code></pre>
+</section>
+<section id="position-6-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-6-6">Position 6<img src="player-mistakes_files/figure-html/cubes-83.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.664 (Money: -0.628)
+  0.236 0.033 0.000 - 0.764 0.129 0.003
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.279  (-0.279)
+3. No double           -0.905  (+0.095)
+Proper cube action: Double, pass
+
+XGID=-B-ACBB--B--c----cbcbA-Bb-:0:0:1:D:1:3:0:7:10
+File: redmangr - Llabba 7pt Backgammon Studio 2023_10_13 15_01_02_004.txt
+Move: 17</code></pre>
+</section>
+</section>
+<section id="error-0.3-2" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.3-2">Error &gt;0.3</h4>
+<section id="position-1-10" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-10">Position 1<img src="player-mistakes_files/figure-html/cubes-84.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.686 (Money: -0.633)
+  0.209 0.009 0.000 - 0.791 0.059 0.001
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.488  (-0.488)
+3. No double           -0.916  (+0.084)
+Proper cube action: Double, pass
+
+XGID=-BBBBBA--------c-cBcBbb-b-:0:0:1:D:10:11:0:13:10
+File: Greathumics - Llabba 13pt Backgammon Studio 2023_01_29 19_57_58_009.txt
+Move: 26</code></pre>
+</section>
+<section id="position-2-8" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-8">Position 2<img src="player-mistakes_files/figure-html/cubes-85.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.824 (Money: -0.816)
+  0.260 0.056 0.001 - 0.740 0.377 0.016
+Cubeful equities:
+1. No double           -1.008
+2. Double, take        -1.481  (-0.473)
+3. Double, pass        -1.000  (+0.008)
+Proper cube action: Too good to double, pass (1.7%)
+
+XGID=-ABBa-ADB-a-b----bBccabA--:0:0:1:D:0:0:0:7:10
+File: Llabba - woknroll 7pt Backgammon Studio 2023_07_11 18_18_59.txt
+Move: 31</code></pre>
+</section>
+<section id="position-3-8" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-8">Position 3<img src="player-mistakes_files/figure-html/cubes-86.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.753 (Money: -0.748)
+  0.270 0.055 0.002 - 0.730 0.340 0.004
+Cubeful equities:
+1. Double, pass        -1.000
+2. Double, take        -1.359  (-0.359)
+3. No double           -0.964  (+0.036)
+Proper cube action: Double, pass
+
+XGID=---bB-F-C---bC-a--acbb-b-A:0:0:1:D:1:0:0:13:10
+File: Llabba - grahamd 13pt Backgammon Studio 2023_05_20 19_06_17_002.txt
+Move: 20</code></pre>
+</section>
+</section>
+</section>
+<section id="wrong-pass" class="level3">
+<h3 class="anchored" data-anchor-id="wrong-pass">Wrong pass</h3>
+<section id="error-0.05-3" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.05-3">Error &gt;0.05</h4>
+<section id="position-1-11" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-11">Position 1<img src="player-mistakes_files/figure-html/cubes-87.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.593 (Money: -0.596)
+  0.233 0.008 0.000 - 0.767 0.069 0.001
+Cubeful equities:
+1. Double, take        -0.948
+2. Double, pass        -1.000  (-0.052)
+3. No double           -0.805  (+0.143)
+Proper cube action: Double, take
+
+XGID=-CDBB-B--a------Ab-e--cbbA:0:0:1:D:0:2:0:7:10
+File: Maciel - Llabba 7pt Backgammon Studio 2023_05_17 14_32_55_002.txt
+Move: 30</code></pre>
+</section>
+<section id="position-2-9" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-9">Position 2<img src="player-mistakes_files/figure-html/cubes-88.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.362 (Money: -0.386)
+  0.394 0.101 0.005 - 0.606 0.266 0.015
+Cubeful equities:
+1. Double, take        -0.900
+2. Double, pass        -1.000  (-0.100)
+3. No double           -0.746  (+0.155)
+Proper cube action: Double, take
+
+XGID=-b----E-C-A-dD---bad---bAA:0:0:1:D:9:1:0:13:10
+File: Llabba - Esalib 13pt Backgammon Studio 2023_04_03 12_45_36_005.txt
+Move: 6</code></pre>
+</section>
+<section id="position-3-9" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-9">Position 3<img src="player-mistakes_files/figure-html/cubes-89.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.447 (Money: -0.460)
+  0.347 0.079 0.003 - 0.653 0.231 0.006
+Cubeful equities:
+1. Double, take        -0.926
+2. Double, pass        -1.000  (-0.074)
+3. No double           -0.769  (+0.156)
+Proper cube action: Double, take
+
+XGID=---A-BB-CAa-bB---cde-B-AA-:0:0:1:D:10:7:0:13:10
+File: Selbs - Llabba 13pt Backgammon Studio 2023_03_24 18_10_57_015.txt
+Move: 10</code></pre>
+</section>
+<section id="position-4-8" class="level5">
+<h5 class="anchored" data-anchor-id="position-4-8">Position 4<img src="player-mistakes_files/figure-html/cubes-90.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.572 (Money: -0.558)
+  0.279 0.081 0.000 - 0.721 0.189 0.009
+Cubeful equities:
+1. Double, take        -0.938
+2. Double, pass        -1.000  (-0.062)
+3. No double           -0.816  (+0.123)
+Proper cube action: Redouble, take
+
+XGID=aDDCaBA----------bbbcbAb--:1:-1:1:D:7:7:0:13:10
+File: Daisy - Llabba 13pt Backgammon Studio 2023_09_28 12_45_23_008.txt
+Move: 42</code></pre>
+</section>
+<section id="position-5-7" class="level5">
+<h5 class="anchored" data-anchor-id="position-5-7">Position 5<img src="player-mistakes_files/figure-html/cubes-91.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.440 (Money: -0.454)
+  0.363 0.080 0.004 - 0.637 0.247 0.016
+Cubeful equities:
+1. Double, take        -0.939
+2. Double, pass        -1.000  (-0.061)
+3. No double           -0.771  (+0.168)
+Proper cube action: Double, take
+
+XGID=-aa---E-Ca--eD---b-c-b-A-B:0:0:1:D:10:7:0:13:10
+File: Llabba - Arkhimedes 13pt Backgammon Studio 2023_11_10 13_57_19_007.txt
+Move: 7</code></pre>
+</section>
+<section id="position-6-7" class="level5">
+<h5 class="anchored" data-anchor-id="position-6-7">Position 6<img src="player-mistakes_files/figure-html/cubes-92.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.457 (Money: -0.469)
+  0.308 0.059 0.001 - 0.692 0.141 0.004
+Cubeful equities:
+1. Double, take        -0.912
+2. Double, pass        -1.000  (-0.088)
+3. No double           -0.772  (+0.140)
+Proper cube action: Double, take
+
+XGID=---AbBCCB----B---cccbb-B--:0:0:1:D:9:3:0:13:10
+File: Llabba - Ophris 13pt Backgammon Studio 2023_10_09 19_40_36_007.txt
+Move: 17</code></pre>
+</section>
+</section>
+<section id="error-0.1-3" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.1-3">Error &gt;0.1</h4>
+<section id="position-1-12" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-12">Position 1<img src="player-mistakes_files/figure-html/cubes-93.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.485 (Money: -0.471)
+  0.353 0.071 0.002 - 0.647 0.233 0.017
+Cubeful equities:
+1. Double, take        -0.848
+2. Double, pass        -1.000  (-0.152)
+3. No double           -0.728  (+0.120)
+Proper cube action: Double, take
+
+XGID=--a--aE-C--AeD---c-c-b--AA:0:0:1:D:3:1:0:7:10
+File: kris - Llabba 7pt Backgammon Studio 2023_06_18 16_27_48_004.txt
+Move: 7</code></pre>
+</section>
+<section id="position-2-10" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-10">Position 2<img src="player-mistakes_files/figure-html/cubes-94.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.578 (Money: -0.579)
+  0.218 0.006 0.000 - 0.782 0.022 0.000
+Cubeful equities:
+1. Double, take        -0.818
+2. Double, pass        -1.000  (-0.182)
+3. No double           -0.779  (+0.038)
+Proper cube action: Redouble, take
+
+XGID=-BBBCC--A--------b-d-cBae-:1:-1:1:D:0:4:0:13:10
+File: Spiril - Llabba 13pt Backgammon Studio 2023_10_30 20_30_27_003.txt
+Move: 42</code></pre>
+</section>
+<section id="position-3-10" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-10">Position 3<img src="player-mistakes_files/figure-html/cubes-95.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.450 (Money: -0.460)
+  0.383 0.072 0.003 - 0.617 0.297 0.003
+Cubeful equities:
+1. Double, take        -0.891
+2. Double, pass        -1.000  (-0.109)
+3. No double           -0.747  (+0.144)
+Proper cube action: Double, take
+
+XGID=---ABbC-C--BcC--ab-ba-b-bA:0:0:1:D:4:1:0:7:10
+File: leochili75 - Llabba 7pt Backgammon Studio 2023_05_07 18_12_00_003.txt
+Move: 11</code></pre>
+</section>
+<section id="position-4-9" class="level5">
+<h5 class="anchored" data-anchor-id="position-4-9">Position 4<img src="player-mistakes_files/figure-html/cubes-96.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.379 (Money: -0.380)
+  0.259 0.095 0.006 - 0.741 0.000 0.000
+Cubeful equities:
+1. Double, take        -0.826
+2. Double, pass        -1.000  (-0.174)
+3. No double           -0.706  (+0.119)
+Proper cube action: Double, take
+
+XGID=-bDCDaaa-----------bbbbb-A:0:0:1:D:4:0:0:7:10
+File: tripleit - Llabba 7pt Backgammon Studio 2023_06_25 16_15_30_002.txt
+Move: 49</code></pre>
+</section>
+</section>
+<section id="error-0.2-3" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.2-3">Error &gt;0.2</h4>
+<section id="position-1-13" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-13">Position 1<img src="player-mistakes_files/figure-html/cubes-97.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.503 (Money: -0.516)
+  0.299 0.066 0.000 - 0.701 0.180 0.001
+Cubeful equities:
+1. Double, take        -0.759
+2. Double, pass        -1.000  (-0.241)
+3. No double           -0.683  (+0.076)
+Proper cube action: Double, take
+
+XGID=-BB-bCD-B--A-------bbacbcA:0:0:1:D:3:4:0:9:10
+File: Llabba - faith23 9pt Backgammon Studio 2023_09_16 10_54_39_005.txt
+Move: 31</code></pre>
+</section>
+<section id="position-2-11" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-11">Position 2<img src="player-mistakes_files/figure-html/cubes-98.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.528 (Money: -0.521)
+  0.361 0.097 0.005 - 0.639 0.309 0.035
+Cubeful equities:
+1. Double, take        -0.792
+2. Double, pass        -1.000  (-0.208)
+3. No double           -0.699  (+0.093)
+Proper cube action: Double, take
+
+XGID=aaB-B-CB-----Bab--bdAbb-BA:0:0:1:D:0:0:0:13:10
+File: Llabba - Hodgey 13pt Backgammon Studio 2023_08_05 10_15_37.txt
+Move: 17</code></pre>
+</section>
+</section>
+<section id="error-0.3-3" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.3-3">Error &gt;0.3</h4>
+<section id="position-1-14" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-14">Position 1<img src="player-mistakes_files/figure-html/cubes-99.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity -0.505 (Money: -0.500)
+  0.325 0.032 0.001 - 0.675 0.178 0.003
+Cubeful equities:
+1. Double, take        -0.667
+2. Double, pass        -1.000  (-0.333)
+3. No double           -0.638  (+0.029)
+Proper cube action: Double, take
+
+XGID=--ABBBBAA--------e-dBbbBb-:0:0:1:D:3:6:0:13:10
+File: Llabba - DiablodelDados 13pt Backgammon Studio 2023_06_18 17_32_21_004.txt
+Move: 22</code></pre>
+</section>
+</section>
+</section>
+<section id="wrong-cash" class="level3">
+<h3 class="anchored" data-anchor-id="wrong-cash">Wrong cash</h3>
+<section id="error-0.05-4" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.05-4">Error &gt;0.05</h4>
+<section id="position-1-15" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-15">Position 1<img src="player-mistakes_files/figure-html/cubes-100.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.986 (Money: +0.985)
+  0.796 0.434 0.005 - 0.204 0.046 0.001
+Cubeful equities:
+1. No double           +1.061
+2. Double, take        +1.425  (+0.364)
+3. Double, pass        +1.000  (-0.061)
+Proper cube action: Too good to redouble, pass (14.4%)
+
+XGID=aB-CB-BBB-ab--A--b-cbA-bb-:1:1:1:00:2:0:0:9:10
+File: mitnick - Llabba 9pt Backgammon Studio 2023_09_18 20_03_49_002.txt
+Move: 33</code></pre>
+</section>
+<section id="position-2-12" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-12">Position 2<img src="player-mistakes_files/figure-html/cubes-101.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +1.156 (Money: +1.032)
+  0.766 0.538 0.008 - 0.234 0.044 0.002
+Cubeful equities:
+1. No double           +1.081
+2. Double, take        +1.371  (+0.291)
+3. Double, pass        +1.000  (-0.081)
+Proper cube action: Too good to double, pass (21.7%)
+
+XGID=bBBBb-D---A-cB-A-b-d--bA--:0:0:1:00:9:0:0:13:10
+File: TheOscar - Llabba 13pt Backgammon Studio 2023_09_22 20_15_24_007.txt
+Move: 15</code></pre>
+</section>
+<section id="position-3-11" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-11">Position 3<img src="player-mistakes_files/figure-html/cubes-102.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.936 (Money: +0.925)
+  0.760 0.443 0.015 - 0.240 0.051 0.001
+Cubeful equities:
+1. No double           +1.094
+2. Double, take        +1.715  (+0.621)
+3. Double, pass        +1.000  (-0.094)
+Proper cube action: Too good to double, pass (13.1%)
+
+XGID=aaBBB-C-----eC-A-bBc--c---:0:0:1:00:0:0:0:13:10
+File: FAETHON - Llabba 13pt Backgammon Studio 2023_06_29 18_26_07.txt
+Move: 14</code></pre>
+</section>
+<section id="position-4-10" class="level5">
+<h5 class="anchored" data-anchor-id="position-4-10">Position 4<img src="player-mistakes_files/figure-html/cubes-103.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.984 (Money: +0.978)
+  0.875 0.216 0.011 - 0.125 0.000 0.000
+Cubeful equities:
+1. No double           +1.091
+2. Double, take        +1.877  (+0.786)
+3. Double, pass        +1.000  (-0.091)
+Proper cube action: Too good to double, pass (10.4%)
+
+XGID=-bBBCDB----------aabbbbba-:0:0:1:00:2:0:0:13:10
+File: Llabba - DiablodelDados 13pt Backgammon Studio 2023_06_18 17_32_21_002.txt
+Move: 31</code></pre>
+</section>
+<section id="position-5-8" class="level5">
+<h5 class="anchored" data-anchor-id="position-5-8">Position 5<img src="player-mistakes_files/figure-html/cubes-104.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +0.996 (Money: +0.919)
+  0.748 0.458 0.030 - 0.252 0.062 0.002
+Cubeful equities:
+1. No double           +1.092
+2. Double, take        +1.656  (+0.564)
+3. Double, pass        +1.000  (-0.092)
+Proper cube action: Too good to double, pass (14.0%)
+
+XGID=bA--B-E-B---cC--abAc-Ac-a-:0:0:1:00:7:5:0:13:10
+File: Selbs - Llabba 13pt Backgammon Studio 2023_03_24 18_10_57_010.txt
+Move: 8</code></pre>
+</section>
+</section>
+<section id="error-0.1-4" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.1-4">Error &gt;0.1</h4>
+<section id="position-1-16" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-16">Position 1<img src="player-mistakes_files/figure-html/cubes-105.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +1.126 (Money: +1.161)
+  0.907 0.348 0.000 - 0.093 0.000 0.000
+Cubeful equities:
+1. No double           +1.157
+2. Double, take        +1.447  (+0.290)
+3. Double, pass        +1.000  (-0.157)
+Proper cube action: Too good to redouble, pass (35.1%)
+
+XGID=-DDa-B----a------a-bbbbbb-:1:1:1:00:10:9:0:13:10
+File: Llabba - accr66 13pt Backgammon Studio 2023_01_25 20_19_48_012.txt
+Move: 56</code></pre>
+</section>
+<section id="position-2-13" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-13">Position 2<img src="player-mistakes_files/figure-html/cubes-106.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +1.027 (Money: +0.981)
+  0.843 0.299 0.001 - 0.157 0.004 0.000
+Cubeful equities:
+1. No double           +1.142
+2. Double, take        +2.010  (+0.868)
+3. Double, pass        +1.000  (-0.142)
+Proper cube action: Too good to double, pass (14.1%)
+
+XGID=-DCaBbF----------babbb-ba-:0:0:1:00:7:6:0:13:10
+File: Llabba - accr66 13pt Backgammon Studio 2023_01_25 20_19_48_008.txt
+Move: 28</code></pre>
+</section>
+<section id="position-3-12" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-12">Position 3<img src="player-mistakes_files/figure-html/cubes-107.png" class="img-fluid" width="672"></h5>
+<pre><code>Cube analysis
+0-ply cubeless equity +1.054 (Money: +1.058)
+  0.826 0.425 0.026 - 0.174 0.045 0.001
+Cubeful equities:
+1. No double           +1.115
+2. Double, take        +1.573  (+0.458)
+3. Double, pass        +1.000  (-0.115)
+Proper cube action: Too good to redouble, pass (20.1%)
+
+XGID=aaCBBBB------Ba--AbbbbbAb-:1:1:1:00:5:2:0:13:10
+File: Llabba - erimitis 13pt Backgammon Studio 2023_02_12 20_29_51_006.txt
+Move: 24</code></pre>
+</section>
+</section>
+<section id="error-0.2-4" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.2-4">Error &gt;0.2</h4>
+</section>
+<section id="error-0.3-4" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.3-4">Error &gt;0.3</h4>
+</section>
+</section>
+</div>
+</section>
+<section id="checker-plays" class="level2">
+<h2 class="anchored" data-anchor-id="checker-plays">Checker plays</h2>
+<div class="cell" data-hash="player-mistakes_cache/html/checker_b731a5778f156c3c06a31bda7c19ef49">
+<section id="move-no.-0" class="level3">
+<h3 class="anchored" data-anchor-id="move-no.-0">Move no. &gt;0</h3>
+<section id="error-0.05-5" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.05-5">Error &gt;0.05</h4>
+<section id="position-1-17" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-17">Position 1<img src="player-mistakes_files/figure-html/checker-1.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    8/4 6/4                      Eq.: -0.321
+     2. 0-ply    24/22 24/20                  Eq.: -0.341 (-0.019)
+     3. 0-ply    13/7                         Eq.: -0.372 (-0.050)
+*    4. 0-ply    24/18                        Eq.: -0.379 (-0.058)
+     5. 0-ply    7/5*/1*                      Eq.: -0.393 (-0.071)
+
+XGID=-a---aEBB---dD-a-b-d-b--B-:0:0:1:42:2:0:0:13:10
+File: Llabba - emperor 13pt Backgammon Studio 2023_11_07 15_53_55_002.txt
+Move: 4</code></pre>
+</section>
+<section id="position-2-14" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-14">Position 2<img src="player-mistakes_files/figure-html/checker-2.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    6/5* 6/1*                    Eq.: -0.243
+     2. 0-ply    24/18                        Eq.: -0.280 (-0.037)
+*    3. 0-ply    13/8 6/5*                    Eq.: -0.298 (-0.055)
+     4. 0-ply    24/23 6/1*                   Eq.: -0.328 (-0.085)
+     5. 0-ply    8/3 6/5*                     Eq.: -0.363 (-0.120)
+
+XGID=-a-B-aE-C---dC---c-db---B-:0:0:1:51:2:0:0:13:10
+File: lionheart - Llabba 13pt Backgammon Studio 2023_06_29 12_55_23_003.txt
+Move: 4</code></pre>
+</section>
+<section id="position-3-13" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-13">Position 3<img src="player-mistakes_files/figure-html/checker-3.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/15                        Eq.: -0.322
+*    2. 0-ply    24/18 13/10                  Eq.: -0.374 (-0.053)
+     3. 0-ply    13/4                         Eq.: -0.383 (-0.061)
+     4. 0-ply    13/10 13/7                   Eq.: -0.389 (-0.068)
+     5. 0-ply    24/21 13/7                   Eq.: -0.393 (-0.071)
+
+XGID=-b----E-C---eE---b-d---bB-:0:0:1:63:9:1:0:13:10
+File: Llabba - Esalib 13pt Backgammon Studio 2023_04_03 12_45_36_005.txt
+Move: 2</code></pre>
+</section>
+<section id="position-4-11" class="level5">
+<h5 class="anchored" data-anchor-id="position-4-11">Position 4<img src="player-mistakes_files/figure-html/checker-4.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/20 6/4                   Eq.: -0.343
+     2. 0-ply    bar/20 24/22                 Eq.: -0.351 (-0.008)
+     3. 0-ply    bar/20 9/7                   Eq.: -0.369 (-0.026)
+     4. 0-ply    bar/20 13/11                 Eq.: -0.374 (-0.031)
+     5. 0-ply    bar/18                       Eq.: -0.380 (-0.037)
+*    7. 0-ply    bar/23 9/4                   Eq.: -0.401 (-0.058)
+
+XGID=-----aD-CA--eD-a-c-e----BA:0:0:1:52:10:11:0:13:10
+File: Greathumics - Llabba 13pt Backgammon Studio 2023_01_29 19_57_58_009.txt
+Move: 4</code></pre>
+</section>
+<section id="position-5-9" class="level5">
+<h5 class="anchored" data-anchor-id="position-5-9">Position 5<img src="player-mistakes_files/figure-html/checker-5.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/18                       Eq.: -0.539
+*    2. 0-ply    bar/24 13/7                  Eq.: -0.626 (-0.088)
+     3. 0-ply    bar/24 8/2                   Eq.: -0.783 (-0.244)
+
+XGID=-a--a-E-C---cE-aac-e----AA:0:0:1:61:4:0:0:7:10
+File: SniperKitten - Llabba 7pt Backgammon Studio 2023_09_08 18_20_16_003.txt
+Move: 4</code></pre>
+</section>
+<section id="position-6-8" class="level5">
+<h5 class="anchored" data-anchor-id="position-6-8">Position 6<img src="player-mistakes_files/figure-html/checker-6.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/15                        Eq.: -0.680
+*    2. 0-ply    24/21 13/7                   Eq.: -0.731 (-0.051)
+     3. 0-ply    24/21 24/18                  Eq.: -0.750 (-0.070)
+     4. 0-ply    13/7 6/3                     Eq.: -0.774 (-0.095)
+     5. 0-ply    24/18 13/10                  Eq.: -0.795 (-0.115)
+
+XGID=----bBD-B---cEa--b-eb---B-:0:0:1:63:11:0:0:13:10
+File: TheOscar - Llabba 13pt Backgammon Studio 2023_09_22 20_15_24_009.txt
+Move: 4</code></pre>
+</section>
+<section id="position-7-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-7-4">Position 7<img src="player-mistakes_files/figure-html/checker-7.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/21 13/9                   Eq.: -0.156
+     2. 0-ply    24/20 13/10                  Eq.: -0.158 (-0.003)
+     3. 0-ply    24/21 24/20                  Eq.: -0.190 (-0.034)
+*    4. 0-ply    13/10 13/9                   Eq.: -0.208 (-0.052)
+     5. 0-ply    24/20 6/3                    Eq.: -0.269 (-0.114)
+
+XGID=-b----E-C---eE---c-e----B-:0:0:1:43:8:1:0:13:10
+File: branco1304 - Llabba 13pt Backgammon Studio 2023_10_19 19_02_52_006.txt
+Move: 1</code></pre>
+</section>
+<section id="position-8-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-8-3">Position 8<img src="player-mistakes_files/figure-html/checker-8.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/21                        Eq.: -0.276
+     2. 0-ply    24/23 13/11                  Eq.: -0.279 (-0.003)
+     3. 0-ply    24/23 24/22                  Eq.: -0.290 (-0.014)
+     4. 0-ply    13/10                        Eq.: -0.320 (-0.044)
+     5. 0-ply    24/22 6/5                    Eq.: -0.336 (-0.061)
+*    6. 0-ply    13/11 6/5                    Eq.: -0.346 (-0.071)
+
+XGID=-b----E-C---eE---c-e----B-:0:0:1:21:10:2:0:13:10
+File: Bulgakov - Llabba 13pt Backgammon Studio 2023_09_12 13_54_06_006.txt
+Move: 1</code></pre>
+</section>
+<section id="position-9-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-9-3">Position 9<img src="player-mistakes_files/figure-html/checker-9.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    21/18(2) 8/5(2)              Eq.: -0.349
+     2. 0-ply    21/18(2) 13/10 8/5           Eq.: -0.357 (-0.007)
+     3. 0-ply    21/18(2) 13/10(2)            Eq.: -0.359 (-0.010)
+     4. 0-ply    21/18(2) 13/7                Eq.: -0.360 (-0.010)
+     5. 0-ply    21/18(2) 13/10 6/3           Eq.: -0.361 (-0.012)
+
+XGID=------E-D---cDbb-c-e-B----:0:0:1:33:6:1:1:7:10
+File: tripleit - Llabba 7pt Backgammon Studio 2023_06_25 16_15_30_004.txt
+Move: 5</code></pre>
+</section>
+<section id="position-10-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-10-3">Position 10<img src="player-mistakes_files/figure-html/checker-10.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/21                        Eq.: -0.267
+     2. 0-ply    24/23 13/11                  Eq.: -0.276 (-0.008)
+     3. 0-ply    24/23 24/22                  Eq.: -0.278 (-0.011)
+     4. 0-ply    13/10                        Eq.: -0.303 (-0.036)
+     5. 0-ply    24/22 6/5                    Eq.: -0.310 (-0.043)
+*    6. 0-ply    13/11 6/5                    Eq.: -0.319 (-0.052)
+
+XGID=-b----E-C---eE---c-e----B-:0:0:1:21:12:6:0:13:10
+File: lionheart - Llabba 13pt Backgammon Studio 2023_06_29 12_55_23_009.txt
+Move: 1</code></pre>
+</section>
+<section id="position-11-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-11-3">Position 11<img src="player-mistakes_files/figure-html/checker-11.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    13/9 13/8                    Eq.: +0.164
+     2. 0-ply    21/16 13/9                   Eq.: +0.150 (-0.014)
+     3. 0-ply    24/20 13/8                   Eq.: +0.138 (-0.026)
+     4. 0-ply    13/9 11/6                    Eq.: +0.112 (-0.052)
+     5. 0-ply    13/9 6/1*                    Eq.: +0.103 (-0.061)
+*    6. 0-ply    24/15                        Eq.: +0.103 (-0.061)
+
+XGID=-a---BD-B--AeD---d-e-A--A-:0:0:1:54:0:0:0:13:10
+File: Llabba - Ophris 13pt Backgammon Studio 2023_10_09 19_40_36.txt
+Move: 5</code></pre>
+</section>
+<section id="position-12-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-12-3">Position 12<img src="player-mistakes_files/figure-html/checker-12.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/20 18/16                 Eq.: -0.176
+     2. 0-ply    bar/20 13/11                 Eq.: -0.229 (-0.053)
+*    3. 0-ply    bar/18                       Eq.: -0.229 (-0.054)
+     4. 0-ply    bar/20 6/4                   Eq.: -0.243 (-0.067)
+     5. 0-ply    bar/20 8/6                   Eq.: -0.259 (-0.084)
+
+XGID=---a-aE-C---eD---cAdA---aA:0:0:1:52:11:5:0:13:10
+File: Llabba - gorkipelin 13pt Backgammon Studio 2023_08_16 10_36_52_010.txt
+Move: 5</code></pre>
+</section>
+<section id="position-13-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-13-2">Position 13<img src="player-mistakes_files/figure-html/checker-13.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    10/7 6/5                     Eq.: +0.383
+     2. 0-ply    24/23 10/7                   Eq.: +0.372 (-0.011)
+*    3. 0-ply    13/10 8/7                    Eq.: +0.284 (-0.099)
+     4. 0-ply    8/7 8/5                      Eq.: +0.165 (-0.218)
+     5. 0-ply    10/7 8/7                     Eq.: +0.141 (-0.242)
+
+XGID=-b---BCAB-A-bD--abae--b-B-:0:0:1:31:5:2:0:13:10
+File: Llabba - JanHan 13pt Backgammon Studio 2023_01_06 15_17_19_005.txt
+Move: 5</code></pre>
+</section>
+<section id="position-14-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-14-2">Position 14<img src="player-mistakes_files/figure-html/checker-14.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/21(2)                    Eq.: -0.591
+*    2. 0-ply    bar/23(2) 6/4(2)             Eq.: -0.678 (-0.087)
+     3. 0-ply    bar/23(2) 13/11(2)           Eq.: -0.908 (-0.317)
+     4. 0-ply    bar/23(2) 13/9               Eq.: -0.993 (-0.403)
+     5. 0-ply    bar/23(2) 13/11 6/4          Eq.: -1.000 (-0.409)
+
+XGID=-a----E-C-a-dD---cac--b-AB:0:0:1:22:11:3:0:13:10
+File: Llabba - gorkipelin 13pt Backgammon Studio 2023_08_16 10_36_52_009.txt
+Move: 5</code></pre>
+</section>
+<section id="position-15-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-15-2">Position 15<img src="player-mistakes_files/figure-html/checker-15.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/23 24/20* 7/5*           Eq.: +0.164
+*    2. 0-ply    bar/23 7/5* 6/4(2)           Eq.: +0.072 (-0.092)
+     3. 0-ply    bar/21 24/20*                Eq.: -0.037 (-0.201)
+     4. 0-ply    bar/23 24/20* 13/11          Eq.: -0.066 (-0.230)
+     5. 0-ply    bar/23 24/20*/18             Eq.: -0.079 (-0.243)
+
+XGID=-a---aEAB---dEa--b-ea---AA:0:0:1:22:2:0:0:7:10
+File: Llabba - gorkipelin 7pt Backgammon Studio 2023_08_29 10_23_07_003.txt
+Move: 4</code></pre>
+</section>
+<section id="position-16-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-16-2">Position 16<img src="player-mistakes_files/figure-html/checker-16.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/18                        Eq.: +0.170
+     2. 0-ply    13/7                         Eq.: +0.155 (-0.015)
+     3. 0-ply    24/23 13/8                   Eq.: +0.131 (-0.039)
+*    4. 0-ply    24/23 6/1*                   Eq.: +0.106 (-0.065)
+     5. 0-ply    7/2*/1*                      Eq.: +0.088 (-0.082)
+
+XGID=-aa---EBC---dC---c-e-a--B-:0:0:1:51:3:3:0:7:10
+File: redmangr - Llabba 7pt Backgammon Studio 2023_10_13 15_01_02_005.txt
+Move: 4</code></pre>
+</section>
+<section id="position-17-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-17-2">Position 17<img src="player-mistakes_files/figure-html/checker-17.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    13/11 9/7* 6/4(2)            Eq.: +0.045
+     2. 0-ply    24/22 9/7* 6/4(2)            Eq.: +0.000 (-0.044)
+*    3. 0-ply    13/7* 9/7                    Eq.: -0.018 (-0.062)
+     4. 0-ply    9/7* 8/4 6/4                 Eq.: -0.034 (-0.079)
+     5. 0-ply    13/9 6/4(2)                  Eq.: -0.091 (-0.135)
+
+XGID=-a----EaCA--dDA--c-d-b--A-:0:0:1:22:4:0:0:13:10
+File: Llabba - gorkipelin 13pt Backgammon Studio 2023_08_16 10_36_52_004.txt
+Move: 5</code></pre>
+</section>
+<section id="position-18-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-18-2">Position 18<img src="player-mistakes_files/figure-html/checker-18.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/23 6/5(2)                Eq.: +0.199
+     2. 0-ply    bar/24 10/9 6/5(2)           Eq.: +0.170 (-0.029)
+     3. 0-ply    bar/24 6/5(3)                Eq.: +0.151 (-0.048)
+*    4. 0-ply    bar/24 8/7 6/5(2)            Eq.: +0.117 (-0.083)
+     5. 0-ply    bar/24 8/7(3)                Eq.: -0.168 (-0.367)
+
+XGID=-b----E-C-A-dD--abae----AA:0:0:1:11:5:2:0:13:10
+File: Llabba - JanHan 13pt Backgammon Studio 2023_01_06 15_17_19_005.txt
+Move: 3</code></pre>
+</section>
+<section id="position-19-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-19-2">Position 19<img src="player-mistakes_files/figure-html/checker-19.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/22 13/8                  Eq.: -0.802
+*    2. 0-ply    bar/17                       Eq.: -0.897 (-0.095)
+     3. 0-ply    bar/22 10/5                  Eq.: -0.975 (-0.172)
+     4. 0-ply    bar/22 8/3                   Eq.: -1.000 (-0.198)
+
+XGID=-b----E-C-A-dD----adb--bAA:0:0:1:53:3:0:0:13:10
+File: Llabba - Lucky Lux 13pt Backgammon Studio 2023_01_23 20_22_56_003.txt
+Move: 4</code></pre>
+</section>
+<section id="position-20-2" class="level5">
+<h5 class="anchored" data-anchor-id="position-20-2">Position 20<img src="player-mistakes_files/figure-html/checker-20.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/23 13/11                  Eq.: -0.285
+     2. 0-ply    24/21                        Eq.: -0.313 (-0.028)
+     3. 0-ply    13/10                        Eq.: -0.332 (-0.047)
+     4. 0-ply    24/23 24/22                  Eq.: -0.337 (-0.052)
+*    5. 0-ply    13/11 6/5                    Eq.: -0.341 (-0.056)
+
+XGID=-b----E-C---dEa--c-da---B-:0:0:1:21:7:5:0:13:10
+File: ZicoBlack - Llabba 13pt Backgammon Studio 2023_09_25 16_35_22_006.txt
+Move: 2</code></pre>
+</section>
+</section>
+<section id="error-0.1-5" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.1-5">Error &gt;0.1</h4>
+<section id="position-1-18" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-18">Position 1<img src="player-mistakes_files/figure-html/checker-21.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    13/11(2) 6/4(2)              Eq.: +0.365
+     2. 0-ply    24/22 13/11 6/4(2)           Eq.: +0.349 (-0.017)
+     3. 0-ply    24/22(2) 6/4(2)              Eq.: +0.301 (-0.064)
+     4. 0-ply    13/9 6/4(2)                  Eq.: +0.267 (-0.098)
+*    5. 0-ply    24/20(2)                     Eq.: +0.254 (-0.111)
+
+XGID=-b-B--D-B---cEa--d-e----B-:0:0:1:22:9:6:0:13:10
+File: Llabba - Mayfwriter 13pt Backgammon Studio 2023_11_13 21_03_15_007.txt
+Move: 3</code></pre>
+</section>
+<section id="position-2-15" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-15">Position 2<img src="player-mistakes_files/figure-html/checker-22.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/16* 6/2*(2)               Eq.: +0.329
+     2. 0-ply    24/16* 8/4(2)                Eq.: +0.266 (-0.064)
+     3. 0-ply    24/20(2) 13/9(2)             Eq.: +0.257 (-0.072)
+     4. 0-ply    24/20(2) 8/4(2)              Eq.: +0.254 (-0.076)
+     5. 0-ply    24/16*(2)                    Eq.: +0.253 (-0.076)
+*    8. 0-ply    8/4(2) 6/2*(2)               Eq.: +0.211 (-0.118)
+
+XGID=-aaB--D-B---dE--ab-d-b--B-:0:0:1:44:6:0:0:13:10
+File: TheOscar - Llabba 13pt Backgammon Studio 2023_09_22 20_15_24_005.txt
+Move: 4</code></pre>
+</section>
+<section id="position-3-14" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-14">Position 3<img src="player-mistakes_files/figure-html/checker-23.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/18 21/18                  Eq.: +0.304
+     2. 0-ply    24/21 13/7                   Eq.: +0.259 (-0.044)
+     3. 0-ply    24/21 8/2                    Eq.: +0.177 (-0.127)
+*    4. 0-ply    13/4*                        Eq.: +0.112 (-0.192)
+     5. 0-ply    13/7 6/3                     Eq.: +0.093 (-0.211)
+
+XGID=----a-EBC---fC---c-e-A--A-:0:0:1:63:0:0:0:13:10
+File: Llabba - Iandaurca 13pt Backgammon Studio 2023_03_24 12_56_54.txt
+Move: 5</code></pre>
+</section>
+<section id="position-4-12" class="level5">
+<h5 class="anchored" data-anchor-id="position-4-12">Position 4<img src="player-mistakes_files/figure-html/checker-24.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    8/3* 6/4*                    Eq.: -0.230
+*    2. 0-ply    13/8 6/4*                    Eq.: -0.335 (-0.105)
+     3. 0-ply    24/22 8/3*                   Eq.: -0.350 (-0.120)
+     4. 0-ply    24/22 13/8                   Eq.: -0.394 (-0.163)
+     5. 0-ply    13/11 8/3*                   Eq.: -0.425 (-0.195)
+
+XGID=---aa-E-C--BcC---cbe----B-:0:0:1:52:8:9:0:13:10
+File: aiueow - Llabba 13pt Backgammon Studio 2023_05_24 10_56_06_010.txt
+Move: 5</code></pre>
+</section>
+<section id="position-5-10" class="level5">
+<h5 class="anchored" data-anchor-id="position-5-10">Position 5<img src="player-mistakes_files/figure-html/checker-25.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    13/10 13/7*                  Eq.: +0.492
+     2. 0-ply    13/7*/4                      Eq.: +0.477 (-0.015)
+     3. 0-ply    24/21 13/7*                  Eq.: +0.448 (-0.044)
+*    4. 0-ply    24/15                        Eq.: +0.382 (-0.111)
+     5. 0-ply    15/6                         Eq.: +0.269 (-0.223)
+
+XGID=--a-B-DaB---dE-A-c-f----A-:0:0:1:63:0:0:0:13:10
+File: Llabba - DrVirus 13pt Backgammon Studio 2023_04_17 14_13_25.txt
+Move: 5</code></pre>
+</section>
+<section id="position-6-9" class="level5">
+<h5 class="anchored" data-anchor-id="position-6-9">Position 6<img src="player-mistakes_files/figure-html/checker-26.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    13/7*/1*(2)                  Eq.: +1.040
+*    2. 0-ply    24/18(2) 13/7*(2)            Eq.: +0.908 (-0.132)
+     3. 0-ply    13/7*(2) 8/2(2)              Eq.: +0.889 (-0.152)
+     4. 0-ply    13/7*/1* 13/7(2)             Eq.: +0.888 (-0.153)
+     5. 0-ply    24/18 13/7*(3)               Eq.: +0.886 (-0.154)
+
+XGID=-a---BDaB---dE-a-c-e----B-:0:0:1:66:4:11:0:13:10
+File: Llabba - emperor 13pt Backgammon Studio 2023_11_07 15_53_55_009.txt
+Move: 3</code></pre>
+</section>
+<section id="position-7-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-7-5">Position 7<img src="player-mistakes_files/figure-html/checker-27.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/18 14/2* 8/2              Eq.: +0.180
+     2. 0-ply    24/18 14/8 13/7(2)           Eq.: +0.155 (-0.025)
+     3. 0-ply    13/7(2) 8/2*(2)              Eq.: +0.048 (-0.132)
+     4. 0-ply    14/2* 13/7 8/2               Eq.: +0.048 (-0.132)
+*    5. 0-ply    13/1*(2)                     Eq.: +0.027 (-0.153)
+
+XGID=-aa---E-C--AdDA--c-d-b--A-:0:0:1:66:8:9:0:13:10
+File: Llabba - Hodgey 13pt Backgammon Studio 2023_08_05 10_15_37_011.txt
+Move: 5</code></pre>
+</section>
+</section>
+<section id="error-0.2-5" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.2-5">Error &gt;0.2</h4>
+<section id="position-1-19" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-19">Position 1<img src="player-mistakes_files/figure-html/checker-28.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/17                        Eq.: +0.137
+*    2. 0-ply    24/21 17/13                  Eq.: -0.088 (-0.225)
+     3. 0-ply    17/10                        Eq.: -0.219 (-0.356)
+     4. 0-ply    17/14 13/9                   Eq.: -0.256 (-0.393)
+     5. 0-ply    24/21 13/9                   Eq.: -0.275 (-0.412)
+
+XGID=-a-b--E-CB--eC---A-cb-b-A-:0:0:1:43:11:9:0:13:10
+File: Llabba - Hodgey 13pt Backgammon Studio 2023_08_05 10_15_37_013.txt
+Move: 5</code></pre>
+</section>
+</section>
+<section id="error-0.3-5" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.3-5">Error &gt;0.3</h4>
+</section>
+</section>
+<section id="move-no.-5" class="level3">
+<h3 class="anchored" data-anchor-id="move-no.-5">Move no. &gt;5</h3>
+<section id="error-0.05-6" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.05-6">Error &gt;0.05</h4>
+<section id="position-1-20" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-20">Position 1<img src="player-mistakes_files/figure-html/checker-29.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    13/5*                        Eq.: +0.065
+     2. 0-ply    12/6 3/1*                    Eq.: +0.018 (-0.047)
+*    3. 0-ply    13/11(2) 12/10 3/1*          Eq.: +0.013 (-0.052)
+     4. 0-ply    13/11(2) 8/6 3/1*            Eq.: +0.010 (-0.055)
+     5. 0-ply    24/18 3/1*                   Eq.: -0.005 (-0.070)
+
+XGID=-aBABaB-B---AB-bbc-d-B-bA-:0:0:1:22:2:8:0:13:10
+File: Llabba - Ciuffo 13pt Backgammon Studio 2023_02_09 15_19_56_004.txt
+Move: 15</code></pre>
+</section>
+<section id="position-2-16" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-16">Position 2<img src="player-mistakes_files/figure-html/checker-30.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/23 24/22                  Eq.: -0.513
+*    2. 0-ply    24/22 6/5                    Eq.: -0.570 (-0.056)
+     3. 0-ply    24/22 8/7                    Eq.: -0.684 (-0.171)
+     4. 0-ply    24/23 8/6                    Eq.: -0.876 (-0.363)
+     5. 0-ply    8/5                          Eq.: -0.992 (-0.479)
+
+XGID=-a---BC-Db--cC--b--cbbA-B-:0:0:1:21:9:7:0:13:10
+File: Llabba - Esalib 13pt Backgammon Studio 2023_04_03 12_45_36_009.txt
+Move: 10</code></pre>
+</section>
+<section id="position-3-15" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-15">Position 3<img src="player-mistakes_files/figure-html/checker-31.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/22 13/8                   Eq.: -0.148
+     2. 0-ply    24/22 8/3                    Eq.: -0.164 (-0.016)
+     3. 0-ply    13/8 6/4*                    Eq.: -0.169 (-0.021)
+     4. 0-ply    22/15                        Eq.: -0.197 (-0.049)
+*    5. 0-ply    21/14*                       Eq.: -0.207 (-0.060)
+
+XGID=----a-CAC---cCa--e-e-BA-B-:0:0:1:52:7:8:0:13:10
+File: Llabba - grahamd 13pt Backgammon Studio 2023_05_20 19_06_17_009.txt
+Move: 9</code></pre>
+</section>
+<section id="position-4-13" class="level5">
+<h5 class="anchored" data-anchor-id="position-4-13">Position 4<img src="player-mistakes_files/figure-html/checker-32.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    8/5* 8/3*                    Eq.: +0.803
+*    2. 0-ply    24/16*                       Eq.: +0.738 (-0.065)
+     3. 0-ply    13/5*                        Eq.: +0.622 (-0.181)
+     4. 0-ply    14/9 8/5*                    Eq.: +0.584 (-0.220)
+     5. 0-ply    14/6                         Eq.: +0.540 (-0.264)
+
+XGID=-BBaBaB-B---dCA-ab-d--b-A-:0:0:1:53:11:8:0:13:10
+File: GitteD - Llabba 13pt Backgammon Studio 2023_01_08 15_39_15_013.txt
+Move: 10</code></pre>
+</section>
+<section id="position-5-11" class="level5">
+<h5 class="anchored" data-anchor-id="position-5-11">Position 5<img src="player-mistakes_files/figure-html/checker-33.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/21 6/4                   Eq.: -0.680
+     2. 0-ply    bar/21 22/20                 Eq.: -0.715 (-0.034)
+*    3. 0-ply    bar/23 8/4                   Eq.: -0.742 (-0.062)
+     4. 0-ply    bar/21 8/6                   Eq.: -0.762 (-0.081)
+     5. 0-ply    bar/21 13/11                 Eq.: -0.774 (-0.094)
+
+XGID=-----bE-D---bD-a-cbe--A--A:0:0:1:42:2:1:0:13:10
+File: Llabba - Selbs 13pt Backgammon Studio 2023_10_16 14_53_18_003.txt
+Move: 6</code></pre>
+</section>
+<section id="position-6-10" class="level5">
+<h5 class="anchored" data-anchor-id="position-6-10">Position 6<img src="player-mistakes_files/figure-html/checker-34.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/21 14/8                  Eq.: +0.029
+     2. 0-ply    bar/21 22/16                 Eq.: -0.021 (-0.050)
+*    3. 0-ply    bar/15                       Eq.: -0.024 (-0.054)
+     4. 0-ply    bar/21 13/7                  Eq.: -0.125 (-0.154)
+     5. 0-ply    bar/21 8/2*                  Eq.: -0.203 (-0.232)
+
+XGID=--aaB-C-B--BbCA--cce--A--A:0:0:1:64:5:6:0:13:10
+File: JuliaH - Llabba 13pt Backgammon Studio 2023_01_18 18_32_47_009.txt
+Move: 9</code></pre>
+</section>
+<section id="position-7-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-7-6">Position 7<img src="player-mistakes_files/figure-html/checker-35.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    20/18*/13                    Eq.: -0.172
+     2. 0-ply    14/9 6/4*                    Eq.: -0.196 (-0.024)
+*    3. 0-ply    13/8 6/4*                    Eq.: -0.222 (-0.051)
+     4. 0-ply    20/18* 14/9                  Eq.: -0.228 (-0.056)
+     5. 0-ply    20/18* 13/8                  Eq.: -0.241 (-0.070)
+
+XGID=----aaE-B---eDA--cadB---A-:0:0:1:52:9:0:0:13:10
+File: CroatianFish - Llabba 13pt Backgammon Studio 2023_07_23 18_59_01_005.txt
+Move: 11</code></pre>
+</section>
+<section id="position-8-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-8-4">Position 8<img src="player-mistakes_files/figure-html/checker-36.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/16*/8                     Eq.: +0.920
+     2. 0-ply    24/20(2) 13/9(2)             Eq.: +0.872 (-0.047)
+*    3. 0-ply    24/16*(2)                    Eq.: +0.845 (-0.075)
+     4. 0-ply    24/16* 13/9(2)               Eq.: +0.837 (-0.083)
+     5. 0-ply    24/16*/12 24/20              Eq.: +0.731 (-0.189)
+
+XGID=-b---BCBA-B--C--acbe--b-B-:0:0:1:44:5:2:0:13:10
+File: Llabba - JanHan 13pt Backgammon Studio 2023_01_06 15_17_19_005.txt
+Move: 7</code></pre>
+</section>
+<section id="position-9-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-9-4">Position 9<img src="player-mistakes_files/figure-html/checker-37.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    11/9 8/4 8/6                 Eq.: -0.646
+     2. 0-ply    8/4(2)                       Eq.: -0.652 (-0.006)
+     3. 0-ply    11/7 8/4                     Eq.: -0.671 (-0.025)
+     4. 0-ply    11/5 6/4                     Eq.: -0.674 (-0.028)
+     5. 0-ply    11/5 8/6                     Eq.: -0.676 (-0.030)
+
+XGID=----AAE-D--AbC---e-ea-aa--:0:0:1:22:10:2:0:13:10
+File: Llabba - Iandaurca 13pt Backgammon Studio 2023_03_24 12_56_54_006.txt
+Move: 10</code></pre>
+</section>
+<section id="position-10-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-10-4">Position 10<img src="player-mistakes_files/figure-html/checker-38.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    8/5* 6/2*                    Eq.: -0.336
+*    2. 0-ply    24/21 6/2*                   Eq.: -0.430 (-0.094)
+     3. 0-ply    24/21 10/6                   Eq.: -0.435 (-0.099)
+     4. 0-ply    8/5* 8/4                     Eq.: -0.488 (-0.152)
+     5. 0-ply    10/7 6/2*                    Eq.: -0.496 (-0.160)
+
+XGID=--a-BaDBB-A-bB-a-bbdb---B-:1:1:1:43:11:10:0:13:10
+File: aiueow - Llabba 13pt Backgammon Studio 2023_05_24 10_56_06_013.txt
+Move: 10</code></pre>
+</section>
+<section id="position-11-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-11-4">Position 11<img src="player-mistakes_files/figure-html/checker-39.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    22/10 8/4                    Eq.: +0.575
+     2. 0-ply    22/6                         Eq.: +0.569 (-0.006)
+     3. 0-ply    22/10 6/2                    Eq.: +0.560 (-0.015)
+     4. 0-ply    22/10 5/1                    Eq.: +0.545 (-0.030)
+*    5. 0-ply    22/10 13/9                   Eq.: +0.503 (-0.072)
+
+XGID=-----CD-D--bcC--bb-bbbA---:0:0:1:44:0:0:0:13:10
+File: Minchy - Llabba 13pt Backgammon Studio 2023_02_24 19_44_27.txt
+Move: 12</code></pre>
+</section>
+<section id="position-12-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-12-4">Position 12<img src="player-mistakes_files/figure-html/checker-40.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/22 8/5                    Eq.: -0.348
+     2. 0-ply    24/21 8/6                    Eq.: -0.364 (-0.016)
+     3. 0-ply    13/11 8/5                    Eq.: -0.386 (-0.038)
+     4. 0-ply    24/21 13/11                  Eq.: -0.387 (-0.039)
+     5. 0-ply    8/6 8/5                      Eq.: -0.391 (-0.043)
+*    9. 0-ply    24/22 24/21                  Eq.: -0.408 (-0.061)
+
+XGID=-BA---C-Da--bC-aae-e----B-:0:0:1:32:1:8:0:13:10
+File: gsh07 - Llabba 13pt Backgammon Studio 2023_09_29 08_05_24_006.txt
+Move: 14</code></pre>
+</section>
+<section id="position-13-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-13-3">Position 13<img src="player-mistakes_files/figure-html/checker-41.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    8/4 7/6                      Eq.: -0.012
+     2. 0-ply    7/6 5/1                      Eq.: -0.075 (-0.063)
+     3. 0-ply    7/2                          Eq.: -0.077 (-0.065)
+*    4. 0-ply    24/23 8/4                    Eq.: -0.110 (-0.098)
+     5. 0-ply    8/4 5/4                      Eq.: -0.192 (-0.180)
+
+XGID=---bBCBDC---a---ab-cbbb-A-:0:0:1:41:0:4:0:11:10
+File: Llabba - petruhl 11pt Backgammon Studio 2023_03_03 18_42_33_003.txt
+Move: 14</code></pre>
+</section>
+<section id="position-14-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-14-3">Position 14<img src="player-mistakes_files/figure-html/checker-42.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    9/5 6/4                      Eq.: -0.006
+     2. 0-ply    13/11 8/4                    Eq.: -0.029 (-0.023)
+     3. 0-ply    13/11 9/5                    Eq.: -0.037 (-0.031)
+     4. 0-ply    9/5 8/6                      Eq.: -0.038 (-0.032)
+     5. 0-ply    8/6 8/4                      Eq.: -0.039 (-0.033)
+*    7. 0-ply    13/9 6/4                     Eq.: -0.066 (-0.060)
+
+XGID=----AACbCB--cC-b-b-cBaaa--:0:0:1:42:5:7:0:13:10
+File: Daisy - Llabba 13pt Backgammon Studio 2023_09_28 12_45_23_007.txt
+Move: 6</code></pre>
+</section>
+<section id="position-15-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-15-3">Position 15<img src="player-mistakes_files/figure-html/checker-43.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/23 13/11 6/4*(2)         Eq.: +0.284
+*    2. 0-ply    bar/23 24/22 6/4*(2)         Eq.: +0.201 (-0.083)
+     3. 0-ply    bar/23 8/4* 6/4              Eq.: +0.107 (-0.177)
+     4. 0-ply    bar/23 13/11(2) 6/4*         Eq.: -0.145 (-0.429)
+     5. 0-ply    bar/23 13/9 6/4*             Eq.: -0.210 (-0.494)
+
+XGID=----aBD-B-a-cEb--b-d-b--AA:0:0:1:22:7:7:0:13:10
+File: Gibraltar_Mike - Llabba 13pt Backgammon Studio 2023_03_22 21_22_47_009.txt
+Move: 8</code></pre>
+</section>
+<section id="position-16-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-16-3">Position 16<img src="player-mistakes_files/figure-html/checker-44.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    7/4* 6/2*                    Eq.: +0.024
+     2. 0-ply    6/2* 5/2                     Eq.: -0.017 (-0.041)
+     3. 0-ply    7/3 6/3                      Eq.: -0.039 (-0.062)
+*    4. 0-ply    13/9 7/4*                    Eq.: -0.054 (-0.078)
+     5. 0-ply    7/4* 7/3                     Eq.: -0.170 (-0.194)
+
+XGID=--a-aCCD----cC---b-ec---B-:0:0:1:43:0:0:0:13:10
+File: CroatianFish - Llabba 13pt Backgammon Studio 2023_07_23 18_59_01.txt
+Move: 10</code></pre>
+</section>
+<section id="position-17-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-17-3">Position 17<img src="player-mistakes_files/figure-html/checker-45.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    8/4 6/4                      Eq.: -0.597
+     2. 0-ply    13/11 5/1                    Eq.: -0.627 (-0.030)
+     3. 0-ply    13/9 8/6                     Eq.: -0.633 (-0.036)
+     4. 0-ply    8/6 5/1                      Eq.: -0.636 (-0.039)
+     5. 0-ply    13/7                         Eq.: -0.637 (-0.040)
+
+XGID=-----AE-E---bD---g-e---a--:0:0:1:42:10:2:0:13:10
+File: Llabba - Iandaurca 13pt Backgammon Studio 2023_03_24 12_56_54_006.txt
+Move: 8</code></pre>
+</section>
+<section id="position-18-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-18-3">Position 18<img src="player-mistakes_files/figure-html/checker-46.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    16/11                        Eq.: +0.190
+     2. 0-ply    6/5 6/2                      Eq.: +0.159 (-0.030)
+     3. 0-ply    8/4 6/5                      Eq.: +0.136 (-0.054)
+*    4. 0-ply    8/3                          Eq.: +0.131 (-0.059)
+     5. 0-ply    6/2 4/3                      Eq.: +0.130 (-0.060)
+
+XGID=----B-CdD--B-B--Bcbdb-----:0:0:1:41:6:2:0:13:10
+File: Llabba - JanHan 13pt Backgammon Studio 2023_01_06 15_17_19_006.txt
+Move: 14</code></pre>
+</section>
+<section id="position-19-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-19-3">Position 19<img src="player-mistakes_files/figure-html/checker-47.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/20(2) 6/2(2)              Eq.: -0.147
+*    2. 0-ply    24/20(2) 8/4(2)              Eq.: -0.199 (-0.052)
+     3. 0-ply    24/20(2) 22/18 7/3           Eq.: -0.241 (-0.094)
+     4. 0-ply    24/20(2) 13/9 7/3            Eq.: -0.245 (-0.097)
+     5. 0-ply    24/20(2) 22/18 13/9          Eq.: -0.267 (-0.120)
+
+XGID=-b----EAC---cCb--c-c-bA-B-:0:0:1:44:2:2:0:13:10
+File: joro1313 - Llabba 13pt Backgammon Studio 2023_11_21 20_13_25_003.txt
+Move: 8</code></pre>
+</section>
+<section id="position-20-3" class="level5">
+<h5 class="anchored" data-anchor-id="position-20-3">Position 20<img src="player-mistakes_files/figure-html/checker-48.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/18 4/3                    Eq.: -0.428
+*    2. 0-ply    13/7 8/7                     Eq.: -0.528 (-0.100)
+     3. 0-ply    8/2 3/2                      Eq.: -0.566 (-0.138)
+     4. 0-ply    8/2 4/3                      Eq.: -0.570 (-0.141)
+     5. 0-ply    24/17                        Eq.: -0.581 (-0.152)
+
+XGID=---ACbC-C---bD--a--cdc--A-:0:0:1:61:3:5:0:13:10
+File: Llabba - Selbs 13pt Backgammon Studio 2023_10_16 14_53_18_005.txt
+Move: 13</code></pre>
+</section>
+</section>
+<section id="error-0.1-6" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.1-6">Error &gt;0.1</h4>
+<section id="position-1-21" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-21">Position 1<img src="player-mistakes_files/figure-html/checker-49.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    13/3 13/8(2)                 Eq.: +0.246
+*    2. 0-ply    13/8(2) 7/2(2)               Eq.: +0.136 (-0.110)
+     3. 0-ply    13/3 7/2(2)                  Eq.: +0.131 (-0.115)
+     4. 0-ply    13/3(2)                      Eq.: +0.126 (-0.120)
+     5. 0-ply    8/3(2) 7/2(2)                Eq.: -0.105 (-0.351)
+
+XGID=-b-B-ACBB----C---ece--B---:0:0:1:55:0:1:0:9:10
+File: Llabba - Bigeagle32 9pt Backgammon Studio 2023_09_21 12_05_50_002.txt
+Move: 9</code></pre>
+</section>
+<section id="position-2-17" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-17">Position 2<img src="player-mistakes_files/figure-html/checker-50.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    8/4 6/5                      Eq.: +0.060
+*    2. 0-ply    22/21 8/4                    Eq.: -0.049 (-0.109)
+     3. 0-ply    8/7 8/4                      Eq.: -0.056 (-0.116)
+     4. 0-ply    6/1                          Eq.: -0.060 (-0.120)
+     5. 0-ply    8/7 6/2                      Eq.: -0.074 (-0.134)
+
+XGID=-B-bBBC-D---a----bbcb-Bc--:0:0:1:41:1:2:0:9:10
+File: GrigoryRevaz - Llabba 9pt Backgammon Studio 2023_09_14 09_36_55_003.txt
+Move: 13</code></pre>
+</section>
+<section id="position-3-16" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-16">Position 3<img src="player-mistakes_files/figure-html/checker-51.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    16/13 8/5(3)                 Eq.: +0.534
+     2. 0-ply    16/13 8/5(2) 6/3             Eq.: +0.532 (-0.002)
+     3. 0-ply    8/5(2) 6/3(2)                Eq.: +0.530 (-0.004)
+     4. 0-ply    16/10 8/5(2)                 Eq.: +0.523 (-0.011)
+     5. 0-ply    16/10 6/3(2)                 Eq.: +0.512 (-0.022)
+
+XGID=--B-B-DbC---bB--Bb-f-a-aa-:0:0:1:33:2:5:0:13:10
+File: JuliaH - Llabba 13pt Backgammon Studio 2023_01_18 18_32_47_006.txt
+Move: 12</code></pre>
+</section>
+<section id="position-4-14" class="level5">
+<h5 class="anchored" data-anchor-id="position-4-14">Position 4<img src="player-mistakes_files/figure-html/checker-52.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/20 13/3* 8/3             Eq.: +0.528
+     2. 0-ply    bar/20 11/6 8/3*(2)          Eq.: +0.478 (-0.050)
+     3. 0-ply    bar/15 8/3*(2)               Eq.: +0.469 (-0.059)
+     4. 0-ply    bar/20 8/3*(3)               Eq.: +0.419 (-0.109)
+*    5. 0-ply    bar/20 8/3*(2) 6/1*          Eq.: +0.407 (-0.121)
+
+XGID=-a-a-BC-CA-AeB---b-d---bBA:0:0:1:55:4:4:0:13:10
+File: Llabba - Mayfwriter 13pt Backgammon Studio 2023_11_13 21_03_15_004.txt
+Move: 7</code></pre>
+</section>
+<section id="position-5-12" class="level5">
+<h5 class="anchored" data-anchor-id="position-5-12">Position 5<img src="player-mistakes_files/figure-html/checker-53.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    18/14(2) 7/3(2)              Eq.: +0.775
+     2. 0-ply    18/14(2) 6/2(2)              Eq.: +0.742 (-0.033)
+     3. 0-ply    18/14(2) 7/3 6/2             Eq.: +0.681 (-0.094)
+     4. 0-ply    18/10*(2)                    Eq.: +0.654 (-0.122)
+*    5. 0-ply    18/10* 8/4*(2)               Eq.: +0.645 (-0.130)
+
+XGID=-A--a-EDC-a-b--c--Bc-c-b--:0:0:1:44:7:9:0:13:10
+File: Llabba - Hodgey 13pt Backgammon Studio 2023_08_05 10_15_37_010.txt
+Move: 9</code></pre>
+</section>
+<section id="position-6-11" class="level5">
+<h5 class="anchored" data-anchor-id="position-6-11">Position 6<img src="player-mistakes_files/figure-html/checker-54.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    23/17*/11 8/2(2)             Eq.: +0.329
+     2. 0-ply    23/17*/11 9/3(2)             Eq.: +0.296 (-0.033)
+*    3. 0-ply    23/17* 9/3(3)                Eq.: +0.190 (-0.140)
+     4. 0-ply    23/17*/5 9/3                 Eq.: +0.070 (-0.259)
+     5. 0-ply    23/17* 9/3 8/2(2)            Eq.: -0.121 (-0.451)
+
+XGID=-A---CBbBC--cC---abbbabA--:0:0:1:66:2:0:0:13:10
+File: CroatianFish - Llabba 13pt Backgammon Studio 2023_07_23 18_59_01_002.txt
+Move: 13</code></pre>
+</section>
+<section id="position-7-7" class="level5">
+<h5 class="anchored" data-anchor-id="position-7-7">Position 7<img src="player-mistakes_files/figure-html/checker-55.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    6/4 6/1                      Eq.: +0.127
+     2. 0-ply    7/5 6/1                      Eq.: +0.126 (-0.001)
+     3. 0-ply    13/11 13/8                   Eq.: +0.119 (-0.008)
+     4. 0-ply    8/3 6/4                      Eq.: +0.108 (-0.018)
+     5. 0-ply    7/2 6/4                      Eq.: +0.098 (-0.028)
+
+XGID=--ABABCAA---dB---dBcca----:0:0:1:52:3:7:0:13:10
+File: Llabba - Selbs 13pt Backgammon Studio 2023_10_16 14_53_18_007.txt
+Move: 12</code></pre>
+</section>
+<section id="position-8-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-8-5">Position 8<img src="player-mistakes_files/figure-html/checker-56.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/15*/10 6/1               Eq.: +0.298
+     2. 0-ply    bar/15* 13/8 6/1             Eq.: +0.280 (-0.018)
+*    3. 0-ply    bar/15*/5*                   Eq.: +0.188 (-0.110)
+     4. 0-ply    bar/15* 8/3 6/1              Eq.: +0.077 (-0.221)
+     5. 0-ply    bar/15* 7/2(2)               Eq.: -0.017 (-0.315)
+
+XGID=-A--aaDBC---dC-a-b-d--b-AA:0:0:1:55:5:1:0:13:10
+File: Llabba - prpascha 13pt Backgammon Studio 2023_05_21 21_45_59_005.txt
+Move: 6</code></pre>
+</section>
+<section id="position-9-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-9-5">Position 9<img src="player-mistakes_files/figure-html/checker-57.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/5                        Eq.: +0.305
+*    2. 0-ply    bar/20 13/8 6/1*(2)          Eq.: +0.163 (-0.143)
+     3. 0-ply    bar/15 6/1*(2)               Eq.: +0.074 (-0.231)
+     4. 0-ply    bar/20 8/3(2) 6/1*           Eq.: -0.033 (-0.338)
+     5. 0-ply    bar/10 13/8                  Eq.: -0.185 (-0.490)
+
+XGID=-a--BAD-B---dD--ac-c-ab-AA:0:0:1:55:2:2:0:13:10
+File: Llabba - aiueow 13pt Backgammon Studio 2023_03_13 21_37_10_003.txt
+Move: 9</code></pre>
+</section>
+<section id="position-10-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-10-5">Position 10<img src="player-mistakes_files/figure-html/checker-58.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/23 13/11 6/4(2)          Eq.: -0.422
+*    2. 0-ply    bar/21 23/21 13/11           Eq.: -0.523 (-0.101)
+     3. 0-ply    bar/23 8/4 6/4               Eq.: -0.539 (-0.117)
+     4. 0-ply    bar/23 10/8 6/4(2)           Eq.: -0.561 (-0.139)
+     5. 0-ply    bar/21 23/21 10/8            Eq.: -0.593 (-0.171)
+
+XGID=-a----E-C-A-dD---badb--AaA:0:0:1:22:11:3:0:13:10
+File: Minchy - Llabba 13pt Backgammon Studio 2023_02_24 19_44_27_010.txt
+Move: 6</code></pre>
+</section>
+<section id="position-11-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-11-5">Position 11<img src="player-mistakes_files/figure-html/checker-59.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    16/4*(2)                     Eq.: +1.025
+*    2. 0-ply    16/10(2) 13/7(2)             Eq.: +0.923 (-0.103)
+     3. 0-ply    13/7(4)                      Eq.: +0.731 (-0.294)
+     4. 0-ply    16/10(2) 13/1                Eq.: +0.628 (-0.398)
+     5. 0-ply    16/4* 13/7(2)                Eq.: +0.310 (-0.716)
+
+XGID=-B-aaBB-C---bDb-Bb-bbc----:0:0:1:66:9:8:0:13:10
+File: Llabba - DiablodelDados 13pt Backgammon Studio 2023_06_18 17_32_21_008.txt
+Move: 14</code></pre>
+</section>
+<section id="position-12-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-12-5">Position 12<img src="player-mistakes_files/figure-html/checker-60.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    22/13                        Eq.: -0.497
+     2. 0-ply    22/16 18/15                  Eq.: -0.595 (-0.099)
+     3. 0-ply    13/7 6/3*                    Eq.: -0.673 (-0.176)
+     4. 0-ply    13/4                         Eq.: -0.673 (-0.177)
+*    5. 0-ply    22/16 6/3*                   Eq.: -0.690 (-0.194)
+
+XGID=---aBbC-C---bD---cAdc-AA--:0:0:1:63:1:1:0:7:10
+File: redmangr - Llabba 7pt Backgammon Studio 2023_10_13 15_01_02_003.txt
+Move: 12</code></pre>
+</section>
+<section id="position-13-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-13-4">Position 13<img src="player-mistakes_files/figure-html/checker-61.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/14                        Eq.: -0.649
+     2. 0-ply    24/18 8/4*                   Eq.: -0.709 (-0.060)
+     3. 0-ply    8/2 6/2                      Eq.: -0.730 (-0.081)
+     4. 0-ply    13/3                         Eq.: -0.765 (-0.116)
+*    5. 0-ply    13/7 8/4*                    Eq.: -0.775 (-0.126)
+
+XGID=----aBD-C---cC---b-ebBb-A-:0:0:1:64:9:5:0:13:10
+File: Llabba - Esalib 13pt Backgammon Studio 2023_04_03 12_45_36_008.txt
+Move: 9</code></pre>
+</section>
+<section id="position-14-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-14-4">Position 14<img src="player-mistakes_files/figure-html/checker-62.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/18                       Eq.: -0.698
+     2. 0-ply    bar/23 13/8                  Eq.: -0.784 (-0.086)
+*    3. 0-ply    bar/23 8/3*                  Eq.: -0.851 (-0.153)
+     4. 0-ply    bar/23 6/1                   Eq.: -0.964 (-0.266)
+
+XGID=--aaB-D-C---eC---a-cbb-B-A:0:0:1:52:8:2:0:13:10
+File: lionheart - Llabba 13pt Backgammon Studio 2023_06_29 12_55_23_006.txt
+Move: 12</code></pre>
+</section>
+<section id="position-15-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-15-4">Position 15<img src="player-mistakes_files/figure-html/checker-63.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/18                       Eq.: -0.345
+*    2. 0-ply    bar/24 13/7                  Eq.: -0.454 (-0.109)
+     3. 0-ply    bar/24 8/2                   Eq.: -0.559 (-0.213)
+
+XGID=-aB--BB-C---eC---c-db--AAA:0:0:1:61:7:8:0:13:10
+File: aiueow - Llabba 13pt Backgammon Studio 2023_05_24 10_56_06_008.txt
+Move: 10</code></pre>
+</section>
+<section id="position-16-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-16-4">Position 16<img src="player-mistakes_files/figure-html/checker-64.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/20 24/23                 Eq.: -0.475
+     2. 0-ply    bar/20 8/7                   Eq.: -0.562 (-0.087)
+     3. 0-ply    bar/20 6/5                   Eq.: -0.577 (-0.102)
+*    4. 0-ply    bar/24 13/8                  Eq.: -0.655 (-0.180)
+     5. 0-ply    bar/24 8/3                   Eq.: -0.683 (-0.208)
+
+XGID=----bCC-C---bDa--cbe----AA:0:0:1:51:11:1:0:13:10
+File: FAETHON - Llabba 13pt Backgammon Studio 2023_06_29 18_26_07_005.txt
+Move: 8</code></pre>
+</section>
+<section id="position-17-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-17-4">Position 17<img src="player-mistakes_files/figure-html/checker-65.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    13/12 8/3*                   Eq.: -0.025
+     2. 0-ply    8/3* 5/4                     Eq.: -0.052 (-0.027)
+     3. 0-ply    23/22 8/3*                   Eq.: -0.052 (-0.027)
+     4. 0-ply    8/7 8/3*                     Eq.: -0.065 (-0.041)
+     5. 0-ply    8/3*/2                       Eq.: -0.086 (-0.061)
+
+XGID=-a-aBCC-B----C--cbbdbA-A--:0:0:1:51:0:9:0:13:10
+File: Seiferdrengen - Llabba 13pt Backgammon Studio 2023_01_04 14_23_00_003.txt
+Move: 15</code></pre>
+</section>
+<section id="position-18-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-18-4">Position 18<img src="player-mistakes_files/figure-html/checker-66.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    18/15(2) 8/5(2)              Eq.: +0.272
+     2. 0-ply    18/15(2) 6/3(2)              Eq.: +0.225 (-0.047)
+     3. 0-ply    13/10(3) 6/3                 Eq.: +0.222 (-0.050)
+     4. 0-ply    18/15(2) 13/7                Eq.: +0.191 (-0.080)
+     5. 0-ply    18/15(2) 13/10 6/3           Eq.: +0.185 (-0.086)
+*    7. 0-ply    18/15(2) 13/10(2)            Eq.: +0.170 (-0.101)
+
+XGID=--AAbBD-B---eC----Bcbba---:1:1:1:33:12:11:0:13:10
+File: Llabba - Selbs 13pt Backgammon Studio 2023_10_16 14_53_18_015.txt
+Move: 9</code></pre>
+</section>
+<section id="position-19-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-19-4">Position 19<img src="player-mistakes_files/figure-html/checker-67.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/23 13/8                   Eq.: -0.509
+     2. 0-ply    13/8 11/10                   Eq.: -0.511 (-0.002)
+     3. 0-ply    21/20 13/8                   Eq.: -0.520 (-0.011)
+     4. 0-ply    21/15                        Eq.: -0.546 (-0.038)
+     5. 0-ply    24/23 21/16                  Eq.: -0.557 (-0.049)
+*    9. 0-ply    13/8 6/5                     Eq.: -0.612 (-0.103)
+
+XGID=--aB--D-B--AdD---bce-A--A-:0:0:1:51:10:3:0:13:10
+File: Llabba - Iandaurca 13pt Backgammon Studio 2023_03_24 12_56_54_007.txt
+Move: 6</code></pre>
+</section>
+<section id="position-20-4" class="level5">
+<h5 class="anchored" data-anchor-id="position-20-4">Position 20<img src="player-mistakes_files/figure-html/checker-68.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/23 24/22 9/5             Eq.: -0.686
+*    2. 0-ply    bar/23 24/22(2) 9/7          Eq.: -0.788 (-0.102)
+     3. 0-ply    bar/21 9/5                   Eq.: -0.804 (-0.118)
+     4. 0-ply    bar/23 13/11 9/5             Eq.: -0.860 (-0.173)
+     5. 0-ply    bar/23 24/22 13/9            Eq.: -0.865 (-0.179)
+
+XGID=-B-B-AB-bA--cD-a-b-eb---BA:0:0:1:22:2:0:0:13:10
+File: Llabba - Mayfwriter 13pt Backgammon Studio 2023_11_13 21_03_15_002.txt
+Move: 6</code></pre>
+</section>
+</section>
+<section id="error-0.2-6" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.2-6">Error &gt;0.2</h4>
+<section id="position-1-22" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-22">Position 1<img src="player-mistakes_files/figure-html/checker-69.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    8/4 5/4                      Eq.: -0.282
+     2. 0-ply    6/2*/1*                      Eq.: -0.296 (-0.014)
+     3. 0-ply    11/7 8/7                     Eq.: -0.390 (-0.108)
+     4. 0-ply    11/6                         Eq.: -0.484 (-0.202)
+     5. 0-ply    11/10 6/2*                   Eq.: -0.532 (-0.250)
+*    6. 0-ply    13/8                         Eq.: -0.557 (-0.275)
+
+XGID=-aaB-CC-B--A-Ba---bdb-bbB-:0:0:1:41:3:0:0:13:10
+File: GitteD - Llabba 13pt Backgammon Studio 2023_01_08 15_39_15_004.txt
+Move: 9</code></pre>
+</section>
+</section>
+<section id="error-0.3-6" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.3-6">Error &gt;0.3</h4>
+<section id="position-1-23" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-23">Position 1<img src="player-mistakes_files/figure-html/checker-70.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/14                        Eq.: -0.109
+     2. 0-ply    13/9 8/2                     Eq.: -0.139 (-0.029)
+     3. 0-ply    13/9 13/7                    Eq.: -0.196 (-0.086)
+     4. 0-ply    8/2 6/2                      Eq.: -0.367 (-0.257)
+     5. 0-ply    9/5 8/2                      Eq.: -0.432 (-0.322)
+
+XGID=---b--E-DA--cD--abbe----A-:0:0:1:64:10:9:0:13:10
+File: Selbs - Llabba 13pt Backgammon Studio 2023_03_24 18_10_57_017.txt
+Move: 6</code></pre>
+</section>
+</section>
+</section>
+<section id="move-no.-15" class="level3">
+<h3 class="anchored" data-anchor-id="move-no.-15">Move no. &gt;15</h3>
+<section id="error-0.05-7" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.05-7">Error &gt;0.05</h4>
+<section id="position-1-24" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-24">Position 1<img src="player-mistakes_files/figure-html/checker-71.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    11/6                         Eq.: +0.849
+*    2. 0-ply    6/3*/1                       Eq.: +0.788 (-0.061)
+     3. 0-ply    6/1                          Eq.: +0.581 (-0.268)
+     4. 0-ply    4/2 4/1                      Eq.: +0.534 (-0.315)
+     5. 0-ply    11/9 6/3*                    Eq.: +0.425 (-0.424)
+
+XGID=-BCaDBC----A----b-adcb-b--:1:-1:1:32:3:2:0:13:10
+File: Llabba - aiueow 13pt Backgammon Studio 2023_03_13 21_37_10_004.txt
+Move: 31</code></pre>
+</section>
+<section id="position-2-18" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-18">Position 2<img src="player-mistakes_files/figure-html/checker-72.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    10/6 2/1                     Eq.: -1.943
+     2. 0-ply    10/5                         Eq.: -2.011 (-0.068)
+     3. 0-ply    10/9 6/2                     Eq.: -2.012 (-0.069)
+     4. 0-ply    22/18 2/1                    Eq.: -2.026 (-0.083)
+     5. 0-ply    22/18 10/9                   Eq.: -2.036 (-0.092)
+*    6. 0-ply    22/17                        Eq.: -2.039 (-0.096)
+
+XGID=-HA---A---A---------dcBBc-:0:0:1:41:4:9:0:13:10
+File: Llabba - emperor 13pt Backgammon Studio 2023_11_07 15_53_55_008.txt
+Move: 63</code></pre>
+</section>
+<section id="position-3-17" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-17">Position 3<img src="player-mistakes_files/figure-html/checker-73.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/23 24/21                 Eq.: -0.626
+*    2. 0-ply    bar/22 24/22                 Eq.: -0.691 (-0.065)
+     3. 0-ply    bar/20                       Eq.: -0.777 (-0.150)
+     4. 0-ply    bar/23 7/4                   Eq.: -0.785 (-0.159)
+     5. 0-ply    bar/22 23/21                 Eq.: -0.801 (-0.174)
+
+XGID=---B-BDBa---b-Ba-bde---AAA:0:0:1:32:10:6:0:13:10
+File: Greathumics - Llabba 13pt Backgammon Studio 2023_01_29 19_57_58_007.txt
+Move: 16</code></pre>
+</section>
+<section id="position-4-15" class="level5">
+<h5 class="anchored" data-anchor-id="position-4-15">Position 4<img src="player-mistakes_files/figure-html/checker-74.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    7/5 7/4                      Eq.: +1.215
+     2. 0-ply    10/8 7/4                     Eq.: +1.196 (-0.018)
+     3. 0-ply    7/4 5/3                      Eq.: +1.193 (-0.022)
+     4. 0-ply    6/4 6/3                      Eq.: +1.178 (-0.036)
+*    5. 0-ply    13/11 7/4                    Eq.: +1.162 (-0.053)
+
+XGID=bbBBBCBB--A-bA---c-c-c----:0:0:1:32:11:9:0:13:10
+File: Llabba - Mayfwriter 13pt Backgammon Studio 2023_11_13 21_03_15_010.txt
+Move: 28</code></pre>
+</section>
+<section id="position-5-13" class="level5">
+<h5 class="anchored" data-anchor-id="position-5-13">Position 5<img src="player-mistakes_files/figure-html/checker-75.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    21/15 12/10                  Eq.: +1.315
+     2. 0-ply    23/15                        Eq.: +1.311 (-0.004)
+     3. 0-ply    21/15 9/7                    Eq.: +1.288 (-0.027)
+     4. 0-ply    12/6 9/7                     Eq.: +1.286 (-0.029)
+     5. 0-ply    21/13                        Eq.: +1.276 (-0.039)
+*    6. 0-ply    23/21 12/6                   Eq.: +1.249 (-0.066)
+
+XGID=bbABBBBB-A--A-a--bacbAbA--:1:-1:1:62:0:1:0:13:10
+File: Llabba - FARHANG 13pt Backgammon Studio 2023_02_17 14_56_01_002.txt
+Move: 23</code></pre>
+</section>
+<section id="position-6-12" class="level5">
+<h5 class="anchored" data-anchor-id="position-6-12">Position 6<img src="player-mistakes_files/figure-html/checker-76.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    18/13                        Eq.: +0.746
+     2. 0-ply    18/15 11/9                   Eq.: +0.724 (-0.022)
+     3. 0-ply    18/16 11/8                   Eq.: +0.708 (-0.038)
+     4. 0-ply    11/6                         Eq.: +0.689 (-0.058)
+*    5. 0-ply    18/15 10/8                   Eq.: +0.687 (-0.059)
+
+XGID=aBBC-bB-B-ABd----cAe------:1:-1:1:32:5:3:0:13:10
+File: Llabba - Ophris 13pt Backgammon Studio 2023_10_09 19_40_36_006.txt
+Move: 19</code></pre>
+</section>
+<section id="position-7-8" class="level5">
+<h5 class="anchored" data-anchor-id="position-7-8">Position 7<img src="player-mistakes_files/figure-html/checker-77.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    3/off 2/off                  Eq.: +0.967
+     2. 0-ply    5/2 3/1                      Eq.: +0.892 (-0.075)
+*    3. 0-ply    5/off                        Eq.: +0.886 (-0.081)
+     4. 0-ply    3/1 3/off                    Eq.: +0.866 (-0.101)
+     5. 0-ply    5/3 5/2                      Eq.: +0.370 (-0.597)
+
+XGID=-DDDbC-------------cbcbba-:1:-1:1:32:8:9:0:13:10
+File: aiueow - Llabba 13pt Backgammon Studio 2023_05_24 10_56_06_010.txt
+Move: 41</code></pre>
+</section>
+<section id="position-8-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-8-6">Position 8<img src="player-mistakes_files/figure-html/checker-78.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    8/6 8/3                      Eq.: +1.111
+     2. 0-ply    8/3 6/4                      Eq.: +1.048 (-0.063)
+     3. 0-ply    8/3 4/2                      Eq.: +1.034 (-0.076)
+     4. 0-ply    8/3 5/3                      Eq.: +1.027 (-0.084)
+*    5. 0-ply    7/5 7/2                      Eq.: +1.026 (-0.084)
+
+XGID=-cC-CBCBB------------dcbc-:1:-1:1:52:2:5:0:13:10
+File: Daisy - Llabba 13pt Backgammon Studio 2023_09_28 12_45_23_004.txt
+Move: 28</code></pre>
+</section>
+<section id="position-9-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-9-6">Position 9<img src="player-mistakes_files/figure-html/checker-79.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    17/9                         Eq.: -0.223
+     2. 0-ply    17/13(2)                     Eq.: -0.225 (-0.002)
+     3. 0-ply    5/1(2)                       Eq.: -0.305 (-0.082)
+*    4. 0-ply    17/15(2) 5/3(2)              Eq.: -0.305 (-0.082)
+     5. 0-ply    17/15(2) 5/1                 Eq.: -0.356 (-0.133)
+
+XGID=-CDBBB------b----B--bb-de-:0:0:1:22:7:8:0:13:10
+File: Llabba - Selbs 13pt Backgammon Studio 2023_10_16 14_53_18_010.txt
+Move: 26</code></pre>
+</section>
+<section id="position-10-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-10-6">Position 10<img src="player-mistakes_files/figure-html/checker-80.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    6/4 6/off                    Eq.: +1.672
+*    2. 0-ply    6/off 2/off                  Eq.: +1.621 (-0.051)
+     3. 0-ply    6/off 4/2                    Eq.: +1.391 (-0.282)
+
+XGID=abADB-B--------a------bde-:0:0:1:62:0:0:0:13:10
+File: Llabba - Lucky Lux 13pt Backgammon Studio 2023_01_23 20_22_56.txt
+Move: 43</code></pre>
+</section>
+<section id="position-11-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-11-6">Position 11<img src="player-mistakes_files/figure-html/checker-81.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/21                       Eq.: -0.800
+     2. 0-ply    bar/22 7/6                   Eq.: -0.825 (-0.025)
+*    3. 0-ply    bar/22 6/5                   Eq.: -0.853 (-0.053)
+     4. 0-ply    bar/22 9/8                   Eq.: -0.873 (-0.073)
+     5. 0-ply    bar/22 3/2                   Eq.: -1.000 (-0.200)
+
+XGID=--BB--CA-B--cCb--cbcA---bA:1:-1:1:31:0:2:0:13:10
+File: Llabba - Breum  13pt Backgammon Studio 2023_01_09 20_28_11_002.txt
+Move: 20</code></pre>
+</section>
+<section id="position-12-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-12-6">Position 12<img src="player-mistakes_files/figure-html/checker-82.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    18/14(2) 7/3*(2)             Eq.: +0.908
+     2. 0-ply    18/14 13/9 7/3*(2)           Eq.: +0.873 (-0.034)
+*    3. 0-ply    13/5 7/3*(2)                 Eq.: +0.843 (-0.064)
+     4. 0-ply    13/9(2) 7/3*(2)              Eq.: +0.841 (-0.067)
+     5. 0-ply    18/14 9/5 7/3*(2)            Eq.: +0.833 (-0.075)
+
+XGID=aB-aaBBB-Ab-bB--b-Bc-baAA-:1:-1:1:44:4:9:0:13:10
+File: joro1313 - Llabba 13pt Backgammon Studio 2023_11_21 20_13_25_008.txt
+Move: 27</code></pre>
+</section>
+<section id="position-13-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-13-5">Position 13<img src="player-mistakes_files/figure-html/checker-83.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    22/13                        Eq.: +0.830
+     2. 0-ply    22/18 11/6                   Eq.: +0.830 (-0.000)
+     3. 0-ply    11/7 11/6                    Eq.: +0.779 (-0.051)
+*    4. 0-ply    11/6 9/5                     Eq.: +0.772 (-0.058)
+     5. 0-ply    22/18 9/4                    Eq.: +0.753 (-0.077)
+
+XGID=aBB-BBB--A-Bb----c-bb-Bbc-:1:-1:1:54:8:11:0:13:10
+File: JuliaH - Llabba 13pt Backgammon Studio 2023_01_18 18_32_47_013.txt
+Move: 29</code></pre>
+</section>
+<section id="position-14-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-14-5">Position 14<img src="player-mistakes_files/figure-html/checker-84.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    8/3 8/2                      Eq.: -0.158
+     2. 0-ply    9/4 8/2                      Eq.: -0.187 (-0.028)
+     3. 0-ply    8/2 6/1                      Eq.: -0.187 (-0.028)
+     4. 0-ply    9/3 8/3                      Eq.: -0.209 (-0.051)
+     5. 0-ply    9/3 6/1                      Eq.: -0.211 (-0.053)
+*    6. 0-ply    20/9                         Eq.: -0.252 (-0.093)
+
+XGID=--ABCBB-BA--c----bcbBbba--:0:0:1:65:7:1:0:13:10
+File: GitteD - Llabba 13pt Backgammon Studio 2023_01_08 15_39_15_006.txt
+Move: 17</code></pre>
+</section>
+<section id="position-15-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-15-5">Position 15<img src="player-mistakes_files/figure-html/checker-85.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    6/2 6/1                      Eq.: +0.686
+*    2. 0-ply    9/4* 6/2                     Eq.: +0.629 (-0.057)
+     3. 0-ply    11/7 11/6                    Eq.: +0.583 (-0.102)
+     4. 0-ply    11/7 6/1                     Eq.: +0.496 (-0.189)
+     5. 0-ply    11/2                         Eq.: +0.470 (-0.215)
+
+XGID=---aacDBBCBB-------bcbab--:1:1:1:54:12:6:0:13:10
+File: lionheart - Llabba 13pt Backgammon Studio 2023_06_29 12_55_23_009.txt
+Move: 23</code></pre>
+</section>
+<section id="position-16-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-16-5">Position 16<img src="player-mistakes_files/figure-html/checker-86.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    5/3(3) 4/2                   Eq.: -0.430
+     2. 0-ply    23/21 4/2 3/1(2)             Eq.: -0.476 (-0.046)
+     3. 0-ply    5/1 5/3(2)                   Eq.: -0.479 (-0.049)
+     4. 0-ply    5/1 5/3 4/2                  Eq.: -0.493 (-0.063)
+*    5. 0-ply    23/21 5/1 4/2                Eq.: -0.501 (-0.071)
+
+XGID=-DBDACa---------cbccc--A--:1:1:1:22:2:4:0:7:10
+File: BoardLord - Llabba 7pt Backgammon Studio 2023_08_09 18_11_07_003.txt
+Move: 25</code></pre>
+</section>
+<section id="position-17-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-17-5">Position 17<img src="player-mistakes_files/figure-html/checker-87.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/21 8/6(2)                Eq.: +0.353
+     2. 0-ply    bar/21 3/1(2)                Eq.: +0.280 (-0.073)
+     3. 0-ply    bar/23 13/7                  Eq.: +0.265 (-0.088)
+*    4. 0-ply    bar/23 13/11(3)              Eq.: +0.263 (-0.090)
+     5. 0-ply    bar/23 8/4 8/6               Eq.: +0.257 (-0.096)
+
+XGID=---BBcBCB---cC---baba-c--A:0:0:1:22:6:1:0:13:10
+File: branco1304 - Llabba 13pt Backgammon Studio 2023_10_19 19_02_52_004.txt
+Move: 24</code></pre>
+</section>
+<section id="position-18-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-18-5">Position 18<img src="player-mistakes_files/figure-html/checker-88.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    2/off 1/off                  Eq.: +0.895
+     2. 0-ply    2/1 2/off                    Eq.: +0.859 (-0.035)
+     3. 0-ply    5/4 2/off                    Eq.: +0.855 (-0.039)
+     4. 0-ply    6/5 2/off                    Eq.: +0.852 (-0.043)
+     5. 0-ply    6/4 2/1                      Eq.: +0.844 (-0.051)
+*    7. 0-ply    4/3*/1                       Eq.: +0.817 (-0.078)
+
+XGID=-ACaCDC--a---------bbcbbb-:1:-1:1:21:4:0:0:13:10
+File: Llabba - Arkhimedes 13pt Backgammon Studio 2023_11_10 13_57_19_002.txt
+Move: 33</code></pre>
+</section>
+<section id="position-19-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-19-5">Position 19<img src="player-mistakes_files/figure-html/checker-89.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    21/20 21/15                  Eq.: -0.629
+     2. 0-ply    21/14                        Eq.: -0.661 (-0.033)
+     3. 0-ply    21/15 6/5                    Eq.: -0.669 (-0.040)
+     4. 0-ply    24/23 21/15                  Eq.: -0.701 (-0.072)
+*    5. 0-ply    7/6 7/1                      Eq.: -0.704 (-0.075)
+
+XGID=-A--bBCBB-------bcce-B-BA-:1:1:1:61:10:0:0:13:10
+File: Llabba - Iandaurca 13pt Backgammon Studio 2023_03_24 12_56_54_005.txt
+Move: 17</code></pre>
+</section>
+<section id="position-20-5" class="level5">
+<h5 class="anchored" data-anchor-id="position-20-5">Position 20<img src="player-mistakes_files/figure-html/checker-90.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    10/8 6/3*                    Eq.: -0.086
+     2. 0-ply    14/12 6/3*                   Eq.: -0.107 (-0.021)
+     3. 0-ply    11/9 6/3*                    Eq.: -0.128 (-0.042)
+     4. 0-ply    13/11 6/3*                   Eq.: -0.147 (-0.060)
+     5. 0-ply    6/3*/1                       Eq.: -0.149 (-0.063)
+*    6. 0-ply    13/11 13/10                  Eq.: -0.163 (-0.077)
+
+XGID=--Ca-BC-B-AA-BA-----c-cdd-:1:1:1:32:6:4:0:13:10
+File: Llabba - aiueow 13pt Backgammon Studio 2023_03_13 21_37_10_007.txt
+Move: 42</code></pre>
+</section>
+</section>
+<section id="error-0.1-7" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.1-7">Error &gt;0.1</h4>
+<section id="position-1-25" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-25">Position 1<img src="player-mistakes_files/figure-html/checker-91.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    9/5 8/5                      Eq.: +0.142
+*    2. 0-ply    22/15                        Eq.: +0.005 (-0.137)
+     3. 0-ply    8/5 8/4                      Eq.: -0.077 (-0.219)
+     4. 0-ply    9/5 7/4                      Eq.: -0.096 (-0.238)
+     5. 0-ply    9/6 8/4                      Eq.: -0.097 (-0.239)
+
+XGID=--BBB-BABAb-b--B-b-d-bAab-:0:0:1:43:3:2:0:7:10
+File: kris - Llabba 7pt Backgammon Studio 2023_06_18 16_27_48_005.txt
+Move: 53</code></pre>
+</section>
+<section id="position-2-19" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-19">Position 2<img src="player-mistakes_files/figure-html/checker-92.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    9/3 4/1                      Eq.: -0.905
+*    2. 0-ply    13/4                         Eq.: -1.075 (-0.170)
+     3. 0-ply    9/3 6/3                      Eq.: -1.148 (-0.243)
+     4. 0-ply    9/6 9/3                      Eq.: -1.228 (-0.322)
+     5. 0-ply    23/14                        Eq.: -1.462 (-0.557)
+
+XGID=--CBAaBb-C-a-B-----bcbbBb-:1:1:1:63:11:9:0:13:10
+File: Llabba - Hodgey 13pt Backgammon Studio 2023_08_05 10_15_37_013.txt
+Move: 33</code></pre>
+</section>
+<section id="position-3-18" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-18">Position 3<img src="player-mistakes_files/figure-html/checker-93.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    13/1 6/2*                    Eq.: -0.271
+     2. 0-ply    13/5 8/4(2)                  Eq.: -0.299 (-0.028)
+*    3. 0-ply    13/9 8/4(2) 6/2*             Eq.: -0.389 (-0.118)
+     4. 0-ply    13/5 13/9(2)                 Eq.: -0.438 (-0.167)
+     5. 0-ply    13/9(2) 8/4(2)               Eq.: -0.596 (-0.325)
+
+XGID=-AaB-BCaB----C---bbcbbBb--:0:0:1:44:7:7:0:13:10
+File: Daisy - Llabba 13pt Backgammon Studio 2023_09_28 12_45_23_008.txt
+Move: 22</code></pre>
+</section>
+<section id="position-4-16" class="level5">
+<h5 class="anchored" data-anchor-id="position-4-16">Position 4<img src="player-mistakes_files/figure-html/checker-94.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/24 5/1*                  Eq.: +0.310
+*    2. 0-ply    bar/24 13/9                  Eq.: +0.163 (-0.147)
+     3. 0-ply    bar/24 6/2                   Eq.: +0.131 (-0.179)
+     4. 0-ply    bar/24 7/3                   Eq.: -0.606 (-0.916)
+
+XGID=-a--dCCBB---aC----abbb-bAA:0:0:1:41:0:0:0:7:10
+File: Maciel - Llabba 7pt Backgammon Studio 2023_05_17 14_32_55.txt
+Move: 24</code></pre>
+</section>
+<section id="position-5-14" class="level5">
+<h5 class="anchored" data-anchor-id="position-5-14">Position 5<img src="player-mistakes_files/figure-html/checker-95.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/22 5/1                   Eq.: +0.658
+*    2. 0-ply    bar/18                       Eq.: +0.556 (-0.102)
+
+XGID=-AbbcGF-----aa-----a-b-abA:1:-1:1:43:0:6:0:11:10
+File: Llabba - petruhl 11pt Backgammon Studio 2023_03_03 18_42_33_004.txt
+Move: 53</code></pre>
+</section>
+<section id="position-6-13" class="level5">
+<h5 class="anchored" data-anchor-id="position-6-13">Position 6<img src="player-mistakes_files/figure-html/checker-96.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    15/9 2/1                     Eq.: +0.843
+*    2. 0-ply    15/8                         Eq.: +0.713 (-0.130)
+     3. 0-ply    15/9 4/3                     Eq.: +0.664 (-0.179)
+     4. 0-ply    15/9 3/2                     Eq.: +0.646 (-0.197)
+
+XGID=--CBBa---------A---ed-cb--:1:-1:1:61:9:11:0:13:10
+File: Llabba - prpascha 13pt Backgammon Studio 2023_05_21 21_45_59_013.txt
+Move: 49</code></pre>
+</section>
+<section id="position-7-9" class="level5">
+<h5 class="anchored" data-anchor-id="position-7-9">Position 7<img src="player-mistakes_files/figure-html/checker-97.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/21                       Eq.: +0.881
+     2. 0-ply    bar/24 21/18*                Eq.: +0.838 (-0.043)
+     3. 0-ply    bar/22*/21                   Eq.: +0.823 (-0.058)
+*    4. 0-ply    bar/22* 6/5                  Eq.: +0.771 (-0.110)
+     5. 0-ply    bar/22* 21/20                Eq.: +0.762 (-0.119)
+
+XGID=-acb-BEBB---AA---bae-Aa--A:1:-1:1:31:0:6:0:11:10
+File: Llabba - petruhl 11pt Backgammon Studio 2023_03_03 18_42_33_004.txt
+Move: 21</code></pre>
+</section>
+<section id="position-8-7" class="level5">
+<h5 class="anchored" data-anchor-id="position-8-7">Position 8<img src="player-mistakes_files/figure-html/checker-98.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    8/3* 7/3                     Eq.: +0.361
+*    2. 0-ply    14/10 12/7                   Eq.: +0.258 (-0.103)
+     3. 0-ply    12/7 10/6                    Eq.: +0.132 (-0.228)
+     4. 0-ply    7/2 6/2                      Eq.: -0.030 (-0.390)
+     5. 0-ply    14/10 14/9                   Eq.: -0.152 (-0.512)
+
+XGID=-b-a--ECC-A-A-B--b-bcab-b-:1:-1:1:54:8:7:0:13:10
+File: Llabba - accr66 13pt Backgammon Studio 2023_01_25 20_19_48_010.txt
+Move: 16</code></pre>
+</section>
+<section id="position-9-7" class="level5">
+<h5 class="anchored" data-anchor-id="position-9-7">Position 9<img src="player-mistakes_files/figure-html/checker-99.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    8/2 5/1                      Eq.: -0.169
+     2. 0-ply    11/1                         Eq.: -0.192 (-0.023)
+     3. 0-ply    11/7 8/2                     Eq.: -0.192 (-0.023)
+     4. 0-ply    20/10                        Eq.: -0.202 (-0.033)
+     5. 0-ply    11/5 8/4                     Eq.: -0.239 (-0.069)
+*    8. 0-ply    20/14 11/7                   Eq.: -0.276 (-0.107)
+
+XGID=--BCCC--A--Ab----b-bB-d-e-:1:1:1:64:6:0:0:13:10
+File: Llabba - Iandaurca 13pt Backgammon Studio 2023_03_24 12_56_54_003.txt
+Move: 38</code></pre>
+</section>
+<section id="position-10-7" class="level5">
+<h5 class="anchored" data-anchor-id="position-10-7">Position 10<img src="player-mistakes_files/figure-html/checker-100.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    11/5 6/4*                    Eq.: +0.151
+*    2. 0-ply    22/20 11/5                   Eq.: +0.050 (-0.101)
+     3. 0-ply    13/5                         Eq.: -0.058 (-0.208)
+     4. 0-ply    22/20 21/15                  Eq.: -0.058 (-0.209)
+     5. 0-ply    21/15 6/4*                   Eq.: -0.096 (-0.247)
+
+XGID=--aBaAC----AbC---bdeACA---:0:0:1:62:4:10:0:13:10
+File: rino - Llabba 13pt Backgammon Studio 2023_10_11 13_27_49_006.txt
+Move: 16</code></pre>
+</section>
+<section id="position-11-7" class="level5">
+<h5 class="anchored" data-anchor-id="position-11-7">Position 11<img src="player-mistakes_files/figure-html/checker-101.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    21/12                        Eq.: -0.258
+     2. 0-ply    11/5 8/5                     Eq.: -0.381 (-0.124)
+*    3. 0-ply    21/18 8/2                    Eq.: -0.390 (-0.133)
+     4. 0-ply    11/8 11/5                    Eq.: -0.427 (-0.169)
+     5. 0-ply    21/18 11/5                   Eq.: -0.458 (-0.201)
+
+XGID=-AB-B-BaCa-B---bbb-d-C-c--:0:0:1:63:2:8:0:13:10
+File: Llabba - Ciuffo 13pt Backgammon Studio 2023_02_09 15_19_56_004.txt
+Move: 19</code></pre>
+</section>
+<section id="position-12-7" class="level5">
+<h5 class="anchored" data-anchor-id="position-12-7">Position 12<img src="player-mistakes_files/figure-html/checker-102.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    6/1                          Eq.: +0.276
+     2. 0-ply    6/2 3/2                      Eq.: +0.185 (-0.091)
+*    3. 0-ply    8/3                          Eq.: +0.143 (-0.133)
+     4. 0-ply    8/7 6/2                      Eq.: -0.292 (-0.568)
+
+XGID=-CEBbbC-B--------a-db-bb--:1:1:1:41:11:6:0:13:10
+File: Llabba - Djmarek 13pt Backgammon Studio 2023_03_26 13_56_31_008.txt
+Move: 49</code></pre>
+</section>
+<section id="position-13-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-13-6">Position 13<img src="player-mistakes_files/figure-html/checker-103.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    8/3 5/3                      Eq.: -0.792
+     2. 0-ply    8/3 6/4                      Eq.: -0.814 (-0.022)
+     3. 0-ply    6/1 5/3                      Eq.: -0.876 (-0.084)
+     4. 0-ply    8/1                          Eq.: -0.883 (-0.091)
+     5. 0-ply    21/16 5/3                    Eq.: -0.891 (-0.099)
+*    6. 0-ply    21/16 6/4                    Eq.: -0.894 (-0.102)
+
+XGID=-BB--CC-A-----b--bbdbBcB--:1:1:1:52:10:0:0:13:10
+File: Llabba - Iandaurca 13pt Backgammon Studio 2023_03_24 12_56_54_005.txt
+Move: 25</code></pre>
+</section>
+<section id="position-14-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-14-6">Position 14<img src="player-mistakes_files/figure-html/checker-104.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    24/23* 20/14                 Eq.: -0.172
+     2. 0-ply    24/23*/17                    Eq.: -0.212 (-0.039)
+     3. 0-ply    24/23* 14/8                  Eq.: -0.320 (-0.148)
+*    4. 0-ply    24/23* 13/7                  Eq.: -0.324 (-0.152)
+     5. 0-ply    13/7 8/7                     Eq.: -0.505 (-0.333)
+
+XGID=---BB-B-C-a--AA---bbBfcaB-:1:1:1:61:4:0:0:7:10
+File: SniperKitten - Llabba 7pt Backgammon Studio 2023_09_08 18_20_16_003.txt
+Move: 34</code></pre>
+</section>
+<section id="position-15-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-15-6">Position 15<img src="player-mistakes_files/figure-html/checker-105.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    16/9                         Eq.: +0.175
+     2. 0-ply    16/13 5/1                    Eq.: +0.115 (-0.060)
+     3. 0-ply    11/4                         Eq.: +0.067 (-0.108)
+*    4. 0-ply    11/8 5/1                     Eq.: +0.056 (-0.119)
+     5. 0-ply    13/9 5/2*                    Eq.: +0.000 (-0.174)
+
+XGID=--aB-CBbB--AbB-bAbBcab----:0:0:1:43:0:0:0:13:10
+File: Selbs - Llabba 13pt Backgammon Studio 2023_03_24 18_10_57.txt
+Move: 16</code></pre>
+</section>
+<section id="position-16-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-16-6">Position 16<img src="player-mistakes_files/figure-html/checker-106.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    14/3                         Eq.: +1.040
+*    2. 0-ply    8/3 8/2                      Eq.: +0.889 (-0.151)
+     3. 0-ply    14/9 8/2                     Eq.: +0.854 (-0.186)
+
+XGID=abCBbDC-B--a-aA---bb-bb---:1:-1:1:65:1:12:0:13:10
+File: Ophris - Llabba 13pt Backgammon Studio 2023_06_26 21_00_46_004.txt
+Move: 54</code></pre>
+</section>
+<section id="position-17-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-17-6">Position 17<img src="player-mistakes_files/figure-html/checker-107.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    14/2(2)                      Eq.: -0.765
+     2. 0-ply    14/2 8/2(2)                  Eq.: -0.790 (-0.025)
+     3. 0-ply    20/2 14/8                    Eq.: -0.861 (-0.097)
+     4. 0-ply    20/2 8/2                     Eq.: -0.865 (-0.100)
+*    5. 0-ply    20/8 14/8(2)                 Eq.: -0.869 (-0.104)
+
+XGID=---CCAC-B-----B-b--cAcbcb-:1:1:1:66:10:4:0:13:10
+File: branco1304 - Llabba 13pt Backgammon Studio 2023_10_19 19_02_52_009.txt
+Move: 31</code></pre>
+</section>
+<section id="position-18-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-18-6">Position 18<img src="player-mistakes_files/figure-html/checker-108.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    20/11                        Eq.: +0.255
+     2. 0-ply    20/15 6/2                    Eq.: +0.184 (-0.070)
+*    3. 0-ply    20/16 13/8                   Eq.: +0.113 (-0.141)
+     4. 0-ply    20/16 6/1                    Eq.: +0.096 (-0.158)
+     5. 0-ply    20/15 13/9                   Eq.: +0.001 (-0.254)
+
+XGID=----BaD-B--B-B----bdAbbBd-:1:1:1:54:1:7:0:13:10
+File: Llabba - Jaflo 13pt Backgammon Studio 2023_10_24 19_07_37_006.txt
+Move: 19</code></pre>
+</section>
+<section id="position-19-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-19-6">Position 19<img src="player-mistakes_files/figure-html/checker-109.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    6/2* 3/1                     Eq.: +0.303
+*    2. 0-ply    6/2* 4/2                     Eq.: +0.159 (-0.144)
+     3. 0-ply    6/4 6/2*                     Eq.: -0.224 (-0.527)
+     4. 0-ply    6/2* 5/3                     Eq.: -0.324 (-0.627)
+     5. 0-ply    5/3 5/1                      Eq.: -0.490 (-0.793)
+
+XGID=-CaCBBC------------acbbfB-:1:1:1:42:0:0:0:13:10
+File: Greathumics - Llabba 13pt Backgammon Studio 2023_01_29 19_57_58.txt
+Move: 56</code></pre>
+</section>
+<section id="position-20-6" class="level5">
+<h5 class="anchored" data-anchor-id="position-20-6">Position 20<img src="player-mistakes_files/figure-html/checker-110.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    8/3 4/3                      Eq.: +0.918
+*    2. 0-ply    18/17 18/13                  Eq.: +0.748 (-0.170)
+     3. 0-ply    18/12                        Eq.: +0.742 (-0.176)
+     4. 0-ply    18/13 5/4                    Eq.: +0.730 (-0.188)
+     5. 0-ply    8/2*                         Eq.: +0.614 (-0.304)
+
+XGID=aBa-CDB-B---------Bd-bbcb-:1:-1:1:51:3:7:0:13:10
+File: Llabba - Hodgey 13pt Backgammon Studio 2023_08_05 10_15_37_006.txt
+Move: 44</code></pre>
+</section>
+</section>
+<section id="error-0.2-7" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.2-7">Error &gt;0.2</h4>
+<section id="position-1-26" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-26">Position 1<img src="player-mistakes_files/figure-html/checker-111.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    18/7                         Eq.: +0.208
+*    2. 0-ply    7/2 7/1                      Eq.: -0.059 (-0.267)
+     3. 0-ply    7/1 6/1                      Eq.: -0.230 (-0.439)
+     4. 0-ply    18/13 7/1                    Eq.: -1.000 (-1.208)
+
+XGID=-BBACbCB----b----bBa-bbbb-:0:0:1:65:10:6:0:13:10
+File: Llabba - aiueow 13pt Backgammon Studio 2023_03_13 21_37_10_011.txt
+Move: 19</code></pre>
+</section>
+<section id="position-2-20" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-20">Position 2<img src="player-mistakes_files/figure-html/checker-112.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    bar/22* 18/12*               Eq.: -0.042
+*    2. 0-ply    bar/22* 24/18                Eq.: -0.261 (-0.219)
+     3. 0-ply    bar/22* 8/2                  Eq.: -0.371 (-0.329)
+     4. 0-ply    bar/22* 13/7                 Eq.: -0.422 (-0.380)
+
+XGID=--B-BbB-A---aD--baBbbbabAA:1:1:1:63:5:3:0:13:10
+File: Gibraltar_Mike - Llabba 13pt Backgammon Studio 2023_03_22 21_22_47_006.txt
+Move: 40</code></pre>
+</section>
+<section id="position-3-19" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-19">Position 3<img src="player-mistakes_files/figure-html/checker-113.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    9/4* 8/2*                    Eq.: +1.067
+     2. 0-ply    8/2* 7/2                     Eq.: +0.973 (-0.094)
+     3. 0-ply    19/13 9/4*                   Eq.: +0.927 (-0.140)
+     4. 0-ply    9/4* 9/3                     Eq.: +0.922 (-0.145)
+*    5. 0-ply    19/8                         Eq.: +0.790 (-0.277)
+
+XGID=--aBaCCBBB---------A-aced-:1:-1:1:65:5:1:0:13:10
+File: Llabba - prpascha 13pt Backgammon Studio 2023_05_21 21_45_59_005.txt
+Move: 48</code></pre>
+</section>
+<section id="position-4-17" class="level5">
+<h5 class="anchored" data-anchor-id="position-4-17">Position 4<img src="player-mistakes_files/figure-html/checker-114.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    6/1 5/2                      Eq.: +0.170
+     2. 0-ply    8/5 8/3                      Eq.: +0.129 (-0.041)
+     3. 0-ply    6/3 6/1                      Eq.: +0.091 (-0.078)
+     4. 0-ply    6/1 4/1                      Eq.: +0.070 (-0.100)
+*    5. 0-ply    13/10 13/8                   Eq.: -0.127 (-0.297)
+
+XGID=-BABBBBbB----B----bbcbbb--:1:-1:1:53:2:1:0:13:10
+File: Gibraltar_Mike - Llabba 13pt Backgammon Studio 2023_03_22 21_22_47_003.txt
+Move: 25</code></pre>
+</section>
+<section id="position-5-15" class="level5">
+<h5 class="anchored" data-anchor-id="position-5-15">Position 5<img src="player-mistakes_files/figure-html/checker-115.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    15/14* 8/4*                  Eq.: +0.458
+*    2. 0-ply    15/14* 15/11                 Eq.: +0.230 (-0.228)
+     3. 0-ply    15/14*/10                    Eq.: +0.215 (-0.243)
+     4. 0-ply    8/4*/3                       Eq.: -0.040 (-0.498)
+     5. 0-ply    8/4* 5/4                     Eq.: -0.067 (-0.525)
+
+XGID=-BABaBB-B---b-aB-b-b-dcB--:0:0:1:41:7:6:0:13:10
+File: ZicoBlack - Llabba 13pt Backgammon Studio 2023_09_25 16_35_22_007.txt
+Move: 29</code></pre>
+</section>
+</section>
+<section id="error-0.3-7" class="level4">
+<h4 class="anchored" data-anchor-id="error-0.3-7">Error &gt;0.3</h4>
+<section id="position-1-27" class="level5">
+<h5 class="anchored" data-anchor-id="position-1-27">Position 1<img src="player-mistakes_files/figure-html/checker-116.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    8/7 6/4 5/4                  Eq.: +0.661
+     2. 0-ply    6/4 5/4 2/1*                 Eq.: +0.400 (-0.261)
+     3. 0-ply    10/9(2) 8/7(2)               Eq.: +0.336 (-0.325)
+*    4. 0-ply    14/13 10/7                   Eq.: +0.317 (-0.343)
+     5. 0-ply    7/4 5/4                      Eq.: +0.315 (-0.345)
+
+XGID=-aC--CCAB-B---A------bcde-:1:1:1:11:6:4:0:13:10
+File: Llabba - aiueow 13pt Backgammon Studio 2023_03_13 21_37_10_007.txt
+Move: 46</code></pre>
+</section>
+<section id="position-2-21" class="level5">
+<h5 class="anchored" data-anchor-id="position-2-21">Position 2<img src="player-mistakes_files/figure-html/checker-117.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    18/11                        Eq.: -0.558
+*    2. 0-ply    8/1*                         Eq.: -0.901 (-0.343)
+     3. 0-ply    8/5 8/4                      Eq.: -1.000 (-0.442)
+     4. 0-ply    18/14 8/5                    Eq.: -1.000 (-0.442)
+     5. 0-ply    18/15 8/4                    Eq.: -1.000 (-0.442)
+
+XGID=-aaCBBB-B---b----bAdbc-C--:0:0:1:43:10:5:0:13:10
+File: GitteD - Llabba 13pt Backgammon Studio 2023_01_08 15_39_15_010.txt
+Move: 35</code></pre>
+</section>
+<section id="position-3-20" class="level5">
+<h5 class="anchored" data-anchor-id="position-3-20">Position 3<img src="player-mistakes_files/figure-html/checker-118.png" class="img-fluid" width="672"></h5>
+<pre><code>     1. 0-ply    16/14 8/7                    Eq.: +0.269
+     2. 0-ply    8/7 5/3                      Eq.: +0.207 (-0.062)
+*    3. 0-ply    23/22 7/5                    Eq.: -0.086 (-0.356)
+     4. 0-ply    10/7                         Eq.: -0.195 (-0.464)
+     5. 0-ply    16/14 7/6                    Eq.: -0.201 (-0.471)
+
+XGID=--aBbCBAC-B-----Abccbb-A--:0:0:1:21:0:2:0:7:10
+File: adidan - Llabba 7pt Backgammon Studio 2023_09_27 07_15_16_002.txt
+Move: 29</code></pre>
+</section>
+</section>
+</section>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
