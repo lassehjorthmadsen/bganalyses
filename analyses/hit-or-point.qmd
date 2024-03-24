@@ -1,0 +1,869 @@
+---
+title: "Hit or point decisions"
+author: "Lasse Hjorth Madsen"
+date: today 
+format: 
+  html:
+    fig-width: 4
+    fig-height: 4
+toc: true
+toc-expand: true
+toc-depth: 2
+editor: source
+execute:
+  echo: false
+  warning: false
+  cache: true
+---
+
+```{r setup}
+#| cache: false
+ 
+library(tidyverse)
+devtools::load_all(path = "../../bglab")
+
+remove_stuff <- function(text) {
+  text |>
+    read_lines() |>
+    str_remove("^ {1,6}") |>
+    str_remove("Confidence.+") |>
+    str_remove("Duration.+") |>
+    str_remove("Rollout¹    ") |> 
+    str_replace_all("        ", "  ") |> 
+    paste(collapse = "\n") |>  
+    str_replace_all("\n\n", "\n") 
+}
+```
+
+## Why this?
+
+This is a collection of checker play problems from the middle game, where the decision is between hitting or making a point. This can often be a difficult choice, so I thought it would be useful to take a closer look. 
+
+We have five main positions, each with several variants, all are rolled out 1296 times; moves and cube decisions at 3-ply.
+
+## Position 1
+
+In the first two contrasting variants, hitting with 21 is clearly right, for all the usual reasons: It gains in the race, gains initiative, cuts down on Black's good numbers, leaves bad 6s from the bar. 
+
+#### Variation A
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=-a----E-D-a-eD---c-e-A--A-:0:0:1:21:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    13/10*                       eq:+0,138
+      Player:   52,70% (G:15,93% B:0,75%)
+      Opponent: 47,30% (G:11,61% B:0,60%)
+      Confidence: ±0,014 (+0,124..+0,152) - [100,0%]
+      Duration: 7 minutes 11 seconds
+
+    2. Rollout¹    24/21                        eq:+0,018 (-0,120)
+      Player:   49,69% (G:11,01% B:0,34%)
+      Opponent: 50,31% (G:7,46% B:0,27%)
+      Confidence: ±0,013 (+0,006..+0,031) - [0,0%]
+      Duration: 6 minutes 40 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+In the second position, either of the pointing plays are a lot better that hitting. 
+
+#### Variation B
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=-a----E-Da--eD---c-eA---A-:0:0:1:31:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    8/5 6/5                      eq:+0,239
+      Player:   54,79% (G:17,12% B:0,74%)
+      Opponent: 45,21% (G:9,91% B:0,37%)
+      Confidence: ±0,014 (+0,225..+0,253) - [100,0%]
+      Duration: 6 minutes 11 seconds
+
+    2. Rollout¹    24/20                        eq:+0,186 (-0,053)
+      Player:   53,47% (G:11,71% B:0,29%)
+      Opponent: 46,53% (G:5,87% B:0,24%)
+      Confidence: ±0,012 (+0,173..+0,198) - [0,0%]
+      Duration: 6 minutes 40 seconds
+
+    3. Rollout²    13/9*                        eq:+0,134 (-0,105)
+      Player:   52,80% (G:16,03% B:0,75%)
+      Opponent: 47,20% (G:12,05% B:0,59%)
+      Confidence: ±0,014 (+0,120..+0,148) - [0,0%]
+      Duration: 21 minutes 25 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+Why the difference?
+
+Let's try to ignore the even stronger pointing play of 8/5 6/5 in variation B, and just compare the advanced anchor plays to the hitting plays.
+
+Clearly, the 20-point is stronger than the 21-point, so that's a long term reason why pointing is more attractive in variation B than in variation A: The point we get to make is better.
+
+There're also a related tactical reason: Leaving a blot on the 20-point in variation B gives Black nice, loose return hits with aces: 21, 31, 41, and 51 from the bar. In variation A the same aces are not nearly as comfortable after hitting. (The corresponding loose hits with 2s are not as clear and happy for Black.) 
+
+Another way of putting it: Hitting in variation A gives Black *both* poor 6s and aces from the bar; in variation B it is only 6s that are uncomfortable. 
+
+For these reasons, the defensive anchor works better that hitting i variation A but not in variation B.
+
+As mentioned, B offers White an even stronger option: 8/5 6 /5. That's better because the 5-point is also a great point to make, *and* it's harder since it's not slotted like the 20-point is. So it makes sense to take the opportunity now, while the need for defense is not super urgent. 
+
+## Position 2
+#### Variation A
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=-b---BD-Ca--cD---bbcA-bA--:0:0:1:13:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    23/20 6/5                    eq:+0,557
+      Player:   62,59% (G:18,02% B:0,71%)
+      Opponent: 37,41% (G:6,52% B:0,28%)
+      Confidence: ±0,014 (+0,544..+0,571) - [100,0%]
+      Duration: 5 minutes 01 second
+
+    2. Rollout¹    13/9*                        eq:+0,414 (-0,143)
+      Player:   59,06% (G:20,49% B:1,62%)
+      Opponent: 40,94% (G:11,74% B:0,61%)
+      Confidence: ±0,015 (+0,400..+0,429) - [0,0%]
+      Duration: 5 minutes 11 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+In position 2A, making the point with 23/20 6/5 is far ahead of the hitting play, 13/9\*, for several reasons. Of course, the anchor is super strong, and a permanent asset. But that's always the case, and often hitting is stronger anyway. In this position specifically: 
+
+- The non-hitting play is nice and smooth
+- The non-hitting play leaves no blots, avoiding 54 and 63 fly shots 
+- Hitting lets Black make an advanced anchor with 43 and 32
+- Hitting lets Black return hit loose with 41 and 31 (much like in the previous position)
+
+#### Variation B
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=-b---BD-Ca--cD---bbcA-bA--:0:0:1:24:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    8/4 6/4                      eq:+0,472
+      Player:   60,45% (G:21,72% B:1,62%)
+      Opponent: 39,55% (G:12,06% B:0,47%)
+      Confidence: ±0,015 (+0,456..+0,487) - [100,0%]
+      Duration: 4 minutes 28 seconds
+
+    2. Rollout¹    23/21 13/9*                  eq:+0,423 (-0,049)
+      Player:   59,54% (G:20,22% B:1,44%)
+      Opponent: 40,46% (G:11,35% B:0,58%)
+      Confidence: ±0,015 (+0,408..+0,437) - [0,0%]
+      Duration: 5 minutes 38 seconds
+
+    3. Rollout¹    13/11 13/9*                  eq:+0,399 (-0,072)
+      Player:   58,74% (G:21,36% B:1,74%)
+      Opponent: 41,26% (G:12,68% B:0,93%)
+      Confidence: ±0,017 (+0,382..+0,417) - [0,0%]
+      Duration: 5 minutes 33 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+Same position, different roll, now with a choice of making the 4-point or hitting. Pointing is still right, but with a smaller margin, since the 4-point is not as urgent, and not as important as the 20-point anchor in the previous position.
+
+#### Variation C
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=-b---BD-C-a-cD---bbcA-bA--:0:0:1:23:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    23/21 13/10*                 eq:+0,457
+      Player:   60,45% (G:19,87% B:1,57%)
+      Opponent: 39,55% (G:11,44% B:0,58%)
+      Confidence: ±0,019 (+0,439..+0,476) - [99,1%]
+      Duration: 5 minutes 33 seconds
+
+    2. Rollout¹    13/11 13/10*                 eq:+0,424 (-0,033)
+      Player:   59,11% (G:21,10% B:1,79%)
+      Opponent: 40,89% (G:12,23% B:0,86%)
+      Confidence: ±0,020 (+0,404..+0,444) - [0,8%]
+      Duration: 5 minutes 09 seconds
+
+    3. Rollout¹    23/20 8/6                    eq:+0,420 (-0,037)
+      Player:   59,11% (G:17,36% B:0,61%)
+      Opponent: 40,89% (G:7,19% B:0,30%)
+      Confidence: ±0,013 (+0,407..+0,433) - [0,1%]
+      Duration: 5 minutes 07 seconds
+
+    4. Rollout¹    13/10* 10/8                  eq:+0,403 (-0,054)
+      Player:   59,11% (G:19,61% B:1,33%)
+      Opponent: 40,89% (G:11,19% B:0,47%)
+      Confidence: ±0,015 (+0,388..+0,418) - [0,0%]
+      Duration: 5 minutes 07 seconds
+
+    5. Rollout¹    23/20 13/11                  eq:+0,397 (-0,060)
+      Player:   58,87% (G:16,95% B:0,67%)
+      Opponent: 41,13% (G:7,76% B:0,28%)
+      Confidence: ±0,012 (+0,385..+0,410) - [0,0%]
+      Duration: 5 minutes 19 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+Almost the same position; this time the anchoring play is a little awkward, and that is enough to make hitting correct, by a small amount. 
+
+#### Variation D
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=-b---BD-BA-acD---bbcA-bA--:0:0:1:25:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    9/4 6/4                      eq:+0,423
+      Player:   59,38% (G:20,66% B:1,37%)
+      Opponent: 40,62% (G:12,40% B:0,56%)
+      Confidence: ±0,016 (+0,408..+0,439) - [73,8%]
+      Duration: 3 minutes 17 seconds
+
+    2. Rollout¹    20/15 13/11*                 eq:+0,416 (-0,008)
+      Player:   60,01% (G:20,37% B:1,57%)
+      Opponent: 39,99% (G:13,02% B:0,89%)
+      Confidence: ±0,017 (+0,399..+0,433) - [26,1%]
+      Duration: 4 minutes 03 seconds
+
+    3. Rollout¹    13/8 13/11*                  eq:+0,389 (-0,035)
+      Player:   58,76% (G:20,90% B:1,73%)
+      Opponent: 41,24% (G:12,24% B:0,85%)
+      Confidence: ±0,018 (+0,371..+0,407) - [0,1%]
+      Duration: 4 minutes 07 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+Variation D is a photo finish: The pointing play cleans up a blot and is super smooth, the hitting play unstacks the mid and is very flexible. The hit has all the usual benefits, while the inner point takes a lot of the sting out of any loose hit from Black. 
+
+Bottom line: The two plays are basically equal.
+
+#### Variation E
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=-b---BDAB-a-cD---bbcA-bA--:0:0:1:23:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    23/20 7/5                    eq:+0,515
+      Player:   61,14% (G:19,33% B:0,67%)
+      Opponent: 38,86% (G:6,94% B:0,29%)
+      Confidence: ±0,015 (+0,500..+0,530) - [100,0%]
+      Duration: 3 minutes 51 seconds
+
+    2. Rollout¹    7/4 6/4                      eq:+0,435 (-0,080)
+      Player:   59,61% (G:21,34% B:1,48%)
+      Opponent: 40,39% (G:12,48% B:0,56%)
+      Confidence: ±0,015 (+0,420..+0,449) - [0,0%]
+      Duration: 3 minutes 18 seconds
+
+    3. Rollout¹    13/10* 7/5                   eq:+0,402 (-0,112)
+      Player:   58,53% (G:21,25% B:1,69%)
+      Opponent: 41,47% (G:11,84% B:0,68%)
+      Confidence: ±0,016 (+0,386..+0,418) - [0,0%]
+      Duration: 3 minutes 53 seconds
+
+    4. Rollout¹    13/10* 10/8                  eq:+0,361 (-0,154)
+      Player:   57,81% (G:19,84% B:1,53%)
+      Opponent: 42,19% (G:11,58% B:0,55%)
+      Confidence: ±0,016 (+0,345..+0,377) - [0,0%]
+      Duration: 4 minutes 28 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+In variation E, if White plays 7/5 with the two, the best 3 is 23/20, making the achor, for the same reasons as seen earlier. The 20-point is simple very valueable, and Black would like to hit loose there, so making it takes priority. The play is also quite flexible, so beats hitting. 
+
+Between the two pointing plays, the anchor wins for the same reason as before: It is the better and more urgent point to make; the 4-point is likely to come later.
+
+#### Variation F
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=-b---BD-C--acD---bbc-AbA--:0:0:1:23:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    23/20 13/11*                 eq:+0,464
+      Player:   60,81% (G:19,52% B:1,50%)
+      Opponent: 39,19% (G:11,05% B:0,49%)
+      Confidence: ±0,016 (+0,447..+0,480) - [99,8%]
+      Duration: 4 minutes 08 seconds
+
+    2. Rollout¹    23/21 13/10                  eq:+0,433 (-0,030)
+      Player:   59,47% (G:18,57% B:0,73%)
+      Opponent: 40,53% (G:8,19% B:0,34%)
+      Confidence: ±0,013 (+0,421..+0,446) - [0,2%]
+      Duration: 3 minutes 44 seconds
+
+    3. Rollout¹    13/10 13/11*                 eq:+0,404 (-0,059)
+      Player:   59,19% (G:20,57% B:1,50%)
+      Opponent: 40,81% (G:12,62% B:0,86%)
+      Confidence: ±0,015 (+0,389..+0,420) - [0,0%]
+      Duration: 3 minutes 52 seconds
+
+    4. Rollout¹    13/11* 11/8                  eq:+0,398 (-0,066)
+      Player:   58,75% (G:19,49% B:1,25%)
+      Opponent: 41,25% (G:11,55% B:0,50%)
+      Confidence: ±0,016 (+0,381..+0,414) - [0,0%]
+      Duration: 3 minutes 46 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+When the point to make is a slightly inferior anchor, the scales tip again and hitting is best, by a small amount, noting that 23/21 13/11\* makes a bid for the better anchor *while* hitting. 
+
+## Position 3
+#### Variation A
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=-a-Ba-DaB--AcB---bbe-A--BA:0:0:1:54:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    Bar/20 24/20                 eq:-0,171
+      Player:   45,64% (G:12,63% B:0,53%)
+      Opponent: 54,36% (G:14,37% B:0,59%)
+      Confidence: ±0,016 (-0,187..-0,155) - [100,0%]
+      Duration: 5 minutes 39 seconds
+
+    2. Rollout¹    Bar/20 11/7*                 eq:-0,209 (-0,038)
+      Player:   44,86% (G:13,48% B:0,63%)
+      Opponent: 55,14% (G:16,50% B:1,14%)
+      Confidence: ±0,016 (-0,225..-0,193) - [0,0%]
+      Duration: 5 minutes 40 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+#### Variation B
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=-a-Ba-DaB--AcB---bbe-A--BA:0:0:1:34:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    Bar/21 11/8                  eq:-0,272
+      Player:   43,03% (G:11,62% B:0,43%)
+      Opponent: 56,97% (G:14,27% B:0,72%)
+      Confidence: ±0,014 (-0,285..-0,258) - [80,9%]
+      Duration: 5 minutes 11 seconds
+
+    2. Rollout¹    Bar/22 11/7*                 eq:-0,284 (-0,013)
+      Player:   43,33% (G:12,70% B:0,61%)
+      Opponent: 56,67% (G:17,81% B:1,21%)
+      Confidence: ±0,018 (-0,302..-0,266) - [12,5%]
+      Duration: 5 minutes 48 seconds
+
+    3. Rollout¹    Bar/21 24/21                 eq:-0,286 (-0,015)
+      Player:   42,86% (G:11,61% B:0,49%)
+      Opponent: 57,14% (G:15,66% B:0,69%)
+      Confidence: ±0,016 (-0,302..-0,271) - [6,6%]
+      Duration: 5 minutes 34 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+#### Variation C
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=-a-Ba-DaBA--cB---bbe-A--BA:0:0:1:45:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    Bar/21 9/4*                  eq:-0,181
+      Player:   45,16% (G:14,43% B:0,70%)
+      Opponent: 54,84% (G:15,73% B:0,92%)
+      Confidence: ±0,017 (-0,198..-0,164) - [97,8%]
+      Duration: 5 minutes 27 seconds
+
+    2. Rollout¹    Bar/20 24/20                 eq:-0,205 (-0,024)
+      Player:   44,93% (G:12,75% B:0,55%)
+      Opponent: 55,07% (G:14,61% B:0,66%)
+      Confidence: ±0,016 (-0,221..-0,189) - [2,2%]
+      Duration: 5 minutes 45 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+#### Variation D
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=-a-Ba-D-B-aAcB---bbe-A--BA:0:0:1:15:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    Bar/20 11/10*                eq:-0,198
+      Player:   45,33% (G:13,20% B:0,74%)
+      Opponent: 54,67% (G:16,62% B:1,20%)
+      Confidence: ±0,016 (-0,214..-0,182) - [100,0%]
+      Duration: 5 minutes 46 seconds
+
+    2. Rollout¹    Bar/20 21/20                 eq:-0,258 (-0,060)
+      Player:   43,49% (G:12,44% B:0,51%)
+      Opponent: 56,51% (G:15,10% B:0,89%)
+      Confidence: ±0,018 (-0,276..-0,240) - [0,0%]
+      Duration: 5 minutes 45 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+## Position 4
+#### Variation A
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=----b-E-C---aD--be-eB---A-:0:0:1:16:0:0:0:0:10
+"
+ggboard(id)
+
+"    1. Rollout¹    24/18 13/12*                 eq:+0,054
+      Player:   51,13% (G:9,31% B:0,40%)
+      Opponent: 48,87% (G:9,61% B:0,31%)
+      Confidence: ±0,014 (+0,040..+0,068) - [100,0%]
+      Duration: 5 minutes 25 seconds
+
+    2. Rollout¹    13/7 13/12*                  eq:-0,010 (-0,064)
+      Player:   50,54% (G:10,34% B:0,44%)
+      Opponent: 49,46% (G:12,37% B:0,60%)
+      Confidence: ±0,016 (-0,026..+0,006) - [0,0%]
+      Duration: 5 minutes 33 seconds
+
+    3. Rollout¹    13/7 8/7                     eq:-0,019 (-0,073)
+      Player:   49,12% (G:9,23% B:0,37%)
+      Opponent: 50,88% (G:10,49% B:0,31%)
+      Confidence: ±0,014 (-0,032..-0,005) - [0,0%]
+      Duration: 4 minutes 32 seconds
+
+    4. Rollout¹    13/12* 12/6                  eq:-0,041 (-0,095)
+      Player:   48,74% (G:9,61% B:0,31%)
+      Opponent: 51,26% (G:9,98% B:0,37%)
+      Confidence: ±0,013 (-0,055..-0,028) - [0,0%]
+      Duration: 4 minutes 55 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+#### Variation B
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=----b-E-C--AaC--be-eB---A-:0:0:1:16:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    11/5 6/5                     eq:+0,093
+      Player:   51,96% (G:10,47% B:0,35%)
+      Opponent: 48,04% (G:9,26% B:0,29%)
+      Confidence: ±0,013 (+0,080..+0,106) - [99,9%]
+      Duration: 4 minutes 17 seconds
+
+    2. Rollout¹    24/18 13/12*                 eq:+0,062 (-0,030)
+      Player:   51,75% (G:9,27% B:0,35%)
+      Opponent: 48,25% (G:9,71% B:0,37%)
+      Confidence: ±0,013 (+0,049..+0,076) - [0,1%]
+      Duration: 5 minutes 13 seconds
+
+    3. Rollout¹    13/12* 12/6                  eq:-0,026 (-0,119)
+      Player:   49,23% (G:9,90% B:0,34%)
+      Opponent: 50,77% (G:10,23% B:0,35%)
+      Confidence: ±0,013 (-0,039..-0,013) - [0,0%]
+      Duration: 4 minutes 48 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+#### Variation C
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=---b--E-C--a-D--be-eB---A-:0:0:1:24:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    24/20 13/11*                 eq:+0,218
+      Player:   55,42% (G:10,96% B:0,47%)
+      Opponent: 44,58% (G:9,21% B:0,32%)
+      Confidence: ±0,015 (+0,203..+0,232) - [92,7%]
+      Duration: 5 minutes 13 seconds
+
+    2. Rollout¹    8/4 6/4                      eq:+0,203 (-0,015)
+      Player:   54,90% (G:12,57% B:0,50%)
+      Opponent: 45,10% (G:10,05% B:0,38%)
+      Confidence: ±0,013 (+0,190..+0,216) - [7,3%]
+      Duration: 4 minutes 30 seconds
+
+    3. Rollout¹    13/11* 11/7                  eq:+0,105 (-0,112)
+      Player:   52,73% (G:12,78% B:0,55%)
+      Opponent: 47,27% (G:12,03% B:0,50%)
+      Confidence: ±0,015 (+0,091..+0,120) - [0,0%]
+      Duration: 5 minutes 36 seconds
+
+    4. Rollout¹    13/9 13/11*                  eq:+0,091 (-0,127)
+      Player:   52,50% (G:13,20% B:0,59%)
+      Opponent: 47,50% (G:13,01% B:0,67%)
+      Confidence: ±0,016 (+0,075..+0,107) - [0,0%]
+      Duration: 5 minutes 22 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+#### Variation D
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=----b-E-C---aE--be-eB-----:0:0:1:13:0:0:0:0:1"
+ggboard(id)
+
+"    1. Rollout¹    13/10 13/12*                 eq:+0,107
+      Player:   52,96% (G:9,55% B:0,33%)
+      Opponent: 47,04% (G:9,00% B:0,31%)
+      Confidence: ±0,013 (+0,095..+0,120) - [97,4%]
+      Duration: 9 minutes 10 seconds
+
+    2. Rollout¹    13/12* 12/9                  eq:+0,087 (-0,021)
+      Player:   52,20% (G:9,28% B:0,33%)
+      Opponent: 47,80% (G:8,99% B:0,34%)
+      Confidence: ±0,014 (+0,072..+0,101) - [1,7%]
+      Duration: 9 minutes 05 seconds
+
+    3. Rollout¹    13/12* 6/3                   eq:+0,084 (-0,023)
+      Player:   52,12% (G:9,34% B:0,39%)
+      Opponent: 47,88% (G:9,77% B:0,35%)
+      Confidence: ±0,015 (+0,070..+0,099) - [0,9%]
+      Duration: 9 minutes 48 seconds
+
+    4. Rollout¹    8/5 6/5                      eq:+0,080 (-0,028)
+      Player:   51,25% (G:8,53% B:0,30%)
+      Opponent: 48,75% (G:7,17% B:0,21%)
+      Confidence: ±0,012 (+0,068..+0,092) - [0,1%]
+      Duration: 7 minutes 42 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+#### Variation E
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=----b-F-B---aD--be-eB---A-:0:0:1:13:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    13/12* 6/3                   eq:-0,072
+      Player:   48,37% (G:10,66% B:0,42%)
+      Opponent: 51,63% (G:13,49% B:0,54%)
+      Confidence: ±0,015 (-0,087..-0,056) - [78,7%]
+      Duration: 13 minutes 30 seconds
+
+    2. Rollout¹    8/5 6/5                      eq:-0,080 (-0,008)
+      Player:   47,75% (G:10,86% B:0,41%)
+      Opponent: 52,25% (G:12,35% B:0,53%)
+      Confidence: ±0,013 (-0,093..-0,066) - [21,1%]
+      Duration: 10 minutes 57 seconds
+
+    3. Rollout¹    24/21 13/12*                 eq:-0,101 (-0,030)
+      Player:   47,74% (G:9,00% B:0,28%)
+      Opponent: 52,26% (G:10,85% B:0,38%)
+      Confidence: ±0,017 (-0,118..-0,084) - [0,2%]
+      Duration: 12 minutes 37 seconds
+
+    4. Rollout¹    13/12* 12/9                  eq:-0,105 (-0,033)
+      Player:   47,46% (G:10,25% B:0,37%)
+      Opponent: 52,54% (G:12,58% B:0,46%)
+      Confidence: ±0,015 (-0,120..-0,090) - [0,0%]
+      Duration: 12 minutes 31 seconds
+
+    5. Rollout¹    13/10 13/12*                 eq:-0,111 (-0,040)
+      Player:   47,47% (G:10,25% B:0,40%)
+      Opponent: 52,53% (G:13,36% B:0,55%)
+      Confidence: ±0,015 (-0,126..-0,096) - [0,0%]
+      Duration: 12 minutes 38 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+#### Variation F
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=----b-D-C---aE--be-eB---A-:0:0:1:13:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    8/5 6/5                      eq:+0,098
+      Player:   52,47% (G:11,29% B:0,38%)
+      Opponent: 47,53% (G:11,82% B:0,37%)
+      Confidence: ±0,014 (+0,084..+0,112) - [96,1%]
+      Duration: 12 minutes 26 seconds
+
+    2. Rollout¹    13/10 13/12*                 eq:+0,075 (-0,023)
+      Player:   51,85% (G:11,18% B:0,47%)
+      Opponent: 48,15% (G:12,97% B:0,49%)
+      Confidence: ±0,021 (+0,055..+0,096) - [3,9%]
+      Duration: 14 minutes 27 seconds
+
+    3. Rollout¹    24/21 13/12*                 eq:+0,025 (-0,073)
+      Player:   50,83% (G:9,78% B:0,37%)
+      Opponent: 49,17% (G:11,41% B:0,37%)
+      Confidence: ±0,016 (+0,010..+0,041) - [0,0%]
+      Duration: 14 minutes 11 seconds
+
+    4. Rollout¹    13/12* 12/9                  eq:+0,007 (-0,091)
+      Player:   50,73% (G:11,02% B:0,44%)
+      Opponent: 49,27% (G:13,15% B:0,55%)
+      Confidence: ±0,017 (-0,010..+0,024) - [0,0%]
+      Duration: 14 minutes 09 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+#### Variation G
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=----b-D-C---aF--be-eB-----:0:0:1:13:0:0:0:0:1"
+ggboard(id)
+
+"    1. Rollout¹    13/10 13/12*                 eq:+0,139
+      Player:   53,55% (G:9,67% B:0,38%)
+      Opponent: 46,45% (G:9,97% B:0,35%)
+      Confidence: ±0,015 (+0,124..+0,155) - [100,0%]
+      Duration: 10 minutes 57 seconds
+
+    2. Rollout¹    13/12* 12/9                  eq:+0,083 (-0,056)
+      Player:   52,21% (G:9,68% B:0,38%)
+      Opponent: 47,79% (G:10,14% B:0,33%)
+      Confidence: ±0,013 (+0,070..+0,096) - [0,0%]
+      Duration: 10 minutes 45 seconds
+
+    3. Rollout¹    8/5 6/5                      eq:+0,054 (-0,085)
+      Player:   50,80% (G:8,65% B:0,33%)
+      Opponent: 49,20% (G:8,80% B:0,25%)
+      Confidence: ±0,014 (+0,041..+0,068) - [0,0%]
+      Duration: 9 minutes 08 seconds
+
+    4. Rollout¹    13/12* 6/3                   eq:+0,035 (-0,104)
+      Player:   51,30% (G:9,36% B:0,33%)
+      Opponent: 48,71% (G:11,12% B:0,37%)
+      Confidence: ±0,016 (+0,019..+0,052) - [0,0%]
+      Duration: 11 minutes 42 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+## Position 5
+#### Variation A
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=-a----EaC--AdD---d-e---AA-:0:0:1:56:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    13/7* 6/1*                   eq:+0,098
+      Player:   51,88% (G:17,84% B:0,49%)
+      Opponent: 48,12% (G:13,89% B:0,76%)
+      Confidence: ±0,014 (+0,083..+0,112) - [100,0%]
+      Duration: 4 minutes 51 seconds
+
+    2. Rollout¹    24/18 23/18                  eq:+0,002 (-0,096)
+      Player:   49,85% (G:9,63% B:0,30%)
+      Opponent: 50,15% (G:9,14% B:0,32%)
+      Confidence: ±0,012 (-0,010..+0,014) - [0,0%]
+      Duration: 5 minutes 23 seconds
+
+    3. Rollout¹    13/8 13/7*                   eq:-0,020 (-0,118)
+      Player:   49,28% (G:14,77% B:0,63%)
+      Opponent: 50,72% (G:14,47% B:0,71%)
+      Confidence: ±0,015 (-0,036..-0,005) - [0,0%]
+      Duration: 5 minutes 07 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+#### Variation B
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=-a----EaD---dD---d-e---AA-:0:0:1:56:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    24/18 23/18                  eq:+0,117
+      Player:   53,05% (G:9,04% B:0,26%)
+      Opponent: 46,95% (G:7,06% B:0,25%)
+      Confidence: ±0,011 (+0,106..+0,128) - [85,3%]
+      Duration: 4 minutes 49 seconds
+
+    2. Rollout¹    13/7* 6/1*                   eq:+0,108 (-0,009)
+      Player:   51,95% (G:17,39% B:0,49%)
+      Opponent: 48,05% (G:12,98% B:0,62%)
+      Confidence: ±0,014 (+0,094..+0,121) - [14,7%]
+      Duration: 4 minutes 27 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+#### Variation C
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=--a---EaD---dD---d-e---AA-:0:0:1:56:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    24/18 23/18                  eq:+0,148
+      Player:   53,61% (G:9,59% B:0,29%)
+      Opponent: 46,39% (G:7,46% B:0,24%)
+      Confidence: ±0,012 (+0,135..+0,160) - [100,0%]
+      Duration: 4 minutes 47 seconds
+
+    2. Rollout¹    13/7* 7/2*                   eq:+0,065 (-0,083)
+      Player:   50,99% (G:15,87% B:0,58%)
+      Opponent: 49,01% (G:12,65% B:0,54%)
+      Confidence: ±0,013 (+0,052..+0,079) - [0,0%]
+      Duration: 4 minutes 22 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
+
+#### Variation D
+
+```{r}
+#| layout-ncol: 2
+#| column: page-right
+
+id <- "XGID=--a---EaD---dD---d-e--A-A-:0:0:1:46:0:0:0:0:10"
+ggboard(id)
+
+"    1. Rollout¹    8/2* 6/2                     eq:+0,197
+      Player:   53,51% (G:18,40% B:0,57%)
+      Opponent: 46,49% (G:10,13% B:0,45%)
+      Confidence: ±0,013 (+0,183..+0,210) - [100,0%]
+      Duration: 3 minutes 43 seconds
+
+    2. Rollout¹    13/7* 6/2*                   eq:+0,161 (-0,035)
+      Player:   53,09% (G:17,54% B:0,62%)
+      Opponent: 46,91% (G:12,22% B:0,54%)
+      Confidence: ±0,014 (+0,147..+0,176) - [0,0%]
+      Duration: 4 minutes 36 seconds
+
+    3. Rollout¹    24/18 22/18                  eq:+0,144 (-0,053)
+      Player:   53,39% (G:9,69% B:0,26%)
+      Opponent: 46,61% (G:7,33% B:0,21%)
+      Confidence: ±0,012 (+0,132..+0,155) - [0,0%]
+      Duration: 4 minutes 49 seconds
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+^`r id`^
