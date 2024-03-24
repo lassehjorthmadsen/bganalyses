@@ -1,7 +1,7 @@
 ---
 params:
   player_name: "Llabba"
-  analysis_folder: "\\analyzed\\0-ply"
+  analysis_folder: "\\analyzed\\4-ply"
   max_examples: 20
   seed: 1970
   benchmark_name: "lasse"
@@ -67,7 +67,7 @@ df <- df_bench |> filter(turn == params$player_name)
 
 ```
 
-```{r params}
+```{r bins}
 mistake_types <- unique(df$mistake_type)
 mistake_types <- mistake_types[!is.na(mistake_types)]
 
@@ -126,7 +126,7 @@ A few statistical summaries might be useful. For cube handling errors, the chart
 
 With all of the above split by type of error (wrong double, wrong take, etc.) and compared to a benchmark player. 
 
-```{r}
+```{r cubesums}
 #| fig-width: 8
 metric_labels <- c("Count of errors (pct)", "Sum of errors (pct)", "Average error (emg)")
 
@@ -158,7 +158,7 @@ plot_data %>%
 ```
 The checker play errors are grouped by move number (counting each player's turn as a move) so we can roughly isolate opening errors and endgame errors. 
 
-```{r}
+```{r checkersums}
 plot_data <- df_bench %>% 
   filter(type == "Checker play") %>% 
   group_by(turn) |> 
