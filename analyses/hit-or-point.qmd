@@ -37,13 +37,13 @@ remove_stuff <- function(text) {
 
 ## Why this?
 
-This is a collection of checker play problems from the middle game, where the decision is between hitting or making a point. This can often be a difficult choice, so I thought it would be useful to take a closer look. 
+This is a collection of checker play problems from the middle game, where the decision is between hitting or making a point. This can often be a difficult choice, so I thought it would be useful to take a closer look.
 
 We have five main positions, each with several variants, all are rolled out 1296 times; moves and cube decisions at 3-ply.
 
 ## Position 1
 
-In the first two contrasting variants, hitting with 21 is clearly right, for all the usual reasons: It gains in the race, gains initiative, cuts down on Black's good numbers, leaves bad 6s from the bar. 
+In the first two contrasting variants, hitting with 21 is clearly right, for all the usual reasons: It gains in the race, gains initiative, cuts down on Black's good numbers, leaves bad 6s from the bar.
 
 #### Variation A
 
@@ -70,9 +70,9 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
 
-In the second position, either of the pointing plays are a lot better that hitting. 
+In the second position, either of the pointing plays are a lot better that hitting.
 
 #### Variation B
 
@@ -111,15 +111,16 @@ Let's try to ignore the even stronger pointing play of 8/5 6/5 in variation B, a
 
 Clearly, the 20-point is stronger than the 21-point, so that's a long term reason why pointing is more attractive in variation B than in variation A: The point we get to make is better.
 
-There're also a related tactical reason: Leaving a blot on the 20-point in variation B gives Black nice, loose return hits with aces: 21, 31, 41, and 51 from the bar. In variation A the same aces are not nearly as comfortable after hitting. (The corresponding loose hits with 2s are not as clear and happy for Black.) 
+There're also a related tactical reason: Leaving a blot on the 20-point in variation B gives Black nice, loose return hits with aces: 21, 31, 41, and 51 from the bar. In variation A the same aces are not nearly as comfortable after hitting. (The corresponding loose hits with 2s are not as clear and happy for Black.)
 
-Another way of putting it: Hitting in variation A gives Black *both* poor 6s and aces from the bar; in variation B it is only 6s that are uncomfortable. 
+Another way of putting it: Hitting in variation A gives Black *both* poor 6s and aces from the bar; in variation B it is only 6s that are uncomfortable.
 
 For these reasons, the defensive anchor works better that hitting i variation A but not in variation B.
 
-As mentioned, B offers White an even stronger option: 8/5 6 /5. That's better because the 5-point is also a great point to make, *and* it's harder since it's not slotted like the 20-point is. So it makes sense to take the opportunity now, while the need for defense is not super urgent. 
+As mentioned, B offers White an even stronger option: 8/5 6 /5. That's better because the 5-point is also a great point to make, *and* it's harder since it's not slotted like the 20-point is. So it makes sense to take the opportunity now, while the need for defense is not super urgent.
 
 ## Position 2
+
 #### Variation A
 
 ```{r}
@@ -145,14 +146,14 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
 
-In position 2A, making the point with 23/20 6/5 is far ahead of the hitting play, 13/9\*, for several reasons. Of course, the anchor is super strong, and a permanent asset. But that's always the case, and often hitting is stronger anyway. In this position specifically: 
+In position 2A, making the point with 23/20 6/5 is far ahead of the hitting play, 13/9\*, for several reasons. Of course, the anchor is super strong, and a permanent asset. But that's always the case, and often hitting is stronger anyway. In this position specifically:
 
-- The non-hitting play is nice and smooth
-- The non-hitting play leaves no blots, avoiding 54 and 63 fly shots 
-- Hitting lets Black make an advanced anchor with 43 and 32
-- Hitting lets Black return hit loose with 41 and 31 (much like in the previous position)
+-   The non-hitting play is nice and smooth
+-   The non-hitting play leaves no blots, avoiding 54 and 63 fly shots
+-   Hitting lets Black make an advanced anchor with 43 and 32
+-   Hitting lets Black return hit loose with 41 and 31 (much like in the previous position)
 
 #### Variation B
 
@@ -185,7 +186,7 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
 
 Same position, different roll, now with a choice of making the 4-point or hitting. Pointing is still right, but with a smaller margin, since the 4-point is not as urgent, and not as important as the 20-point anchor in the previous position.
 
@@ -232,9 +233,9 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
 
-Almost the same position; this time the anchoring play is a little awkward, and that is enough to make hitting correct, by a small amount. 
+Almost the same position; this time the anchoring play is a little awkward, and that is enough to make hitting correct, by a small amount.
 
 #### Variation D
 
@@ -267,9 +268,9 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
 
-Variation D is a photo finish: The pointing play cleans up a blot and is super smooth, the hitting play unstacks the mid and is very flexible. The hit has all the usual benefits, while the inner point takes a lot of the sting out of any loose hit from Black. 
+Variation D is a photo finish: The pointing play cleans up a blot and is super smooth, the hitting play unstacks the mid and is very flexible. The hit has all the usual benefits, while the inner point takes a lot of the sting out of any loose hit from Black.
 
 Bottom line: The two plays are basically equal.
 
@@ -310,9 +311,9 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
 
-In variation E, if White plays 7/5 with the two, the best 3 is 23/20, making the achor, for the same reasons as seen earlier. The 20-point is simple very valueable, and Black would like to hit loose there, so making it takes priority. The play is also quite flexible, so beats hitting. 
+In variation E, if White plays 7/5 with the two, the best 3 is 23/20, making the achor, for the same reasons as seen earlier. The 20-point is simple very valueable, and Black would like to hit loose there, so making it takes priority. The play is also quite flexible, so beats hitting.
 
 Between the two pointing plays, the anchor wins for the same reason as before: It is the better and more urgent point to make; the 4-point is likely to come later.
 
@@ -353,11 +354,14 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
 
-When the point to make is a slightly inferior anchor, the scales tip again and hitting is best, by a small amount, noting that 23/21 13/11\* makes a bid for the better anchor *while* hitting. 
+When the point to make is a slightly inferior anchor, the scales tip again and hitting is best, by a small amount, noting that 23/21 13/11\* makes a bid for the better anchor *while* hitting.
 
 ## Position 3
+
+These four variations are mostly close, with the anchor play usually winning by a small margin (except in the last position, variation D).
+
 #### Variation A
 
 ```{r}
@@ -383,7 +387,9 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
+
+Since the five doesn't play well elsewhere, it must be played bar/20. Then, White has a choice of anchoring with 24/20 or hitting with 11/7\*. Probably largely for the reasons we saw earlier -- White doesn't want Black to play an ace from the bar 6/5\*, unstacking -- the anchor is best. But it is pretty close, since hitting has some good benefits as well (like 4 dancing numbers).
 
 #### Variation B
 
@@ -416,7 +422,9 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
+
+Same position, different roll, with an anchoring option on the 21-point rather that the 20-point. Anchoring is still right, but by an even smaller amount, since the anchor is not quite as good.  
 
 #### Variation C
 
@@ -425,6 +433,7 @@ ggboard(id)
 #| column: page-right
 
 id <- "XGID=-a-Ba-DaBA--cB---bbe-A--BA:0:0:1:45:0:0:0:0:10"
+       
 ggboard(id)
 
 "    1. Rollout¹    Bar/21 9/4*                  eq:-0,181
@@ -443,7 +452,11 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
+
+When White can anchor *and* hit, that is the winner. But note that the 20-point is still the stronger point, so making that anchor *without* hitting is close.
+
+A small experiment demonstrate that point: If White, after playing bar/21 9/4\*, is allowed to slide the 21-point anchor to the 20-point, the gain is about 0,075 cubeful equity, Black on roll. That's about the amount it is worth to win an opening roll of 53: Very significant, though not overwhelming. 
 
 #### Variation D
 
@@ -470,9 +483,14 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
+
+Finally a variation where hitting is clearly right. Unlike earlier, where a motivation for making the anchor was to counter loose hitting aces from the bar, *not* hitting will *also* leave Black good aces (hitting on the 11-point). Both hitting and not hitting will leave Black with good 6s from the bar. With the tactical gains from pointing gone, hitting is right.  
 
 ## Position 4
+
+Another example of hitting being clear: 
+
 #### Variation A
 
 ```{r}
@@ -511,7 +529,9 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
+
+In variation A, the point to make is not super strong, and hitting also takes complete control of the outfield, so hitting is the winner -- not a super difficult play to find.
 
 #### Variation B
 
@@ -544,7 +564,9 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+Given the choice of making the much stronger 5-point, however, that wins out, although by a modest amount.
+
+``r id``
 
 #### Variation C
 
@@ -583,7 +605,9 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+The strength of the 4-point available in variation C is somewhere in between, so now the choice between hitting and pointing is very close, with hitting winning by a bit.   
+
+``r id``
 
 #### Variation D
 
@@ -622,7 +646,13 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
+
+In variation D White has the pointing option of the even stronger 5-point, but compared to C also has escaped the back checker to the midpoint. It's bit surprising that making the 5-point is *not* best, when the 4-point was so close before. 
+
+The reason have to do with the need for unstacking the heavy midpoint. 5 checkers on a point is a big liability (I think the optimal number of checkers on any point is 3).
+
+The point about unstacking is made clear in the next position, variation E:
 
 #### Variation E
 
@@ -667,7 +697,9 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+Now the big stack is on the 6-point, and the two best plays unstack just that point. The unusual looking hitting and unstacking with 13/11\* 6/3 is actually tied for first place with making the 5-point with 8/5 6/5. The pointing play also unstacks and makes the strong 5-point. Breaking the 8-point is a serious drawback, and for that reason the play is only *as* good as hitting.
+
+``r id``
 
 #### Variation F
 
@@ -706,7 +738,9 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
+
+If we take two checkers from the overly heavy 6-point and move back to the 8- and midpoints, the urge to unstack the midpoint is bigger, but making the 5-point is also much prettier, since we don't have to break anything. On balance making the 5-point is now slightly best, noting that we can unstack later (but not necessarily make the 5-point later).
 
 #### Variation G
 
@@ -745,9 +779,16 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
+
+Adding a sixth checker to the midpoint makes hitting while unstacking much more pressing, so the two plays that do that, are now clearly better than making the 5-point.
+
+Overall it does seem that the motive of unstacking is quite important and can easily tip the scale to either pointing or hitting -- depending on which one also unstacks. It makes sense that stacks are very bad; checkers stuck in the middle of a pile don't do any good. It's why we are happy to slot and build with an opening 21: It unstacks *two* heavy points.
 
 ## Position 5
+
+The last set of problems involves the possibility of making the 18-point -- a nice anchor but not as good as the 20-point, so hitting figures to come out on top more often.
+
 #### Variation A
 
 ```{r}
@@ -779,7 +820,9 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
+
+In variation A the alternative to pointing with 24/18 23/18 is double hitting rather than single hitting. Double hitting is often very strong, so it is not surprising that it is clearly the better play here. 
 
 #### Variation B
 
@@ -806,7 +849,9 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
+
+But details matter: In variation B White can play completely without blots, and that is enough to make pointing just as good as double hitting. Backgammon is still a race.
 
 #### Variation C
 
@@ -833,7 +878,9 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
+
+Details matter a lot: In variation C White can still make a point with no blots, but can also double hit in a slightly less flexible way as before, which detracts enough from the double hit to make it a borderline blunder. 
 
 #### Variation D
 
@@ -866,4 +913,6 @@ ggboard(id)
   cat(sep = "")
 ```
 
-^`r id`^
+``r id``
+
+Finally, when you can make a point *and* hit, that's often strong. Here, pointing Black's head with 8/2\* 6/2 is both stronger than making the better point (18) and also stronger than double hitting with 13/7\* 6/2\*.

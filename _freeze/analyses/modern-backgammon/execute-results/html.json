@@ -1,7 +1,8 @@
 {
-  "hash": "e580a3cbf5da38b74eedb71113a4c0f2",
+  "hash": "c57a8cea7f44c662744394484b5995bd",
   "result": {
-    "markdown": "---\ntitle: \"Problems from Modern Backgammon\"\nauthor: \"Lasse Hjorth Madsen\"\ndate: today \nformat: \n  html:\n    fig-width: 4\n    fig-height: 4\ntoc: true\ntoc-expand: true\neditor: source\nexecute:\n  echo: false\n  warning: false\n---\n\n::: {.cell hash='modern-backgammon_cache/html/setup_e87a7ee16cc8ad188b078260fff1bffd'}\n\n:::\n\n\n## Why this?\n\n",
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Problems from Modern Backgammon\"\nauthor: \"Lasse Hjorth Madsen\"\ndate: today \nformat: \n  html:\n    fig-width: 4\n    fig-height: 4\ntoc: true\ntoc-expand: true\neditor: source\nexecute:\n  echo: false\n  warning: false\n---\n\n::: {.cell}\n\n:::\n\n\n## Why this?\n\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
