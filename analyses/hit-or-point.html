@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Lasse Hjorth Madsen">
+<meta name="dcterms.date" content="2024-03-24">
+
+<title>Hit or point decisions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analyses/milestones-2023.html">PRAXIS</a></li><li class="breadcrumb-item"><a href="../analyses/hit-or-point.html">Hit or point decisions</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HOME</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">THEORY</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/explore-emg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explore EMG Normalization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/met-precision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Match Equity Precision</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/janowski.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Janowski Formulars</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/many-takepoints.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exploring take points</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/bgmoves-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mistake, errors and statistics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">PRAXIS</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/milestones-2023.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Milestones III, 2023</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/mistakes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mistakes were made</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/opening-mistakes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Opening checker play errors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/middle-game-cubes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Middle game cube benchmark</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyses/hit-or-point.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Hit or point decisions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#why-this" id="toc-why-this" class="nav-link active" data-scroll-target="#why-this">Why this?</a></li>
+  <li><a href="#position-1" id="toc-position-1" class="nav-link" data-scroll-target="#position-1">Position 1</a></li>
+  <li><a href="#position-2" id="toc-position-2" class="nav-link" data-scroll-target="#position-2">Position 2</a></li>
+  <li><a href="#position-3" id="toc-position-3" class="nav-link" data-scroll-target="#position-3">Position 3</a></li>
+  <li><a href="#position-4" id="toc-position-4" class="nav-link" data-scroll-target="#position-4">Position 4</a></li>
+  <li><a href="#position-5" id="toc-position-5" class="nav-link" data-scroll-target="#position-5">Position 5</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Hit or point decisions</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Lasse Hjorth Madsen </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 24, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="why-this" class="level2">
+<h2 class="anchored" data-anchor-id="why-this">Why this?</h2>
+<p>This is a collection of checker play problems from the middle game, where the decision is between hitting or making a point. This can often be a difficult choice, so I thought it would be useful to take a closer look.</p>
+<p>We have five main positions, each with several variants, all are rolled out 1296 times; moves and cube decisions at 3-ply.</p>
+</section>
+<section id="position-1" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="position-1">Position 1</h2>
+<p>In the first two contrasting variants, hitting with 21 is clearly right, for all the usual reasons: It gains in the race, gains initiative, cuts down on Black’s good numbers, leaves bad 6s from the bar.</p>
+<section id="variation-a" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-a">Variation A</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-1_5aeb1020e92b8f356323f95a29d1da05">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 13/10*           eq:+0,138
+Player:   52,70% (G:15,93% B:0,75%)
+Opponent: 47,30% (G:11,61% B:0,60%)
+
+2. 24/21      eq:+0,018 (-0,120)
+Player:   49,69% (G:11,01% B:0,34%)
+Opponent: 50,31% (G:7,46% B:0,27%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=-a—-E-D-a-eD—c-e-A–A-:0:0:1:21:0:0:0:0:10</sup></p>
+<p>In the second position, either of the pointing plays are a lot better that hitting.</p>
+</section>
+<section id="variation-b" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-b">Variation B</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-2_250b1a421ba0896c763cb0d2f3242024">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 8/5 6/5          eq:+0,239
+Player:   54,79% (G:17,12% B:0,74%)
+Opponent: 45,21% (G:9,91% B:0,37%)
+
+2. 24/20      eq:+0,186 (-0,053)
+Player:   53,47% (G:11,71% B:0,29%)
+Opponent: 46,53% (G:5,87% B:0,24%)
+
+3. Rollout²    13/9*      eq:+0,134 (-0,105)
+Player:   52,80% (G:16,03% B:0,75%)
+Opponent: 47,20% (G:12,05% B:0,59%)</code></pre>
+</div>
+</div>
+</div>
+<p>Why the difference?</p>
+<p>Let’s try to ignore the even stronger pointing play of 8/5 6/5 in variation B, and just compare the advanced anchor plays to the hitting plays.</p>
+<p>Clearly, the 20-point is stronger than the 21-point, so that’s a long term reason why pointing is more attractive in variation B than in variation A: The point we get to make is better.</p>
+<p>There’re also a related tactical reason: Leaving a blot on the 20-point in variation B gives Black nice, loose return hits with aces: 21, 31, 41, and 51 from the bar. In variation A the same aces are not nearly as comfortable after hitting. (The corresponding loose hits with 2s are not as clear and happy for Black.)</p>
+<p>Another way of putting it: Hitting in variation A gives Black <em>both</em> poor 6s and aces from the bar; in variation B it is only 6s that are uncomfortable.</p>
+<p>For these reasons, the defensive anchor works better that hitting i variation A but not in variation B.</p>
+<p>As mentioned, B offers White an even stronger option: 8/5 6 /5. That’s better because the 5-point is also a great point to make, <em>and</em> it’s harder since it’s not slotted like the 20-point is. So it makes sense to take the opportunity now, while the need for defense is not super urgent.</p>
+</section>
+</section>
+<section id="position-2" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="position-2">Position 2</h2>
+<section id="variation-a-1" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-a-1">Variation A</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-3_d2efa8a5ee93dfeb4737226bc5a5ded7">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 23/20 6/5        eq:+0,557
+Player:   62,59% (G:18,02% B:0,71%)
+Opponent: 37,41% (G:6,52% B:0,28%)
+
+2. 13/9*      eq:+0,414 (-0,143)
+Player:   59,06% (G:20,49% B:1,62%)
+Opponent: 40,94% (G:11,74% B:0,61%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=-b—BD-Ca–cD—bbcA-bA–:0:0:1:13:0:0:0:0:10</sup></p>
+<p>In position 2A, making the point with 23/20 6/5 is far ahead of the hitting play, 13/9*, for several reasons. Of course, the anchor is super strong, and a permanent asset. But that’s always the case, and often hitting is stronger anyway. In this position specifically:</p>
+<ul>
+<li>The non-hitting play is nice and smooth</li>
+<li>The non-hitting play leaves no blots, avoiding 54 and 63 fly shots</li>
+<li>Hitting lets Black make an advanced anchor with 43 and 32</li>
+<li>Hitting lets Black return hit loose with 41 and 31 (much like in the previous position)</li>
+</ul>
+</section>
+<section id="variation-b-1" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-b-1">Variation B</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-4_2bf6e3fa47a9024d2700ea6d201025fa">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 8/4 6/4          eq:+0,472
+Player:   60,45% (G:21,72% B:1,62%)
+Opponent: 39,55% (G:12,06% B:0,47%)
+
+2. 23/21 13/9*      eq:+0,423 (-0,049)
+Player:   59,54% (G:20,22% B:1,44%)
+Opponent: 40,46% (G:11,35% B:0,58%)
+
+3. 13/11 13/9*      eq:+0,399 (-0,072)
+Player:   58,74% (G:21,36% B:1,74%)
+Opponent: 41,26% (G:12,68% B:0,93%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=-b—BD-Ca–cD—bbcA-bA–:0:0:1:24:0:0:0:0:10</sup></p>
+<p>Same position, different roll, now with a choice of making the 4-point or hitting. Pointing is still right, but with a smaller margin, since the 4-point is not as urgent, and not as important as the 20-point anchor in the previous position.</p>
+</section>
+<section id="variation-c" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-c">Variation C</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-5_6fe100d7f5f3d5d9eef8eeb5474b2116">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 23/21 13/10*     eq:+0,457
+Player:   60,45% (G:19,87% B:1,57%)
+Opponent: 39,55% (G:11,44% B:0,58%)
+
+2. 13/11 13/10*     eq:+0,424 (-0,033)
+Player:   59,11% (G:21,10% B:1,79%)
+Opponent: 40,89% (G:12,23% B:0,86%)
+
+3. 23/20 8/6        eq:+0,420 (-0,037)
+Player:   59,11% (G:17,36% B:0,61%)
+Opponent: 40,89% (G:7,19% B:0,30%)
+
+4. 13/10* 10/8      eq:+0,403 (-0,054)
+Player:   59,11% (G:19,61% B:1,33%)
+Opponent: 40,89% (G:11,19% B:0,47%)
+
+5. 23/20 13/11      eq:+0,397 (-0,060)
+Player:   58,87% (G:16,95% B:0,67%)
+Opponent: 41,13% (G:7,76% B:0,28%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=-b—BD-C-a-cD—bbcA-bA–:0:0:1:23:0:0:0:0:10</sup></p>
+<p>Almost the same position; this time the anchoring play is a little awkward, and that is enough to make hitting correct, by a small amount.</p>
+</section>
+<section id="variation-d" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-d">Variation D</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-6_9696194e2e7cf5d8be9abfcaee29b41a">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 9/4 6/4          eq:+0,423
+Player:   59,38% (G:20,66% B:1,37%)
+Opponent: 40,62% (G:12,40% B:0,56%)
+
+2. 20/15 13/11*     eq:+0,416 (-0,008)
+Player:   60,01% (G:20,37% B:1,57%)
+Opponent: 39,99% (G:13,02% B:0,89%)
+
+3. 13/8 13/11*      eq:+0,389 (-0,035)
+Player:   58,76% (G:20,90% B:1,73%)
+Opponent: 41,24% (G:12,24% B:0,85%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=-b—BD-BA-acD—bbcA-bA–:0:0:1:25:0:0:0:0:10</sup></p>
+<p>Variation D is a photo finish: The pointing play cleans up a blot and is super smooth, the hitting play unstacks the mid and is very flexible. The hit has all the usual benefits, while the inner point takes a lot of the sting out of any loose hit from Black.</p>
+<p>Bottom line: The two plays are basically equal.</p>
+</section>
+<section id="variation-e" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-e">Variation E</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-7_8909fd251c418e26a100c3e5ac909cc1">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 23/20 7/5        eq:+0,515
+Player:   61,14% (G:19,33% B:0,67%)
+Opponent: 38,86% (G:6,94% B:0,29%)
+
+2. 7/4 6/4          eq:+0,435 (-0,080)
+Player:   59,61% (G:21,34% B:1,48%)
+Opponent: 40,39% (G:12,48% B:0,56%)
+
+3. 13/10* 7/5       eq:+0,402 (-0,112)
+Player:   58,53% (G:21,25% B:1,69%)
+Opponent: 41,47% (G:11,84% B:0,68%)
+
+4. 13/10* 10/8      eq:+0,361 (-0,154)
+Player:   57,81% (G:19,84% B:1,53%)
+Opponent: 42,19% (G:11,58% B:0,55%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=-b—BDAB-a-cD—bbcA-bA–:0:0:1:23:0:0:0:0:10</sup></p>
+<p>In variation E, if White plays 7/5 with the two, the best 3 is 23/20, making the achor, for the same reasons as seen earlier. The 20-point is simple very valueable, and Black would like to hit loose there, so making it takes priority. The play is also quite flexible, so beats hitting.</p>
+<p>Between the two pointing plays, the anchor wins for the same reason as before: It is the better and more urgent point to make; the 4-point is likely to come later.</p>
+</section>
+<section id="variation-f" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-f">Variation F</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-8_42b7786461aff2f5435def30a83cc101">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 23/20 13/11*     eq:+0,464
+Player:   60,81% (G:19,52% B:1,50%)
+Opponent: 39,19% (G:11,05% B:0,49%)
+
+2. 23/21 13/10      eq:+0,433 (-0,030)
+Player:   59,47% (G:18,57% B:0,73%)
+Opponent: 40,53% (G:8,19% B:0,34%)
+
+3. 13/10 13/11*     eq:+0,404 (-0,059)
+Player:   59,19% (G:20,57% B:1,50%)
+Opponent: 40,81% (G:12,62% B:0,86%)
+
+4. 13/11* 11/8      eq:+0,398 (-0,066)
+Player:   58,75% (G:19,49% B:1,25%)
+Opponent: 41,25% (G:11,55% B:0,50%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=-b—BD-C–acD—bbc-AbA–:0:0:1:23:0:0:0:0:10</sup></p>
+<p>When the point to make is a slightly inferior anchor, the scales tip again and hitting is best, by a small amount, noting that 23/21 13/11* makes a bid for the better anchor <em>while</em> hitting.</p>
+</section>
+</section>
+<section id="position-3" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="position-3">Position 3</h2>
+<section id="variation-a-2" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-a-2">Variation A</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-9_a7f7597322703efb018035eea17e2738">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. Bar/20 24/20     eq:-0,171
+Player:   45,64% (G:12,63% B:0,53%)
+Opponent: 54,36% (G:14,37% B:0,59%)
+
+2. Bar/20 11/7*     eq:-0,209 (-0,038)
+Player:   44,86% (G:13,48% B:0,63%)
+Opponent: 55,14% (G:16,50% B:1,14%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=-a-Ba-DaB–AcB—bbe-A–BA:0:0:1:54:0:0:0:0:10</sup></p>
+</section>
+<section id="variation-b-2" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-b-2">Variation B</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-10_27b3b444bbd20d6ef845cced2da0c83f">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. Bar/21 11/8      eq:-0,272
+Player:   43,03% (G:11,62% B:0,43%)
+Opponent: 56,97% (G:14,27% B:0,72%)
+
+2. Bar/22 11/7*     eq:-0,284 (-0,013)
+Player:   43,33% (G:12,70% B:0,61%)
+Opponent: 56,67% (G:17,81% B:1,21%)
+
+3. Bar/21 24/21     eq:-0,286 (-0,015)
+Player:   42,86% (G:11,61% B:0,49%)
+Opponent: 57,14% (G:15,66% B:0,69%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=-a-Ba-DaB–AcB—bbe-A–BA:0:0:1:34:0:0:0:0:10</sup></p>
+</section>
+<section id="variation-c-1" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-c-1">Variation C</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-11_f05c2729ac192bd9a59837f20d0d9653">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. Bar/21 9/4*      eq:-0,181
+Player:   45,16% (G:14,43% B:0,70%)
+Opponent: 54,84% (G:15,73% B:0,92%)
+
+2. Bar/20 24/20     eq:-0,205 (-0,024)
+Player:   44,93% (G:12,75% B:0,55%)
+Opponent: 55,07% (G:14,61% B:0,66%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=-a-Ba-DaBA–cB—bbe-A–BA:0:0:1:45:0:0:0:0:10</sup></p>
+</section>
+<section id="variation-d-1" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-d-1">Variation D</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-12_c862a9fcf47c3f70ee0d96adbee9f226">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. Bar/20 11/10*    eq:-0,198
+Player:   45,33% (G:13,20% B:0,74%)
+Opponent: 54,67% (G:16,62% B:1,20%)
+
+2. Bar/20 21/20     eq:-0,258 (-0,060)
+Player:   43,49% (G:12,44% B:0,51%)
+Opponent: 56,51% (G:15,10% B:0,89%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=-a-Ba-D-B-aAcB—bbe-A–BA:0:0:1:15:0:0:0:0:10</sup></p>
+</section>
+</section>
+<section id="position-4" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="position-4">Position 4</h2>
+<section id="variation-a-3" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-a-3">Variation A</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-13_b1734ef4322c2ee04a7599f16fa255e3">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 24/18 13/12*     eq:+0,054
+Player:   51,13% (G:9,31% B:0,40%)
+Opponent: 48,87% (G:9,61% B:0,31%)
+
+2. 13/7 13/12*      eq:-0,010 (-0,064)
+Player:   50,54% (G:10,34% B:0,44%)
+Opponent: 49,46% (G:12,37% B:0,60%)
+
+3. 13/7 8/7         eq:-0,019 (-0,073)
+Player:   49,12% (G:9,23% B:0,37%)
+Opponent: 50,88% (G:10,49% B:0,31%)
+
+4. 13/12* 12/6      eq:-0,041 (-0,095)
+Player:   48,74% (G:9,61% B:0,31%)
+Opponent: 51,26% (G:9,98% B:0,37%)</code></pre>
+</div>
+</div>
+</div>
+<p>^XGID=—-b-E-C—aD–be-eB—A-:0:0:1:16:0:0:0:0:10 ^</p>
+</section>
+<section id="variation-b-3" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-b-3">Variation B</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-14_3459e2a7d9ae811b7aa947037ecb697a">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 11/5 6/5         eq:+0,093
+Player:   51,96% (G:10,47% B:0,35%)
+Opponent: 48,04% (G:9,26% B:0,29%)
+
+2. 24/18 13/12*     eq:+0,062 (-0,030)
+Player:   51,75% (G:9,27% B:0,35%)
+Opponent: 48,25% (G:9,71% B:0,37%)
+
+3. 13/12* 12/6      eq:-0,026 (-0,119)
+Player:   49,23% (G:9,90% B:0,34%)
+Opponent: 50,77% (G:10,23% B:0,35%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=—-b-E-C–AaC–be-eB—A-:0:0:1:16:0:0:0:0:10</sup></p>
+</section>
+<section id="variation-c-2" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-c-2">Variation C</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-15_943499360c895470deec99c9626ca1ca">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 24/20 13/11*     eq:+0,218
+Player:   55,42% (G:10,96% B:0,47%)
+Opponent: 44,58% (G:9,21% B:0,32%)
+
+2. 8/4 6/4          eq:+0,203 (-0,015)
+Player:   54,90% (G:12,57% B:0,50%)
+Opponent: 45,10% (G:10,05% B:0,38%)
+
+3. 13/11* 11/7      eq:+0,105 (-0,112)
+Player:   52,73% (G:12,78% B:0,55%)
+Opponent: 47,27% (G:12,03% B:0,50%)
+
+4. 13/9 13/11*      eq:+0,091 (-0,127)
+Player:   52,50% (G:13,20% B:0,59%)
+Opponent: 47,50% (G:13,01% B:0,67%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=—b–E-C–a-D–be-eB—A-:0:0:1:24:0:0:0:0:10</sup></p>
+</section>
+<section id="variation-d-2" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-d-2">Variation D</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-16_405b4ef23cac831baddd37e4ebc51806">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 13/10 13/12*     eq:+0,107
+Player:   52,96% (G:9,55% B:0,33%)
+Opponent: 47,04% (G:9,00% B:0,31%)
+
+2. 13/12* 12/9      eq:+0,087 (-0,021)
+Player:   52,20% (G:9,28% B:0,33%)
+Opponent: 47,80% (G:8,99% B:0,34%)
+
+3. 13/12* 6/3       eq:+0,084 (-0,023)
+Player:   52,12% (G:9,34% B:0,39%)
+Opponent: 47,88% (G:9,77% B:0,35%)
+
+4. 8/5 6/5          eq:+0,080 (-0,028)
+Player:   51,25% (G:8,53% B:0,30%)
+Opponent: 48,75% (G:7,17% B:0,21%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=—-b-E-C—aE–be-eB—–:0:0:1:13:0:0:0:0:1</sup></p>
+</section>
+<section id="variation-e-1" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-e-1">Variation E</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-17_4ad098f5a958b5698c0d0de2ac55b864">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 13/12* 6/3       eq:-0,072
+Player:   48,37% (G:10,66% B:0,42%)
+Opponent: 51,63% (G:13,49% B:0,54%)
+
+2. 8/5 6/5          eq:-0,080 (-0,008)
+Player:   47,75% (G:10,86% B:0,41%)
+Opponent: 52,25% (G:12,35% B:0,53%)
+
+3. 24/21 13/12*     eq:-0,101 (-0,030)
+Player:   47,74% (G:9,00% B:0,28%)
+Opponent: 52,26% (G:10,85% B:0,38%)
+
+4. 13/12* 12/9      eq:-0,105 (-0,033)
+Player:   47,46% (G:10,25% B:0,37%)
+Opponent: 52,54% (G:12,58% B:0,46%)
+
+5. 13/10 13/12*     eq:-0,111 (-0,040)
+Player:   47,47% (G:10,25% B:0,40%)
+Opponent: 52,53% (G:13,36% B:0,55%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=—-b-F-B—aD–be-eB—A-:0:0:1:13:0:0:0:0:10</sup></p>
+</section>
+<section id="variation-f-1" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-f-1">Variation F</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-18_d8b3b143d0148a3d8b4bc058311b6ac5">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 8/5 6/5          eq:+0,098
+Player:   52,47% (G:11,29% B:0,38%)
+Opponent: 47,53% (G:11,82% B:0,37%)
+
+2. 13/10 13/12*     eq:+0,075 (-0,023)
+Player:   51,85% (G:11,18% B:0,47%)
+Opponent: 48,15% (G:12,97% B:0,49%)
+
+3. 24/21 13/12*     eq:+0,025 (-0,073)
+Player:   50,83% (G:9,78% B:0,37%)
+Opponent: 49,17% (G:11,41% B:0,37%)
+
+4. 13/12* 12/9      eq:+0,007 (-0,091)
+Player:   50,73% (G:11,02% B:0,44%)
+Opponent: 49,27% (G:13,15% B:0,55%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=—-b-D-C—aE–be-eB—A-:0:0:1:13:0:0:0:0:10</sup></p>
+</section>
+<section id="variation-g" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-g">Variation G</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-19_92ae3e8f0a929106256bfe49892c09cb">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 13/10 13/12*     eq:+0,139
+Player:   53,55% (G:9,67% B:0,38%)
+Opponent: 46,45% (G:9,97% B:0,35%)
+
+2. 13/12* 12/9      eq:+0,083 (-0,056)
+Player:   52,21% (G:9,68% B:0,38%)
+Opponent: 47,79% (G:10,14% B:0,33%)
+
+3. 8/5 6/5          eq:+0,054 (-0,085)
+Player:   50,80% (G:8,65% B:0,33%)
+Opponent: 49,20% (G:8,80% B:0,25%)
+
+4. 13/12* 6/3       eq:+0,035 (-0,104)
+Player:   51,30% (G:9,36% B:0,33%)
+Opponent: 48,71% (G:11,12% B:0,37%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=—-b-D-C—aF–be-eB—–:0:0:1:13:0:0:0:0:1</sup></p>
+</section>
+</section>
+<section id="position-5" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="position-5">Position 5</h2>
+<section id="variation-a-4" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-a-4">Variation A</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-20_25359ebc6e0748a982f0de1d2cb7d27a">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 13/7* 6/1*       eq:+0,098
+Player:   51,88% (G:17,84% B:0,49%)
+Opponent: 48,12% (G:13,89% B:0,76%)
+
+2. 24/18 23/18      eq:+0,002 (-0,096)
+Player:   49,85% (G:9,63% B:0,30%)
+Opponent: 50,15% (G:9,14% B:0,32%)
+
+3. 13/8 13/7*       eq:-0,020 (-0,118)
+Player:   49,28% (G:14,77% B:0,63%)
+Opponent: 50,72% (G:14,47% B:0,71%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=-a—-EaC–AdD—d-e—AA-:0:0:1:56:0:0:0:0:10</sup></p>
+</section>
+<section id="variation-b-4" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-b-4">Variation B</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-21_6afa58f7eae06dcab5ad4eb496656b3b">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 24/18 23/18      eq:+0,117
+Player:   53,05% (G:9,04% B:0,26%)
+Opponent: 46,95% (G:7,06% B:0,25%)
+
+2. 13/7* 6/1*       eq:+0,108 (-0,009)
+Player:   51,95% (G:17,39% B:0,49%)
+Opponent: 48,05% (G:12,98% B:0,62%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=-a—-EaD—dD—d-e—AA-:0:0:1:56:0:0:0:0:10</sup></p>
+</section>
+<section id="variation-c-3" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-c-3">Variation C</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-22_e2057cc7afefd5360a8b148acbb6ed6d">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 24/18 23/18      eq:+0,148
+Player:   53,61% (G:9,59% B:0,29%)
+Opponent: 46,39% (G:7,46% B:0,24%)
+
+2. 13/7* 7/2*       eq:+0,065 (-0,083)
+Player:   50,99% (G:15,87% B:0,58%)
+Opponent: 49,01% (G:12,65% B:0,54%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=–a—EaD—dD—d-e—AA-:0:0:1:56:0:0:0:0:10</sup></p>
+</section>
+<section id="variation-d-3" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="variation-d-3">Variation D</h4>
+<div class="cell column-page-right quarto-layout-panel" data-hash="hit-or-point_cache/html/unnamed-chunk-23_57a6cd556bd530bfc1941a80d478947c">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hit-or-point_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<pre><code>1. 8/2* 6/2         eq:+0,197
+Player:   53,51% (G:18,40% B:0,57%)
+Opponent: 46,49% (G:10,13% B:0,45%)
+
+2. 13/7* 6/2*       eq:+0,161 (-0,035)
+Player:   53,09% (G:17,54% B:0,62%)
+Opponent: 46,91% (G:12,22% B:0,54%)
+
+3. 24/18 22/18      eq:+0,144 (-0,053)
+Player:   53,39% (G:9,69% B:0,26%)
+Opponent: 46,61% (G:7,33% B:0,21%)</code></pre>
+</div>
+</div>
+</div>
+<p><sup>XGID=–a—EaD—dD—d-e–A-A-:0:0:1:46:0:0:0:0:10</sup></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
