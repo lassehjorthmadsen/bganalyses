@@ -1,8 +1,11 @@
 {
-  "hash": "e6d0b46ccb6bc91995cbd3a091c6973d",
+  "hash": "31ee9b62be4cd3871a48698b276937e0",
   "result": {
+    "engine": "knitr",
     "markdown": "---\ntitle: \"Prime vs. prime\"\nauthor: \"Lasse Hjorth Madsen\"\ndate: today \nformat: \n  html:\n    fig-width: 4\n    fig-height: 4\ntoc: true\ntoc-expand: true\neditor: source\nexecute:\n  echo: false\n  warning: false\n---\n\n::: {.cell}\n\n:::\n\n\n## Why this?\n\n",
-    "supporting": [],
+    "supporting": [
+      "prime-vs-prime_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],
