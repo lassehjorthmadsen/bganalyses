@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lasse Hjorth Madsen">
-<meta name="dcterms.date" content="2024-03-24">
+<meta name="dcterms.date" content="2024-03-25">
 
 <title>Mistake, errors and statistics</title>
 <style>
@@ -47,7 +47,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -56,6 +62,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -72,12 +79,12 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analyses/explore-emg.html">THEORY</a></li><li class="breadcrumb-item"><a href="../analyses/bgmoves-analysis.html">Mistake, errors and statistics</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analyses/explore-emg.html">THEORY</a></li><li class="breadcrumb-item"><a href="../analyses/bgmoves-analysis.html">Mistake, errors and statistics</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -87,7 +94,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -186,7 +193,7 @@ ul.task-list li input[type="checkbox"] {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
@@ -214,7 +221,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analyses/explore-emg.html">THEORY</a></li><li class="breadcrumb-item"><a href="../analyses/bgmoves-analysis.html">Mistake, errors and statistics</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Mistake, errors and statistics</h1>
 </div>
@@ -233,7 +240,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 24, 2024</p>
+      <p class="date">March 25, 2024</p>
     </div>
   </div>
   
@@ -241,7 +248,9 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
+
 
 <section id="why-this" class="level2">
 <h2 class="anchored" data-anchor-id="why-this">Why this?</h2>
@@ -263,7 +272,11 @@ ul.task-list li input[type="checkbox"] {
 <p>First, let’s just count, sum, and average all the errors, to see how they split by cube/checker play and by me/opponents. The left, middle, and right panel in the plot below shows counts, sums, and averages.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Luckily, it looks like I make fewer and smaller errors than my opponents on Backgammon Galaxy, but that is not surprising: I never use a rating filter, and therefore my opponents are of all skill levels, including beginners.</p>
@@ -278,7 +291,11 @@ ul.task-list li input[type="checkbox"] {
 <p>Is the total sum of errors mostly from many small errors, or a few big blunders?</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The single interval of checker play errors, that contribute the most to the total cost of errors, is the medium-sized one, errors between 0.05 and 0.1. And about half the checker play errors could be eliminated if I didn’t make blunder at 0.1 and above. Presumably the biggest ones are the easiest to get rid of, so it makes sense to focus on blunders, as many players do.</p>
@@ -290,14 +307,22 @@ ul.task-list li input[type="checkbox"] {
 <p>Next, let’s focus on my cube errors, and split by what GNU Backgammon think the proper cube action is.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The biggest class of my cube-related errors, comes from positions where the proper cube action is no (re)double, take (where no-redouble and no-double are lumped together). That class of cube positions are both frequent and with large, average errors. The mistake, however, can be both me doubling when I shouldn’t, or me passing a no-double (which of course is always very bad).</p>
 <p>Let’s further split by what the actual action was, so try to nail it better.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>I looks like the single biggest contributor to my cube mistakes, is me doubling or re-doubling when the position isn’t strong enough. (The big green bar in the middle panel.) Do I double too aggressively? Maybe, but on the other hand if you add together the cases where I rolled but should have doubled (the two purple bars in the middle panel) they represent also a big sum, so sometimes I miss a good double double too.</p>
@@ -310,14 +335,22 @@ ul.task-list li input[type="checkbox"] {
 <p>Checker play errors are a bit harder to categorize that cube errors. I’m planing on doing a algorithm to determine position type, but until then, we need to go simple. Let’s look at move number, to distinguish between errors early and late in the game. (Note that GNU BG use a move number for every player’s decision, so a double/take/play sequence would be <em>three</em> moves with the same position.)</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Not surprisingly, most checker play errors come early in the game, since all games have a beginning, but not all games are long.</p>
 <p>Let’s bin the move number into a fewer intervals, so we can better identify opening game and later game errors.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The bigger part of checker play errors are from within move 6-15. The errors are both large on average and frequent, so they sum up to a lot.</p>
@@ -330,13 +363,21 @@ ul.task-list li input[type="checkbox"] {
 <p>One way to visualize the distribution of my double-errors vs my opponent’s take-errors, is to plot the estimated density distributions of errors like this:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Another way to look at it would be to plot the size of my error of doubling, against the error of my opponent. In case of a correct response, a pass, that error would just be zero. Like this:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The point here is, that the bigger the no-double is, the bigger is also the potential gain from an erroneous take. While those big take-blunders may be less likely, the gain when they do happen is also bigger. The plot shows one outlier, bottom left corner, of a really big no-double that was accepted for a big gain.</p>
@@ -347,13 +388,21 @@ ul.task-list li input[type="checkbox"] {
 <p>Let’s do plot similar to before. First, the estimated density distributions of errors:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Next, the scatter plot:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -376,7 +425,11 @@ ul.task-list li input[type="checkbox"] {
 <p>Let’s reproduce the first three charts from this report, split by ply, and inspect the results. First we have the overall results (like in the <em>Me vs The Galaxy</em>-section). For readability, instead of splitting on me vs opponent, we look at just my errors, but split by ply number.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>From casual inspection, it looks like 0- and 1-ply are different, but 2-, 3-, and 4-ply produce mostly similar results on the aggregated level. 4-ply does have a slightly lower <em>count</em> of cube errors than 3-ply, and so a bit higher <em>average</em> cube error.</p>
@@ -384,27 +437,38 @@ ul.task-list li input[type="checkbox"] {
 <p>Same overall impression from the split by error size: 0- and 1-ply stand out a bit; otherwise little noticeable difference.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>In the cube-error plot again 0- and 1-ply stand out, and in general the bars look a little more noisy – but that is to be expected as the data set for cube actions is considerably smaller.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="bgmoves-analysis_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>All-in all no obvious reasons to invest computer time in doing 5-ply. The 4-ply analysis took abut 3 days, so a 5-ply would take months – we really would need a tangible reason to do that.</p>
 <p>For fun, let’s examine some cases where 3-ply and 4-ply disagree the most. We pull out 20 examples, 10 checker play mistakes and 10 cube errors, in each case with 5 positions where 3-ply says the error made is bigger than 4-ply thinks, and 5 cases vice versa.</p>
 <p>The stand-out pattern is, that we have many backgame position types. Other than that, there’s not a signal there that I can easily spot.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="1">
+<div class="quarto-layout-row">
 <section id="position-1-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-1-checker-play">Position 1: Checker play</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-1.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.259
 Size of error, 4-ply: -0.16
 Difference          : -0.099
@@ -423,14 +487,14 @@ XGID                : XGID=--aBBBDbA---ca----bcc-B-B-:0:0:-1:21:0:2:0:5:10
  5. Cubeful 0-ply    18/17* 13/11                 Eq.: +0.330 (-0.109)</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-2-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-2-checker-play">Position 2: Checker play</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-2.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.191
 Size of error, 4-ply: -0.103
 Difference          : -0.088
@@ -449,14 +513,14 @@ XGID                : XGID=------B-D----C-abcdcb-CBA-:1:1:-1:61:0:0:0:3:10
 *5. Cubeful 4-ply    10/9 7/1*                    Eq.: -0.014 (-0.103)</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-3-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-3-checker-play">Position 3: Checker play</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-3.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.147
 Size of error, 4-ply: -0.07
 Difference          : -0.077
@@ -475,14 +539,14 @@ XGID                : XGID=-aabb-EBE-A-baA--b-d--A---:0:0:1:54:0:0:0:5:10
 *5. Cubeful 4-ply    22/13*                       Eq.: +0.075 (-0.070)</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-4-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-4-checker-play">Position 4: Checker play</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-4.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.258
 Size of error, 4-ply: -0.185
 Difference          : -0.073
@@ -501,14 +565,14 @@ XGID                : XGID=-dbCBBCA-A--c----bBb-Aa-a-:1:-1:-1:62:0:0:0:3:10
  5. Cubeful 2-ply    8/6 8/2                      Eq.: -0.893 (-0.265)</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-5-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-5-checker-play">Position 5: Checker play</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-5.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.181
 Size of error, 4-ply: -0.109
 Difference          : -0.072
@@ -527,14 +591,14 @@ XGID                : XGID=----BAE-BA--dB-b-aBc--bab-:0:0:-1:62:0:3:0:5:10
  5. Cubeful 2-ply    13/5                         Eq.: +0.393 (-0.228)</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-6-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-6-checker-play">Position 6: Checker play</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-6.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.016
 Size of error, 4-ply: -0.116
 Difference          : 0.1
@@ -553,14 +617,14 @@ XGID                : XGID=-----BBA-B---a----dbdcCCaB:0:0:-1:53:0:0:0:3:10
  5. Cubeful 2-ply    6/1 4/1                      Eq.: +0.361 (-0.240)</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-7-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-7-checker-play">Position 7: Checker play</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-7.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.315
 Size of error, 4-ply: -0.405
 Difference          : 0.09
@@ -579,14 +643,14 @@ XGID                : XGID=aba-BCD-CA--cA---b-fA-----:1:-1:-1:31:0:0:0:5:10
  5. Cubeful 0-ply    bar/24 8/5*                  Eq.: -0.935 (-0.526)</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-8-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-8-checker-play">Position 8: Checker play</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-8.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.139
 Size of error, 4-ply: -0.226
 Difference          : 0.087
@@ -605,14 +669,14 @@ XGID                : XGID=--aBCBCbB--Ba--a---cbab-bA:0:0:-1:33:0:0:0:3:10
  5. Cubeful 2-ply    13/4 6/3                     Eq.: +0.252 (-0.156)</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-9-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-9-checker-play">Position 9: Checker play</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-9.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.116
 Size of error, 4-ply: -0.201
 Difference          : 0.085
@@ -631,14 +695,14 @@ XGID                : XGID=-b-CBCCB--------bcccb-B---:1:-1:-1:41:2:3:0:7:10
  5. Cubeful 2-ply    8/4 7/6                      Eq.: +0.185 (-0.192)</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-10-checker-play" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-10-checker-play">Position 10: Checker play</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-10.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.046
 Size of error, 4-ply: -0.129
 Difference          : 0.083
@@ -657,14 +721,14 @@ XGID                : XGID=-BBBACB-----c-B-ac-bbbbA--:1:-1:1:51:0:0:0:5:10
  5. Cubeful 0-ply    14/13 14/9                   Eq.: -1.000 (-0.129)</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-11-cube-decision" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-11-cube-decision">Position 11: Cube decision</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-11.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.619
 Size of error, 4-ply: -0.514
 Difference          : -0.105
@@ -689,14 +753,14 @@ Cubeful equities:
 Proper cube action: Too good to double, pass (5.2%)</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-12-cube-decision" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-12-cube-decision">Position 12: Cube decision</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-12.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.93
 Size of error, 4-ply: -0.851
 Difference          : -0.079
@@ -721,14 +785,14 @@ Cubeful equities:
 Proper cube action: Too good to redouble, pass (9.6%)</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-13-cube-decision" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-13-cube-decision">Position 13: Cube decision</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-13.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.134
 Size of error, 4-ply: -0.063
 Difference          : -0.071
@@ -753,14 +817,14 @@ Cubeful equities:
 Proper cube action: Double, pass</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-14-cube-decision" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-14-cube-decision">Position 14: Cube decision</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-14.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.403
 Size of error, 4-ply: -0.332
 Difference          : -0.071
@@ -785,14 +849,14 @@ Cubeful equities:
 Proper cube action: Double, pass</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-15-cube-decision" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-15-cube-decision">Position 15: Cube decision</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-15.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.376
 Size of error, 4-ply: -0.308
 Difference          : -0.068
@@ -817,14 +881,14 @@ Cubeful equities:
 Proper cube action: Double, pass</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-16-cube-decision" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-16-cube-decision">Position 16: Cube decision</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-16.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.2
 Size of error, 4-ply: -0.271
 Difference          : 0.071
@@ -849,14 +913,14 @@ Cubeful equities:
 Proper cube action: No double, take (41.5%)</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-17-cube-decision" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-17-cube-decision">Position 17: Cube decision</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-17.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.215
 Size of error, 4-ply: -0.285
 Difference          : 0.07
@@ -881,14 +945,14 @@ Cubeful equities:
 Proper cube action: Redouble, pass</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-18-cube-decision" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-18-cube-decision">Position 18: Cube decision</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-18.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.073
 Size of error, 4-ply: -0.137
 Difference          : 0.064
@@ -913,14 +977,14 @@ Cubeful equities:
 Proper cube action: No double, take (21.7%)</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-19-cube-decision" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-19-cube-decision">Position 19: Cube decision</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-19.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.174
 Size of error, 4-ply: -0.238
 Difference          : 0.064
@@ -945,14 +1009,14 @@ Cubeful equities:
 Proper cube action: Double, take</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <section id="position-20-cube-decision" class="level4 quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <h4 class="anchored" data-anchor-id="position-20-cube-decision">Position 20: Cube decision</h4>
 <p><img src="bgmoves-analysis_files/figure-html/plot_examples-20.png" class="img-fluid" width="672"></p>
 </section>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <pre><code>Size of error, 3-ply: -0.161
 Size of error, 4-ply: -0.22
 Difference          : 0.059
@@ -1063,10 +1127,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/lassehjorthmadsen\.github\.io\/bganalyses\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1076,8 +1157,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1089,7 +1179,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1133,6 +1346,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1158,6 +1372,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1218,6 +1458,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lasse Hjorth Madsen">
-<meta name="dcterms.date" content="2024-03-24">
+<meta name="dcterms.date" content="2024-03-25">
 
 <title>Janowski Formulars</title>
 <style>
@@ -47,7 +47,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -56,17 +62,46 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
-
 <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+
 <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -77,12 +112,12 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analyses/explore-emg.html">THEORY</a></li><li class="breadcrumb-item"><a href="../analyses/janowski.html">Janowski Formulars</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analyses/explore-emg.html">THEORY</a></li><li class="breadcrumb-item"><a href="../analyses/janowski.html">Janowski Formulars</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -92,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -191,7 +226,7 @@ ul.task-list li input[type="checkbox"] {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
@@ -226,7 +261,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analyses/explore-emg.html">THEORY</a></li><li class="breadcrumb-item"><a href="../analyses/janowski.html">Janowski Formulars</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Janowski Formulars</h1>
 </div>
@@ -245,7 +280,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 24, 2024</p>
+      <p class="date">March 25, 2024</p>
     </div>
   </div>
   
@@ -253,7 +288,9 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
+
 
 <section id="why-this" class="level2">
 <h2 class="anchored" data-anchor-id="why-this">Why this?</h2>
@@ -278,6 +315,7 @@ ul.task-list li input[type="checkbox"] {
 <p>As mentioned, a game of backgammon played to conclusion can end in six possible ways. A certain position in Janowski’s article, have the following probabilities of each outcome:</p>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -314,6 +352,7 @@ ul.task-list li input[type="checkbox"] {
 </table>
 
 
+</div>
 </div>
 </div>
 <p>The average win is then:</p>
@@ -366,12 +405,17 @@ ul.task-list li input[type="checkbox"] {
 <p>Let’s look at a position after Black opens with 21, slotting:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="janowski_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="janowski_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>According to XG 1-ply, the probabilities of the six possible outcomes of the game, if played to conclusion, are as follows:</p>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -410,11 +454,13 @@ ul.task-list li input[type="checkbox"] {
 
 </div>
 </div>
+</div>
 <p>This comes to a cubeless equity of: <span class="math inline">\(E = 0.0069\)</span>; White is a slight underdog to win, but is compensated by a tiny bit of extra gammons and backgammons, so that the game is basically even.</p>
 <p>Note that the numbers that XG reports are probabilities for winning (<em>including</em> gammons and backgammons), gammon (<em>including</em> backgammon), and backgammon. They have to be converted to get probabilities that sum to 1, like in the above table, if one prefers that way of looking at it. (My R-package, <a href="https://lassehjorthmadsen.github.io/backgammon/index.html"><code>backgammon</code></a> has a function for that.)</p>
 <p>If we apply Janowski’s take point formulars to the above cubeless probablities, we get:</p>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -440,11 +486,13 @@ ul.task-list li input[type="checkbox"] {
 
 </div>
 </div>
+</div>
 <p>All these four numbers align perfectly with what you get when you consult XGs <code>Analyze|Cube Information</code> menu. GNU Backgammon, in <code>Analyze|Market Window</code>, also gives the exact same take points. We can conclude that both programs probably implemented Janowski’s take point formular in the same way for money games.</p>
 <p>Of course, the interesting bit is the <em>actual</em> take points; the “Dead” and “Perfectly live” take point are just lower and upper bounds between which the “real” take point must be found. As mentioned, Janowski just takes a weighted average of the two, to arrive at a guesstimate for the real take point.</p>
 <p>Putting aside for a moment the take points, let’s look at the cubeful <em>equities</em>, i.e.&nbsp;the average or <em>expected</em> value of a position, while taking into account the doubling cube. For White in the above position, using the Janowski formulas, and assuming a cube-life index of <span class="math inline">\(0.7\)</span>, we get:</p>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -475,12 +523,14 @@ ul.task-list li input[type="checkbox"] {
 
 </div>
 </div>
+</div>
 <p>The calculated equities agrees pretty closely with what XG says.</p>
 <p>Note that XGs reported equity listed as “Owned by Opponent” is doubled, so you can directly compare a non-double action to a double/take action. This is why it looks like Opponent (Black), has about double the equity as Player (White), if owning the cube.</p>
 <p>Let’s examine what GNU says about the same position, to find out if it is applying Janowski like I expect it to. You can’t input specific probabilities, and get the estimated cubeful equities for each cube location, so we’ll need to switch to GNU’s evaluations, which of course are slightly different from XG’s.</p>
 <p>Here, GNU 2-ply (what XG calls 3-ply) cubeless estimates for the same opening position:</p>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -519,10 +569,12 @@ ul.task-list li input[type="checkbox"] {
 
 </div>
 </div>
+</div>
 <p>Which comes to a cubeless <em>equity</em> of <span class="math inline">\(E = 0.0017\)</span>.</p>
 <p>The <a href="https://www.gnu.org/software/gnubg/manual/gnubg.html">GNU Backgammon Manual</a>, helpfully states that they use a cube-life index, or cube efficiency, of <span class="math inline">\(0.68\)</span> for contact positions. Applying Janowski’s formulars for cubeful equity to the above probabilities and, using <span class="math inline">\(0.68\)</span> as cube efficiency, we get:</p>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -553,6 +605,7 @@ ul.task-list li input[type="checkbox"] {
 
 </div>
 </div>
+</div>
 <p>The Janowski-style calculated equities are all near-identical to what GNU reports. I’m a little unsure if the small discrepancies are due to rounding errors or some other details that I’m not aware of.</p>
 <p>Going back to the questions of which cube-life index XG uses: Perhaps it depends on the position? (GNU BG uses a slightly lower value, <span class="math inline">\(0.60\)</span> rather than <span class="math inline">\(0.68\)</span>, in short races.)</p>
 <p>Lets do another example to try to find out.</p>
@@ -561,11 +614,16 @@ ul.task-list li input[type="checkbox"] {
 <h4 class="anchored" data-anchor-id="bear-off-position">Bear-off position</h4>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="janowski_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="janowski_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -604,11 +662,13 @@ ul.task-list li input[type="checkbox"] {
 
 </div>
 </div>
+</div>
 <p>With no gammons, the cubeless take point clearly is <span class="math inline">\(0.25\)</span> and the perfectly efficient cubeful take point is <span class="math inline">\(0.20\)</span> which is also what XG reports.</p>
 <p>The cubeless equity is also easy to calculate: <span class="math inline">\(E=-0.00612\)</span></p>
 <p>The Janowski-style estimated cubeful equities, assuming a cube-life index of <span class="math inline">\(0.622,\)</span> are:</p>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -639,6 +699,7 @@ ul.task-list li input[type="checkbox"] {
 
 </div>
 </div>
+</div>
 <p>The values that XG report are very close to the calculated values, so it must assume a lower cube value in the second position, which would also be reasonable in a medium to short length race like this.</p>
 <p>Let’s do a final example.</p>
 </section>
@@ -646,12 +707,17 @@ ul.task-list li input[type="checkbox"] {
 <h4 class="anchored" data-anchor-id="middle-game-position">Middle game position</h4>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="janowski_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="janowski_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>XG’s 1-ply estimated probabilities are:</p>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -690,10 +756,12 @@ ul.task-list li input[type="checkbox"] {
 
 </div>
 </div>
+</div>
 <p>The cubeless equity is: <span class="math inline">\(E=0.5907\)</span></p>
 <p>The Janowski-style estimated cubeful equities, assuming a cube-life index of <span class="math inline">\(0.7\)</span>, are:</p>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -722,6 +790,7 @@ ul.task-list li input[type="checkbox"] {
 </table>
 
 
+</div>
 </div>
 </div>
 <p>XG’s values are again close to the calculated values, although not exactly the same. The reason for the discrepancy (especially with the cube in the middle) is not obvious. (I used 1-ply to make sure the difference is not due to how the numbers gets aggregated at higher plies.)</p>
@@ -753,6 +822,7 @@ ul.task-list li input[type="checkbox"] {
 <p>For overview, we can put our results in a table like this, adding a column for the “real” take point, which, as mentioned, is just a weighted average of the dead- and the live-cube take point. (Using a weight, or cube efficiency, of <span class="math inline">\(0.7\)</span>.)</p>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -787,6 +857,7 @@ ul.task-list li input[type="checkbox"] {
 
 </div>
 </div>
+</div>
 <p>These are all the same numbers that GNU BG and XG reports, in the “Market window” and “Cube Information” dialog boxes. A rollout confirm that in a long race (I tried 125 pips vs 139 pips), trailing (-5,-3), you do indeed have a small take with about 22% winning chances, just like the “real-cube” average indicates.</p>
 <p>This is about the same as in money game, so the lesson for this score (-5, -3) is that the extraordinary cube leverage just about cancels out the somewhat higher take point (of <span class="math inline">\(0.287\)</span>) one would have without using the cube, so in the end the take point is close to money game. Of course this is for a long race; if it was a very short race or even a last-roll situation we would be back to the higher take point. A four-roll position would be a pass, for example.</p>
 </section>
@@ -796,6 +867,7 @@ ul.task-list li input[type="checkbox"] {
 <p>All the take points, in tabular form, starting with the 16-cube, where the live-cube take point is identical to the dead-cube take point:</p>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -854,6 +926,7 @@ ul.task-list li input[type="checkbox"] {
 
 </div>
 </div>
+</div>
 <p>From the table we can note that our “real-cube” take point for the initial double is <span class="math inline">\(0.216\)</span>, again about the same as for money, which is not surprising in a straight race at the beginning of a long match. We note also our take point, should we ever face a 32-cube, is very low: <span class="math inline">\(0.043\)</span>. That’s what we have if we pass and trail (-25, -8), so if we’re doing any better, we should take and play for the match.</p>
 <p>That means also that the 16-cube is of little value to the opponent, since to use it efficiently, he or she must nearly win first. One way to see that, is to notice that <em>their</em> take point for the 16-cube, is almost the same in the dead-cube model as in the live-cube model. (<span class="math inline">\(0.233\)</span> and <span class="math inline">\(0.223\)</span> respectively.)</p>
 <p>In a funny way, <em>all</em> the possible future take points affects our take point for the initial double, since the calculations are recursive, with each take point affecting the next.</p>
@@ -872,7 +945,11 @@ TP_{1_{live}} = TP_1 \\
 <p>We can plot the take points to show this effect, starting with the dead-cube take point at cube level 1, then work subsequent take points into the live cube model, one by one:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="janowski_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="janowski_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>We see how we get from the initial dead-cube take point of 0.253 to the live-cube take point of 0.201. Each subsequent take point has less and less of an impact on our initial take point. And let’s just rember once again that the real take point is to be found between these two values; when the game still has a way to go, it is usually closer to live-cube take point that to the dead-cube take point.</p>
@@ -883,12 +960,17 @@ TP_{1_{live}} = TP_1 \\
 <p>A standard opening blitz after 63, 55, dance, looks like this:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="janowski_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="janowski_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>GNU BG 2-ply evaluates the position like this:</p>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -927,11 +1009,13 @@ TP_{1_{live}} = TP_1 \\
 
 </div>
 </div>
+</div>
 <p>We’re clear favorites with a strong gammon threat; it is more likely that we will win a gammon than a single game. If we double, a gammon will win the match exactly, while a single win will put us at 2-away which is also valuable. However, our opponent will be quick to redouble, after which our gammons will be worthless and his gammons will be lethal.</p>
 <p>So, what’s the buttom line? Do we have a double? Can our opponent take?</p>
 <p>Applying the Janowski formulas, we get take points for Black, and take points for White for the potential recube, as follows:</p>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -964,6 +1048,7 @@ TP_{1_{live}} = TP_1 \\
 </table>
 
 
+</div>
 </div>
 </div>
 <p>In the last row we see that Black as a very high take point, 0.4345, for the reason mentioned: The likely gammon will lose the match. Should Black turn the match around, however, White <em>also</em> has a high takepoint, 0.3776, and since the cube would be dead, the live-cube takepoint is the same as the dead-cube takepoint. For that reason, Black’s live-cube and real-cube takepoints are much lower: The model suggests Black would be able to take with a winning probability of 0.3229.</p>
@@ -1064,10 +1149,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/lassehjorthmadsen\.github\.io\/bganalyses\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1077,8 +1179,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1090,7 +1201,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1134,6 +1368,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1159,6 +1394,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1219,6 +1480,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

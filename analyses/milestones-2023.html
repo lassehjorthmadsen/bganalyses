@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lasse Hjorth Madsen">
-<meta name="dcterms.date" content="2024-03-24">
+<meta name="dcterms.date" content="2024-03-25">
 
 <title>Milestones III, 2023</title>
 <style>
@@ -47,7 +47,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -56,17 +62,46 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
-
 <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+
 <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -77,12 +112,12 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analyses/milestones-2023.html">PRAXIS</a></li><li class="breadcrumb-item"><a href="../analyses/milestones-2023.html">Milestones III, 2023</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analyses/milestones-2023.html">PRAXIS</a></li><li class="breadcrumb-item"><a href="../analyses/milestones-2023.html">Milestones III, 2023</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -92,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -191,7 +226,7 @@ ul.task-list li input[type="checkbox"] {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
@@ -232,7 +267,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analyses/milestones-2023.html">PRAXIS</a></li><li class="breadcrumb-item"><a href="../analyses/milestones-2023.html">Milestones III, 2023</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Milestones III, 2023</h1>
 </div>
@@ -251,7 +286,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 24, 2024</p>
+      <p class="date">March 25, 2024</p>
     </div>
   </div>
   
@@ -259,7 +294,9 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
+
 
 <section id="why-this" class="level2">
 <h2 class="anchored" data-anchor-id="why-this">Why this?</h2>
@@ -270,15 +307,19 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="cube-actions">Cube actions</h2>
 <section id="position-1" class="level3">
 <h3 class="anchored" data-anchor-id="position-1">Position 1</h3>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-1_6ff2b4f6a2b29a22eab085a546127a7a">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Over the board, this looked to White like a strong double. White has an excellent forward structure, a fat racing lead, and a 4-point prime that can be extended from the back in relative safety, since Black has two checkers on the bar. The only weakness is White’s blot on the ace point, but getting hit is not a big deal, so it can’t be much of a liability.</p>
 <p>Meanwhile, Black has made almost no progress; only the 11-point is made.</p>
 <p>White guessed this was a strong double, and a smallish take for Black. It is, however, the other way around: White has only a small double, Black has a huge take:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-2_c28dd354076c99dd39ea21b1ae3b9ae4">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Cubeful Equities:
        No double:     +0,690 (-0,047)
@@ -289,8 +330,9 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 </div>
 </div>
 <p>Looking at the outcome probabilities, we see that White does have a big gammon threat, but also that Black wins more than a third of the games:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-3_4de0bac3e33e3212b14d130eb7ab8ced">
+<div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -329,14 +371,18 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 
 </div>
 </div>
+</div>
 <p>One thing that might be overlooked here, is that White has very few real crushing sequences, because he’s a little short on ammo. Black will almost always make some kind of anchor, and then have some kind of counter play agains White’s three back checkers.</p>
 <p>To see if this result is match-score related, let’s check the same position for money, and while we’re at it, also check if XG Roller ++ (fast, truncated rollouts), gets it right, compared to a full rollout at strong settings.</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-4_f8998e1e4c3f74b797c14fa9db46b2f2">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Cubeful Equities:
 No double:     +0,800 (-0,120)
@@ -355,8 +401,9 @@ Double/Pass:   +1,000 (+0,082)</code></pre>
 <p>For money, the double is bigger, and the take is smaller, so more in line with White’s first impression. It appears that the 2-point lead for White does make a difference.</p>
 <p>But why?</p>
 <p>The next table shows Black’s take points under different assumption: a) No cube and no gammons (like a last-roll position); b) no cube and gammon rates from the table above; and c) taking both cube and gammons into account.</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-5_5309719c88f192431a90b86bc0d291bb">
+<div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -391,10 +438,12 @@ Double/Pass:   +1,000 (+0,082)</code></pre>
 
 </div>
 </div>
+</div>
 <p>The last-roll take point is not too different from money at this score, and it also doesn’t make much difference to factor in gammons. When we consider possible recubes, however, we see that Black’s take point at the score, is somewhat lower than it would be for money.</p>
 <p>This is because he’ll redouble more aggressively at the score. We can see why, by looking at <em>White’s</em> take points for a potential recube, assuming the same gammon frequencies:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-6_e6f46ab34ffd353d2f01bb8fefc875ba">
+<div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -429,16 +478,20 @@ Double/Pass:   +1,000 (+0,082)</code></pre>
 
 </div>
 </div>
+</div>
 <p>So, it looks like a good part of White’s flawed evaluation of the original position, comes from the fact that Black can take somewhat more aggressively at the score; hence White needs more to have a really strong double.</p>
 <p>The reason for Black’s lower take point at the score, lies mostly in the potential redouble in positions where gammons are possible: It’s hard for White to accept a 4-cube at 5-away 7-away, where a gammon loss is much more costly than a gammon win.</p>
 <p>Still, the position is also a clear take for money, so there’s some reconsideration for White to do in that department too. What will it take to turn the position into a really tough take for money?</p>
 <p>If we activate the awkward spare on the ace-point, we suddenly have a big pass. Perhaps not surprising, since we’re turning a big liability into a big asset. But still:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-7_e19e3c73dfe892d9365ac5737e00ebfb">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -449,12 +502,15 @@ Double/Pass:   +1,000</code></pre>
 </div>
 </div>
 <p>Even if we put the spare checker in a less ideal place, we still get a double/pass:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-8_b2668ad4f84b8883524107bb4d7f91a5">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -465,12 +521,15 @@ Double/Pass:   +1,000</code></pre>
 </div>
 </div>
 <p>That spare has to move out of the action, to get to a marginal pass:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-9_a97ddd8a6656c34309004ac41c40b65b">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -481,12 +540,15 @@ Double/Pass:   +1,000</code></pre>
 </div>
 </div>
 <p>Finally, we get to a decent take, noting that Black is no longer far behind in the race:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-10_28bdb66bf245a7f11feef4015d73aa70">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -498,12 +560,15 @@ Double/Pass:   +1,000 (+0,053)</code></pre>
 </div>
 <p>One way to see how bad White’s ace-point blot is, is to consider the original position after something like 31: 24/20. Now, most aces, like 21, 31, 41, and 51, are below-average rolls for Black, even though they hit. White is <em>hoping</em> to get hit (except with 41 and 11, trying for a high anchor); that’s how bad the blot is.</p>
 <p>Another experiment would be to improve White’s opportunity to extend the prime from the back. A one-pip change can be huge: We go from a clear take to a pretty clear pass:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-11_3cd6a0a7ed5e970e4335dfe1eef87425">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -514,12 +579,15 @@ Double/Pass:   +1,000</code></pre>
 </div>
 </div>
 <p>Another change in the same spirit is to bring in another builder for that important 9-point. It has about the same effect as slotting the 9-point:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-12_1a6a485c5ed41eaf5f6dc794d053e368">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -530,12 +598,15 @@ Double/Pass:   +1,000</code></pre>
 </div>
 </div>
 <p>A final one-pip change that has a rather dramatic effect, is to just semi-active the ace-point checker so it easier becomes part of a prime, and is both easier and more attractive to cover. Again, we go from a clear take to a clear pass:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-13_6508b960290e25e2058f63595bebd49d">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -555,13 +626,17 @@ Double/Pass:   +1,000</code></pre>
 </section>
 <section id="position-2" class="level3">
 <h3 class="anchored" data-anchor-id="position-2">Position 2</h3>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-14_5ee11e19eef3df3659c98e69c1fe4aba">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>This is another example of blitz that could work as a bluff double: It might look like White has a strong blitz going, but in fact the take is easy, and this is not even a double. In practice, it’s not impossible to get a pass. (In the actual game, Black passed this.)</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-15_8029284b73ec771f72e7fb1a6d677a74">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Analyzed in XG Roller++
 Cubeful Equities:
@@ -571,12 +646,15 @@ Double/Pass:   +1,000 (+0,421)</code></pre>
 </div>
 </div>
 <p>At the match score, the error from passing is gigantic, for money it is smaller but still big:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-16_df63550693c3d5371aedd1b8c0eaad8c">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -587,8 +665,9 @@ Double/Pass:   +1,000 (+0,258)</code></pre>
 </div>
 </div>
 <p>To better understand why this score is so different from money, we can compare the take points for money and at the score, using different assumptions:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-18_58683935fad33b950545de00adbfac5a">
+<div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -623,15 +702,19 @@ Double/Pass:   +1,000 (+0,258)</code></pre>
 
 </div>
 </div>
+</div>
 <p>As in position 1, it is the powerful recube access that makes Black considerable more inclined to take at the score, compare to money game.</p>
 <p>Let’s keep the money game variant, and play with features of the position.</p>
 <p>The ace-point slots makes all the difference in the world, because it commits White to a blitz. If we turn the slot into a builder White can both blitz or prime, and two strong game plans are much better than one. As a result Black has a moderate sized pass in the variant below.</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-19_bcf618cdbd20fe897f669160ef0b704b">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -642,12 +725,15 @@ Double/Pass:   +1,000</code></pre>
 </div>
 </div>
 <p>Also, making it a bit easier for White to jump his back checkers, turns the position into just a borderline take.</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-20_c4aeb5319ba724cfe76cc05f72ff8aaf">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -661,14 +747,18 @@ Double/Pass:   +1,000 (+0,004)</code></pre>
 </section>
 <section id="position-3" class="level3">
 <h3 class="anchored" data-anchor-id="position-3">Position 3</h3>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-21_ef05b12d79ec664742f5f0b7ae38ce03">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>White had a good start, and considered doubling, but must be mindful of the score, leading 3-away, 5-away. Is the position strong enough to double?</p>
 <p>No, doubling would be a big mistake:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-22_1f3710b0c66e09f4732868b9c0f46958">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Analyzed in XG Roller++
 No double:     +0,452
@@ -677,24 +767,27 @@ Double/Pass:   +1,000 (+0,548)</code></pre>
 </div>
 </div>
 <p>To better understand the position, consider two illustrative variants: Money game (left), and money game with White’s 2-point switched back a pip (right) so it becomes the 3-point:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-23_6d210e13dd8bb03b35103a52bcdcef2d">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-23-2.png" class="img-fluid" width="384"></p>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>Analyzed in XG Roller++
 Cubeful Equities:
 No double:     +0,619
 Double/Take:   +0,556 (-0,063)
 Double/Pass:   +1,000 (+0,381)</code></pre>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>Analyzed in XG Roller++
 Cubeful Equities:
 No double:     +0,731 (-0,011)
@@ -705,24 +798,27 @@ Double/Pass:   +1,000 (+0,258)</code></pre>
 </div>
 <p>The original is still a no-double for money, although doubling is a much smaller mistake that at the score. Shifting to a better inner point makes a clear difference; now the decision to double is really close, and White has a small double.</p>
 <p>Bringing in more ammunition <em>and</em> making the 11-point is required to turn the position into a solid double/take for money, although it would still be a clear no-double at the score:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-24_15ec20c539b2041aadc30ef7df6ab408">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid" width="384"></p>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>Analyzed in XG Roller++
 Cubeful Equities:
 No double:     +0,686
 Double/Take:   +0,581 (-0,105)
 Double/Pass:   +1,000 (+0,314)</code></pre>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>Analyzed in XG Roller++
 Cubeful Equities:
 No double:     +0,838 (-0,082)
@@ -732,24 +828,27 @@ Double/Pass:   +1,000 (+0,080)</code></pre>
 </div>
 </div>
 <p>Only if we in addition to the modifications above, <em>also</em> switch back to the much stronger 4-point, do we have a double at the score, but only just. For money, the position is now a big pass.</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-25_fea38fa63a43211e95777bf37bcf3310">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid" width="384"></p>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>Analyzed in XG Roller++
 Cubeful Equities:
 No double:     +0,847 (-0,011)
 Double/Take:   +0,859
 Double/Pass:   +1,000 (+0,141)</code></pre>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>Analyzed in XG Roller++
 Cubeful Equities:
 No double:     +0,939 (-0,061)
@@ -759,8 +858,9 @@ Double/Pass:   +1,000</code></pre>
 </div>
 </div>
 <p>Let’s compare take points at the score and for money (using outcome probabilities from the original position) to see why cube action is so different at this score than for money:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-26_9a2005771293f763e582bef4226c6d72">
+<div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -795,10 +895,12 @@ Double/Pass:   +1,000</code></pre>
 
 </div>
 </div>
+</div>
 <p>While it would actually be harder for Black to accept a double in a short race (a 4-roll position would be a pass), the ability to redouble makes all the difference.</p>
 <p>The take points are based on the below outcome probabilities from XG roller++. Note that Black has as much as 38 percent to win this game (in the original position):</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-27_61916bb1ff963ab0d3772f3211115342">
+<div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -837,26 +939,34 @@ Double/Pass:   +1,000</code></pre>
 
 </div>
 </div>
+</div>
 <p>In summary, when leading 3-away, 5-away, in a typical middle game position, the leader should have a position that is a clear money pass, to consider doubling. That potential re-cube is just too powerful to let your opponent have.</p>
 </section>
 <section id="position-4" class="level3">
 <h3 class="anchored" data-anchor-id="position-4">Position 4</h3>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-28_d211c40b430c46bd5a608e06db270580">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Here, White figured that escaping with a 6 or making the 9- or 10-point, could lead to a market loss and doubled. White failed to pay enough attention to the match score, <em>and</em> overestimated the position a bit, the combination of which made the decision to double a 0.308 blunder.</p>
 <p>The three diagrams below show left to right: a) the position for money: A borderline double at best; b) The modification required to turn it into a solid double and a solid take; c) The closest variant that would make the position only a small take for money</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-29_664f88963def839e872e585631aa68b5">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-29-2.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-29-3.png" class="img-fluid" width="384"></p>
 </div>
 </div>
@@ -864,8 +974,9 @@ Double/Pass:   +1,000</code></pre>
 <p>The market loss that White imagined was something like a 63: 22/13, which would indeed have lost White’s market – if Black was not allowed to roll. But Black gets to roll, and most rolls make some kind of improvement that allows Black to take, so true market losers are rare.</p>
 <p>But the big part of the mistake was failing to account for the match score. It’s easy to see how the ability to recube to 4 is a powerful thing for Black when trailing 7-away, 3-away. After a redouble/take, Black can win 4 points, with the added possibility of winning a gammon and the match; White can win only 3 points and can’t benefit from gammons.</p>
 <p>Let’s line up Black’s take points in a table and compare to money game:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-30_e982a8b8d9b0997947def57c971e6fda">
+<div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -900,15 +1011,19 @@ Double/Pass:   +1,000</code></pre>
 
 </div>
 </div>
+</div>
 <p>Like we saw in an earlier problem, Black can take really deep at this score and these gammon frequencies – take point all things considered is about 19%.</p>
 <p>For money White can justify a cube on a sunny day; at the match score he needs a better position.</p>
 <p>The variant that makes for a marginal money game take, for example, would still be a sizable no-double at the score:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-31_1861a10986a6b7e191619fdf32ff2197">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -921,13 +1036,17 @@ Double/Pass: +1,000 (+0,269)</code></pre>
 </section>
 <section id="position-5" class="level3">
 <h3 class="anchored" data-anchor-id="position-5">Position 5</h3>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-32_d7dfadaceb59a68fc528870ed4a5574c">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>This one is much the same theme as the previous position: White overestimated their winning chances and figured that escaping the back checker would be a clear market loss. In fact, this is a big no double:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-33_def06d94e1c04d3703a49670c7107ab3">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Analyzed in XG Roller++
 Cubeful Equities:
@@ -937,12 +1056,15 @@ Double/Pass:   +1,000 (+0,615)</code></pre>
 </div>
 </div>
 <p>The mistake is magnified by the score, but for money it is still a massive no-double:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-34_d12b49b8f9901b46098770b281e6a73e">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -953,12 +1075,15 @@ Double/Pass:   +1,000 (+0,512)</code></pre>
 </div>
 </div>
 <p>It is easy to see the mistake considering that escaping <em>and</em> having Black fan, will not even turn it into a double, much less a drop:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-35_2c9d1f2d36c05f2342dda948b8d2a0c8">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -969,12 +1094,15 @@ Double/Pass:   +1,000 (+0,253)</code></pre>
 </div>
 </div>
 <p>In fact, to make this position a close take/pass decision, White needs pretty massive improvements, like this:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-36_91ff2ee9caeb94acd21b54ca36ca1a21">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in Rollout
 Cubeful Equities:
@@ -985,12 +1113,15 @@ Double/Pass:   +1,000 (+0,011)</code></pre>
 </div>
 </div>
 <p>The weakness of White’s position comes in large part from the the gap on the 4-point. If we close that (by sliding Black’s anchor forward one pip), the the escape/fan-sequence is now a double/take. (The original position, of course, remains a no-double, even with the gap closed, since escape/fan is still not a market loss).</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-37_57bab595c9ff66c4b73c1d9c035d5dd1">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -1003,13 +1134,17 @@ Double/Pass:   +1,000 (+0,080)</code></pre>
 </section>
 <section id="position-6" class="level3">
 <h3 class="anchored" data-anchor-id="position-6">Position 6</h3>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-38_0e8e4d284049552fe8b379e0b441b616">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>In this position White underestimated an attacking position, <em>and</em> failed to take the match score into account, and so took a double that is a big pass:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-39_f52264f9e298f45a3bc8717c7c411c40">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Analyzed in XG Roller++
 Cubeful Equities:
@@ -1020,12 +1155,15 @@ Double/Pass:   +1,000</code></pre>
 </div>
 <p>The fact that White can lose a costly gammon and can almost never redouble, is what makes the error really big. Black’s gammon value after double/take is 0.57; White’s gammon value is 0.36. Should White decide to redouble, Black can pass and get to match winning chance of 0.09 or take and redouble if he is doing any better than that. So White can’t get much benefit from the cube either.</p>
 <p>But the position itself is also quite bad, a clear money pass:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-40_667c98e046a5132f71875ba0c73faec3">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -1036,12 +1174,15 @@ Double/Pass:   +1,000</code></pre>
 </div>
 </div>
 <p>Part of the problem with White’s position is the made ace-point; sliding that point back to the 3-point results in a marginal take/pass:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-41_ff77e8fc62fac79b4a98c91b4f5cd7b2">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -1052,12 +1193,15 @@ Double/Pass:   +1,000 (+0,004)</code></pre>
 </div>
 </div>
 <p>Of course, removing the annoying double shot that Black has in the outfield, also improves White’s position a lot. Clear money-take here (although still a pass at the original score):</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-42_8631bebac9190ee9cf9e93384b70e291">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -1068,12 +1212,15 @@ Double/Pass:   +1,000 (+0,121)</code></pre>
 </div>
 </div>
 <p>To turn the position into a take at 3-away, 7-away, White needs a series of improvements: A big upgrade of the ace-point into the 5-point, removing the 14-point shot, <em>and</em> placing Black’s escaped checker a little further from home:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-43_7ae8338bbba1f26cd64558380f2c0bab">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in Rollout
 Cubeful Equities:
@@ -1087,14 +1234,18 @@ Double/Pass:   +1,000 (+0,003)</code></pre>
 </section>
 <section id="position-7" class="level3">
 <h3 class="anchored" data-anchor-id="position-7">Position 7</h3>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-44_ab4ff1cde2cf1f275cca70d0c63320f8">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>This one, half backgame, half holding game, is a little unusual and can be hard to evaluate. Black is, of course, miles behind in the race and need to hit a shot to win. On the positive side, Black has a great defensive structure to generate hits. But not right away, White has no shot-leaving rolls, although there will be later. Since this is not a deep backgame, the gammon danger isn’t too great.</p>
 <p>In the actual game, White doubled and Black took. It turns out to be small no-double:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-45_80055ebf724409fbce43571f1290cd67">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Analyzed in XG Roller++
@@ -1105,12 +1256,15 @@ Double/Pass:   +1,000 (+0,294)</code></pre>
 </div>
 </div>
 <p>Let’s first confirm that this is not due to the match score: For money the no-double is actually a little bigger:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-46_b53107d6f19111898b1c9b2aa7feebbe">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -1121,12 +1275,15 @@ Double/Pass:   +1,000 (+0,304)</code></pre>
 </div>
 </div>
 <p>The market loss that White is hoping for, is something like 62. Then, on average, the market will be lost, as Black needs to roll small to secure enough timing to gain a take. But this is a very good sequence for White, and the market loss is mostly small:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-47_4096846f0980db4e63cb872d0d48c314">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 
 1. XG Roller++ 10/4 6/4     eq:+1,010
@@ -1136,12 +1293,15 @@ Opponent: 23,39% (G:1,60% B:0,05%)</code></pre>
 </div>
 </div>
 <p>White’s big issue is the 4-point gap. If we shift back the 2-point checkers to the 4-point, it’s a whole other story; White is now borderline <em>too good</em> to double:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-48_01bca19bc288f818e7f4cd06856110e9">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 
 Analyzed in XG Roller++
@@ -1153,12 +1313,15 @@ Double/Pass:   +1,000 (-0,001)</code></pre>
 </div>
 </div>
 <p>Timing is another big issue; we can give Black back a take, even with the 4-point-modification, if also move White forward, improving Black’s timing:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-49_eaf170c9ba1a7eb35adc598d78d25046">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 
 Analyzed in XG Roller++
@@ -1170,12 +1333,15 @@ Double/Pass:   +1,000 (+0,023)</code></pre>
 </div>
 </div>
 <p>Another timing experiment: If we in the original position (money game variant) move Black’s spare back 14 pips, his position gets stronger so it becomes even more of a no-double. Note that Black is now also somewhat blocked and risk crunching, but the timing benefit outweigh this:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-50_122353dc344e97cdcb92313c2e708145">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 
 Analyzed in XG Roller++
@@ -1187,12 +1353,15 @@ Double/Pass:   +1,000 (+0,408)</code></pre>
 </div>
 </div>
 <p>Interestingly, clearing White’s 10-point is <em>not</em> a big issue: If we clear the point in a very smooth way with lot’s of new spares, White’s position gets <em>worse</em>, not better, because Black’s timing also improves in the process, and because White now has shot-leaving 3’s, 31, 35, 36, and in general awkward 5’s, in particular 54 and 55.</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-51_dc6614db2b54043d1ed1a5cd6d21c42a">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 
 Analyzed in XG Roller++
@@ -1206,14 +1375,18 @@ Double/Pass:   +1,000 (+0,431)</code></pre>
 </section>
 <section id="position-8" class="level3">
 <h3 class="anchored" data-anchor-id="position-8">Position 8</h3>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-52_51e6253b6964354b7b714b8c34a5bf80">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-52-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-52-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>This one is from the same match and somewhat related to the previous position, but a more pure holding game. White has a big, but not decicive, 15-pips lead in the race. White’s game is much improved compared to a standard holding game by the made 7-point, but the gap on the 5-point works the opposite direction, and to some extent cancels out that benefit.</p>
 <p>In the game White doubled, which is a significant mistake:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-53_fd107d4008131c1c23ebcd3e3cb5dc80">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Analyzed in XG Roller++
 Cubeful Equities:
@@ -1223,12 +1396,15 @@ Double/Pass:   +1,000 (+0,339)</code></pre>
 </div>
 </div>
 <p>As is often the case, the mistake is due to a combination of mis-evaluating the score, <em>and</em> the position. For money, it is still a no-double, but the mistake is smaller:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-54_a24d33797cc2e5ae7dd4a31e0a89d4ec">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 Analyzed in XG Roller++
 Cubeful Equities:
@@ -1249,8 +1425,9 @@ Moves: 3-ply, cube: XG Roller</code></pre>
 <p>The above analysis includes a full rollout to make sure the truncated XG roller++ is not off. The difference is small.</p>
 <p>It’s not hard to see that White, leading 3-away, 5-away, should be careful about doubling because a potential recube is powerful. On the other hand, the position has few gammons, and Black may have less recube vig than normal, as is often the case in holding games, where you go from no-double to huge pass after hitting a shot. So let’s examine a bit more.</p>
 <p>The outcome probabilities, based on XG roller++, is as follows:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-55_c2924e6e50a32a32dfcac1852d881b6f">
+<div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -1289,9 +1466,11 @@ Moves: 3-ply, cube: XG Roller</code></pre>
 
 </div>
 </div>
+</div>
 <p>Which yield the following take points, for money and at the score, under different assumptions. (Since gammons and backgammons are so few, it matters little if they are taken into account.)</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-56_59f0104def95acb58cdbc848bd085510">
+<div class="cell">
 <div class="cell-output-display">
+<div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -1326,16 +1505,20 @@ Moves: 3-ply, cube: XG Roller</code></pre>
 
 </div>
 </div>
+</div>
 <p>We see that the trailer has a rather high take point, but also a lot of cube levarage, so that the final take point, taking everything into account, is very similar to money game, for this close to gammonless position.</p>
 <p>So, the reason why doubling is a bigger mistake at the match score compared to money, is not that Black as much easier take. It is because there is more equity at stake, so close to the end of the match.</p>
 <p>Back to the position itself, in the money game variant.</p>
 <p>The 5-point-gap is enough of an asset for Black, that if we remove it, White now has s small money-double, even though the race lead is two pips smaller:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-57_ff649e83bbdde6907f12419ca986faf7">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 
 Analyzed in XG Roller++
@@ -1347,12 +1530,15 @@ Double/Pass:   +1,000 (+0,286)</code></pre>
 </div>
 </div>
 <p>The racing equity is a big part of the story; if we give Black another 9 pip the we go from a huge take to a small pass:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-58_69417c3a4f736dd90a6ae5662633be02">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-58-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 
 Analyzed in XG Roller++
@@ -1364,12 +1550,15 @@ Double/Pass:   +1,000</code></pre>
 </div>
 </div>
 <p>A combination of the two: Keeping the increased racing deficit but getting back the 5-point-gap, and we’re back to a very small double. It looks like the 5-point gap just about makes it up for trailing an extra 9-pips:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-59_661842dbe5c842a2973235032d41a2f9">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 
 Analyzed in XG Roller++
@@ -1383,16 +1572,20 @@ Double/Pass:   +1,000 (+0,181)</code></pre>
 </section>
 <section id="position-9" class="level3">
 <h3 class="anchored" data-anchor-id="position-9">Position 9</h3>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-60_08f318783f7105b101103b66eb0cdc90">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>This position is interesting because both players made a huge error: White by doubling, Black by passing.</p>
 <p>It’s easy to see that White has a ton of shots (27 rolls hit somewhere), and that Blacks position is badly underdeveloped.</p>
 <p>It is perhaps less easy to realize that White’s position overall is not all that strong: He is behind in the race, on the bar, and short on attack material. He has 9 bad sixes that doesn’t hit anything, after which Black has at least an even position.</p>
 <p>Bottom line is big no double/take:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-61_b0aa4ea8a1e8e83c0c0655439a6d8b08">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Analyzed in XG Roller++
 Player Winning Chances:   56,23% (G:20,52% B:1,00%)
@@ -1404,12 +1597,15 @@ Double/Pass:   +1,000 (+0,625)</code></pre>
 </div>
 </div>
 <p>White being on the bar is a really big deal: If we move that checker to the 15-point, White no longer has the 9 bad sixes, and the race is closer. Result is a smallish double, and a clear take for Black:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-62_5465a6d4cc6968b81bfd6fab6b5242f6">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
  Analyzed in XG Roller++
 Cubeful Equities:
@@ -1420,12 +1616,15 @@ Double/Pass:   +1,000 (+0,276)</code></pre>
 </div>
 </div>
 <p>If we move the same checker just another 4 pips forward, White now has a double shot on the vulnerable Black checker on the 8-point and more ammunition closer to the key 4-point. It now becomes a strong double, and a borderline pass:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-63_e5df1649aab0b02de887f0155d37f4df">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-63-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
  Analyzed in XG Roller++
 Cubeful Equities:
@@ -1438,9 +1637,13 @@ Double/Pass:   +1,000</code></pre>
 </section>
 <section id="position-10" class="level3">
 <h3 class="anchored" data-anchor-id="position-10">Position 10</h3>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-64_84af1d7ebbc430735878e5fc2eaa9013">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>A straight race, a rare 8-cube. If you know that White has about 24% match winning chances if he passes and trails 3-away, 7-away, it is easy to see that this is also the take point at this score and this cube value.</p>
@@ -1449,7 +1652,7 @@ Double/Pass:   +1,000</code></pre>
 <p>Checking the numbers, we see that the difference between winning and losing with the cube at 4 would be <span class="math inline">\(0.762 - 0.238 = 0.524\)</span>, and the difference between winning and losing with the cube at 8 would be <span class="math inline">\(1-0=1\)</span>. So the stake doesn’t quite double at this score and this cube level, but almost, hence the slightly lower take point.</p>
 <p>In the position, White trails by two pips, so the take should be clear. The double is also okay, Black <em>is</em> a clear favorite, he is not giving away anything since the cube will be dead, and short races like this are always volatile.</p>
 <p>The XG-numbers:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-66_8684d259ab4c926ecf39fbd261d15611">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Analyzed in Rollout
 No redouble
@@ -1468,15 +1671,19 @@ Redouble/Pass:   +1,000 (+0,297)</code></pre>
 </section>
 <section id="position-11" class="level3">
 <h3 class="anchored" data-anchor-id="position-11">Position 11</h3>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-67_80436a19d59683e8c9c3cbb35bb9d9a1">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-67-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-67-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>It’s tempting to take this cube as White. There’s a lot of contact left, and White has a 3-point board, just like Black, as well as racing chances. Still, the take is quite wrong.</p>
 <p>White is likely to be hit next turn, and must hope to hit back in order to win. Whites big weakness is the two inner board blots; they make the potential return hits a double edged sword.</p>
 <p>As we see, the result of having those blots is a devastating number of gammons lost, making the position a clear pass:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-68_a5cf8c5731fd15c84fc2ac49c2e29071">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Analyzed in XG Roller+
 Player Winning Chances:   69,58% (G:37,05% B:1,66%)
@@ -1489,12 +1696,15 @@ Double/Pass:   +1,000</code></pre>
 </div>
 </div>
 <p>Naturally, it is a whole other story if we remove just one of the blots and turn it into a builder. From a big pass to a close take:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-69_049c7a631e85b06db623a161107e8aec">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-69-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>Analyzed in XG Roller++
 Cubeful Equities:
 No double:     +0,757 (-0,210)
@@ -1504,12 +1714,15 @@ Double/Pass:   +1,000 (+0,034)</code></pre>
 </div>
 </div>
 <p>If we improve further, by giving White a powerful board, the position is not even a double:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-70_845effb2b148e881c6b96e99fd72eb1e">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-70-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>Analyzed in XG Roller++
 Cubeful Equities:
 No double:     +0,528
@@ -1524,9 +1737,13 @@ Double/Pass:   +1,000 (+0,472)</code></pre>
 <h2 class="anchored" data-anchor-id="checker-plays">Checker plays</h2>
 <section id="position-1-1" class="level3">
 <h3 class="anchored" data-anchor-id="position-1-1">Position 1</h3>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-71_60a842c469fd88cbaf236c92adc7572f">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-71-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-71-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Here, White has four reasonable options:</p>
@@ -1540,7 +1757,7 @@ Double/Pass:   +1,000 (+0,472)</code></pre>
 <p>11/6, 11/9 also breaks the 11-point, but is more compact. It adds 63 to build the 3-point, slots the 9-point which could be useful, and only leaves 44 as an extra shot (a joker anyway).</p>
 <p>13/11, 13/8, clearing the midpoint, puts full emphasis on White’s all-important 5-point, leaves no shot, and makes it more dangerous for Black to split with a roll like 42.</p>
 <p>The interesting part is not that XG picks 13/11, 13/8, but the <em>magnitude</em> of the mistake is remarkable; anything but breaking the midpoint is a blunder:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-72_2002b78457793e9999814e48683e4449">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>XG Roller++ 
 1. 13/11 13/8           eq:+0,026
@@ -1558,40 +1775,46 @@ Double/Pass:   +1,000 (+0,472)</code></pre>
 </section>
 <section id="positions-2a-2e" class="level3">
 <h3 class="anchored" data-anchor-id="positions-2a-2e">Positions 2a-2e</h3>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-73_9eb31d6f5592efa879b2853475564c29">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-73-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-73-2.png" class="img-fluid" width="384"></p>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-73-3.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-73-4.png" class="img-fluid" width="384"></p>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-73-5.png" class="img-fluid" width="384"></p>
 </div>
 </div>
 </div>
 <p>These five positions share a common theme: The right play is hard to find for those of us who learned, back in the day, that the one thing you must never do in backgammon, is to make the ace-point.</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-74_c95dcc8c5582a6ef153d5830d2c468f4">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>Position 2a
 XG Roller++ 
 1. 5/1* 3/1     eq:+0,266
 2. 8/6 5/1*     eq:+0,215 (-0,051)
 3. 7/1*         eq:+0,204 (-0,062)</code></pre>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>Position 2b
 XG Roller++ 
 1. 6/1* 2/1     eq:-0,324
@@ -1599,14 +1822,14 @@ XG Roller++
 3. 24/23 6/1*   eq:-0,413 (-0,089)</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>Position 2c
 XG Roller++ 
 1. 8/6 2/1      eq:+0,178
 2. 8/5          eq:+0,130 (-0,048)</code></pre>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>Position 2d
 XG Roller++ 
 1. 6/1          eq:+0,767
@@ -1614,8 +1837,8 @@ XG Roller++
 3. 9/5 6/5      eq:+0,723 (-0,044)</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>Position 2e
 XG Roller++ 
 1. 24/23 16/15* 3/2* 2/1    eq:+0,909
@@ -1634,15 +1857,19 @@ XG Roller++
 </section>
 <section id="position-3-1" class="level3">
 <h3 class="anchored" data-anchor-id="position-3-1">Position 3</h3>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-75_c45e28930fdec5ed9bad5c5d412f6330">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-75-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-75-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>This is a technical play, where it is tempting to assume that all reasonable plays are close. Actually, they are not so close.</p>
 <p>Obviously the play is all about getting off the gammon. Over the board, White played 19/9, thinking that it hardly mattered, as long as he made crossovers and avoided wastage by playing past the 6-point.</p>
 <p>The gammon race is close. The probabilities that White will lose a gammon after the five best plays, are listed below.</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-76_83b52d5de8de8a8b86fa5d8820ff2a7c">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>1. 13/7 10/6    53.93% 
 2. 19/13 10/6   55.07%
@@ -1661,9 +1888,13 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 </section>
 <section id="position-4-1" class="level3">
 <h3 class="anchored" data-anchor-id="position-4-1">Position 4</h3>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-77_9cda3fafabeaefb2f5e777297d805d47">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-77-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-77-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>This one is from the same game as position 3, but Black has rolled well, so White is now a big favorite to get gammoned. The 31 White has to play is a little funny, because the correct play seem to violate basic principles for getting off the gammon: Make crossovers; don’t waste pips.</p>
@@ -1672,7 +1903,7 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 <p>It’s true, that if White makes two crossovers now, with 13/12 8/5, he only needs to generate three crossovers from a future double. But 11 fails to do even that, so it loses a tiny bit there.</p>
 <p>The other two-crossover play, played in the actual game, is 20/17 13/12 which also fails on 11, and plays worse on 55 and 44 as well.</p>
 <p>The probabilities of losing a gammon after the 7 best plays are:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-78_7db4c674d38f2fba596968249bc1f30f">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>1. 8/7 8/5      89,63% 
 2. 13/12 8/5    89,78% 
@@ -1688,16 +1919,20 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 </section>
 <section id="position-5-1" class="level3">
 <h3 class="anchored" data-anchor-id="position-5-1">Position 5</h3>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-79_722788a033dab05f0e498ff2c9df8059">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-79-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-79-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>This is a tough play. White has two reasonable but very different plays: Hitting with 24/18*/14, or priming with 13/7 11/7.</p>
 <p>Hitting has big upsides and big downsides. Black hits back on fully 18 rolls, but also has some bad rolls, 4 dancing rolls, and an additional 8 bad sixes. Some hitting rolls, like 51, aren’t too happy either.</p>
 <p>Priming could work, since White is behind in the race. It leaves Black a few immediate horror rolls, 55 and 44, but also some pretty strong hitting aces.</p>
 <p>In the end, priming comes out slightly better:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-80_585ff5d22a663582da7aab47aa92d08f">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>1. 13/7 11/7          eq:+0,417
 2. 24/18* 18/14       eq:+0,401 (-0,016)
@@ -1705,22 +1940,25 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 </div>
 </div>
 <p>Let’s have a look at the money game variant, together with a very minimal one-pip modification:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-81_6171946d8beab705296fa2a26efc4c7e">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-81-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-81-2.png" class="img-fluid" width="384"></p>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>XG Roller++ 
 1. 13/7 11/7          eq:+0,413
 2. 24/18* 18/14       eq:+0,405 (-0,008)</code></pre>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>XG Roller++ 
 1. 24/18* 18/14       eq:+0,367
 2. 13/7 11/7          eq:+0,343 (-0,024)</code></pre>
@@ -1735,12 +1973,15 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 <p>Bottom line is that Black is better set-up for priming in the right-hand position, so White should chose another gameplan.</p>
 <p>Small differences often are not so small.</p>
 <p>Let’s do one more exercise with this position, and look at how a few analogous problems evaluate:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-82_5447c0906114425323fa29d570b0626c">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-82-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 XG Roller++ 
 1. 13/7 8/7           eq:+0,394
@@ -1749,11 +1990,11 @@ XG Roller++
 4. 24/18* 11/10       eq:+0,314 (-0,080)</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-82-2.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 XG Roller++ 
 1. 13/7 9/7           eq:+0,411
@@ -1761,11 +2002,11 @@ XG Roller++
 3. 9/3 5/3            eq:+0,290 (-0,121)</code></pre>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-82-3.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 XG Roller++ 
 1. 24/21 24/18*       eq:+0,427
@@ -1779,15 +2020,19 @@ XG Roller++
 </section>
 <section id="position-6-1" class="level3">
 <h3 class="anchored" data-anchor-id="position-6-1">Position 6</h3>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-83_e09cda5c60aefe47ec79711eea2a5a30">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-83-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-83-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>A technical play that White got wrong, by a surprising amount. White wanted to stay back, making it harder for Black to play safe, taking advantage of a stronger home board. The play made was 8/4 5/2, maintaing contact, trying to improve the home board fast.</p>
 <p>The key is, that White is ahead in the race, not behind, and would like to release the back checker to steer into a more race-like position.</p>
 <p>Any good play involves 22/18 with the 4:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-84_4daeac6e04361007ce97282fd5d9a831">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>XG Roller++
 1. 22/18 5/2      eq:-0,274
@@ -1802,12 +2047,15 @@ XG Roller++
 <p>After the actual 8/4 5/2, Black’s worst roll is 51, played 8/2, voluntarily leaving only 4 indirect shots. The point is that the supposedly contact-maintaining play generates a lot fewer immediate shots than the contact-breaking play.</p>
 <p>22/18 5/2 is so much better than 8/4 5/2 because it is better <em>both</em> for the race and for the hits.</p>
 <p>In this variant, where White is behind in the race, 22/18 is still correct, although not by such a big margin, since it doesn’t have the added racing benefits:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-85_40d0694f70e8f8293e082a292b22e680">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-85-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 XG Roller++
 1. 22/18 11/8        eq:-0,598
@@ -1821,15 +2069,19 @@ XG Roller++
 </section>
 <section id="position-7-1" class="level3">
 <h3 class="anchored" data-anchor-id="position-7-1">Position 7</h3>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-86_6fee77e6d3444d155136bbc49a7e281c">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-86-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-86-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>This one is a little tricky: On White’s side of the board, White clearly has a priming position, so the indicated game plan would be to extend that prime. 13/7 13/9 is good for that, adding builders for both the 3-point and the 8-point.</p>
 <p>On the the other side of the board, things are not so clear. Black’s position could be either for blitzing (three disjointed inside points) or for priming. If Black’s position is considered more of a prime, that would be a motivation for White to jump the prime, if considered a blitz, White would be more inclined to keep the anchor.</p>
 <p>One way to think about it: White’s side of the board calls for a priming play, Black’s side of the board is more ambiguous. So on balance, probably priming is better. Indeed, the nod goes to the priming play, 13/9 13/7, with the top three plays being reasonably close.</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-87_17b2ae14ad28e599600cee965609f552">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>XG Roller++ 
 1. 13/9 13/7        eq:+0,379
@@ -1841,12 +2093,15 @@ XG Roller++
 </div>
 <p>It’s not too surprising that the 24/20 split is better than the 24/18 split, since the former tries for the better anchor, and gets more return shots if hit.</p>
 <p>As always, let’s check if the play is affected by some match score related artifact. It is not:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-88_e6724a787baa8126dcf83dc419b7908e">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-88-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 XG Roller++
 1. 13/9 13/7        eq:+0,311
@@ -1859,12 +2114,15 @@ XG Roller++
 </div>
 <p>Let’s play with the money game variant, and see how the preferred play changes, when we modify the position.</p>
 <p>First, if we move one Black checker 13/8, Black has one more checker in the zone. The 8-point is not part of his prime, so overall Black’s position gets more blitz-like. In that light, it is not surprising that the priming plays stands out a little more. The strongest alternative is now running, 24/10, because any split is more dangerous in a blitz-like situation.</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-89_eea8e8f6e4ebe915a9f3265691e4b535">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-89-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 XG Roller++
 1. 13/9 13/7        eq:+0,266
@@ -1875,12 +2133,15 @@ XG Roller++
 </div>
 </div>
 <p>Likewise if we modify Black with 13/6, the position is now even more blitz-like, increasing also the threat on a potential white plot on Black’s ace-point. The priming option is now clearly better.</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-90_8646ab15a52993e292b1338dbeec5d29">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-90-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 XG Roller++
 1. 13/9 13/7        eq:+0,310
@@ -1891,12 +2152,15 @@ XG Roller++
 </div>
 </div>
 <p>Next, suppose White has a 63 to play instead of 64. Now the strongest split, 24/20, is not available, so again priming stands out more clearly, even though the checker on the 10-point is not a builder for the 3-point. (On the positive side, it doesn’t leave a joker fly-shot either.) Running, 24/15, is now <em>not</em> a contender, because it leaves more shots, and is not as useful as the corresponding 64: 24/14 when missed.</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-91_acc8b061b607715d5bfd58de58f9b3f4">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-91-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 XG Roller++
 1. 13/10 13/7       eq:+0,304
@@ -1907,12 +2171,15 @@ XG Roller++
 </div>
 </div>
 <p>With 62 White now has the option of splitting with 24/22, which is as good as priming, while the running play is much worse, as expected.</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-92_0f1e04176f49cded8d095353344a890f">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-92-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 XG Roller++
 1. 13/11 13/7       eq:+0,315
@@ -1924,12 +2191,15 @@ XG Roller++
 </div>
 </div>
 <p>If White had a 45 to play, priming stands out, since it directly slots the 8-point <em>and</em> the 9-point, threatening to make a full prime next turn. Well worth the price of 6 fly-shots.</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-93_817f361e104b76f087ab616ee17d1067">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-93-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 XG Roller++
 1. 13/9 13/8        eq:+0,351
@@ -1940,12 +2210,15 @@ XG Roller++
 </div>
 </div>
 <p>If we make Black’s position <em>less</em> blitz-like, by moving the 6-point spare back to the 8-point, <em>now</em> splitting is correct.</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-94_b111e5821860f1a5ccc8f3eb5e852f19">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-94-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 XG Roller++
 1. 24/20 13/7       eq:+0,331
@@ -1957,12 +2230,15 @@ XG Roller++
 </div>
 </div>
 <p>Also, if Black’s back checkers are split, it’s getting harder and more dangerous for White to extend his prime from the rear, so again splitting is slightly best.</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-95_fdfbb87f372184d9552491832202e541">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-95-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 XG Roller++
 1. 24/20 13/7       eq:+0,173
@@ -1974,12 +2250,15 @@ XG Roller++
 </div>
 </div>
 <p>Finally, if we move Black’s 8-point blot back to his 13-point, splitting is safer, and is now clearly correct. It is now more of a prime vs.&nbsp;prime situation, and the way to play those, is to either extend your own prime or jump the opponent’s prime, depending on the dice roll. Here, White can potentially completely nullify Black’s prime if the attempt for an advanced anchor works. In the light of that opportunity, extending White’s own prime can wait.</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-96_99ae0f60097e3322f5f298c9a25ba67c">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-96-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
 XG Roller++
 1. 24/20 13/7       eq:+0,430
@@ -1993,15 +2272,19 @@ XG Roller++
 </section>
 <section id="position-8-1" class="level3">
 <h3 class="anchored" data-anchor-id="position-8-1">Position 8</h3>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-97_669a4329af5a649068964e06294d3474">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="milestones-2023_files/figure-html/unnamed-chunk-97-1.png" class="img-fluid" width="384"></p>
+<div>
+<figure class="figure">
+<p><img src="milestones-2023_files/figure-html/unnamed-chunk-97-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Here’s a technical play that caused White some trouble. White’s thoughts over the board where something like this: “A hit is fatal, and since outfield control is decent already, there’s no pressing need to leave any indirect shot, so the play is 7/4 7/2. Ugly, but safe.”</p>
 <p>What’s missing is the fact that White is behind in the race, not ahead. In fact, the game is just about equal, so it is quite important to hit Black when he is forced off the anchor, and it is important not to leave too many return shots when that happens.</p>
 <p>The best plays are:</p>
-<div class="cell" data-hash="milestones-2023_cache/html/unnamed-chunk-98_3cc6950f0afa2d79d64f24a4ed007f10">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>XG Roller++
 1. 18/13 6/3        eq:+0,025
@@ -2018,12 +2301,15 @@ XG Roller++
 </section>
 <section id="positions-9a-9b" class="level3">
 <h3 class="anchored" data-anchor-id="positions-9a-9b">Positions 9a-9b</h3>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-99_e67a4b086deca8fe2a3a97f0fe1e62ca">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-99-1.png" class="img-fluid" width="384"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="milestones-2023_files/figure-html/unnamed-chunk-99-2.png" class="img-fluid" width="384"></p>
 </div>
 </div>
@@ -2038,9 +2324,12 @@ XG Roller++
 <p>The <em>second</em> position, a roll later, looks similar but really isn’t. This time White slotted with 10/5 6/4, recognizing that that the risk isn’t that great. 10/5 is correct, but the right two is now 24/22.</p>
 <p>The key is to see that slotting the 4-point is not the same as making it. Black would like to split to the 21-point, and if he can do so while hitting, that’s much stronger. Rolls like 53 or 32 play the same way after the actual slotting play and after the better and quieter 10/5 24/22. 53 goes 24/16 and 32 plays 24/21 8/6 either way – but hitting at the same time if White slots, which is much stronger.</p>
 <p>The truncated rollouts for the two positions:</p>
-<div class="cell quarto-layout-panel" data-hash="milestones-2023_cache/html/unnamed-chunk-100_38e4b7dd18dd7544a41c04a7310d586c">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>White to play 32:
 1. 7/4 6/4       eq:+0,615
 2. 13/11 13/10   eq:+0,510 (-0,105)
@@ -2048,7 +2337,7 @@ XG Roller++
 4. 24/21 13/11   eq:+0,496 (-0,119)
 5. 24/22 13/10   eq:+0,477 (-0,138)</code></pre>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>White to play 52:
 1. 24/22 10/5   eq:+0,553
 2. 11/9 10/5    eq:+0,507 (-0,046)
@@ -2154,10 +2443,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/lassehjorthmadsen\.github\.io\/bganalyses\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -2167,8 +2473,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -2180,7 +2495,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -2224,6 +2662,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -2249,6 +2688,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -2309,6 +2774,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 
