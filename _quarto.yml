@@ -21,6 +21,7 @@ website:
         - analyses/opening-mistakes.qmd
         - analyses/middle-game-cubes.qmd
         - analyses/hit-or-point.qmd
+        - analyses/5-point-match.qmd
 
     search: true
       

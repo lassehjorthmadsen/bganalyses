@@ -1,0 +1,530 @@
+---
+title: "The five point match"
+author: "Lasse Hjorth Madsen"
+date: today 
+format: 
+  html:
+    fig-width: 4
+    fig-height: 4
+toc: true
+toc-expand: true
+toc-depth: 3
+editor: source
+execute:
+  echo: false
+  warning: false
+  cache: true
+---
+
+```{r setup}
+#| cache: false
+library(tidyverse)
+library(kableExtra)
+library(ggrepel)
+
+devtools::load_all(path = "../../bglab")
+
+met <- get_met()
+
+met3 <- round(met, 3)
+theme_set(
+  theme_minimal() +
+  theme(
+    axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0)),
+    axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)),
+    panel.grid.major.y = element_blank()
+    )
+  )
+```
+
+```{r helpers}
+remove_stuff <- function(text, leading_breaks = 4) {
+  text |>
+    read_lines() |>
+    str_remove("^ {1,6}") |>
+    str_remove("Confidence.+") |>
+    str_remove("Duration.+") |>
+    str_remove("Rollout¹    ") |> 
+    str_replace_all("        ", "  ") |> 
+    paste(collapse = "\n") |>  
+    str_replace_all("\n\n", "\n") |> 
+    cat(rep("\n", leading_breaks), ... = _, sep = "")
+}
+
+compare_tps <- function(x1, y1, cube1, tps, tpsm) {
+  caption <- paste0("Estimated live cube take points at ", x1, "-away, ", y1, "-away")
+  
+  nice_table <- tps |> 
+    filter(x == x1, y == y1, cube == cube1) |> 
+    arrange(pos_type) |> 
+    left_join(select(tpsm, pos_type, `Take point, money` = tp_real), by = "pos_type") |> 
+    select(`Position type` = pos_type, 
+           `Take point, match` = tp_real2, 
+           `Take point, money`) |> 
+    mutate(Difference = `Take point, match` - `Take point, money`) |> 
+    kable(format = "html", digits = 3, caption = caption) 
+  
+  return(nice_table)
+}
+
+```
+
+## Why this?
+
+This is walk-through of all scores in a five point match. We examine how take points and cube dynamic varies across scores, with sample positions to illustrate differences.
+
+## Positions types
+
+To show differences due to gammons, we consider five different types of positions:
+
+- Last roll: Truly last roll, not even automatic recubes
+- No gammons: Zero gammon but possibly cube leverage
+- A little gammon: Early middle games with anchors
+- Some gammons: No-anchor middle games
+- Many gammons: Blitzes and back games
+
+What do the different gammon situations look like? Below are the examples we will use for examination here, along with money game rollouts.
+
+```{r pos1}
+#| column: page-right
+#| layout-ncol: 2
+
+ggboard("XGID=------A-----------------a-:0:0:1:00:0:0:0:0:10") +
+  labs(title = "Position 1: Last roll, marginal money take",
+       subtitle = "Black wins 25.0%")
+
+"Player Winning Chances:   75,00% (G:0,00% B:0,00%)
+  Opponent Winning Chances: 25,00% (G:0,00% B:0,00%)
+
+Cubeless Equities: No Double=+0,500, Double=+1,000
+
+Cubeful Equities:
+       No double:     +0,500 (-0,500)
+       Double/Take:   +1,000
+       Double/Pass:   +1,000
+
+Best Cube action: Double / Take" |>  
+  remove_stuff() |>
+  cat()
+```
+
+```{r pos2}
+#| column: page-right
+#| layout-ncol: 2
+
+ggboard("XGID=-ABBBCB-AA-A-aaaa--bbbbab-:0:0:1:00:0:0:0:0:10") +
+  labs(title = "Position 2: No gammons, small money take",
+       subtitle = "Black wins 22.1%")
+
+" Player Winning Chances:   77,93% (G:0,00% B:0,00%)
+  Opponent Winning Chances: 22,07% (G:0,00% B:0,00%)
+
+Cubeless Equities: No Double=+0,559, Double=+1,117
+
+Cubeful Equities:
+       No double:     +0,838 (-0,144)
+       Double/Take:   +0,983
+       Double/Pass:   +1,000 (+0,017)
+
+Best Cube action: Double / Take" |>  
+  remove_stuff() |>
+  cat()
+```
+
+```{r pos3}
+#| column: page-right
+#| layout-ncol: 2
+
+ggboard("XGID=--b-B-DBB---eC---cBd---a--:0:0:1:00:0:0:0:0:10") +
+  labs(title = "Position 3: A little gammon, small money take",
+       subtitle = "Black wins 26.4%")
+
+"  Player Winning Chances:   73,58% (G:14,79% B:0,70%)
+  Opponent Winning Chances: 26,42% (G:4,53% B:0,16%)
+
+Cubeless Equities: No Double=+0,581, Double=+1,159
+
+Cubeful Equities:
+       No double:     +0,923 (-0,052)
+       Double/Take:   +0,975
+       Double/Pass:   +1,000 (+0,025)
+
+Best Cube action: Double / Take" |>  
+  remove_stuff() |>
+  cat()
+```
+
+```{r pos4}
+#| column: page-right
+#| layout-ncol: 2
+
+ggboard("XGID=-aa-B-CBC---cD-b-c-e----A-:0:0:1:00:0:0:0:0:10") +
+  labs(title = "Position 4: Some gammons, small money take",
+       subtitle = "Black wins 29.2%")
+
+"  Player Winning Chances:   70,79% (G:23,06% B:1,12%)
+  Opponent Winning Chances: 29,21% (G:6,10% B:0,23%)
+
+Cubeless Equities: No Double=+0,588, Double=+1,189
+
+Cubeful Equities:
+       No double:     +0,871 (-0,101)
+       Double/Take:   +0,972
+       Double/Pass:   +1,000 (+0,028)
+
+Best Cube action: Double / Take" |>  
+  remove_stuff() |>
+  cat()
+```
+
+```{r pos5}
+#| column: page-right
+#| layout-ncol: 2
+
+ggboard("XGID=b---C-CBB---dC---c-cc-B---:0:0:1:00:0:0:0:0:10") +
+  labs(title = "Position 5: Many gammons, small money take",
+       subtitle = "Black wins 32.8%")
+
+
+"  Player Winning Chances:   67,23% (G:35,78% B:0,95%)
+  Opponent Winning Chances: 32,77% (G:7,68% B:0,40%)
+
+Cubeless Equities: No Double=+0,616, Double=+1,262
+
+Cubeful Equities:
+       No double:     +0,843 (-0,152)
+       Double/Take:   +0,995
+       Double/Pass:   +1,000 (+0,005)
+
+Best Cube action: Double / Take
+" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+We'll use these as examples to consider how the score influences take points in a five-point match.
+
+## Overview
+
+First, a high level overview of the scores we see in five-point matches.
+
+### Match equity table
+
+For convenience, here's the default match equity table used by XG, for five-point matches, rounded to three decimal points:
+
+
+```{r}
+met3[1:5, 1:5]
+```
+
+### Take point plots
+
+Plotting take points under different situations, might help to build an intuition of the cube dynamics in the five-point match. We first calculate take point assuming the player will never redouble (except for automatic redoubles when we have nothing to lose). This is to see the effect of the score and gammons, for now ignoring the cube.
+
+```{r takepoints}
+probs1 <- outcome_probs(c(25.00, 0.00, 0.00, 75.00,  0.00, 0.00)) / 100
+probs2 <- outcome_probs(c(22.07, 0.00, 0.00, 77.93,  0.00, 0.00)) / 100
+probs3 <- outcome_probs(c(26.42, 4.53, 0.16, 73.58, 14.79, 0.70)) / 100
+probs4 <- outcome_probs(c(29.21, 6.10, 0.23, 70.79, 23.06, 1.12)) / 100
+probs5 <- outcome_probs(c(32.77, 7.68, 0.40, 67.23, 35.78, 0.95)) / 100
+
+probs <- list(probs1, probs2, probs3, probs4, probs5)
+pos_types <- c("Last roll", "Race", "A little gammon", "Some gammons", "Many gammons")
+
+tps <- expand_grid(x = 2:5, y = 2:5, cube = c(1, 2, 4), probs = probs) |>  
+  mutate(pos_type = fct(rep(pos_types, 48), levels = pos_types),
+         cube_eff = if_else(pos_type == "Last roll", 0, 2/3),
+         last_roll = pos_type == "Last roll") |> 
+  rowwise() |>  
+  mutate(tp_dead  = tp_gammons(x, y, probs, cube, met, last_roll),
+         tp_real  = tp_info(x, y, probs, cube, met, cube_eff)["tp_real"],
+         tp_live  = tp_xg(x, y, probs, cube, met)["tp_live"],
+         tp_real2 = cube_eff * tp_live + (1 - cube_eff) * tp_dead,
+         mwc_pass = mwc(x, y - cube, met),
+         mwc_take = probs[1] * mwc(x - 2 * cube, y, met) +
+                    probs[2] * mwc(x - 4 * cube, y, met) +
+                    probs[3] * mwc(x - 6 * cube, y, met) +
+                    probs[4] * mwc(x, y - 2 * cube, met) +
+                    probs[5] * mwc(x, y - 4 * cube, met) +
+                    probs[6] * mwc(x, y - 6 * cube, met),
+         emg_pass = emg(mwc_pass, x, y, cube, met),
+         emg_take = emg(mwc_take, x, y, cube, met),
+         take_marg= emg_take - emg_pass
+         ) |>  
+  ungroup() |>  
+  filter(tp_dead > 0, cube < x) |>  
+  mutate(score_label = paste0("-", x, ",-", y)) |>   
+  arrange(-tp_dead) 
+
+tpsm <- 
+  tibble(probs = probs, 
+         pos_type = pos_types,
+         eq_roll = c(1.0, 0.983, 0.975, 0.972, 0.995)) |> 
+  mutate(cube_eff = if_else(pos_type == "Last roll", 0, 2/3)) |> 
+  rowwise() |> 
+  mutate(tp_dead = tp_money(probs, cube_eff = 0),
+         tp_real = tp_money(probs, cube_eff = cube_eff),
+         eq_dead = 2 * eq_money(probs, 1, sum(probs[1:3]), cube_eff = 0),
+         eq_real = 2 * eq_money(probs, 1, sum(probs[1:3]))) |> 
+  ungroup()
+```
+
+```{r plot1}
+#| fig-width: 7
+#| fig-height: 5
+score_order <- tps |> 
+  filter(cube == 1, pos_type == "Race") |> 
+  arrange(-tp_dead) |> 
+  pull(score_label)
+
+money_reflines <- tpsm |> filter(pos_type != "Last roll")
+
+top <- 3
+
+plot_data <- tps |> 
+  filter(cube == 1, pos_type != "Last roll") |> 
+  select(x, y, cube, pos_type, tp_dead, score_label) |> 
+  group_by(pos_type) |> 
+  mutate(rank = rank(tp_dead, ties.method = "first")) |> 
+  mutate(use_label = 
+           ((rank <= top | rank > n() - top) & pos_type == "Race") |
+           ((rank <= top | rank > n() - top) & pos_type == "Many gammons" & y > 2),
+         label = if_else(use_label, round(tp_dead, 2), NA)) |> 
+  ungroup()
+
+plot_data |> 
+  ggplot(aes(x = tp_dead, y = score_label, color = pos_type, 
+             group = score_label, label = label)) +
+  geom_point() +
+  geom_line(color = "darkgray") +
+  scale_y_discrete(limits = score_order) +
+  scale_x_continuous(breaks = seq(0.15, 0.5, 0.05), limits = c(0.15, 0.5)) +
+  geom_text_repel(color = "black", size = 3, min.segment.length = 0, 
+                  seed = 2, force = 20) +
+  geom_vline(data = money_reflines, 
+             aes(xintercept = tp_dead, color = pos_type),
+             linetype = "dashed", show.legend = F) +
+  labs(title = "Initial cube take points across scores and position types",
+       subtitle = "-2,-5 is short for 2-away, 5-away. Dashed lines show money game takepoints",
+       y = "Score",
+       x = "Take point assuming dead cube",
+       color = "Position type")
+```
+
+Several patterns stand out; some well-know, some might not be so well-know. A few observations:
+
+- The absolutely lowest take point you can face, is when leading 2-away, 5-away in a straight race. You can take here with as little as 17% winning chances.
+- Not surprisingly, if you get doubled at 4-away, 2-away, the automatic redouble to 4 also generates a low take point: 19%.
+- Leading 2-away, 4-away, get you the third-lowest race take point: 20%.
+- However, leading 2-away, *3*-away, makes for a slightly *higher* take point (26%) than for money, since winning two points is also very valuable for the opponent here.
+- Same thing at 4-away, 3-away; we have the very highest dead-cube race take point: 35%. (Note that this of course changes when we introduce the cube, since re-cubes are very potent here. But be careful if this is a last-roll situation).
+- The innocent 5-away 4-away is also dangerous: Take point 30%.
+- At the other end of the spectrum we see (not surprisingly) very high take points when the opponent need 4 *and* has a clear gammon threat. Of course we have the notorious 2-away 4-away, where you need tremendous compensation in terms of winning chances, if you get doubled with a good risk of losing a gammon. But 3-away, 4-away and 5-away, 4-away, are almost as precarious.
+- In general, introducing gammons pushed the take points up, a good deal more than for money (compare the purple dots to the purple dotted line), because winning a gammon with the cube at two generally is pretty decisive.  
+
+Let's focus on the effect of introducing the cube. If we look at a straight, medium length race, like in our reference position above, access to the cube in a in a money game generally allows us to take with about 22% rather than the 25% we would need in a true last roll situation.
+
+At match scores, that effect varies considerably. Look at the plot below:
+
+
+```{r plot2}
+#| fig-width: 7
+#| fig-height: 5
+
+money_reflines <- tpsm |> 
+  filter(pos_type == "Race") |> 
+  select(tp_dead, tp_real2 = tp_real) |> 
+  pivot_longer(cols = everything())
+
+tps |> 
+  filter(cube == 1, pos_type == "Race") |>
+  select(score_label, tp_dead, tp_real2) |> 
+  pivot_longer(cols = c(tp_dead, tp_real2)) |> 
+  arrange(value, desc(name)) |> 
+  ggplot(aes(x = value, y = score_label, color = name, group = score_label)) +
+  geom_point() +
+  geom_line(color = "darkgray") +
+  scale_y_discrete(limits = score_order) +
+  scale_x_continuous(breaks = seq(0.15, 0.5, 0.05), limits = c(0.15, 0.5)) +
+  scale_color_discrete(labels = c("tp_dead" = "Only automatic recubes", 
+                                  "tp_real2" = "Semi-efficient recubes")) +
+  geom_vline(data = money_reflines, 
+            aes(xintercept = value, color = name),
+            linetype = "dashed", show.legend = F) +
+  labs(title = "Initial cube take points across scores and cube liveliness",
+       subtitle = "-2,-5 is short for 2-away, 5-away. Dashed lines show money game takepoints.",
+       y = "Score",
+       x = "Take point assuming no gammons (e.g. a race)",
+       color = "Cube assumption")
+```
+
+Of course, at scores where a double/take (and possibly an automatic re-cube) leaves the cube dead, there's no difference between the dead-cube take point and the take point including the cube.
+
+At other scores, in general, the cube benefits the trailer the most: At 4-away, 3-away, for example, cube access makes a massive difference, lowering the take point from 35% to 26%.
+
+In contrast, at 3-away, 5-away, if the leader redoubles, the cube comes back at 8, making his lead meaningless, so being able to redouble is not so helpful. Take point goes from 21% cubeless to 19% with cube leverage. (Both lower than the money take point of 22%, however.) 
+
+## Pre-crawford
+
+### 5-away scores
+
+#### 5-away, 5-away
+
+We give this score a pretty detailed treatment, then apply the same methodology to the rest of the pre-Crawford scores. The intention is to examine the anatomy of all score: How are they different from money *in general*?
+
+```{r}
+compare_tps(x1 = 5, y1 = 5, cube1 = 1, tps = tps, tpsm = tpsm)
+```
+
+This table compares take point for the five example positions for money and at the score 5-away, 5-away. When the difference between the match and the money take point is negative, it means the position is easier to take at the match score. When the difference is positive, we have less of a take at the score. 
+
+Let's spot check with a few rollouts at the score: Our sample race position and the blitz position:
+
+
+```{r pos2-5a5a}
+#| column: page-right
+#| layout-ncol: 2
+
+ggboard("XGID=-ABBBCB-AA-A-aaaa--bbbbab-:0:0:1:00:0:0:0:5:10") +
+  labs(title = "Position 2: Race",
+       subtitle = "Small money take, slightly bigger take at the score")
+
+"Money game, cubeful equities:
+       No double:     +0,838 (-0,144)
+       Double/Take:   +0,983
+       Double/Pass:   +1,000 (+0,017)
+       Best Cube action: Double / Take
+
+5-away, 5-away, cubeful equities:
+       No double:     +0,817 (-0,093)
+       Double/Take:   +0,910
+       Double/Pass:   +1,000 (+0,090)
+       Best Cube action: Double / Take" |>  
+  remove_stuff() |>
+  cat()
+```
+
+The rollout confirms that this race is indeed a bigger take at the score, as we would expect from the slightly lower take point.
+
+```{r pos5-5a5a}
+#| column: page-right
+#| layout-ncol: 2
+
+ggboard("XGID=b---C-CBB---dC---c-cc-B---:0:0:1:00:0:0:0:5:10") +
+  labs(title = "Position 5: Many gammons",
+       subtitle = "Small money take, moderate pass at the score")
+
+
+"Money game, cubeful equities:
+       No double:     +0,843 (-0,152)
+       Double/Take:   +0,995
+       Double/Pass:   +1,000 (+0,005)
+
+Best Cube action: Double / Take
+
+5-away, 5-away, cubeful equities:
+       No double:     +0,856 (-0,144)
+       Double/Take:   +1,096 (+0,096)
+       Double/Pass:   +1,000
+
+Best Cube action: Double / Pass" |>  
+  remove_stuff() |>  
+  cat(sep = "")
+```
+
+Again, the rollout shows that the blitz position, which was a marginal take for money, is a pass at the score, due to the slightly higher take point.
+
+#### 4-away, 5-away
+
+```{r}
+compare_tps(4, 5, 1, tps, tpsm)
+```
+
+#### 3-away, 5-away
+
+```{r}
+compare_tps(3, 5, 1, tps, tpsm)
+```
+
+#### 2-away, 5-away
+
+```{r}
+compare_tps(2, 5, 1, tps, tpsm)
+```
+
+#### 5-away, 4-away
+
+```{r}
+compare_tps(5, 4, 1, tps, tpsm)
+```
+
+#### 5-away, 3-away
+
+```{r}
+compare_tps(5, 3, 1, tps, tpsm)
+```
+
+#### 5-away, 2-away
+
+```{r}
+compare_tps(5, 2, 1, tps, tpsm)
+```
+
+
+### 4-away scores
+
+#### 4-away, 4-away
+
+```{r}
+compare_tps(4, 4, 1, tps, tpsm)
+```
+
+#### 3-away, 4-away
+
+```{r}
+compare_tps(3, 4, 1, tps, tpsm)
+```
+
+#### 2-away, 4-away
+
+```{r}
+compare_tps(2, 4, 1, tps, tpsm)
+```
+
+#### 4-away, 3-away
+
+```{r}
+compare_tps(4, 3, 1, tps, tpsm)
+```
+
+### 3-away scores
+
+#### 3-away, 3-away
+
+```{r}
+compare_tps(3, 3, 1, tps, tpsm)
+```
+
+#### 2-away, 3-away
+
+```{r}
+compare_tps(2, 3, 1, tps, tpsm)
+```
+
+#### 3-away, 2-away
+
+```{r}
+compare_tps(3, 2, 1, tps, tpsm)
+```
+
+### The funny two-point match  
+
+## Post-crawford
+
+### 1-away, even-away
+
+### 1-away, odd-away
+
+## Recubes
+
+## The rare 8-cube
