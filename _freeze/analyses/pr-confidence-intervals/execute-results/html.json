@@ -1,0 +1,17 @@
+{
+  "hash": "e5fb839b33b6cfcc3cb6373ceb641180",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Confidence intervals for PR\"\nauthor: \"Lasse Hjorth Madsen\"\ndate: today \nformat: \n  html:\n    fig-width: 4\n    fig-height: 4\ntoc: true\ntoc-expand: true\ntoc-depth: 3\neditor: source\nexecute:\n  echo: false\n  warning: false\n  cache: true\n---\n\n::: {.cell}\n\n:::\n\n\n## Why this?\n\nPerformance Rating, PR, is the defacto standard for measuring playing strength in backgammon. It's the average error per decision (i.e. non-forced and non-trivial play). But for an individual player PR varies a lot from match to match, from tournament to tournament, or, presumably, over time. This is expected, since players face very different sets of decisions in each match. A match is, in essence, a random sample of all possible decision one will have to make in backgammon.\n\nIt would be nice to calculate confidence intervals and compute p-values, to give an idea of how accurate a given PR-result is.\n\nFor example:\n\n- Suppose I estimate my own playing strength at around, say, 4.0 PR. Now suppose I play a 17-point match at 6.0 PR. What is the most reasonable interpretation: a) That I for some reason played worse than usual, or b) That this is just an example of the natural variation given the relative small sample size?\n\n- Or, suppose that I play 8 matches in some tournament, for a combined PR of 4.5. Then, a year a later, I play 5.5 in another tournament. Is this evidence that my play has gotten worse, or is it likely to be just statistical noise?\n\nThe last case was a real life experience for me at the qualification tournaments for the Danish national team in 2024 and 2025. It would be nice to more confidently interpret these data.\n\n\n\n## To-do\n\n- Update bgmoves dataset\n- Use bgmoves dataset to estimate variance\n- Split the variance between me/opponents, and checker play, cube decisions.\n- Calculate average number of moves for various match lengths\n- Calculate example of confidence intervals.\n- Test hypotheses:\n    - PR_2025 < PR_2024\n    - PR_live < PR_online\n- Examine data from VM kval. 2024 and 2025\n  - Distribution of PRs\n  - Do players PR vary by about the expected amount?",
+    "supporting": [
+      "pr-confidence-intervals_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
