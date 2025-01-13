@@ -1,0 +1,105 @@
+---
+title: "Compute decisions"
+output: html_document
+date: "2025-01-13"
+---
+
+## Sample matches
+
+  A tibble: 3 × 5
+  file             player1    player2 date           n
+  <chr>            <chr>      <chr>   <chr>      <int>
+1 match9102134.txt michael55  lasse   30/06/2024   697
+2 match9284748.txt sol2surf   lasse   07/07/2024   561
+3 match8067917.txt marcel2710 lasse   19/05/2024   543
+
+## XG summary
+### match9102134.txt
+
+	lasse	michael55
+• Level of Play	World Class (-0,0093)	World Class (-0,0096)
+• Performance Rating	4,67	4,82
+• Checker Play	World Class (-0,0086)	World Class (-0,0073)
+• Cube Play	Expert (-0,0144)	Advanced (-0,0197)
+• Luck	Quite lucky (+0,0139)	Quite unlucky (-0,0139)
+• Total Errors (Blunders)	31 (18)	23 (12)
+   Equity (Cost)	-2,998 (-11,96%)	-3,136 (-11,84%)
+   Decisions	321	325
+• Checker Errors (Blunders)	27 (14)	18 (8)
+   Equity (Cost)	-2,407 (-9,35%)	-1,933 (-7,35%)
+   Unforced Moves	280	264
+• Doubles (Blunders)	3 (3)	2 (1)
+   Equity (Cost)	-0,483 (-2,21%)	-0,169 (-0,64%)
+     - Wrong Doubles	-0,374 (-1,48%)	
+     - Missed Doubles	-0,109 (-0,73%)	-0,169 (-0,64%)
+   Cube Decisions	36	51
+• Takes (Blunders)	1 (1)	3 (3)
+   Equity (Cost)	-0,109 (-0,39%)	-1,034 (-3,85%)
+     - Wrong Takes	-0,109 (-0,39%)	
+     - Wrong Passes		-1,034 (-3,85%)
+   Take Decisions	5	10
+• Jokers	37	27
+   Luck (Cost)	+8,932 (+52,15%)	-8,932 (-52,15%)
+   Rolls	322	321
+   Luck based rating	47,85% favorite	52,15% favorite
+   Luck based Elo	103	121
+
+### match9284748.txt
+
+	lasse	sol2surf
+• Level of Play	World Class (-0,0096)	Advanced (-0,0156)
+• Performance Rating	4,80	7,82
+• Checker Play	Expert (-0,0109)	Advanced (-0,0161)
+• Cube Play	World Champ. (-0,0048)	Expert (-0,0130)
+• Luck	Quite unlucky (-0,0116)	Quite lucky (+0,0116)
+• Total Errors (Blunders)	23 (12)	31 (19)
+   Equity (Cost)	-2,631 (-14,52%)	-4,159 (-23,73%)
+   Decisions	274	266
+• Checker Errors (Blunders)	19 (11)	26 (16)
+   Equity (Cost)	-2,340 (-13,17%)	-3,585 (-20,27%)
+   Unforced Moves	214	222
+• Doubles (Blunders)	2	5 (3)
+   Equity (Cost)	-0,128 (-0,62%)	-0,574 (-3,47%)
+     - Wrong Doubles	-0,044 (-0,29%)	-0,398 (-2,62%)
+     - Missed Doubles	-0,084 (-0,33%)	-0,176 (-0,85%)
+   Cube Decisions	50	36
+• Takes (Blunders)	2 (1)	None
+   Equity (Cost)	-0,163 (-0,73%)	
+     - Wrong Takes		
+     - Wrong Passes	-0,163 (-0,73%)	
+   Take Decisions	10	8
+• Jokers	20	38
+   Luck (Cost)	-5,983 (-53,13%)	+5,983 (+53,13%)
+   Rolls	257	259
+   Luck based rating	53,13% favorite	46,87% favorite
+   Luck based Elo	127	101
+
+### match8067917.txt
+
+	lasse	marcel2710
+• Level of Play	World Class (-0,0077)	World Class (-0,0077)
+• Performance Rating	3,87	3,85
+• Checker Play	World Class (-0,0068)	World Class (-0,0054)
+• Cube Play	Advanced (-0,0156)	Advanced (-0,0204)
+• Luck	Insignificant (+0,0009)	Insignificant (-0,0009)
+• Total Errors (Blunders)	14 (6)	15 (9)
+   Equity (Cost)	-1,717 (-13,88%)	-1,750 (-14,04%)
+   Decisions	222	227
+• Checker Errors (Blunders)	11 (4)	10 (5)
+   Equity (Cost)	-1,357 (-12,44%)	-1,035 (-9,96%)
+   Unforced Moves	199	192
+• Doubles (Blunders)	2 (1)	3 (2)
+   Equity (Cost)	-0,204 (-0,82%)	-0,375 (-2,41%)
+     - Wrong Doubles	-0,204 (-0,82%)	-0,321 (-2,20%)
+     - Missed Doubles		-0,054 (-0,21%)
+   Cube Decisions	14	28
+• Takes (Blunders)	1 (1)	2 (2)
+   Equity (Cost)	-0,156 (-0,62%)	-0,340 (-1,67%)
+     - Wrong Takes		
+     - Wrong Passes	-0,156 (-0,62%)	-0,340 (-1,67%)
+   Take Decisions	9	7
+• Jokers	28	30
+   Luck (Cost)	+0,436 (+51,35%)	-0,436 (-51,35%)
+   Rolls	241	244
+   Luck based rating	48,65% favorite	51,35% favorite
+   Luck based Elo	110	122
