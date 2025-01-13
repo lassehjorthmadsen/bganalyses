@@ -1,12 +1,11 @@
 ---
 params:
-  player_name: "Llabba"
-  analysis_folder: "\\analyzed\\4-ply"
+  player_name: "lasse"
   max_examples: 20
   seed: 1970
-  benchmark_name: "lasse"
+  benchmark_name: "Llabba"
 
-title: "Mistakes were made by `r params$player_name`"
+title: "Mistakes were made"
 author: "Lasse Hjorth Madsen"
 date: today 
 format: html
@@ -25,19 +24,11 @@ execute:
 library(tidyverse)
 devtools::load_all(path = "../../bglab")
 theme_set(theme_minimal())
-
-# Notes:
-# quarto preview analyses/player-mistakes.qmd --cache-refresh
-# quarto render document.qmd -P alpha:0.2 -P ratio:0.3
-# quarto render document.qmd --execute-params params.yml
 ```
 
 ```{r parse}
 #| cache: true
-file_path <- paste0("..\\..\\bglab\\data-raw\\", params$player_name, params$analysis_folder)
-files <- list.files(file_path, pattern = "*.txt", full.names = TRUE)
-
-moves <- txt2df(files)
+player_moves <- bgmoves |> filter(tolower(player2) == tolower(params$player_name))
 ```
 
 ```{r subset_and_clean}
@@ -47,15 +38,16 @@ cost_labels <- paste0(">", cost_breaks)[-length(cost_breaks)] %>% rev()
 move_breaks <- c(0, 5, 15, Inf) 
 move_labels <- paste0(">", move_breaks)[-length(move_breaks)] 
 
-df_bench <- moves %>%
-  bind_rows(bgmoves) |> 
+df_bench <- bgmoves %>%
   select(file, move_no, play, turn, proper_ca, move_err, cube_err, cube_eq, move_eq, xgid) %>% 
   pivot_longer(cols = c(cube_err, move_err), names_to = "type", values_to = "cost") %>% 
-  filter(!is.na(cost), cost <= -min(cost_breaks), turn %in% c(params$player_name, params$benchmark_name)) %>% 
-  mutate(turn = fct(turn, levels = c(params$benchmark_name, params$player_name)),
+  filter(!is.na(cost), 
+         cost <= -min(cost_breaks), 
+         tolower(turn) %in% tolower(c(params$player_name, params$benchmark_name))) |> 
+  mutate(turn = fct(tolower(turn), levels = tolower(c(params$benchmark_name, params$player_name))),
          type = case_match(type, "cube_err" ~ "Cube decision", "move_err" ~ "Checker play"),
-         cost_bin = fct_rev(cut(.$cost, -cost_breaks, right = FALSE, labels = cost_labels)), 
-         move_bin = cut(.$move_no, move_breaks, right = TRUE, labels = move_labels),
+         cost_bin = fct_rev(cut(.data$cost, -cost_breaks, right = FALSE, labels = cost_labels)), 
+         move_bin = cut(.data$move_no, move_breaks, right = TRUE, labels = move_labels),
          mistake_type = case_when(
            type == "Cube decision" & play == "Rejects" & str_detect(proper_ca, "take") ~ "Wrong pass",
            type == "Cube decision" & play == "Accepts" & str_detect(proper_ca, "pass") ~ "Wrong take",
@@ -63,8 +55,7 @@ df_bench <- moves %>%
            type == "Cube decision" & play == "Rolls" & str_detect(proper_ca, "Double|Redouble") ~ "Missed double",
            type == "Cube decision" & play == "Doubles" & str_detect(proper_ca, "Too") ~ "Wrong cash")) 
 
-df <- df_bench |> filter(turn == params$player_name)
-
+df <- df_bench |> filter(tolower(turn) == tolower(params$player_name))
 ```
 
 ```{r bins}
@@ -110,9 +101,9 @@ All categories are then split into the same error sizes intervals like this:
 
 ## Abut the data
 
-The report was created like this: First, I use a Python script for GNU Backgammon to analyze a collection of matches at 4-ply. Then, my R-package [`bglab`](https://lassehjorthmadsen.github.io/bglab/index.html) contains tools to turn the GNU BG analysis files into a data frame that can be analyzed using descriptive statistics. Finally, this Quarto notebook (part of my [Backgammon Playground](https://lassehjorthmadsen.github.io/bganalyses/) with R-code analyzes that data. 
+The report was created like this: First, I use a Python script for GNU Backgammon to analyze a collection of matches at 4- or 2-ply (doing everything at 4-ply turned out to be unfeasible). Then, my R-package [`bglab`](https://lassehjorthmadsen.github.io/bglab/index.html) contains tools to turn the GNU BG analysis files into a data frame that can be analyzed using descriptive statistics. Finally, this Quarto notebook (part of my [Backgammon Playground](https://lassehjorthmadsen.github.io/bganalyses/)) with R-code analyzes that data. 
 
-The data are build from a set of `r length(files)` matches played by the nick `r params$player_name`. The matches contains of a total of `r nrow(moves)` decisions, from which we look at the subset of `r nrow(df)` decisions by `r params$player_name`, that GNU BG thought was in error.
+The data are build from a set of `r n_distinct(player_moves$file)` games played by the nick `r params$player_name`. The games contains of a total of `r nrow(player_moves)` positions, from which we look at the subset of `r nrow(df)` decisions by `r params$player_name`, that GNU BG thought was in error.
 
 In order to not create a phone book of a document, we display here only a maximum of `r params$max_examples` from each of the above mentioned categories.
 
@@ -120,9 +111,9 @@ In order to not create a phone book of a document, we display here only a maximu
 
 A few statistical summaries might be useful. For cube handling errors, the chart below shows:
 
-- The number of cube errors made 
-- The sum all cube errors
-- The average size of cube errors
+- The number of cube errors made (as a percentage)
+- The sum cube errors (in percent of total)
+- The average size of cube errors (normalized to money game equivalent, emg)
 
 With all of the above split by type of error (wrong double, wrong take, etc.) and compared to a benchmark player. 
 
@@ -142,8 +133,8 @@ plot_data <- df_bench %>%
             .groups = "drop") %>% 
   pivot_longer(cols = metric_labels, names_to = "metric") %>% 
   mutate(metric = fct(metric, levels = metric_labels),
-         width = case_when(turn == params$player_name ~ 0.8, TRUE ~ 0.4),
-         alpha = case_when(turn == params$player_name ~ 0.5, TRUE ~ 0.5))
+         width = case_when(turn == tolower(params$player_name) ~ 0.8, TRUE ~ 0.4),
+         alpha = case_when(turn == tolower(params$player_name) ~ 0.5, TRUE ~ 0.5))
   
 plot_data %>% 
   ggplot(aes(x = mistake_type, y = value, fill = turn, width = width)) +
@@ -171,8 +162,8 @@ plot_data <- df_bench %>%
             .groups = "drop") %>% 
   pivot_longer(cols = metric_labels, names_to = "metric") %>% 
   mutate(metric = fct(metric, levels = metric_labels),
-         width = case_when(turn == params$player_name ~ 0.8, TRUE ~ 0.4),
-         alpha = case_when(turn == params$player_name ~ 0.5, TRUE ~ 0.5))
+         width = case_when(turn == tolower(params$player_name) ~ 0.8, TRUE ~ 0.4),
+         alpha = case_when(turn == tolower(params$player_name) ~ 0.5, TRUE ~ 0.5))
   
 plot_data %>% 
   ggplot(aes(x = move_bin, y = value, fill = turn, width = width)) +

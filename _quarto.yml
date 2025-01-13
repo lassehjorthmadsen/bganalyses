@@ -17,7 +17,7 @@ website:
       - section: "PRAXIS"
         contents:
         - analyses/milestones-2023.qmd
-        - analyses/mistakes.qmd
+        - analyses/player-mistakes.qmd
         - analyses/opening-mistakes.qmd
         - analyses/middle-game-cubes.qmd
         - analyses/hit-or-point.qmd
