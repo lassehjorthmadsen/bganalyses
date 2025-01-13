@@ -1,0 +1,136 @@
+---
+title: "Big Cubes"
+author: "Lasse Hjorth Madsen"
+date: today 
+format: 
+  html:
+    fig-width: 4
+    fig-height: 4
+toc: true
+toc-expand: true
+toc-depth: 4
+editor: source
+execute:
+  echo: false
+  warning: false
+  cache: true
+---
+
+```{r setup}
+#| cache: false
+library(tidyverse)
+
+devtools::load_all(path = "../../bglab")
+
+met <- get_met()
+
+theme_set(
+  theme_minimal() +
+  theme(
+    axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0)),
+    axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)),
+    panel.grid.major.y = element_blank()
+    )
+  )
+```
+
+```{r helpers}
+remove_stuff <- function(text, leading_breaks = 4) {
+  text |>
+    read_lines() |>
+    str_remove("^ {1,6}") |>
+    str_remove("Confidence.+") |>
+    str_remove("Duration.+") |>
+    str_remove("Rollout¹    ") |> 
+    str_replace_all("        ", "  ") |> 
+    paste(collapse = "\n") |>  
+    str_replace_all("\n\n", "\n") |> 
+    cat(rep("\n", leading_breaks), ... = _, sep = "")
+}
+
+```
+
+```{r takepoints}
+tps <- expand_grid(x = 3:25, cube = c(1, 2, 4, 8, 16)) |> 
+  rowwise() |>  
+  mutate(tp = tp(x, x, cube, met),
+         single_win_value = mwc(x - cube, x , met) - mwc(x ,x , met)) |>  
+  ungroup() |>  
+  filter(tp > 0, cube < x) |> 
+  arrange(-tp)
+```
+
+## Why this?
+
+This is to investigate take points when the cube level gets high and the match score is tied.
+
+## Example
+
+Here's one example from a recent match:
+
+```{r}
+#| column: page-right
+#| layout-ncol: 2
+
+
+ggboard("XGID=-CC--A------------------h-:2:-1:-1:00:3:3:0:17:10") +
+  labs(title = "Black on roll, cube action?")
+
+"
+Analyzed in Rollout
+Redouble/Take
+  Player Winning Chances:   76,10% (G:0,00% B:0,00%)
+  Opponent Winning Chances: 23,90% (G:0,00% B:0,00%)
+
+Cubeful Equities:
+       No redouble:     +0,809 (-0,168)
+       Redouble/Take:   +0,977
+       Redouble/Pass:   +1,000 (+0,023)
+
+Rollout:
+  10368 Games rolled with Variance Reduction.
+  Moves: 3-ply, cube decisions: XG Roller
+" |> remove_stuff() |> cat()
+```
+
+```{r}
+tp_info(14, 14, c(0.5, 0, 0, 0.5, 0, 0), 4, met, cube_eff = 0)
+tp(14, 14, 4, met)
+tp(5, 5, 2, met)
+tp(7, 7, 4, met)
+```
+
+```{r plot}
+#| column: page-right
+#| fig-width: 6
+
+tps |> 
+  ggplot(aes(x = x, y = tp, color = factor(cube))) + 
+  geom_point() + 
+  geom_line() +
+  geom_hline(yintercept = 0.25, color = "darkgray") +
+  scale_x_continuous(breaks = 3:25) +
+  scale_y_continuous(breaks = seq(0, 0.4, 0.02)) +
+  labs(title = "Cubeless, gammonless take points at even score",
+       subtitle = "by match length and cube value",
+       color = "Cube value",
+       x = "Match length",
+       y = "Take point") +
+  theme(panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank(), 
+        panel.grid.major.y = element_line())
+
+```
+
+```{r}
+tps |> 
+  select(-tp) |> 
+  filter(x %in% 5:15, cube %in% c(2, 4)) |> 
+  arrange(x) |>
+  rename(`Match length` = x) |> 
+  mutate(cube = paste(cube, "point win")) |> 
+  pivot_wider(names_from = cube, values_from = single_win_value) |>  
+  mutate(Ratio = c_across(3) / c_across(2)) |> 
+  mutate(across(where(is.double), round, 2)) 
+```
+
