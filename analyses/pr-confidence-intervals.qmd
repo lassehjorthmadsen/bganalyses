@@ -44,6 +44,7 @@ The last case was a real life experience for me at the qualification tournaments
 ## To-do
 
 - Update bgmoves dataset
+- In bgmoves define a decision
 - Use bgmoves dataset to estimate variance
 - Split the variance between me/opponents, and checker play, cube decisions.
 - Calculate average number of moves for various match lengths
