@@ -4,6 +4,7 @@ author: "Lasse Hjorth Madsen"
 date: today 
 format: 
   html:
+    df-print: paged
     fig-width: 4
     fig-height: 4
 toc: true
@@ -19,39 +20,174 @@ execute:
 ```{r setup}
 #| cache: false
 library(tidyverse)
-library(kableExtra)
-library(ggrepel)
-
 devtools::load_all(path = "../../bglab")
+```
+
+```{r compute_decisions}
+bgmoves <- bgmoves |> 
+  mutate(forced_checker = str_count(move_eq, "\n") == 0 & play == "Rolls",
+         max_checker_error = str_extract(move_eq, "\\([-\\d.]+\\)$") |> 
+           str_remove_all("\\(|\\)") |> 
+           as.numeric(),
+         max_checker_error = coalesce(max_checker_error, 0),
+         checker_decision = !forced_checker & max_checker_error <= -0.001 & play == "Rolls",
+         max_cube_error = str_extract(cube_eq, "\\([-\\d.]+\\)\\n") |> 
+           str_remove_all("\\(|\\)|\\n") |> 
+           as.numeric(),
+         max_cube_error = coalesce(max_cube_error, 0),
+         cube_decision = (!is.na(cube_eq) & max_cube_error != 0 & max_cube_error >= -0.2) | 
+           (play %in% c("Doubles", "Accepts", "Rejects")) | mistake_ca) |> 
+  #select(-forced_checker, -max_checker_error, -max_cube_error) |> 
+  mutate(any_decision = checker_decision | cube_decision)
+```
+
+```{r pivot_data}
+df <- bgmoves |>
+  select(turn, `Move error` = move_err, `Cube error` = cube_err, checker_decision, cube_decision, length, file) |> 
+  pivot_longer(c(`Move error`, `Cube error`), names_to = "error_type", values_to = "error_size")  
+```
+
+```{r clean_data}
+df <- df |>
+  # Turn can be NA, probably due to parsing error
+  filter(!is.na(turn)) |> 
+  mutate(Turn = ifelse(tolower(turn) == "lasse", "Lasse", "Opponent"),
+         match = str_remove(file, "_\\d{3}")) |>
+  # We don't include zero errors for non-decisions
+  filter((error_type == "Move error" & checker_decision) | (error_type == "Cube error" & cube_decision)) |> 
+  select(-checker_decision, -cube_decision, -turn)
 ```
 
 ## Why this?
 
-Performance Rating, PR, is the defacto standard for measuring playing strength in backgammon. It's the average error per decision (i.e. non-forced and non-trivial play). But for an individual player PR varies a lot from match to match, from tournament to tournament, or, presumably, over time. This is expected, since players face very different sets of decisions in each match. A match is, in essence, a random sample of all possible decision one will have to make in backgammon.
+Performance Rating, PR, is the defacto standard for measuring playing strength in backgammon. It's the average error per decision (i.e. non-forced and non-trivial play). But for an individual player PR varies a lot from match to match, from tournament to tournament, and over time. This is expected, since players face very different sets of decisions in each match.
 
-It would be nice to calculate confidence intervals and compute p-values, to give an idea of how accurate a given PR-result is.
+A match is, in essence, a random sample of all possible decision one will have to make in backgammon. But random samples vary; some matches are hard, some not so hard. Let's try to examine that variation and to calculate confidence intervals around PR-values, to give an idea of how accurate a given PR-result is.
 
-For example:
+## Examples
 
-- Suppose I estimate my own playing strength at around, say, 4.0 PR. Now suppose I play a 17-point match at 6.0 PR. What is the most reasonable interpretation: a) That I for some reason played worse than usual, or b) That this is just an example of the natural variation given the relative small sample size?
+Suppose I estimate my own playing strength at around, say, 5.0 PR. Now suppose I play a 17-point match at 6.0 PR. What is the most reasonable interpretation:
 
-- Or, suppose that I play 8 matches in some tournament, for a combined PR of 4.5. Then, a year a later, I play 5.5 in another tournament. Is this evidence that my play has gotten worse, or is it likely to be just statistical noise?
+  - That I for some reason played worse than usual, or 
+  - That the match was tougher that average?
+    
+For another example, suppose that I play 8 matches in some tournament, with a combined PR of 4.5. Then, a year later, I play 6.4 in a similar tournament. Is this evidence that my play has gotten worse, or is it as likely to be just statistical noise?
 
-The last case was a real life experience for me at the qualification tournaments for the Danish national team in 2024 and 2025. It would be nice to more confidently interpret these data.
+The last example was a real life experience for me at the qualification tournaments for the Danish national team in 2024 and 2025. It would be nice to more confidently interpret these data.
+
+## The data
+
+We can use the [`bgmoves`](https://lassehjorthmadsen.github.io/bglab/reference/bgmoves.html) dataset to estimate the *variance* of my errors, which we need to compute confidence intervals around a specific PR result.
+
+`bgmoves` have `r nrow(bgmoves)` positions, some involving both a play and a cube play. Not all positions in the database are decisions; if we pull out all actual decisions from the dataset, we get a subset of `r nrow(df)` actual decisions.
+
+In backgammon, the majority of checker play decisions are easy; both my and my opponents get the most checker plays right. Here's a count of checker play decisions, by player and if a an error was made: 
+
+```{r count_checker_errors}
+df |> 
+  filter(error_type == "Move error") |> 
+  count(Turn, `Checker play error made` = error_size != 0) |>
+  group_by(Turn) |> 
+  mutate(`Percent (by player)` = round(n / sum(n) * 100, 1)) |> 
+  ungroup()
+```
+
+So we got 70-75 percent of all checker play decisions right. One can guess that perhaps half of all checker plays are truly routine; among the other half some are pretty easy, some are too close to care about, and some are real problems. If I get half of the latter group right, that aligns roughly with the numbers above.
+
+Cube decisions are different by nature, they are far fewer, but it looks like most are also relatively easy:
+
+```{r count_cube_errors}
+df |> 
+  filter(error_type == "Cube error", !is.na(error_size)) |> 
+  count(Turn, `Cube error made` = error_size != 0) |>
+  group_by(Turn) |> 
+  mutate(`Percent (by player)` = round(n / sum(n) * 100, 1)) |> 
+  ungroup()
+```
+
+## PR estimates
+
+We really wanted to use the data to estimate PR and especially the uncertainty of those estimates, so let's get going.
+
+PR is the average error per decision, where decision is defined as non-obvious moves: Non-forced checker plays; checker plays where all moves are not equal; non-optional cubes; and potential doubles where doubling is a mistake less that 0.200 emg.
+
+When we compute PR for a specific game or match or series of matches, it can be seen as an estimate of the true PR based on a random *sample* of all possible decision.
+
+Like this:
+
+```{r conf_by_player}
+#| column: page-right
+
+df |> 
+  group_by(Turn) |> 
+  summarise(Decisions = n(),
+            `Mean error` = mean(error_size, na.rm = TRUE), 
+            `Standard deviation` = sd(error_size, na.rm = TRUE),
+            PR = mean(error_size, na.rm = TRUE) * -500, 
+            `Confidence interval` = paste("±", round(`Standard deviation`/ sqrt(Decisions) * 500 * qnorm(0.975), 3))) |> 
+  ungroup() |> 
+  mutate(across(where(is_double), \(x) round(x, 3)))
+```
+
+So in this data set I averages a PR of 5.259 ± 0.141. The calculation is based on a *lot* of decisions, 69,737. The mean error (in equivalent-to-money-game, emg) is -0.011, meaning that I on average sacrifice about a percentage of a point on each decision. That may seem low, but recall that it's across *all* decisions, also routine ones, and that most error are zero, so there has to be an occasional big one in there.
+
+The standard deviation is a measure of how much the errors vary around the mean; we see that the variation is a bit higher for my opponents. That makes sense, since this group includes quite a few inexperienced players, who makes bigger mistakes more frequently.
+
+PR is just the mean error multiplied by -500.
+
+The [confidence interval, CI](https://en.wikipedia.org/wiki/Confidence_interval) is calculated as the standard deviation divided by the quare root of the number of observations, n:
+
+$$
+\text{CI} = \bar{x} \pm z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}
+$$
+Where:
+
+$$
+\bar{x} \text{ = sample mean}\\[6pt]
+z_{\alpha/2} \text{ = critical value (1.96 for 95\% confidence)}\\[6pt]
+\sigma \text{ = standard deviation}\\[6pt]
+n \text{ = number of observations}
+$$
 
 
 
-## To-do
+The above is a hand-held calculation by me, to display the results nicely; let's just try to use one of the build-in statistical functions in R for to sanity check if the results agree: 
 
-- Update bgmoves dataset
-- In bgmoves define a decision
-- Use bgmoves dataset to estimate variance
-- Split the variance between me/opponents, and checker play, cube decisions.
-- Calculate average number of moves for various match lengths
-- Calculate example of confidence intervals.
-- Test hypotheses:
-    - PR_2025 < PR_2024
-    - PR_live < PR_online
-- Examine data from VM kval. 2024 and 2025
-  - Distribution of PRs
-  - Do players PR vary by about the expected amount?
+```{r}
+test_result <- df |> filter(Turn == "Lasse") |> pull(error_size) |> (`*`)(-500) |> t.test()
+```
+
+My overall average PR: 
+
+```{r}
+test_result$estimate
+```
+
+(Note this is not exactly eXtremeGammon estimates, analysis is done by GNUBG and varies a bit).
+
+The confidence interval on that estimate:
+
+```{r}
+test_result$estimate - test_result$conf.int[1]
+```
+
+
+```{r}
+test_result$stderr 
+```
+
+
+```{r variance_by_player_and_error_type}
+df |> 
+  group_by(Turn, `Error type` = error_type) |> 
+  summarise(Decisions = n(),
+            `Mean error` = mean(error_size, na.rm = TRUE), 
+            `Standard deviation` = sd(error_size, na.rm = TRUE),
+            PR = mean(error_size, na.rm = TRUE) * -500, 
+            `Confidence interval` = paste("±", round(`Standard deviation`/ sqrt(Decisions) * 500 * qnorm(0.975), 2))) |> 
+  ungroup() |> 
+  mutate(across(where(is_double), \(x) round(x, 3)))
+```
+
+
+Let's say you play a 17-point match, with about 230 decisions on average. If your error variance is like mine online error variance,

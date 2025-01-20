@@ -18,6 +18,8 @@ df <- bgmoves |>
          cube_decision = (!is.na(cube_eq) & max_cube_error != 0 & max_cube_error >= -0.2) | 
            (play %in% c("Doubles", "Accepts", "Rejects")))
 
+# Known issue: logic fails when max_checker_error is not negative, which can happen when plies are mixed,
+# like in "Magic - Lasse 5pt Backgammon Studio 2024_04_22 19_06_30_004.txt", move 41.
 
 # Sanity check logic for cube decisions
 df |> count(cube_decision)
