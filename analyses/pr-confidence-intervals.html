@@ -336,7 +336,7 @@ window.Quarto = {
 <section id="why-this" class="level2">
 <h2 class="anchored" data-anchor-id="why-this">Why this?</h2>
 <p>Performance Rating, PR, is the defacto standard for measuring playing strength in backgammon. It’s the average error per decision (i.e.&nbsp;non-forced and non-trivial play). But for an individual player PR varies a lot from match to match, from tournament to tournament, and over time. This is expected, since players face very different sets of decisions in each match.</p>
-<p>A match is, in essence, a random sample of all possible decision one will have to make in backgammon. But random samples vary; some matches are hard, some not so hard. Let’s try to examine that variation and to calculate confidence intervals around PR-values, to give an idea of how accurate a given PR-result is.</p>
+<p>A match is, in essence, a random sample of all possible decision one will have to make in backgammon. But random samples vary; some matches are hard, some not so hard. Let’s try to examine that variation and to calculate confidence intervals around PR-values, to get an idea of how accurate a given PR-result is.</p>
 </section>
 <section id="examples" class="level2">
 <h2 class="anchored" data-anchor-id="examples">Examples</h2>
@@ -377,7 +377,7 @@ window.Quarto = {
 <section id="sec-estimates" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-estimates">PR estimates</h2>
 <p>We really wanted to use the data to estimate PR and especially the uncertainty of those estimates, so let’s get going.</p>
-<p>PR is the average error per decision, where decision is defined as non-obvious moves: Non-forced checker plays; checker plays where all moves are not equal; non-optional cubes; and potential doubles where doubling is a mistake less that 0.200 emg.</p>
+<p>PR is the average error per decision, where decision is defined as non-obvious moves: Non-forced checker plays; checker plays where all moves are not equal; non-optional cubes; and potential doubles where doubling is a mistake less that 0.200 emg (the commonly used ‘equivalent-to-money-game’ metric).</p>
 <p>When we compute PR for a specific game or match or series of matches, it can be seen as an estimate of the true PR based on a random <em>sample</em> of all possible decision.</p>
 <p>Like this:</p>
 <div class="cell page-columns page-full">
@@ -398,7 +398,7 @@ Table&nbsp;1: PR confidence intervals
 </figure>
 </div>
 </div>
-<p>So in this data set I average a PR of 5.259 ± 0.141. The calculation is based on a <em>lot</em> of decisions, 69,737. The mean error (in equivalent-to-money-game, emg) is -0.011, meaning that I on average sacrifice about a percentage of a point on each decision. That may seem low, but recall that it’s across <em>all</em> decisions, also routine ones, and that most error are zero, so there has to be occasional really big mistakes in there. (Have a look at <a href="https://lassehjorthmadsen.github.io/bganalyses/analyses/player-mistakes.html">this</a> analysis, for a more in-depth look at distributions of mistakes.)</p>
+<p>So in this data set I average a PR of 5.259 ± 0.141. The calculation is based on a <em>lot</em> of decisions, 69,737. The mean error (in equivalent-to-money-game, emg) is -0.011, meaning that I on average sacrifice about a percentage of a point on each decision. That may seem low, but recall that it’s across <em>all</em> decisions, also routine ones, and that most error are zero, so there has to be occasionally really big mistakes in there. (Have a look at <a href="https://lassehjorthmadsen.github.io/bganalyses/analyses/player-mistakes.html">this</a> analysis, for a more in-depth look at distributions of mistakes.)</p>
 <p>The standard deviation is a measure of how much the errors vary around the mean; we see that the variation is a bit higher for my opponents. That makes sense, since this group includes quite a few inexperienced players, who makes bigger mistakes more frequently.</p>
 <p>PR is just the mean error multiplied by -500.</p>
 <p>The <a href="https://en.wikipedia.org/wiki/Confidence_interval">confidence interval, CI</a> is calculated as the standard deviation divided by the quare root of the number of observations, n:</p>
@@ -439,7 +439,7 @@ n \text{ = number of observations}
 </div>
 </div>
 </div>
-<p>Let’s say you play a 17-point match, with about 230 decisions on average. If your error variance is like my online error variance, then the confidence interval is about <span class="math inline">\(\pm2.5\ PR\)</span> That’s a lot, meaning that a single 17-point match is usually not that informative.</p>
+<p>Let’s say you play a 17-point match, with about 230 decisions on average. If your error variance is like my online error variance, then the confidence interval is about <span class="math inline">\(\pm2.5\ PR\)</span>. That’s a lot, meaning that a single 17-point match is usually not that informative.</p>
 <p>If your error variance is more like my online opponents’ error variance, then the confidence interval is even wider, about <span class="math inline">\(\pm3.5\ PR\)</span>.</p>
 <p>If, on your other hand, your are an exceptionally skilled player, like a friend of mine who plays under the nick ‘Llabba’, the variance is lower and the confidence interval tighter, about <span class="math inline">\(\pm1.6\ PR\)</span>.</p>
 <p>As in so many other cases, we can conclude that we generally need more data that we think.</p>
@@ -452,7 +452,7 @@ n \text{ = number of observations}
 <ul>
 <li>First tournament: 1,244 decisions; PR 4.4</li>
 <li>Second tournament: 1,228 decisions; PR 6.4</li>
-<li>For both tournaments, we assume same standard deviation as in my online matches: 0.0</li>
+<li>For both tournaments, we assume same standard deviation as in my online matches: 0.038</li>
 </ul>
 <p>We can focus on the <em>difference</em> in PR between the two estimates by using the following variant of the formula above:</p>
 <p><span class="math display">\[
