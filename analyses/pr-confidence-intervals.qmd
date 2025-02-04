@@ -7,6 +7,7 @@ format:
     df-print: paged
     fig-width: 4
     fig-height: 4
+number-sections: false
 toc: true
 toc-expand: true
 toc-depth: 3
@@ -20,7 +21,9 @@ execute:
 ```{r setup}
 #| cache: false
 library(tidyverse)
+library(boot)
 devtools::load_all(path = "../../bglab")
+theme_set(theme_minimal())
 ```
 
 ```{r compute_decisions}
@@ -49,29 +52,29 @@ df <- bgmoves |>
 
 ```{r clean_data}
 df <- df |>
-  # Turn can be NA, probably due to parsing error
-  filter(!is.na(turn)) |> 
-  mutate(Turn = ifelse(tolower(turn) == "lasse", "Lasse", "Opponent"),
+  # Turn and error_size can be NA, probably due to parsing error
+  filter(!is.na(turn), !is.na(error_size)) |> 
+  mutate(Player = ifelse(tolower(turn) == "lasse", "Lasse", "Someone else"),
          match = str_remove(file, "_\\d{3}")) |>
   # We don't include zero errors for non-decisions
   filter((error_type == "Move error" & checker_decision) | (error_type == "Cube error" & cube_decision)) |> 
-  select(-checker_decision, -cube_decision, -turn)
+  select(-checker_decision, -cube_decision)
 ```
 
 ## Why this?
 
 Performance Rating, PR, is the defacto standard for measuring playing strength in backgammon. It's the average error per decision (i.e. non-forced and non-trivial play). But for an individual player PR varies a lot from match to match, from tournament to tournament, and over time. This is expected, since players face very different sets of decisions in each match.
 
-A match is, in essence, a random sample of all possible decision one will have to make in backgammon. But random samples vary; some matches are hard, some not so hard. Let's try to examine that variation and to calculate confidence intervals around PR-values, to give an idea of how accurate a given PR-result is.
+A match is, in essence, a random sample of all possible decision one will have to make in backgammon. But random samples vary; some matches are hard, some not so hard. Let's try to examine that variation and to calculate confidence intervals around PR-values, to get an idea of how accurate a given PR-result is.
 
 ## Examples
 
-Suppose I estimate my own playing strength at around, say, 5.0 PR. Now suppose I play a 17-point match at 6.0 PR. What is the most reasonable interpretation:
+Suppose I estimate my own playing strength at around, say, 5.0 PR. Now, let's say I play a 17-point match at 6.0 PR. What is the most reasonable interpretation:
 
   - That I for some reason played worse than usual, or 
   - That the match was tougher that average?
     
-For another example, suppose that I play 8 matches in some tournament, with a combined PR of 4.5. Then, a year later, I play 6.4 in a similar tournament. Is this evidence that my play has gotten worse, or is it as likely to be just statistical noise?
+For another example, suppose that I play eight 11-point matches in some tournament, with a combined PR of 4.4. Then, a year later, I play 6.4 in a similar tournament. Is this evidence that my play has gotten worse, or is it as likely to be just statistical noise?
 
 The last example was a real life experience for me at the qualification tournaments for the Danish national team in 2024 and 2025. It would be nice to more confidently interpret these data.
 
@@ -79,15 +82,15 @@ The last example was a real life experience for me at the qualification tourname
 
 We can use the [`bgmoves`](https://lassehjorthmadsen.github.io/bglab/reference/bgmoves.html) dataset to estimate the *variance* of my errors, which we need to compute confidence intervals around a specific PR result.
 
-`bgmoves` have `r nrow(bgmoves)` positions, some involving both a play and a cube play. Not all positions in the database are decisions; if we pull out all actual decisions from the dataset, we get a subset of `r nrow(df)` actual decisions.
+`bgmoves` have `r nrow(bgmoves)` positions, some involving both a checker play and a cube play. Not all positions in the database are decisions; if we pull out all actual decisions from the dataset, we get a subset of `r nrow(df)` actual decisions.
 
-In backgammon, the majority of checker play decisions are easy; both my and my opponents get the most checker plays right. Here's a count of checker play decisions, by player and if a an error was made: 
+In backgammon, the majority of checker play decisions are easy; both me and my opponents get the most checker plays right. Here's a count of checker play decisions, by player and if a an error was made: 
 
 ```{r count_checker_errors}
 df |> 
   filter(error_type == "Move error") |> 
-  count(Turn, `Checker play error made` = error_size != 0) |>
-  group_by(Turn) |> 
+  count(Player, `Checker play error made` = error_size != 0) |>
+  group_by(Player) |> 
   mutate(`Percent (by player)` = round(n / sum(n) * 100, 1)) |> 
   ungroup()
 ```
@@ -98,38 +101,40 @@ Cube decisions are different by nature, they are far fewer, but it looks like mo
 
 ```{r count_cube_errors}
 df |> 
-  filter(error_type == "Cube error", !is.na(error_size)) |> 
-  count(Turn, `Cube error made` = error_size != 0) |>
-  group_by(Turn) |> 
+  filter(error_type == "Cube error") |> 
+  count(Player, `Cube error made` = error_size != 0) |>
+  group_by(Player) |> 
   mutate(`Percent (by player)` = round(n / sum(n) * 100, 1)) |> 
   ungroup()
 ```
 
-## PR estimates
+## PR estimates {#sec-estimates}
 
 We really wanted to use the data to estimate PR and especially the uncertainty of those estimates, so let's get going.
 
-PR is the average error per decision, where decision is defined as non-obvious moves: Non-forced checker plays; checker plays where all moves are not equal; non-optional cubes; and potential doubles where doubling is a mistake less that 0.200 emg.
+PR is the average error per decision, where decision is defined as non-obvious moves: Non-forced checker plays; checker plays where all moves are not equal; non-optional cubes; and potential doubles where doubling is a mistake less that 0.200 emg (the commonly used 'equivalent-to-money-game' metric).
 
 When we compute PR for a specific game or match or series of matches, it can be seen as an estimate of the true PR based on a random *sample* of all possible decision.
 
 Like this:
 
 ```{r conf_by_player}
+#| label: tbl-out
+#| tbl-cap: "PR confidence intervals"
 #| column: page-right
 
 df |> 
-  group_by(Turn) |> 
+  group_by(Player) |> 
   summarise(Decisions = n(),
-            `Mean error` = mean(error_size, na.rm = TRUE), 
-            `Standard deviation` = sd(error_size, na.rm = TRUE),
-            PR = mean(error_size, na.rm = TRUE) * -500, 
-            `Confidence interval` = paste("±", round(`Standard deviation`/ sqrt(Decisions) * 500 * qnorm(0.975), 3))) |> 
+            `Mean error` = mean(error_size), 
+            `Standard deviation` = sd(error_size),
+            PR = mean(error_size) * -500, 
+            `Confidence interval` = paste("±", round(`Standard deviation`/ (sqrt(Decisions) - 1) * 500 * qnorm(0.975), 3))) |> 
   ungroup() |> 
   mutate(across(where(is_double), \(x) round(x, 3)))
 ```
 
-So in this data set I averages a PR of 5.259 ± 0.141. The calculation is based on a *lot* of decisions, 69,737. The mean error (in equivalent-to-money-game, emg) is -0.011, meaning that I on average sacrifice about a percentage of a point on each decision. That may seem low, but recall that it's across *all* decisions, also routine ones, and that most error are zero, so there has to be an occasional big one in there.
+So in this data set I average a PR of 5.259 ± 0.141. The calculation is based on a *lot* of decisions, 69,737. The mean error (in equivalent-to-money-game, emg) is -0.011, meaning that I on average sacrifice about a percentage of a point on each decision. That may seem low, but recall that it's across *all* decisions, also routine ones, and that most error are zero, so there has to be  occasionally really big mistakes in there. (Have a look at [this](https://lassehjorthmadsen.github.io/bganalyses/analyses/player-mistakes.html) analysis, for a more in-depth look at distributions of mistakes.)
 
 The standard deviation is a measure of how much the errors vary around the mean; we see that the variation is a bit higher for my opponents. That makes sense, since this group includes quite a few inexperienced players, who makes bigger mistakes more frequently.
 
@@ -143,51 +148,323 @@ $$
 Where:
 
 $$
-\bar{x} \text{ = sample mean}\\[6pt]
-z_{\alpha/2} \text{ = critical value (1.96 for 95\% confidence)}\\[6pt]
-\sigma \text{ = standard deviation}\\[6pt]
+\bar{x} \text{ = sample mean}
+$$
+$$
+z_{\alpha/2} \text{ = critical value (1.96 for 95\% confidence)}
+$$
+$$
+\sigma \text{ = standard deviation}
+$$
+$$
 n \text{ = number of observations}
 $$
 
-
-
-The above is a hand-held calculation by me, to display the results nicely; let's just try to use one of the build-in statistical functions in R for to sanity check if the results agree: 
-
-```{r}
-test_result <- df |> filter(Turn == "Lasse") |> pull(error_size) |> (`*`)(-500) |> t.test()
-```
-
-My overall average PR: 
-
-```{r}
-test_result$estimate
-```
-
-(Note this is not exactly eXtremeGammon estimates, analysis is done by GNUBG and varies a bit).
-
-The confidence interval on that estimate:
-
-```{r}
-test_result$estimate - test_result$conf.int[1]
-```
-
-
-```{r}
-test_result$stderr 
-```
-
+We can split up the calculations by decision type (checker or cube), and see that the variance is a bit higher for cube decision. The confidence intervals are quite a bit wider, since the number of decisions is smaller:
 
 ```{r variance_by_player_and_error_type}
+#| column: page-right
+
 df |> 
-  group_by(Turn, `Error type` = error_type) |> 
+  group_by(Player, `Decision type` = error_type) |> 
   summarise(Decisions = n(),
-            `Mean error` = mean(error_size, na.rm = TRUE), 
-            `Standard deviation` = sd(error_size, na.rm = TRUE),
-            PR = mean(error_size, na.rm = TRUE) * -500, 
+            `Mean error` = mean(error_size), 
+            `Standard deviation` = sd(error_size),
+            PR = mean(error_size) * -500, 
             `Confidence interval` = paste("±", round(`Standard deviation`/ sqrt(Decisions) * 500 * qnorm(0.975), 2))) |> 
   ungroup() |> 
   mutate(across(where(is_double), \(x) round(x, 3)))
 ```
 
+## Applications
 
-Let's say you play a 17-point match, with about 230 decisions on average. If your error variance is like mine online error variance,
+### A 17-point match
+
+If, like in the examples mentioned in the beginning, you have a much smaller sample, like a single match, how will the calculations typically look like? Here's how many decisions we find, on average, per player, in matches of different length:
+
+
+```{r match_lengths}
+df |> 
+  filter(!is.na(length), length %% 2 == 1) |> 
+  group_by(match, length, turn) |> 
+  summarise(decisions = n()) |> 
+  group_by(Length = length) |>
+  summarise(`No. of matches` = n(),
+            `Mean no. of decisions` = mean(decisions),
+            `Median no. of decisions` = median(decisions),
+            .groups = "drop") |> 
+  mutate(across(where(is_double), \(x) round(x, 1)))
+  
+
+```
+
+
+```{r compare_players}
+my_sd <- df |> filter(Player == "Lasse") |> pull(error_size) |> sd()
+other_sd <- df |> filter(Player != "Lasse") |> pull(error_size) |> sd()
+llabba_sd <- df |> filter(tolower(turn) == "llabba") |> pull(error_size) |> sd()
+
+my_sd_round <- my_sd |> round(3)
+```
+
+
+Let's say you play a 17-point match, with about 230 decisions on average. If your error variance is like my online error variance, then the confidence interval is about $\pm`r round(my_sd / sqrt(230) * 1.96 * 500, 1)`\ PR$. That's a lot, meaning that a single 17-point match is usually not that informative.
+
+If your error variance is more like my online opponents' error variance, then the confidence interval is even wider, about $\pm`r round(other_sd / sqrt(230) * 1.96 * 500, 1)`\ PR$.
+
+If, on your other hand, your are an exceptionally skilled player, like a friend of mine who plays under the nick 'Llabba', the variance is lower and the confidence interval tighter, about $\pm`r round(llabba_sd / sqrt(230) * 1.96 * 500, 1)`\ PR$.
+
+As in so many other cases, we can conclude that we generally need more data that we think.
+
+### A disastrous tournament
+
+Let's take a look at the second example from the beginning: Me playing 4.4 and 6.4 respectively, across eight 11-point matches in two PR-based tournaments.
+
+How strong evidence is this, that I was weaker in the second tournament, rather that just getting particular hard problems, or being unlucky in the inevitable guesswork?
+
+Key numbers:
+
+   - First tournament: 1,244 decisions; PR 4.4
+   - Second tournament: 1,228 decisions; PR 6.4
+   - For both tournaments, we assume same standard deviation as in my online matches: `r my_sd_round`
+
+We can focus on the *difference* in PR between the two estimates by using the following variant of the formula above:
+
+$$
+\text{CI} = \bar{x}_1 - \bar{x}_1 \pm z_{\alpha/2} \cdot \sqrt{  \frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2} }
+$$
+Plugging in numbers, remembering to multiply standard deviation, $\sigma$, by 500 to get to PR. 
+
+```{r test_diff}
+# Components
+difference <- 6.4 - 4.4
+sd_term <- 500 * my_sd
+n1 <- 1228
+n2 <- 1244
+conf <- 0.95
+
+# Margin of error
+margin_error <- qnorm(1/2 + conf/2) * sqrt(sd_term^2/n1 + sd_term^2/n2)
+
+# Calculate z-score for testing difference = 0
+z_score <- difference / sqrt(sd_term^2/n1 + sd_term^2/n2)
+
+# Calculate p-value
+p_value <-  2 * (1 - pnorm(z_score))
+```
+
+$$
+\text{CI} = 6.4 - 4.4 \pm 1.96 \cdot \sqrt{\frac{(500 \cdot`r  
+my_sd_round`)^2}{1228}+\frac{(500 \cdot`r my_sd_round`)^2}{1244}}) = 2 \pm `r round(margin_error, 2)`
+$$
+Since the confidence interval of the difference in PR of 2 does not include zero, it looks like there's some evidence that I played worse in the second tournament, and not just getting harder decisions.
+
+Another way of looking at it is to express the difference in standard errors, or z-scores, which would be:
+
+$$
+z = \frac{2}{\frac{500 \cdot`r  
+my_sd_round`}{\sqrt{1228}}+\frac{500 \cdot`r my_sd_round`}{\sqrt{1244}}} = `r round(z_score, 2)` 
+$$
+Which again translates to a p-value of `r round(p_value, 3)`.
+
+If my backgammon skills really was the same in the two tournaments, I would observe a difference in PR of at least 2 with probability `r round(2 * (1 - pnorm(z_score)), 3)`.
+
+Of course, the real explanation could be a combination: I might have had an harder job in the second tournament, and also was not playing my top game, perhaps due to distraction, fatigue, lack of motivation or whatever.
+
+### A wing fighter plot
+
+Now that we have the data, let's try to rank player by average PR in a nice plot.
+
+```{r players_rank}
+players <- df |> 
+  select(Player = turn, file, error_size) |>
+  mutate(player_lowcase = tolower(Player)) |> 
+  filter(!is.na(error_size)) |> 
+  group_by(player_lowcase) |> 
+  summarise(Player = max(Player),
+            Decisions = n(),
+            `Mean error` = mean(error_size), 
+            `Standard deviation` = sd(error_size),
+            PR = mean(error_size) * -500, 
+            ci = `Standard deviation`/ (sqrt(Decisions) - 1) * 500 * qnorm(0.975)) |> 
+  filter(Decisions > 250) |> 
+  slice_min(PR, n = 40, with_ties = FALSE) |> 
+  mutate(Player = fct_reorder(Player, PR, .fun = min))
+```
+
+
+```{r players_rank_plot}
+#| column: page-right
+#| fig-width: 7
+#| fig-height: 6
+
+players |> 
+  ggplot(aes(y = Player, x = PR, size = Decisions)) +
+  geom_point(color = "lightblue", show.legend = TRUE) +
+  geom_errorbar(aes(xmin = PR-ci, xmax = PR + ci), 
+                width = 0.4, 
+                linewidth = 0.2, 
+                color = "grey",
+                show.legend = FALSE) +
+  scale_x_continuous(breaks = seq(1,20)) +
+  labs(title = "Mean PR for online backgammon players",
+       subtitle = "Top players with more than 250 decisions. Vertical lines are confidence intervals",
+        y = NULL, x = "Mean PR") +
+  theme(panel.grid.major.y = element_blank(),
+        axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        legend.justification = c(1, 0), legend.position = c(0.9, 0))
+```
+
+In general, for random opponents on Galaxy Backgammon, there are too little data for the confidence intervals to be super meaningful. For myself and Llabba I have a lot more data so estimates are much more precise.
+
+Note, as mentioned earlier, that the confidence intervals depend not only on the number of decisions we have available, but also on the *standard deviation* of the errors, e.g. how consistent players are.
+
+Not surprisingly, strong players tend to have lower standard deviation as well; almost by definition they have fewer extreme values. We can see that in the plot below.
+
+```{r players_sdt_dev}
+#| column: page-right
+#| fig-width: 7
+#| fig-height: 5
+
+players |> 
+  ggplot(aes(y = `Standard deviation`, x = PR, size = Decisions)) +
+  geom_point(color = "lightblue")  +
+  scale_x_continuous(breaks = seq(1,20)) +
+  geom_smooth(se = FALSE, show.legend = FALSE, color = "lightgray") +
+  labs(title = "Mean PR vs. error standard deviation for online backgammon players",
+       subtitle = "Top players with more than 250 decisions. Grey line is a smoothed trend",
+        y = "Standard deviation on errors in EMG", x = "Mean PR") +
+  theme(panel.grid.major.y = element_blank(),
+        axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)),
+        axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        legend.justification = c(1, 0), legend.position = c(1, 0))
+```
+
+### A word of caution
+
+Let's take a quick moment to reiterate the concept of a confidence interval, since this is often misinterpreted. I'm using a customary confidence level of 95%. That means, that *before* playing a match, I know that my resulting PR will, with probability 95%, be within, say, $\pm`r round(my_sd / sqrt(230) * 1.96 * 500, 1)`$ of my true PR.
+
+It does *not* mean that my true PR is within this interval from any result that I have already obtained. Once the match is finished, it either does or does not reflect my actual PR. The 95% refers to the *process* of collecting data from random sample, not the accuracy of any *specific* result.
+
+## Double checking
+
+### Calculate another way
+
+Just to check, let's re-calculate my confidence intervals from the table in @sec-estimates using a the `t.test()` function from the `stats` package in R -- as standard as it gets.
+
+```{r sanity_check}
+#| code-fold: true
+#| echo: true
+
+my_errors <- df |> 
+  filter(Player == "Lasse") |> 
+  pull(error_size) |> 
+  (`*`)(-500)
+
+test_result <- my_errors |> t.test()
+
+my_mean <- test_result$estimate |> round(3)
+my_ci <- (test_result$estimate - test_result$conf.int[1]) |> round(3)
+
+cat("Mean PR for player Lasse            : ", my_mean, "\r",
+    "Confidence interval for player Lasse: ", my_ci,
+    sep = "")
+```
+This agrees quite closely; the small discrepancy is likely due to using the t-distribution which in this case is *nearly* identical to the normal distribution.
+
+### Normally distributed?
+
+It would be nice to check if the data actually behaves as assumed above: That PR estimates follows a normal distribution around the true mean, with the standard deviation of the estimates declining by the square root of the number of observations. (This should hold even though the distribution of errors is far from normal, as stated by the [Central limit theorem](https://en.wikipedia.org/wiki/Central_limit_theorem)).
+
+To check, we can treat each individual game in the dataset as a sample, and see if game-level average errors are indeed distributed normally around players' overall error rate. We expect games with fewer decisions to show larger variability than games with many decisions, but they should be approximately normal distributed around the 'true' mean.
+
+```{r z-score-plot-data}
+game_errors <- df |> 
+  select(Player = turn, file, error_size) |>
+  mutate(player_lowcase = tolower(Player)) |> 
+  filter(!is.na(error_size)) |> 
+  group_by(player_lowcase) |> 
+  mutate(total_decisions = n(),
+         mean_pr = mean(error_size) * -500,
+         std_dev = sd(error_size) * -500) |>
+  filter(total_decisions > 200) |> 
+  group_by(player_lowcase, file, total_decisions, mean_pr, std_dev) |> 
+  summarise(Player = max(Player), 
+            mean_game_pr = mean(error_size) * - 500,
+            game_decisions = n(),
+            .groups = "drop") |> 
+  mutate(game_sd_error = std_dev / sqrt(game_decisions),
+         z_score = (mean_pr - mean_game_pr) / game_sd_error) 
+```
+
+
+```{r z-score-plot}
+game_errors |> 
+  ggplot(aes(x = z_score)) +
+  geom_density() +
+  labs(title = "How games-level PR vary around overall PR",
+       subtitle = "Measured in standard errors, or z-scores",
+       x = "Difference between ovarall PR and game PR,\n measured in standard errors",
+       y = "Density")
+```
+
+Actually, the distribution does not quite follow the symmetrical shape of the normal distribution. In hindsight this is not so surprising: The PR value cannot go *below* zero but the upper bound is very high. In other words: There's a hard limit to how well you can play in a given game (zero PR), but the potential to screw up is huge. You can be a large number of standard deviations *above* your average, but only so much *lower*.
+
+### Bootstrap
+
+To check if this affect the confidence intervals calculated above, let's try [boot strapping](https://en.wikipedia.org/wiki/Bootstrapping_(statistics)) -- a numerical approach that doesn't rely on assumptions of the underlying distribution or the [Central limit theorem](https://en.wikipedia.org/wiki/Central_limit_theorem)).
+
+Again, we compare to my own confidence interval from @sec-estimates:
+
+```{r bootstrap}
+boot_mean <- function(data, indices) {
+  resampled <- data[indices]
+  return(mean(resampled))
+}
+  
+boot_results <- boot(data = my_errors, statistic = boot_mean, R = 10000)
+  
+my_boot_mean <- mean(boot_results$t) |> round(3)
+my_boot_ci <- (boot.ci(boot_results, type = "norm")$normal[3] - my_boot_mean) |> 
+  round(3)
+
+cat("Boot strapped mean PR for player Lasse: ", my_boot_mean, "\r",
+    "Boot strapped CI for player Lasse     : ", my_boot_ci,
+    sep = "")
+```
+
+Again very close; small differences can be due to the stochastical nature of boot strapping.
+
+We can conclude that the confidence intervals presented earlier are likely to be valid.
+
+```{r toy_example_boot}
+#| include: false
+#| eval: false
+
+# To demonstrate how bootstrap sampling works, using the boot package
+
+set.seed(11)
+
+toy <- runif(1000)      # Toy data
+alpha <- qnorm(0.975)  # Alpha level, ~1.96
+
+# Traditional confidence interval
+std_err <- sd(toy)/(sqrt(length(toy) - 1))  
+ci <- std_err * alpha
+
+# Bootstrap confidence interval
+boot_mean <- function(data, indices) {
+  resampled <- data[indices]
+  return(mean(resampled))
+}
+
+boo <- boot(data = toy, statistic = boot_mean, R = 10000)
+bci = boot.ci(boo, type = "norm")
+
+# Compare
+cat(" Std.err     : ", std_err, "\n", "Std.err boot: ", sd(boo$t))
+cat(" Mean        : ", mean(toy), "\n", "Mean boot   : ", mean(boo$t))
+cat(" CI          : ", ci, "\n", "CI boot     : ", mean(boo$t) - bci$normal[2])
+cat(" CI diff     : ", ci - mean(boo$t) + bci$normal[2])
+```
+
