@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lasse Hjorth Madsen">
-<meta name="dcterms.date" content="2025-01-09">
+<meta name="dcterms.date" content="2025-02-04">
 
 <title>Confidence intervals for PR</title>
 <style>
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -68,7 +102,40 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -207,12 +274,27 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#why-this" id="toc-why-this" class="nav-link active" data-scroll-target="#why-this">Why this?</a></li>
-  <li><a href="#to-do" id="toc-to-do" class="nav-link" data-scroll-target="#to-do">To-do</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
+  <li><a href="#sec-estimates" id="toc-sec-estimates" class="nav-link" data-scroll-target="#sec-estimates">PR estimates</a></li>
+  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">Applications</a>
+  <ul class="collapse">
+  <li><a href="#a-17-point-match" id="toc-a-17-point-match" class="nav-link" data-scroll-target="#a-17-point-match">A 17-point match</a></li>
+  <li><a href="#a-disastrous-tournament" id="toc-a-disastrous-tournament" class="nav-link" data-scroll-target="#a-disastrous-tournament">A disastrous tournament</a></li>
+  <li><a href="#a-wing-fighter-plot" id="toc-a-wing-fighter-plot" class="nav-link" data-scroll-target="#a-wing-fighter-plot">A wing fighter plot</a></li>
+  <li><a href="#a-word-of-caution" id="toc-a-word-of-caution" class="nav-link" data-scroll-target="#a-word-of-caution">A word of caution</a></li>
+  </ul></li>
+  <li><a href="#double-checking" id="toc-double-checking" class="nav-link" data-scroll-target="#double-checking">Double checking</a>
+  <ul class="collapse">
+  <li><a href="#calculate-another-way" id="toc-calculate-another-way" class="nav-link" data-scroll-target="#calculate-another-way">Calculate another way</a></li>
+  <li><a href="#normally-distributed" id="toc-normally-distributed" class="nav-link" data-scroll-target="#normally-distributed">Normally distributed?</a></li>
+  <li><a href="#bootstrap" id="toc-bootstrap" class="nav-link" data-scroll-target="#bootstrap">Bootstrap</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -233,7 +315,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 9, 2025</p>
+      <p class="date">February 4, 2025</p>
     </div>
   </div>
   
@@ -247,36 +329,229 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="why-this" class="level2">
 <h2 class="anchored" data-anchor-id="why-this">Why this?</h2>
-<p>Performance Rating, PR, is the defacto standard for measuring playing strength in backgammon. It’s the average error per decision (i.e.&nbsp;non-forced and non-trivial play). But for an individual player PR varies a lot from match to match, from tournament to tournament, or, presumably, over time. This is expected, since players face very different sets of decisions in each match. A match is, in essence, a random sample of all possible decision one will have to make in backgammon.</p>
-<p>It would be nice to calculate confidence intervals and compute p-values, to give an idea of how accurate a given PR-result is.</p>
-<p>For example:</p>
-<ul>
-<li><p>Suppose I estimate my own playing strength at around, say, 4.0 PR. Now suppose I play a 17-point match at 6.0 PR. What is the most reasonable interpretation: a) That I for some reason played worse than usual, or b) That this is just an example of the natural variation given the relative small sample size?</p></li>
-<li><p>Or, suppose that I play 8 matches in some tournament, for a combined PR of 4.5. Then, a year a later, I play 5.5 in another tournament. Is this evidence that my play has gotten worse, or is it likely to be just statistical noise?</p></li>
-</ul>
-<p>The last case was a real life experience for me at the qualification tournaments for the Danish national team in 2024 and 2025. It would be nice to more confidently interpret these data.</p>
+<p>Performance Rating, PR, is the defacto standard for measuring playing strength in backgammon. It’s the average error per decision (i.e.&nbsp;non-forced and non-trivial play). But for an individual player PR varies a lot from match to match, from tournament to tournament, and over time. This is expected, since players face very different sets of decisions in each match.</p>
+<p>A match is, in essence, a random sample of all possible decision one will have to make in backgammon. But random samples vary; some matches are hard, some not so hard. Let’s try to examine that variation and to calculate confidence intervals around PR-values, to give an idea of how accurate a given PR-result is.</p>
 </section>
-<section id="to-do" class="level2">
-<h2 class="anchored" data-anchor-id="to-do">To-do</h2>
+<section id="examples" class="level2">
+<h2 class="anchored" data-anchor-id="examples">Examples</h2>
+<p>Suppose I estimate my own playing strength at around, say, 5.0 PR. Now, let’s say I play a 17-point match at 6.0 PR. What is the most reasonable interpretation:</p>
 <ul>
-<li>Update bgmoves dataset</li>
-<li>Use bgmoves dataset to estimate variance</li>
-<li>Split the variance between me/opponents, and checker play, cube decisions.</li>
-<li>Calculate average number of moves for various match lengths</li>
-<li>Calculate example of confidence intervals.</li>
-<li>Test hypotheses:
-<ul>
-<li>PR_2025 &lt; PR_2024</li>
-<li>PR_live &lt; PR_online</li>
-</ul></li>
-<li>Examine data from VM kval. 2024 and 2025
-<ul>
-<li>Distribution of PRs</li>
-<li>Do players PR vary by about the expected amount?</li>
-</ul></li>
+<li>That I for some reason played worse than usual, or</li>
+<li>That the match was tougher that average?</li>
 </ul>
+<p>For another example, suppose that I play eight 11-point matches in some tournament, with a combined PR of 4.4. Then, a year later, I play 6.4 in a similar tournament. Is this evidence that my play has gotten worse, or is it as likely to be just statistical noise?</p>
+<p>The last example was a real life experience for me at the qualification tournaments for the Danish national team in 2024 and 2025. It would be nice to more confidently interpret these data.</p>
+</section>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data">The data</h2>
+<p>We can use the <a href="https://lassehjorthmadsen.github.io/bglab/reference/bgmoves.html"><code>bgmoves</code></a> dataset to estimate the <em>variance</em> of my errors, which we need to compute confidence intervals around a specific PR result.</p>
+<p><code>bgmoves</code> have 191012 positions, some involving both a checker play and a cube play. Not all positions in the database are decisions; if we pull out all actual decisions from the dataset, we get a subset of 163530 actual decisions.</p>
+<p>In backgammon, the majority of checker play decisions are easy; both me and my opponents get the most checker plays right. Here’s a count of checker play decisions, by player and if a an error was made:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Player"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Checker play error made"],"name":[2],"type":["lgl"],"align":["right"]},{"label":["n"],"name":[3],"type":["int"],"align":["right"]},{"label":["Percent (by player)"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"Lasse","2":"FALSE","3":"45843","4":"75.2"},{"1":"Lasse","2":"TRUE","3":"15089","4":"24.8"},{"1":"Someone else","2":"FALSE","3":"55721","4":"70.7"},{"1":"Someone else","2":"TRUE","3":"23051","4":"29.3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>So we got 70-75 percent of all checker play decisions right. One can guess that perhaps half of all checker plays are truly routine; among the other half some are pretty easy, some are too close to care about, and some are real problems. If I get half of the latter group right, that aligns roughly with the numbers above.</p>
+<p>Cube decisions are different by nature, they are far fewer, but it looks like most are also relatively easy:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Player"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Cube error made"],"name":[2],"type":["lgl"],"align":["right"]},{"label":["n"],"name":[3],"type":["int"],"align":["right"]},{"label":["Percent (by player)"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"Lasse","2":"FALSE","3":"7316","4":"83.1"},{"1":"Lasse","2":"TRUE","3":"1488","4":"16.9"},{"1":"Someone else","2":"FALSE","3":"11477","4":"76.4"},{"1":"Someone else","2":"TRUE","3":"3545","4":"23.6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-estimates" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-estimates">PR estimates</h2>
+<p>We really wanted to use the data to estimate PR and especially the uncertainty of those estimates, so let’s get going.</p>
+<p>PR is the average error per decision, where decision is defined as non-obvious moves: Non-forced checker plays; checker plays where all moves are not equal; non-optional cubes; and potential doubles where doubling is a mistake less that 0.200 emg.</p>
+<p>When we compute PR for a specific game or match or series of matches, it can be seen as an estimate of the true PR based on a random <em>sample</em> of all possible decision.</p>
+<p>Like this:</p>
+<div class="cell page-columns page-full">
+<div id="tbl-out" class="cell quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-out-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: PR confidence intervals
+</figcaption>
+<div aria-describedby="tbl-out-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<div class="cell-output-display column-page-right">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Player"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Decisions"],"name":[2],"type":["int"],"align":["right"]},{"label":["Mean error"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Standard deviation"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["PR"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Confidence interval"],"name":[6],"type":["chr"],"align":["left"]}],"data":[{"1":"Lasse","2":"69736","3":"-0.011","4":"0.038","5":"5.259","6":"± 0.142"},{"1":"Someone else","2":"93794","3":"-0.017","4":"0.054","5":"8.469","6":"± 0.173"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>So in this data set I average a PR of 5.259 ± 0.141. The calculation is based on a <em>lot</em> of decisions, 69,737. The mean error (in equivalent-to-money-game, emg) is -0.011, meaning that I on average sacrifice about a percentage of a point on each decision. That may seem low, but recall that it’s across <em>all</em> decisions, also routine ones, and that most error are zero, so there has to be occasional really big mistakes in there. (Have a look at <a href="https://lassehjorthmadsen.github.io/bganalyses/analyses/player-mistakes.html">this</a> analysis, for a more in-depth look at distributions of mistakes.)</p>
+<p>The standard deviation is a measure of how much the errors vary around the mean; we see that the variation is a bit higher for my opponents. That makes sense, since this group includes quite a few inexperienced players, who makes bigger mistakes more frequently.</p>
+<p>PR is just the mean error multiplied by -500.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Confidence_interval">confidence interval, CI</a> is calculated as the standard deviation divided by the quare root of the number of observations, n:</p>
+<p><span class="math display">\[
+\text{CI} = \bar{x} \pm z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}
+\]</span> Where:</p>
+<p><span class="math display">\[
+\bar{x} \text{ = sample mean}
+\]</span> <span class="math display">\[
+z_{\alpha/2} \text{ = critical value (1.96 for 95\% confidence)}
+\]</span> <span class="math display">\[
+\sigma \text{ = standard deviation}
+\]</span> <span class="math display">\[
+n \text{ = number of observations}
+\]</span></p>
+<p>We can split up the calculations by decision type (checker or cube), and see that the variance is a bit higher for cube decision. The confidence intervals are quite a bit wider, since the number of decisions is smaller:</p>
+<div class="cell page-columns page-full">
+<div class="cell-output-display column-page-right">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Player"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Decision type"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Decisions"],"name":[3],"type":["int"],"align":["right"]},{"label":["Mean error"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Standard deviation"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["PR"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Confidence interval"],"name":[7],"type":["chr"],"align":["left"]}],"data":[{"1":"Lasse","2":"Cube error","3":"8804","4":"-0.017","5":"0.064","6":"8.641","7":"± 0.66"},{"1":"Lasse","2":"Move error","3":"60932","4":"-0.010","5":"0.033","6":"4.770","7":"± 0.13"},{"1":"Someone else","2":"Cube error","3":"15022","4":"-0.028","5":"0.086","6":"13.991","7":"± 0.69"},{"1":"Someone else","2":"Move error","3":"78772","4":"-0.015","5":"0.045","6":"7.416","7":"± 0.16"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+<section id="applications" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="applications">Applications</h2>
+<section id="a-17-point-match" class="level3">
+<h3 class="anchored" data-anchor-id="a-17-point-match">A 17-point match</h3>
+<p>If, like in the examples mentioned in the beginning, you have a much smaller sample, like a single match, how will the calculations typically look like? Here’s how many decisions we find, on average, per player, in matches of different length:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Length"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["No. of matches"],"name":[2],"type":["int"],"align":["right"]},{"label":["Mean no. of decisions"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Median no. of decisions"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"39","3":"20.6","4":"21.0"},{"1":"3","2":"1651","3":"43.1","4":"40.0"},{"1":"5","2":"669","3":"67.6","4":"65.0"},{"1":"7","2":"110","3":"98.0","4":"95.0"},{"1":"9","2":"12","3":"101.0","4":"105.0"},{"1":"11","2":"2","3":"194.0","4":"194.0"},{"1":"13","2":"96","3":"185.0","4":"178.5"},{"1":"17","2":"16","3":"227.8","4":"223.0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>Let’s say you play a 17-point match, with about 230 decisions on average. If your error variance is like my online error variance, then the confidence interval is about <span class="math inline">\(\pm2.5\ PR\)</span> That’s a lot, meaning that a single 17-point match is usually not that informative.</p>
+<p>If your error variance is more like my online opponents’ error variance, then the confidence interval is even wider, about <span class="math inline">\(\pm3.5\ PR\)</span>.</p>
+<p>If, on your other hand, your are an exceptionally skilled player, like a friend of mine who plays under the nick ‘Llabba’, the variance is lower and the confidence interval tighter, about <span class="math inline">\(\pm1.6\ PR\)</span>.</p>
+<p>As in so many other cases, we can conclude that we generally need more data that we think.</p>
+</section>
+<section id="a-disastrous-tournament" class="level3">
+<h3 class="anchored" data-anchor-id="a-disastrous-tournament">A disastrous tournament</h3>
+<p>Let’s take a look at the second example from the beginning: Me playing 4.4 and 6.4 respectively, across eight 11-point matches in two PR-based tournaments.</p>
+<p>How strong evidence is this, that I was weaker in the second tournament, rather that just getting particular hard problems, or being unlucky in the inevitable guesswork?</p>
+<p>Key numbers:</p>
+<ul>
+<li>First tournament: 1,244 decisions; PR 4.4</li>
+<li>Second tournament: 1,228 decisions; PR 6.4</li>
+<li>For both tournaments, we assume same standard deviation as in my online matches: 0.0</li>
+</ul>
+<p>We can focus on the <em>difference</em> in PR between the two estimates by using the following variant of the formula above:</p>
+<p><span class="math display">\[
+\text{CI} = \bar{x}_1 - \bar{x}_1 \pm z_{\alpha/2} \cdot \sqrt{  \frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2} }
+\]</span> Plugging in numbers, remembering to multiply standard deviation, <span class="math inline">\(\sigma\)</span>, by 500 to get to PR.</p>
+<p><span class="math display">\[
+\text{CI} = 6.4 - 4.4 \pm 1.96 \cdot \sqrt{\frac{(500 \cdot0.038)^2}{1228}+\frac{(500 \cdot0.038)^2}{1244}}) = 2 \pm 1.5
+\]</span> Since the confidence interval of the difference in PR of 2 does not include zero, it looks like there’s some evidence that I played worse in the second tournament, and not just getting harder decisions.</p>
+<p>Another way of looking at it is to express the difference in standard errors, or z-scores, which would be:</p>
+<p><span class="math display">\[
+z = \frac{2}{\frac{500 \cdot0.038}{\sqrt{1228}}+\frac{500 \cdot0.038}{\sqrt{1244}}} = 2.61
+\]</span> Which again translates to a p-value of 0.009.</p>
+<p>If my backgammon skills really was the same in the two tournaments, I would observe a difference in PR of at least 2 with probability 0.009.</p>
+<p>Of course, the real explanation could be a combination: I might have had an harder job in the second tournament, and also was not playing my top game, perhaps due to distraction, fatigue, lack of motivation or whatever.</p>
+</section>
+<section id="a-wing-fighter-plot" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="a-wing-fighter-plot">A wing fighter plot</h3>
+<p>Now that we have the data, let’s try to rank player by average PR in a nice plot.</p>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div class="page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="pr-confidence-intervals_files/figure-html/players_rank_plot-1.png" class="img-fluid figure-img column-page-right" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In general, for random opponents on Galaxy Backgammon, there are too little data for the confidence intervals to be super meaningful. For myself and Llabba I have a lot more data so estimates are much more precise.</p>
+<p>Note, as mentioned earlier, that the confidence intervals depend not only on the number of decisions we have available, but also on the <em>standard deviation</em> of the errors, e.g.&nbsp;how consistent players are.</p>
+<p>Not surprisingly, strong players tend to have lower standard deviation as well; almost by definition they have fewer extreme values. We can see that in the plot below.</p>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div class="page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="pr-confidence-intervals_files/figure-html/players_sdt_dev-1.png" class="img-fluid figure-img column-page-right" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="a-word-of-caution" class="level3">
+<h3 class="anchored" data-anchor-id="a-word-of-caution">A word of caution</h3>
+<p>Let’s take a quick moment to reiterate the concept of a confidence interval, since this is often misinterpreted. I’m using a customary confidence level of 95%. That means, that <em>before</em> playing a match, I know that my resulting PR will, with probability 95%, be within, say, <span class="math inline">\(\pm2.5\)</span> of my true PR.</p>
+<p>It does <em>not</em> mean that my true PR is within this interval from any result that I have already obtained. Once the match is finished, it either does or does not reflect my actual PR. The 95% refers to the <em>process</em> of collecting data from random sample, not the accuracy of any <em>specific</em> result.</p>
+</section>
+</section>
+<section id="double-checking" class="level2">
+<h2 class="anchored" data-anchor-id="double-checking">Double checking</h2>
+<section id="calculate-another-way" class="level3">
+<h3 class="anchored" data-anchor-id="calculate-another-way">Calculate another way</h3>
+<p>Just to check, let’s re-calculate my confidence intervals from the table in <a href="#sec-estimates" class="quarto-xref">Section&nbsp;4</a> using a the <code>t.test()</code> function from the <code>stats</code> package in R – as standard as it gets.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>my_errors <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Lasse"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(error_size) <span class="sc">|&gt;</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  (<span class="st">`</span><span class="at">*</span><span class="st">`</span>)(<span class="sc">-</span><span class="dv">500</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>test_result <span class="ot">&lt;-</span> my_errors <span class="sc">|&gt;</span> <span class="fu">t.test</span>()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>my_mean <span class="ot">&lt;-</span> test_result<span class="sc">$</span>estimate <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>my_ci <span class="ot">&lt;-</span> (test_result<span class="sc">$</span>estimate <span class="sc">-</span> test_result<span class="sc">$</span>conf.int[<span class="dv">1</span>]) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Mean PR for player Lasse            : "</span>, my_mean, <span class="st">"</span><span class="sc">\r</span><span class="st">"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Confidence interval for player Lasse: "</span>, my_ci,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mean PR for player Lasse            : 5.259
+Confidence interval for player Lasse: 0.141</code></pre>
+</div>
+</div>
+<p>This agrees quite closely; the small discrepancy is likely due to using the t-distribution which in this case is <em>nearly</em> identical to the normal distribution.</p>
+</section>
+<section id="normally-distributed" class="level3">
+<h3 class="anchored" data-anchor-id="normally-distributed">Normally distributed?</h3>
+<p>It would be nice to check if the data actually behaves as assumed above: That PR estimates follows a normal distribution around the true mean, with the standard deviation of the estimates declining by the square root of the number of observations. (This should hold even though the distribution of errors is far from normal, as stated by the <a href="https://en.wikipedia.org/wiki/Central_limit_theorem">Central limit theorem</a>).</p>
+<p>To check, we can treat each individual game in the dataset as a sample, and see if game-level average errors are indeed distributed normally around players’ overall error rate. We expect games with fewer decisions to show larger variability than games with many decisions, but they should be approximately normal distributed around the ‘true’ mean.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="pr-confidence-intervals_files/figure-html/z-score-plot-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Actually, the distribution does not quite follow the symmetrical shape of the normal distribution. In hindsight this is not so surprising: The PR value cannot go <em>below</em> zero but the upper bound is very high. In other words: There’s a hard limit to how well you can play in a given game (zero PR), but the potential to screw up is huge. You can be a large number of standard deviations <em>above</em> your average, but only so much <em>lower</em>.</p>
+</section>
+<section id="bootstrap" class="level3">
+<h3 class="anchored" data-anchor-id="bootstrap">Bootstrap</h3>
+<p>To check if this affect the confidence intervals calculated above, let’s try <a href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)">boot strapping</a> – a numerical approach that doesn’t rely on assumptions of the underlying distribution or the <a href="https://en.wikipedia.org/wiki/Central_limit_theorem">Central limit theorem</a>).</p>
+<p>Again, we compare to my own confidence interval from <a href="#sec-estimates" class="quarto-xref">Section&nbsp;4</a>:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Boot strapped mean PR for player Lasse: 5.26
+Boot strapped CI for player Lasse     : 0.139</code></pre>
+</div>
+</div>
+<p>Again very close; small differences can be due to the stochastical nature of boot strapping.</p>
+<p>We can conclude that the confidence intervals presented earlier are likely to be valid.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
