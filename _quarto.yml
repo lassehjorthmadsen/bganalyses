@@ -15,6 +15,7 @@ website:
         - analyses/many-takepoints.qmd
         - analyses/bgmoves-analysis.qmd
         - analyses/pr-confidence-intervals.qmd
+        - analyses/big-cubes.qmd
       - section: "PRAXIS"
         contents:
         - analyses/milestones-2023.qmd

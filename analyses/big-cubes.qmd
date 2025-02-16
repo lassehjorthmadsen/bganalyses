@@ -6,6 +6,7 @@ format:
   html:
     fig-width: 4
     fig-height: 4
+    df-print: paged
 toc: true
 toc-expand: true
 toc-depth: 4
@@ -47,7 +48,6 @@ remove_stuff <- function(text, leading_breaks = 4) {
     str_replace_all("\n\n", "\n") |> 
     cat(rep("\n", leading_breaks), ... = _, sep = "")
 }
-
 ```
 
 ```{r takepoints}
@@ -72,12 +72,10 @@ Here's one example from a recent match:
 #| column: page-right
 #| layout-ncol: 2
 
-
 ggboard("XGID=-CC--A------------------h-:2:-1:-1:00:3:3:0:17:10") +
   labs(title = "Black on roll, cube action?")
 
-"
-Analyzed in Rollout
+"Analyzed in Rollout
 Redouble/Take
   Player Winning Chances:   76,10% (G:0,00% B:0,00%)
   Opponent Winning Chances: 23,90% (G:0,00% B:0,00%)
@@ -86,19 +84,43 @@ Cubeful Equities:
        No redouble:     +0,809 (-0,168)
        Redouble/Take:   +0,977
        Redouble/Pass:   +1,000 (+0,023)
-
-Rollout:
-  10368 Games rolled with Variance Reduction.
-  Moves: 3-ply, cube decisions: XG Roller
 " |> remove_stuff() |> cat()
 ```
 
-```{r}
-tp_info(14, 14, c(0.5, 0, 0, 0.5, 0, 0), 4, met, cube_eff = 0)
-tp(14, 14, 4, met)
-tp(5, 5, 2, met)
-tp(7, 7, 4, met)
+In the match, I was playing White and passed this cube, which was a very small mistake. I expected the take point to be a bit higher than for money, but apparently that is not the case.
+
+My thinking was, that points get progressively more valuable the closer you get to the end of a match: At double match point you have 50% chance of winning, an actual win get you to 100%, so a point is worth 50 percentage points. At 17-away, 17-away a single point win get you from 50% to 54% so is worth just 4 percentage points. At 5-away, 5-away a point is worth about 8 percentage points.
+
+So in a sense doubling more than doubles the stakes. A bit like 'doubling' from 4 to not 8 but perhaps 9 points. That should make you *more* reluctant to take, I thought. 
+
+An actual calculation shows that the take point when doubled from 4 to 8 at 13-away, 13-away is
+`r round(tp(14, 14, 4, met) * 100, 1)`% -- practically the same as for money, if anything a bit *lower*.
+
+That agrees with the numbers in the position above; White can take with just 23.9%, since he gains a bit from being able to double Black out efficiently when they get to a two-roll position. 
+
+So exactly where did my logic go wrong?
+
+The thing is, as the cube get bigger, the value of the points *currently* at stake also increases, so doubling does not necessarily "more that doubles" the stakes as I thought. Here's a table to illustrate:
+
+
+```{r table}
+tps |> 
+  select(-tp) |> 
+  mutate(single_win_value = single_win_value * 100) |> 
+  filter(x %in% 9:21, cube %in% c(4, 8)) |> 
+  arrange(x) |>
+  rename(`Match length` = x) |> 
+  mutate(cube = paste("Value of a", cube, "point win")) |> 
+  pivot_wider(names_from = cube, values_from = single_win_value) |>  
+  mutate(Ratio = c_across(3) / c_across(2)) |> 
+  mutate(across(starts_with("Value"), \(x) round(x, 1)),
+         across(Ratio, \(x) round(x, 2))) |> 
+  kableExtra::kable()
 ```
+
+We see that the value of both a 4-point win and an 8-point win increases as the match gets shorter, but the *ratio* between the two remains approximately the same, just about 2. So doubling from 4 to 8 does in fact double the stakes, not more than that.
+
+Let's plot the take points for more scores and more cube values:
 
 ```{r plot}
 #| column: page-right
@@ -119,18 +141,13 @@ tps |>
   theme(panel.grid.minor.x = element_blank(),
         panel.grid.minor.y = element_blank(), 
         panel.grid.major.y = element_line())
-
 ```
 
-```{r}
-tps |> 
-  select(-tp) |> 
-  filter(x %in% 5:15, cube %in% c(2, 4)) |> 
-  arrange(x) |>
-  rename(`Match length` = x) |> 
-  mutate(cube = paste(cube, "point win")) |> 
-  pivot_wider(names_from = cube, values_from = single_win_value) |>  
-  mutate(Ratio = c_across(3) / c_across(2)) |> 
-  mutate(across(where(is.double), round, 2)) 
-```
+Near the end of the match the take points can be a bit funny, as we know. When both players need 4 points, it's hard to take a 4-cube (take point `r round(tp(4, 4, 2, met) * 100, 0)`%). Here, doubling from 2 to 4 does indeed "more that doubles" the stakes. 
+
+At the other extreme, at 5-away, 5-away, it's easy to take an 8-cube, because the alternative, dropping, would leave you with just `r round(met[5,1] * 100, 1)`% winning chances.
+
+At longer matches, when the score is tied, cubes at the 1-, 2- or 4-levels behaves just like for money, as we might expect.
+
+8- and 16-cubes are different, however. These take-point are quite a bit lower that 25% (unless the match is *very* long). There intuition here is that conceding 8 or 16 points would leave you in a pretty desperate situaition anyway, so it's not something one should do easily. 
 
