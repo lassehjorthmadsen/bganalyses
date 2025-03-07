@@ -1373,11 +1373,101 @@ The practical advice would be to double anything that looks like a blitz, and wa
 compare_tps(x1 = 5, y1 = 5, cube1 = 2, tps = tps, tpsm = tpsm)
 ```
 
+Observations
+
+- At 5-away, 5-away it is little harder to find a take for a recube in positions without too many gammons, because the extra two points are particular valuable.
+- When gammons are likely, this effect is reduced, or even reversed, because after double/take the gammon drops low:
+
+```{r}
+compare_gvs(5, 5, c(2,4), met)
+```
+
+```{r}
+#| column: page-right
+#| layout-ncol: 2
+         
+ggboard("XGID=-B-bBCCBA---b----c-ccb-AA-:1:-1:-1:00:0:0:0:0:10") +
+  labs(title = "Example position 1",
+       subtitle = "Moderate take for money, marginal take at the score")
+
+"Money game, Cubeful Equities:
+       No redouble:     +0,819 (-0,111)
+       Redouble/Take:   +0,931
+       Redouble/Pass:   +1,000 (+0,069)
+
+
+5-away, 5-away, Cubeful Equities:
+       No redouble:     +0,859 (-0,137)
+       Redouble/Take:   +0,996
+       Redouble/Pass:   +1,000 (+0,004)
+" |> remove_stuff() |> cat()
+```
+
+Case in point: A position with strong boards and some gammon potential for both sides, but not enough to reverse the small tendency to drop at the score: White has enough for a decent money-take for, but at best a very marginal take at the score.
+
+It would take a truly gammonish position to make the underdog *more* inclined to take at the score, like our initial sample position for 'many gammons':
+
+
+```{r}
+#| column: page-right
+#| layout-ncol: 2
+         
+ggboard("XGID=b---C-CBB---dC---c-cc-B---:1:1:1:00:0:0:0:5:10") +
+  labs(title = "Example position 2",
+       subtitle = "Small take for money, clear take at the score")
+
+"Money game, Cubeful Equities:
+       No redouble:     +0,873 (-0,110)
+       Redouble/Take:   +0,984
+       Redouble/Pass:   +1,000 (+0,016)
+
+
+5-away, 5-away, Cubeful Equities:
+       No redouble:     +0,879 (-0,032)
+       Redouble/Take:   +0,911
+       Redouble/Pass:   +1,000 (+0,089)
+" |> remove_stuff() |> cat()
+```
+
+Ignoring that this position is too young to be a likely *re*double, Black is more inclined to take at the score, than for money.
+
 ### 4-away, 5-away
 
 ```{r}
 compare_tps(x1 = 4, y1 = 5, cube1 = 2, tps = tps, tpsm = tpsm)
 ```
+
+Observations:
+
+- At 4-away, 5-away it is even harder for the leader to take a recube, and this holds across all position types, although the effect is smallest when a lot of gammons are in play.
+
+- The reason is of course, the the cube is now officially dead after redouble/take, *and* the gammon value drops all the way down to zero for the leader, but quite as low for the trailer:
+
+```{r}
+compare_gvs(4, 5, c(2,4), met)
+```
+
+```{r}
+#| column: page-right
+#| layout-ncol: 2
+ggboard("XGID=-B-bBCCBA---b----c-ccb-AA-:1:-1:-1:00:1:0:0:5:10") +
+  labs(title = "Example position 1",
+       subtitle = "Moderate take for money, huge drop at the score")
+
+"Money game, Cubeful Equities:
+       No redouble:     +0,819 (-0,111)
+       Redouble/Take:   +0,931
+       Redouble/Pass:   +1,000 (+0,069)
+
+
+4-away, 5-away, Cubeful Equities:
+       No redouble:     +0,989 (-0,011)
+       Redouble/Take:   +1,314 (+0,314)
+       Redouble/Pass:   +1,000
+" |> remove_stuff() |> cat()
+```
+
+Example position 1, which was a marginal take at 5-away, 5-away, is now a huge drop.
 
 ### 3-away, 5-away
 
@@ -1385,11 +1475,23 @@ compare_tps(x1 = 4, y1 = 5, cube1 = 2, tps = tps, tpsm = tpsm)
 compare_tps(x1 = 3, y1 = 5, cube1 = 2, tps = tps, tpsm = tpsm)
 ```
 
+Observations:
+
+- Across all positions types it is *much* harder to take a redouble when leading 3-away, 5-away, compared to money. 
+
+- This is one of the big reasons why it's often a good idea to postpone the initial doubling a bit when leading 3-away, 5-away: It's a powerful weapon you're giving away.
+
 ### 5-away, 4-away
 
 ```{r}
 compare_tps(x1 = 5, y1 = 4, cube1 = 2, tps = tps, tpsm = tpsm)
 ```
+
+- If White do *not* have an automatic recube available (as in a last-roll situation), he should be careful about taking a redouble at this score.
+
+- Even if the auto-redouble is available, it's considerable harder to find a take than for money.
+
+- Of course, after redouble/take/auto-redouble, it is double match point, so gammons are harmless -- this could lead to takes that normally 'look like' big passes.
 
 ### 5-away, 3-away
 
@@ -1397,22 +1499,12 @@ compare_tps(x1 = 5, y1 = 4, cube1 = 2, tps = tps, tpsm = tpsm)
 compare_tps(x1 = 5, y1 = 3, cube1 = 2, tps = tps, tpsm = tpsm)
 ```
 
+- A redouble here is of course for the match, so one needs only the same winning probability as when trailing 5-away, 1-away: 15.8%
+
+- Caveat is when you don't get to redouble, as in a last-roll or virtually last roll situation. Then we need a good bit more -- but still less than for money.
+
 ## The rare 8-cube
 
 ```{r}
 compare_tps(x1 = 5, y1 = 5, cube1 = 4, tps = tps, tpsm = tpsm)
-```
-
-## Outside the 5-point match
-
-```{r}
-compare_tps(12, 14, 2, tps, tpsm)
-```
-
-```{r}
-compare_tps(8, 5, 1, tps, tpsm)
-```
-
-```{r}
-compare_gvs(5, 3, 1:2, met)
 ```
