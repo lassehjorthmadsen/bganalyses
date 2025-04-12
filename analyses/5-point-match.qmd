@@ -1221,39 +1221,56 @@ compare_tps(2, 3, 1, tps, tpsm)
 
 Observations
 
-- Obs.
+- Every type of position is a bit harder to take here than for money, although the difference is less pronounced in last-roll positions where White wouldn't have had the benefit of potential redoubles anyway. 
 
-- Obs.
+- Of course, *especially* when the trailer has a gammon threat, the leader should be reluctant to take.
 
 ```{r}
 #| column: page-right
 #| layout-ncol: 2
 
-ggboard("XGID=-E--------------------abc-:0:0:-1:00:0:0:0:0:10") +
-  labs(title = "Example position 1",
-       subtitle = "Subtitle")
-
+ggboard("XGID=-DD-------------------acd-:0:0:-1:D:3:2:0:5:10") +
+  labs(title = "Example position 1: White wins 25.5%",
+       subtitle = "An imperfect four-roll position; take for money, pass at the score")
 "
+Money game, Cubeful Equities:
+       No double:     +0,764 (-0,141)
+       Double/Take:   +0,906
+       Double/Pass:   +1,000 (+0,094)
 
+
+2-away, 3-away, Cubeful Equities:
+       No double:     +0,767 (-0,233)
+       Double/Take:   +1,037 (+0,037)
+       Double/Pass:   +1,000
 " |> remove_stuff() |> cat()
 ```
 
-Comment on example 1.
+11 doesn't necessarily save a roll, so White is a bit worse off compared to a pure 4-roll position. Enough to turn a money take into a pass at the score.
 
 ```{r}
 #| column: page-right
 #| layout-ncol: 2
 
-ggboard("XGID=-b----E-C---cD---bbd--AbAA:0:0:-1:D:0:0:0:0:10") +
+ggboard("XGID=-b----E-C---cD---bbd--AbAA:0:0:-1:D:3:2:0:5:10") +
   labs(title = "Example position 2",
-       subtitle = "Subtitle")
+       subtitle = "Take for money, big pass at the score")
 
 "
-
+Money game, Cubeful Equities:
+       No double:     +0,784 (-0,171)
+       Double/Take:   +0,955
+       Double/Pass:   +1,000 (+0,045)
+       
+       
+2-away, 3-away, Cubeful Equities:
+       No double:     +1,030
+       Double/Take:   +1,451 (+0,421)
+       Double/Pass:   +1,000 (-0,030)       
 " |> remove_stuff() |> cat()
 ```
 
-Comment on example 2.
+When Black has a match winning gammon threat, this small money take becomes a gigantic pass at 2-away, 4-away
 
 #### 3-away, 2-away
 
@@ -1263,39 +1280,56 @@ compare_tps(3, 2, 1, tps, tpsm)
 
 Observations
 
-- Obs.
+- Naturally, the trailer can take (and redouble) with anything better than the 24.9% he would have had after passing at 3-away, 1-away, Crawford.
 
-- Obs.
-
-```{r}
-#| column: page-right
-#| layout-ncol: 2
-
-ggboard("XGID=-E--------------------abc-:0:0:-1:00:0:0:0:0:10") +
-  labs(title = "Example position 1",
-       subtitle = "Subtitle")
-
-"
-
-" |> remove_stuff() |> cat()
-```
-
-Comment on example 1.
+- Beware the last-roll situation, however: When the leader could win exactly 2-point (and not risk losing 3 or 4 point) that is dangerous.
 
 ```{r}
 #| column: page-right
 #| layout-ncol: 2
 
-ggboard("XGID=-b----E-C---cD---bbd--AbAA:0:0:-1:D:0:0:0:0:10") +
-  labs(title = "Example position 2",
-       subtitle = "Subtitle")
+ggboard("XGID=-B-------------------a-a--:0:0:-1:D:2:3:0:5:10") +
+  labs(title = "Example position 1. White wins 36.1%",
+       subtitle = "Beware the last-roll position at this score")
 
 "
+Money game, Cubeful Equities:
+       No double:     +0,278 (-0,278)
+       Double/Take:   +0,556
+       Double/Pass:   +1,000 (+0,444)
+
+
+3-away, 2-away, Cubeful Equities:
+       No double:     +0,278 (-0,722)
+       Double/Take:   +1,037 (+0,037)
+       Double/Pass:   +1,000
 
 " |> remove_stuff() |> cat()
 ```
 
-Comment on example 2.
+Even with 36.1% winning chances White can't quite take at the score with no automatic recube available; he needs 36.8%. 
+
+```{r}
+#| column: page-right
+#| layout-ncol: 2
+
+ggboard("XGID=-DD-------------------acd-:0:0:-1:00:3:2:0:5:10") +
+  labs(title = "Example position 2: White wins 25.5%",
+       subtitle = "An imperfect four-roll position; take for money, take at the score")
+"
+Money game, Cubeful Equities:
+       No double:     +0,764 (-0,141)
+       Double/Take:   +0,906
+       Double/Pass:   +1,000 (+0,094)
+       
+3-away, 2-away, Cubeful Equities:
+       No double:     +0,766 (-0,188)
+       Double/Take:   +0,954
+       Double/Pass:   +1,000 (+0,046)
+" |> remove_stuff() |> cat()
+```
+
+The same near-four-roll position as shown to be a pass at 2-away, 3-away. A smallish take at this score. 
 
 ### The funny two-point match  
 
@@ -1441,7 +1475,7 @@ Observations:
 
 - At 4-away, 5-away it is even harder for the leader to take a recube, and this holds across all position types, although the effect is smallest when a lot of gammons are in play.
 
-- The reason is of course, the the cube is now officially dead after redouble/take, *and* the gammon value drops all the way down to zero for the leader, but quite as low for the trailer:
+- The reason is of course, the the cube is now officially dead after redouble/take, *and* the gammon value drops all the way down to zero for the leader, but not quite as low for the trailer:
 
 ```{r}
 compare_gvs(4, 5, c(2,4), met)
@@ -1481,17 +1515,86 @@ Observations:
 
 - This is one of the big reasons why it's often a good idea to postpone the initial doubling a bit when leading 3-away, 5-away: It's a powerful weapon you're giving away.
 
+
+```{r}
+#| column: page-right
+#| layout-ncol: 2
+ggboard("XGID=-AbDCBD----aca----bbbb--A-:1:-1:-1:00:2:0:0:5:10") +
+  labs(title = "Example position 1",
+       subtitle = "Clear double/take for money, huge drop at the score")
+
+"Money game, Cubeful Equities:
+       No redouble:     +0,784 (-0,121)
+       Redouble/Take:   +0,905
+       Redouble/Pass:   +1,000 (+0,095)
+
+
+3-away, 5-away, Cubeful Equities:
+       No redouble:     +0,995 (-0,005)
+       Redouble/Take:   +1,570 (+0,570)
+       Redouble/Pass:   +1,000
+" |> remove_stuff() |> cat()
+```
+
+A pretty straight double/take for money, becomes a gigantic drop at the score.
+
 ### 5-away, 4-away
 
 ```{r}
 compare_tps(x1 = 5, y1 = 4, cube1 = 2, tps = tps, tpsm = tpsm)
 ```
 
-- If White do *not* have an automatic recube available (as in a last-roll situation), he should be careful about taking a redouble at this score.
+- If White does *not* have an automatic recube available (as in a last-roll situation), he should be careful about taking a redouble at this score.
 
-- Even if the auto-redouble is available, it's considerable harder to find a take than for money.
+- Even if the auto-redouble is available, it's considerable harder to find a take in a race than for money.
 
 - Of course, after redouble/take/auto-redouble, it is double match point, so gammons are harmless -- this could lead to takes that normally 'look like' big passes.
+
+
+```{r}
+#| column: page-right
+#| layout-ncol: 2
+ggboard("XGID=-DCC-------------------ee-:1:-1:-1:00:0:1:0:5:10") +
+  labs(title = "Example position 1: White wins 23.7%",
+       subtitle = "Moderate take for money, clear drop at the score")
+
+"Money game, Cubeful Equities:
+       No redouble:     +0,869 (-0,075)
+       Redouble/Take:   +0,944
+       Redouble/Pass:   +1,000 (+0,056)
+
+
+5-away, 4-away, Cubeful Equities:
+       No redouble:     +0,860 (-0,140)
+       Redouble/Take:   +1,121 (+0,121)
+       Redouble/Pass:   +1,000
+" |> remove_stuff() |> cat()
+```
+
+This is a 5-roll position with drawbacks: White can't use 22 to save a roll and 11 is not fully effective. Those are quite expensive drawbacks, rather than 28% in in a pure 5-roll, white has only 24% here. Enought for a good money take, not enough at 5-away, 4-away, even taking into consideration the automatic recube.
+
+
+```{r}
+#| column: page-right
+#| layout-ncol: 2
+ggboard("XGID=---bBBDBBA--A-aa--abbbbb-A:1:-1:-1:00:0:1:0:5:10") +
+  labs(title = "Example position 2",
+       subtitle = "Clear pass for money, no double at the score")
+
+"Money game, Cubeful Equities:
+       No redouble:     +0,880 (-0,120)
+       Redouble/Take:   +1,096 (+0,096)
+       Redouble/Pass:   +1,000
+
+
+5-away, 4-away, Cubeful Equities:
+       No redouble:     +0,874
+       Redouble/Take:   +0,436 (-0,438)
+       Redouble/Pass:   +1,000 (+0,126)
+" |> remove_stuff() |> cat()
+```
+
+This looks scary for money, and it is indeed a pass. But of course the many gammons don't matter after double/take/re-double, so White has a super easy take and Black is better off not doubling.
 
 ### 5-away, 3-away
 
@@ -1503,8 +1606,58 @@ compare_tps(x1 = 5, y1 = 3, cube1 = 2, tps = tps, tpsm = tpsm)
 
 - Caveat is when you don't get to redouble, as in a last-roll or virtually last roll situation. Then we need a good bit more -- but still less than for money.
 
+
+```{r}
+#| column: page-right
+#| layout-ncol: 2
+ggboard("XGID=---BBBCB----aB----Bccbbbb-:1:-1:-1:00:0:2:0:5:10") +
+  labs(title = "Example position 1. White wins 18.2%",
+       subtitle = "Big pass for money, clear take at the score")
+
+"Money game, Cubeful Equities:
+       No redouble:     +0,702 (-0,298)
+       Redouble/Take:   +1,231 (+0,231)
+       Redouble/Pass:   +1,000
+
+
+5-away, 3-away, Cubeful Equities:
+       No redouble:     +0,688 (-0,182)
+       Redouble/Take:   +0,870
+       Redouble/Pass:   +1,000 (+0,130)
+" |> remove_stuff() |> cat()
+```
+
+White can find the 15.8% he needs to take here. 
+
 ## The rare 8-cube
 
 ```{r}
 compare_tps(x1 = 5, y1 = 5, cube1 = 4, tps = tps, tpsm = tpsm)
+```
+
+The non-automatic 8-cube arises only at 5-away, 5-away, so like before we have at take point at 15.8%. If gammons are likely this could lead to the unusual too-good-to-double-take  situation. When this happens, the doubler is worse off doubling *no matter* if the opponent passes or takes.  
+
+Could look like this:
+
+```{r}
+#| column: page-right
+#| layout-ncol: 2
+ggboard("XGID=---BBBBB-----C-------bbbB-:2:-1:-1:00:0:0:0:5:10") +
+  labs(title = "Example position 1: White wins 16.5% at the score",
+       subtitle = "Too good to double, take")
+
+"Money game, Cubeful Equities:
+       No redouble:     +1,646
+       Redouble/Take:   +3,054 (+1,409)
+       Redouble/Pass:   +1,000 (-0,646)
+
+
+5-away, 5-away, Cubeful Equities:
+       No redouble:     +1,003
+       Redouble/Take:   +0,981 (-0,022)
+       Redouble/Pass:   +1,000 (-0,003)
+       
+1296 Games rolled with Variance Reduction.
+Moves: 3-ply, cube decisions: XG Roller
+" |> remove_stuff() |> cat()
 ```
