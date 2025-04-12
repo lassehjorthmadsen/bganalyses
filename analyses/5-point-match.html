@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lasse Hjorth Madsen">
-<meta name="dcterms.date" content="2025-02-16">
+<meta name="dcterms.date" content="2025-04-12">
 
 <title>The five point match</title>
 <style>
@@ -285,11 +285,19 @@ window.Quarto = {
   <li><a href="#post-crawford" id="toc-post-crawford" class="nav-link" data-scroll-target="#post-crawford">Post-crawford</a>
   <ul>
   <li><a href="#away-even-away" id="toc-away-even-away" class="nav-link" data-scroll-target="#away-even-away">1-away, even-away</a></li>
+  <li><a href="#even-away-1-away" id="toc-even-away-1-away" class="nav-link" data-scroll-target="#even-away-1-away">Even-away, 1-away</a></li>
   <li><a href="#away-odd-away" id="toc-away-odd-away" class="nav-link" data-scroll-target="#away-odd-away">1-away, odd-away</a></li>
+  <li><a href="#odd-away-1-away" id="toc-odd-away-1-away" class="nav-link" data-scroll-target="#odd-away-1-away">Odd-away, 1-away</a></li>
   </ul></li>
-  <li><a href="#recubes" id="toc-recubes" class="nav-link" data-scroll-target="#recubes">Recubes</a></li>
+  <li><a href="#recubes" id="toc-recubes" class="nav-link" data-scroll-target="#recubes">Recubes</a>
+  <ul>
+  <li><a href="#away-5-away-4" id="toc-away-5-away-4" class="nav-link" data-scroll-target="#away-5-away-4">5-away, 5-away</a></li>
+  <li><a href="#away-5-away-5" id="toc-away-5-away-5" class="nav-link" data-scroll-target="#away-5-away-5">4-away, 5-away</a></li>
+  <li><a href="#away-5-away-6" id="toc-away-5-away-6" class="nav-link" data-scroll-target="#away-5-away-6">3-away, 5-away</a></li>
+  <li><a href="#away-4-away-4" id="toc-away-4-away-4" class="nav-link" data-scroll-target="#away-4-away-4">5-away, 4-away</a></li>
+  <li><a href="#away-3-away-4" id="toc-away-3-away-4" class="nav-link" data-scroll-target="#away-3-away-4">5-away, 3-away</a></li>
+  </ul></li>
   <li><a href="#the-rare-8-cube" id="toc-the-rare-8-cube" class="nav-link" data-scroll-target="#the-rare-8-cube">The rare 8-cube</a></li>
-  <li><a href="#outside-the-5-point-match" id="toc-outside-the-5-point-match" class="nav-link" data-scroll-target="#outside-the-5-point-match">Outside the 5-point match</a></li>
   </ul>
 </nav>
     </div>
@@ -315,7 +323,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 16, 2025</p>
+      <p class="date">April 12, 2025</p>
     </div>
   </div>
   
@@ -531,7 +539,7 @@ Best Cube action: Double / Take</code></pre>
 <div class="cell-output-display">
 <div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
-<caption>Estimated live cube take points at 5-away, 5-away</caption>
+<caption>Estimated live cube take points at 5-away, 5-away, cube at 1</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">Position type</th>
@@ -640,7 +648,7 @@ Money game, cubeful equities:
 <div class="cell-output-display">
 <div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
-<caption>Estimated live cube take points at 4-away, 5-away</caption>
+<caption>Estimated live cube take points at 4-away, 5-away, cube at 1</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">Position type</th>
@@ -2156,8 +2164,8 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 </div>
 <p>Observations</p>
 <ul>
-<li><p>Obs.</p></li>
-<li><p>Obs.</p></li>
+<li><p>Every type of position is a bit harder to take here than for money, although the difference is less pronounced in last-roll positions where White wouldn’t have had the benefit of potential redoubles anyway.</p></li>
+<li><p>Of course, <em>especially</em> when the trailer has a gammon threat, the leader should be reluctant to take.</p></li>
 </ul>
 <div>
 
@@ -2167,9 +2175,25 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="5-point-match_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="384"></p>
 </div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>
+
+
+
+
+Money game, Cubeful Equities:
+ No double:     +0,764 (-0,141)
+ Double/Take:   +0,906
+ Double/Pass:   +1,000 (+0,094)
+
+2-away, 3-away, Cubeful Equities:
+ No double:     +0,767 (-0,233)
+ Double/Take:   +1,037 (+0,037)
+ Double/Pass:   +1,000</code></pre>
 </div>
 </div>
-<p>Comment on example 1.</p>
+</div>
+<p>11 doesn’t necessarily save a roll, so White is a bit worse off compared to a pure 4-roll position. Enough to turn a money take into a pass at the score.</p>
 <div>
 
 </div>
@@ -2178,9 +2202,26 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="5-point-match_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid" width="384"></p>
 </div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>
+
+
+
+
+Money game, Cubeful Equities:
+ No double:     +0,784 (-0,171)
+ Double/Take:   +0,955
+ Double/Pass:   +1,000 (+0,045)
+ 
+ 
+2-away, 3-away, Cubeful Equities:
+ No double:     +1,030
+ Double/Take:   +1,451 (+0,421)
+ Double/Pass:   +1,000 (-0,030)       </code></pre>
 </div>
 </div>
-<p>Comment on example 2.</p>
+</div>
+<p>When Black has a match winning gammon threat, this small money take becomes a gigantic pass at 2-away, 4-away</p>
 </section>
 <section id="away-2-away-2" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="away-2-away-2">3-away, 2-away</h4>
@@ -2237,8 +2278,8 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 </div>
 <p>Observations</p>
 <ul>
-<li><p>Obs.</p></li>
-<li><p>Obs.</p></li>
+<li><p>Naturally, the trailer can take (and redouble) with anything better than the 24.9% he would have had after passing at 3-away, 1-away, Crawford.</p></li>
+<li><p>Beware the last-roll situation, however: When the leader could win exactly 2-point (and not risk losing 3 or 4 point) that is dangerous.</p></li>
 </ul>
 <div>
 
@@ -2248,9 +2289,25 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="5-point-match_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid" width="384"></p>
 </div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>
+
+
+
+
+Money game, Cubeful Equities:
+ No double:     +0,278 (-0,278)
+ Double/Take:   +0,556
+ Double/Pass:   +1,000 (+0,444)
+
+3-away, 2-away, Cubeful Equities:
+ No double:     +0,278 (-0,722)
+ Double/Take:   +1,037 (+0,037)
+ Double/Pass:   +1,000</code></pre>
 </div>
 </div>
-<p>Comment on example 1.</p>
+</div>
+<p>Even with 36.1% winning chances White can’t quite take at the score with no automatic recube available; he needs 36.8%.</p>
 <div>
 
 </div>
@@ -2259,37 +2316,88 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="5-point-match_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid" width="384"></p>
 </div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>
+
+
+
+
+Money game, Cubeful Equities:
+ No double:     +0,764 (-0,141)
+ Double/Take:   +0,906
+ Double/Pass:   +1,000 (+0,094)
+ 
+3-away, 2-away, Cubeful Equities:
+ No double:     +0,766 (-0,188)
+ Double/Take:   +0,954
+ Double/Pass:   +1,000 (+0,046)</code></pre>
 </div>
 </div>
-<p>Comment on example 2.</p>
+</div>
+<p>The same near-four-roll position as shown to be a pass at 2-away, 3-away. A smallish take at this score.</p>
 </section>
 </section>
 <section id="the-funny-two-point-match" class="level3">
 <h3 class="anchored" data-anchor-id="the-funny-two-point-match">The funny two-point match</h3>
+<p>The two-point match is funny: It’s a well-known fact that an optimal strategy is to double at first opportunity, at which point the opponent will always have a clear take, with the take point beeing 32%.</p>
+<p>However, in practice, if you delay doubling until you have at least one market losing sequences, you might gain a bit from either:</p>
+<ol type="a">
+<li>The opponent doubling too late and loosing their market</li>
+<li>The opponent passing a less obvious take</li>
+</ol>
+<p>On the flip side, delaying doubling may cost you if:</p>
+<ol type="a">
+<li>You accidentally lose your market by overlooking something</li>
+<li>You end up passing what is really a take.</li>
+</ol>
+<p>For example, let’s say the opponent opens with 31. Should you double, knowing there’s zero chance he will pass? The best possible sequence is that you roll 66 and he rolls 61, which will still leave him with more than 40% winning chances and a very clear take. Still, the take is less clear than before, so perhaps there’s someone out there that will pass.</p>
+<p>In practical play, it would be better to roll, since it can’t hurt and it opens the possibility of harvesting possible mistakes the opponent might make.</p>
+<p>Suppose it is you who opens the game with 31, an he rolls 52, splitting. Now you <em>do</em> have market losers: Mostly involving you rolling 33, 55, or 66 and him responding poorly. Against any particular opponent it <em>might</em> still be the best play to hold off, but that depends on exactly how likely you are to lose your market (and by how much), and exactly how more likely the opponent is to make a future mistake, compare to yourself. That’s extremely hard to judge, so the best practical play against reasonably competent opposition, is probably to double.</p>
 </section>
 </section>
 <section id="post-crawford" class="level2">
 <h2 class="anchored" data-anchor-id="post-crawford">Post-crawford</h2>
 <section id="away-even-away" class="level3">
 <h3 class="anchored" data-anchor-id="away-even-away">1-away, even-away</h3>
+<p>When you are leading post-crawford, with the opponent being either 2-away or 4-away, you have a ‘free drop’. At 1-away, 2-away you can pass and get to double match point for 50% winning chances, so you need to have better than that to take.</p>
+<p>In general, you pass if you win the opening with one of the poorer rolls: 51, 52, or 43. Naturally you pass most of the time when the opponents win the opening roll – unless you respond strong, for example by hitting.</p>
+<p>At 1-away, 4-away you can take slightly more, the idea being of ‘saving’ the free drop for later, if you lose a single game and get to 1-away, 2-away, where you might need the free pass even more – like if the opponent opens with 31 and you don’t roll a good double (11, 33, 66 will do the trick) in return.</p>
+<p>A good benchmark: If you open with 41, played 13/9, 24/23, you should <em>pass</em> at 1-away, 2-away, but <em>take</em> at 1-away, 4-away.</p>
+</section>
+<section id="even-away-1-away" class="level3">
+<h3 class="anchored" data-anchor-id="even-away-1-away">Even-away, 1-away</h3>
+<p>When trailing 2-away or 4-away, of course you double right away. If you have no market losers that would make you a favorite, you <em>could</em> delay doubling, hoping to double and induce a wrong pass if you become a near-favorite. But this won’t really work: You would need a position good enough so that becoming a near-favorite is possible, but becoming an actual favorite is not possible. Even after a sequence like 54 (split), 44 (point-on-head) you could roll a joker like 11 from the bar, potentially losing your market.</p>
 </section>
 <section id="away-odd-away" class="level3">
 <h3 class="anchored" data-anchor-id="away-odd-away">1-away, odd-away</h3>
+<p>At 1-away, 3-away or 1-away, 5-away, you have a ‘free take’. How free is ‘free’?</p>
+<p>If, at 1-away, 3-away, you pass you get to 1-away, 2-away were you have the benefit of a free drop, making your match winning chances slightly above even-money: 51.2%. By taking and losing you get to DMP for 50%, so the loss is just 1.2%. The gain from taking and winning is 48.8%, making the take point:</p>
+<p><span class="math inline">\(Take\ point = \frac{loss}{loss+gain} = \frac{1.2}{1.2 + 48.8} = 2.4\)</span>%</p>
+<p>At 1-away, 5-away, the corresponding numbers would look like this:</p>
+<p><span class="math inline">\(Take\ point = \frac{loss}{loss+gain} = \frac{1.3}{1.3 + 32.3} = 3.9\)</span>%</p>
+<p>So the take is indeed almost free – unless we can lose a gammon. Gammons are expensive, with a value of 1.0 after double/take at 1-away, 3-away, and 0.55 at 1-away, 3-away. This means that in the worst case (opponent 3-away) we can take when our gammon chances are no less than our winning chances.</p>
+<p>When opponent is 5-away gammons are not nearly as costly, so they need to be roughly double our winning chances for us to pass.</p>
+<p>For example, suppose we open with one of the worst possible sequences: 52 (split), then the opponent fails to double, rolls 55 (double hit), then we dance with both checkers with 66. Now we have roughly 30% chances of winning but 40% chanches of getting gammoned.</p>
+<p>That is a big pass at 1-away, 3-away, and a big take at 1-away, 5-away.</p>
+<p>So practically speaking: When we have a free take available we take almost everything, <em>except</em> when being blitzed real badly.</p>
+</section>
+<section id="odd-away-1-away" class="level3">
+<h3 class="anchored" data-anchor-id="odd-away-1-away">Odd-away, 1-away</h3>
+<p>The above analysis also means that when trailing, and the opponent have a free take, we can delay doubling with little risk, as long as we’re not really threatening to win a gammon.</p>
+<p>For example, suppose we’re trailing 3-away post-crawford, and the opponent opens with 21: 13/11 6/5. We <em>could</em> double, expecting an automatic take (hoping for an enormous bonus if the opponent mistakes the free take for a free drop).</p>
+<p><em>Or</em> we could roll, hoping for something like 64 (double hit), 66 (double dance), in which case the opponent will <em>still</em> have a clear take (winning about 37%, lossing a gammon about 27% of the time) – but might also have a lot harder decision with more room for mistaking an easy take for a drop.</p>
+<p>The practical advice would be to double anything that looks like a blitz, and wait with anything that does not.</p>
 </section>
 </section>
-<section id="recubes" class="level2">
+<section id="recubes" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="recubes">Recubes</h2>
-</section>
-<section id="the-rare-8-cube" class="level2">
-<h2 class="anchored" data-anchor-id="the-rare-8-cube">The rare 8-cube</h2>
-</section>
-<section id="outside-the-5-point-match" class="level2">
-<h2 class="anchored" data-anchor-id="outside-the-5-point-match">Outside the 5-point match</h2>
+<section id="away-5-away-4" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="away-5-away-4">5-away, 5-away</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
-<caption>Estimated live cube take points at 12-away, 14-away, cube at 2</caption>
+<caption>Estimated live cube take points at 5-away, 5-away, cube at 2</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">Position type</th>
@@ -2301,33 +2409,33 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Last roll</td>
-<td style="text-align: right;">0.262</td>
+<td style="text-align: right;">0.284</td>
 <td style="text-align: right;">0.250</td>
-<td style="text-align: right;">0.012</td>
+<td style="text-align: right;">0.034</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Race</td>
-<td style="text-align: right;">0.232</td>
+<td style="text-align: right;">0.254</td>
 <td style="text-align: right;">0.214</td>
+<td style="text-align: right;">0.039</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A little gammon</td>
+<td style="text-align: right;">0.278</td>
+<td style="text-align: right;">0.261</td>
 <td style="text-align: right;">0.017</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">A little gammon</td>
-<td style="text-align: right;">0.289</td>
-<td style="text-align: right;">0.261</td>
-<td style="text-align: right;">0.028</td>
-</tr>
 <tr class="even">
 <td style="text-align: left;">Some gammons</td>
-<td style="text-align: right;">0.321</td>
+<td style="text-align: right;">0.294</td>
 <td style="text-align: right;">0.291</td>
-<td style="text-align: right;">0.030</td>
+<td style="text-align: right;">0.003</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Many gammons</td>
-<td style="text-align: right;">0.366</td>
+<td style="text-align: right;">0.318</td>
 <td style="text-align: right;">0.335</td>
-<td style="text-align: right;">0.031</td>
+<td style="text-align: right;">-0.016</td>
 </tr>
 </tbody>
 </table>
@@ -2336,84 +2444,568 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 </div>
 </div>
 </div>
+<p>Observations</p>
+<ul>
+<li>At 5-away, 5-away it is little harder to find a take for a recube in positions without too many gammons, because the extra two points are particular valuable.</li>
+<li>When gammons are likely, this effect is reduced, or even reversed, because after double/take the gammon drops low:</li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <table data-quarto-postprocess="true" class="table table-sm table-striped small">
-<caption>Estimated live cube take points at 8-away, 5-away, cube at 1</caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Position type</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Take point, match</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Take point, money</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Difference</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Last roll</td>
-<td style="text-align: right;">0.247</td>
-<td style="text-align: right;">0.250</td>
-<td style="text-align: right;">-0.003</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Race</td>
-<td style="text-align: right;">0.204</td>
-<td style="text-align: right;">0.214</td>
-<td style="text-align: right;">-0.010</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">A little gammon</td>
-<td style="text-align: right;">0.238</td>
-<td style="text-align: right;">0.261</td>
-<td style="text-align: right;">-0.023</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Some gammons</td>
-<td style="text-align: right;">0.262</td>
-<td style="text-align: right;">0.291</td>
-<td style="text-align: right;">-0.029</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Many gammons</td>
-<td style="text-align: right;">0.299</td>
-<td style="text-align: right;">0.335</td>
-<td style="text-align: right;">-0.036</td>
-</tr>
-</tbody>
-</table>
-
-
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<table data-quarto-postprocess="true" class="table table-sm table-striped small">
-<caption>Gammon values at 5-away, 3-away</caption>
+<caption>Gammon values at 5-away, 5-away</caption>
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">Cube value</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Gammon value, 5-away</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Gammon value, 3-away</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">0.42</td>
-<td style="text-align: right;">0.57</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.66</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">0.73</td>
-<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.23</td>
 </tr>
 </tbody>
 </table>
 
 
+</div>
+</div>
+</div>
+<div>
+
+</div>
+<div class="cell column-page-right quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="5-point-match_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>
+
+
+
+Money game, Cubeful Equities:
+ No redouble:     +0,819 (-0,111)
+ Redouble/Take:   +0,931
+ Redouble/Pass:   +1,000 (+0,069)
+
+5-away, 5-away, Cubeful Equities:
+ No redouble:     +0,859 (-0,137)
+ Redouble/Take:   +0,996
+ Redouble/Pass:   +1,000 (+0,004)</code></pre>
+</div>
+</div>
+</div>
+<p>Case in point: A position with strong boards and some gammon potential for both sides, but not enough to reverse the small tendency to drop at the score: White has enough for a decent money-take for, but at best a very marginal take at the score.</p>
+<p>It would take a truly gammonish position to make the underdog <em>more</em> inclined to take at the score, like our initial sample position for ‘many gammons’:</p>
+<div>
+
+</div>
+<div class="cell column-page-right quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="5-point-match_files/figure-html/unnamed-chunk-52-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>
+
+
+
+Money game, Cubeful Equities:
+ No redouble:     +0,873 (-0,110)
+ Redouble/Take:   +0,984
+ Redouble/Pass:   +1,000 (+0,016)
+
+5-away, 5-away, Cubeful Equities:
+ No redouble:     +0,879 (-0,032)
+ Redouble/Take:   +0,911
+ Redouble/Pass:   +1,000 (+0,089)</code></pre>
+</div>
+</div>
+</div>
+<p>Ignoring that this position is too young to be a likely <em>re</em>double, Black is more inclined to take at the score, than for money.</p>
+</section>
+<section id="away-5-away-5" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="away-5-away-5">4-away, 5-away</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Estimated live cube take points at 4-away, 5-away, cube at 2</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Position type</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Take point, match</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Take point, money</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Last roll</td>
+<td style="text-align: right;">0.298</td>
+<td style="text-align: right;">0.250</td>
+<td style="text-align: right;">0.048</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Race</td>
+<td style="text-align: right;">0.298</td>
+<td style="text-align: right;">0.214</td>
+<td style="text-align: right;">0.084</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A little gammon</td>
+<td style="text-align: right;">0.329</td>
+<td style="text-align: right;">0.261</td>
+<td style="text-align: right;">0.068</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Some gammons</td>
+<td style="text-align: right;">0.347</td>
+<td style="text-align: right;">0.291</td>
+<td style="text-align: right;">0.056</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Many gammons</td>
+<td style="text-align: right;">0.374</td>
+<td style="text-align: right;">0.335</td>
+<td style="text-align: right;">0.039</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<p>Observations:</p>
+<ul>
+<li><p>At 4-away, 5-away it is even harder for the leader to take a recube, and this holds across all position types, although the effect is smallest when a lot of gammons are in play.</p></li>
+<li><p>The reason is of course, the the cube is now officially dead after redouble/take, <em>and</em> the gammon value drops all the way down to zero for the leader, but not quite as low for the trailer:</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Gammon values at 4-away, 5-away</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">Cube value</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Gammon value, 4-away</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Gammon value, 5-away</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.81</td>
+<td style="text-align: right;">0.77</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.23</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<div>
+
+</div>
+<div class="cell column-page-right quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="5-point-match_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>
+
+
+
+Money game, Cubeful Equities:
+ No redouble:     +0,819 (-0,111)
+ Redouble/Take:   +0,931
+ Redouble/Pass:   +1,000 (+0,069)
+
+4-away, 5-away, Cubeful Equities:
+ No redouble:     +0,989 (-0,011)
+ Redouble/Take:   +1,314 (+0,314)
+ Redouble/Pass:   +1,000</code></pre>
+</div>
+</div>
+</div>
+<p>Example position 1, which was a marginal take at 5-away, 5-away, is now a huge drop.</p>
+</section>
+<section id="away-5-away-6" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="away-5-away-6">3-away, 5-away</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Estimated live cube take points at 3-away, 5-away, cube at 2</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Position type</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Take point, match</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Take point, money</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Last roll</td>
+<td style="text-align: right;">0.334</td>
+<td style="text-align: right;">0.250</td>
+<td style="text-align: right;">0.084</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Race</td>
+<td style="text-align: right;">0.334</td>
+<td style="text-align: right;">0.214</td>
+<td style="text-align: right;">0.120</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A little gammon</td>
+<td style="text-align: right;">0.376</td>
+<td style="text-align: right;">0.261</td>
+<td style="text-align: right;">0.115</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Some gammons</td>
+<td style="text-align: right;">0.399</td>
+<td style="text-align: right;">0.291</td>
+<td style="text-align: right;">0.108</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Many gammons</td>
+<td style="text-align: right;">0.434</td>
+<td style="text-align: right;">0.335</td>
+<td style="text-align: right;">0.099</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<p>Observations:</p>
+<ul>
+<li><p>Across all positions types it is <em>much</em> harder to take a redouble when leading 3-away, 5-away, compared to money.</p></li>
+<li><p>This is one of the big reasons why it’s often a good idea to postpone the initial doubling a bit when leading 3-away, 5-away: It’s a powerful weapon you’re giving away.</p></li>
+</ul>
+<div>
+
+</div>
+<div class="cell column-page-right quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="5-point-match_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>
+
+
+
+Money game, Cubeful Equities:
+ No redouble:     +0,784 (-0,121)
+ Redouble/Take:   +0,905
+ Redouble/Pass:   +1,000 (+0,095)
+
+3-away, 5-away, Cubeful Equities:
+ No redouble:     +0,995 (-0,005)
+ Redouble/Take:   +1,570 (+0,570)
+ Redouble/Pass:   +1,000</code></pre>
+</div>
+</div>
+</div>
+<p>A pretty straight double/take for money, becomes a gigantic drop at the score.</p>
+</section>
+<section id="away-4-away-4" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="away-4-away-4">5-away, 4-away</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Estimated live cube take points at 5-away, 4-away, cube at 2</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Position type</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Take point, match</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Take point, money</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Last roll</td>
+<td style="text-align: right;">0.315</td>
+<td style="text-align: right;">0.250</td>
+<td style="text-align: right;">0.065</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Race</td>
+<td style="text-align: right;">0.256</td>
+<td style="text-align: right;">0.214</td>
+<td style="text-align: right;">0.042</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A little gammon</td>
+<td style="text-align: right;">0.256</td>
+<td style="text-align: right;">0.261</td>
+<td style="text-align: right;">-0.005</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Some gammons</td>
+<td style="text-align: right;">0.256</td>
+<td style="text-align: right;">0.291</td>
+<td style="text-align: right;">-0.035</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Many gammons</td>
+<td style="text-align: right;">0.256</td>
+<td style="text-align: right;">0.335</td>
+<td style="text-align: right;">-0.078</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<ul>
+<li><p>If White does <em>not</em> have an automatic recube available (as in a last-roll situation), he should be careful about taking a redouble at this score.</p></li>
+<li><p>Even if the auto-redouble is available, it’s considerable harder to find a take in a race than for money.</p></li>
+<li><p>Of course, after redouble/take/auto-redouble, it is double match point, so gammons are harmless – this could lead to takes that normally ‘look like’ big passes.</p></li>
+</ul>
+<div>
+
+</div>
+<div class="cell column-page-right quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="5-point-match_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>
+
+
+
+Money game, Cubeful Equities:
+ No redouble:     +0,869 (-0,075)
+ Redouble/Take:   +0,944
+ Redouble/Pass:   +1,000 (+0,056)
+
+5-away, 4-away, Cubeful Equities:
+ No redouble:     +0,860 (-0,140)
+ Redouble/Take:   +1,121 (+0,121)
+ Redouble/Pass:   +1,000</code></pre>
+</div>
+</div>
+</div>
+<p>This is a 5-roll position with drawbacks: White can’t use 22 to save a roll and 11 is not fully effective. Those are quite expensive drawbacks, rather than 28% in in a pure 5-roll, white has only 24% here. Enought for a good money take, not enough at 5-away, 4-away, even taking into consideration the automatic recube.</p>
+<div>
+
+</div>
+<div class="cell column-page-right quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="5-point-match_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>
+
+
+
+Money game, Cubeful Equities:
+ No redouble:     +0,880 (-0,120)
+ Redouble/Take:   +1,096 (+0,096)
+ Redouble/Pass:   +1,000
+
+5-away, 4-away, Cubeful Equities:
+ No redouble:     +0,874
+ Redouble/Take:   +0,436 (-0,438)
+ Redouble/Pass:   +1,000 (+0,126)</code></pre>
+</div>
+</div>
+</div>
+<p>This looks scary for money, and it is indeed a pass. But of course the many gammons don’t matter after double/take/re-double, so White has a super easy take and Black is better off not doubling.</p>
+</section>
+<section id="away-3-away-4" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="away-3-away-4">5-away, 3-away</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Estimated live cube take points at 5-away, 3-away, cube at 2</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Position type</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Take point, match</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Take point, money</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Last roll</td>
+<td style="text-align: right;">0.211</td>
+<td style="text-align: right;">0.250</td>
+<td style="text-align: right;">-0.039</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Race</td>
+<td style="text-align: right;">0.158</td>
+<td style="text-align: right;">0.214</td>
+<td style="text-align: right;">-0.056</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A little gammon</td>
+<td style="text-align: right;">0.158</td>
+<td style="text-align: right;">0.261</td>
+<td style="text-align: right;">-0.103</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Some gammons</td>
+<td style="text-align: right;">0.158</td>
+<td style="text-align: right;">0.291</td>
+<td style="text-align: right;">-0.133</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Many gammons</td>
+<td style="text-align: right;">0.158</td>
+<td style="text-align: right;">0.335</td>
+<td style="text-align: right;">-0.176</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<ul>
+<li><p>A redouble here is of course for the match, so one needs only the same winning probability as when trailing 5-away, 1-away: 15.8%</p></li>
+<li><p>Caveat is when you don’t get to redouble, as in a last-roll or virtually last roll situation. Then we need a good bit more – but still less than for money.</p></li>
+</ul>
+<div>
+
+</div>
+<div class="cell column-page-right quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="5-point-match_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>
+
+
+
+Money game, Cubeful Equities:
+ No redouble:     +0,702 (-0,298)
+ Redouble/Take:   +1,231 (+0,231)
+ Redouble/Pass:   +1,000
+
+5-away, 3-away, Cubeful Equities:
+ No redouble:     +0,688 (-0,182)
+ Redouble/Take:   +0,870
+ Redouble/Pass:   +1,000 (+0,130)</code></pre>
+</div>
+</div>
+</div>
+<p>White can find the 15.8% he needs to take here.</p>
+</section>
+</section>
+<section id="the-rare-8-cube" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-rare-8-cube">The rare 8-cube</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Estimated live cube take points at 5-away, 5-away, cube at 4</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Position type</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Take point, match</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Take point, money</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Last roll</td>
+<td style="text-align: right;">0.158</td>
+<td style="text-align: right;">0.250</td>
+<td style="text-align: right;">-0.092</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Race</td>
+<td style="text-align: right;">0.158</td>
+<td style="text-align: right;">0.214</td>
+<td style="text-align: right;">-0.056</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A little gammon</td>
+<td style="text-align: right;">0.158</td>
+<td style="text-align: right;">0.261</td>
+<td style="text-align: right;">-0.103</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Some gammons</td>
+<td style="text-align: right;">0.158</td>
+<td style="text-align: right;">0.291</td>
+<td style="text-align: right;">-0.133</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Many gammons</td>
+<td style="text-align: right;">0.158</td>
+<td style="text-align: right;">0.335</td>
+<td style="text-align: right;">-0.176</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<p>The non-automatic 8-cube arises only at 5-away, 5-away, so like before we have at take point at 15.8%. If gammons are likely this could lead to the unusual too-good-to-double-take situation. When this happens, the doubler is worse off doubling <em>no matter</em> if the opponent passes or takes.</p>
+<p>Could look like this:</p>
+<div>
+
+</div>
+<div class="cell column-page-right quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="5-point-match_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid" width="384"></p>
+</div>
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>
+
+
+
+Money game, Cubeful Equities:
+ No redouble:     +1,646
+ Redouble/Take:   +3,054 (+1,409)
+ Redouble/Pass:   +1,000 (-0,646)
+
+5-away, 5-away, Cubeful Equities:
+ No redouble:     +1,003
+ Redouble/Take:   +0,981 (-0,022)
+ Redouble/Pass:   +1,000 (-0,003)
+ 
+1296 Games rolled with Variance Reduction.
+Moves: 3-ply, cube decisions: XG Roller</code></pre>
 </div>
 </div>
 </div>
