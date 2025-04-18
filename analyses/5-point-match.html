@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lasse Hjorth Madsen">
-<meta name="dcterms.date" content="2025-04-12">
+<meta name="dcterms.date" content="2025-04-18">
 
 <title>The five point match</title>
 <style>
@@ -323,7 +323,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 12, 2025</p>
+      <p class="date">April 18, 2025</p>
     </div>
   </div>
   
@@ -338,14 +338,15 @@ window.Quarto = {
 <section id="why-this" class="level2">
 <h2 class="anchored" data-anchor-id="why-this">Why this?</h2>
 <p>This is walk-through of all scores in a five point match. We examine how take points and cube dynamic varies across scores, with sample positions to illustrate differences.</p>
+<p>The goal is to try to better understand the <em>match scores</em>, not so much any particular position.</p>
 </section>
 <section id="positions-types" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="positions-types">Positions types</h2>
 <p>To show differences due to gammons, we consider five different types of positions:</p>
 <ul>
-<li>Last roll: Truly last roll, not even automatic recubes</li>
-<li>No gammons: Zero gammon but possibly cube leverage</li>
-<li>A little gammon: Early middle games with anchors</li>
+<li>Last roll: Truly last roll, with not even automatic recubes</li>
+<li>No gammons: Zero gammon but possibly some cube leverage</li>
+<li>A little gammon: Typically early middle games with anchors</li>
 <li>Some gammons: No-anchor middle games</li>
 <li>Many gammons: Blitzes and back games</li>
 </ul>
@@ -491,7 +492,7 @@ Best Cube action: Double / Take</code></pre>
 </section>
 <section id="take-point-plots" class="level3">
 <h3 class="anchored" data-anchor-id="take-point-plots">Take point plots</h3>
-<p>Plotting take points under different situations, might help to build an intuition of the cube dynamics in the five-point match. We first calculate take point assuming the player will never redouble (except for automatic redoubles when we have nothing to lose). This is to see the effect of the score and gammons, for now ignoring the cube.</p>
+<p>Plotting take points under different situations might help to build an intuition of the cube dynamics in the five-point match. We first calculate take points assuming the doubled player will never redouble (except for automatic redoubles when we have nothing to lose). This is to see the effect of the score and gammons, for now ignoring the cube.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -509,10 +510,10 @@ Best Cube action: Double / Take</code></pre>
 <li>However, leading 2-away, <em>3</em>-away, makes for a slightly <em>higher</em> take point (26%) than for money, since winning two points is also very valuable for the opponent here.</li>
 <li>Same thing at 4-away, 3-away; we have the very highest dead-cube race take point: 35%. (Note that this of course changes when we introduce the cube, since re-cubes are very potent here. But be careful if this is a last-roll situation).</li>
 <li>The innocent 5-away 4-away is also dangerous: Take point 30%.</li>
-<li>At the other end of the spectrum we see (not surprisingly) very high take points when the opponent need 4 <em>and</em> has a clear gammon threat. Of course we have the notorious 2-away 4-away, where you need tremendous compensation in terms of winning chances, if you get doubled with a good risk of losing a gammon. But 3-away, 4-away and 5-away, 4-away, are almost as precarious.</li>
-<li>In general, introducing gammons pushed the take points up, a good deal more than for money (compare the purple dots to the purple dotted line), because winning a gammon with the cube at two generally is pretty decisive.</li>
+<li>At the other end of the spectrum we see (not surprisingly) very high take points when the opponent needs 4 <em>and</em> has a clear gammon threat. Of course we have the notorious 2-away 4-away, where you need tremendous compensation in terms of winning chances, if you get doubled with a good risk of losing a gammon. But 3-away, 4-away and 5-away, 4-away, are almost as precarious.</li>
+<li>In general, introducing gammons pushed the take points up, a good deal more than for money (compare the purple dots to the purple dotted line), because winning a gammon with the cube at two generally is pretty decisive in a 5-point match.</li>
 </ul>
-<p>Let’s focus on the effect of introducing the cube. If we look at a straight, medium length race, like in our reference position above, access to the cube in a in a money game generally allows us to take with about 22% rather than the 25% we would need in a true last roll situation.</p>
+<p>Let’s focus on the effect of introducing the cube. If we look at a straight, medium length race, like in our reference position above, access to the cube in a money game generally allows us to take with about 22% rather than the 25% we would need in a true last roll situation.</p>
 <p>At match scores, that effect varies considerably. Look at the plot below:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -640,7 +641,7 @@ Money game, cubeful equities:
 </div>
 </div>
 <p>Again, the rollout shows that the blitz position, which was a marginal take for money, is a pass at the score, due to the slightly higher take point.</p>
-<p>Lee’s do the rest of the scores, using the same table for displaying take poins and how much they differ for money, but fresh example positions.</p>
+<p>Lee’s do the rest of the scores, using the same kind of table for displaying take poins and how much they differ for money, but fresh example positions.</p>
 </section>
 <section id="away-5-away-1" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="away-5-away-1">4-away, 5-away</h4>
@@ -695,7 +696,7 @@ Money game, cubeful equities:
 </div>
 </div>
 </div>
-<p>Observations</p>
+<p>Observations:</p>
 <ul>
 <li><p>Winning two points and getting to 2-away is valuable, so take point is lower that for money in last-roll or race positions.</p></li>
 <li><p>Losing a gammon hurts extra, so take points rise as the opponents gammon threat rises.</p></li>
@@ -806,7 +807,7 @@ Money game, Cubeful Equities:
 </div>
 </div>
 </div>
-<p>Observations</p>
+<p>Observations:</p>
 <ul>
 <li><p>Winning 2 points is very valuable when 3-away; it gets you to the Crawford game. Therefore, take points in last-roll and race positions are low.</p></li>
 <li><p>Recube vig is low, however, so the difference from money is most pronounced is pure last-roll positions where the cube is dead anyway.</p></li>
@@ -949,7 +950,7 @@ Money game, Cubeful Equities:
 </div>
 </div>
 </div>
-<p>Observations</p>
+<p>Observations:</p>
 <ul>
 <li>Same pattern as in 4-away, 5-away and in 3-away, 5-away, but even more pronounced: White takes more in races, considerable less in gammonish positions.</li>
 </ul>
@@ -1004,7 +1005,7 @@ Money game, Cubeful Equities:
 </div>
 </div>
 </div>
-<p>This is a bit scary since White can easily get closed out and gammoned. Still only 12 rolls cover, and on the remaining 24 rolls White will have plenty of play if he just enters. Even after Blacks 8 rolls with hitting 3’s, entering gives counter play. Easy take for money. At 2-away, 5-away it is a big pass, however.</p>
+<p>This is a bit scary since White can easily get closed out and gammoned. Still only 11 rolls cover the 4-point blot, and on the remaining 25 rolls White will have plenty of play if he just enters. Even after Blacks 7 rolls with hitting 3’s (43 and 63 don’t hit), entering gives White counter play. Easy take for money. At 2-away, 5-away it is a big pass, however.</p>
 </section>
 <section id="away-4-away" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="away-4-away">5-away, 4-away</h4>
@@ -1059,7 +1060,7 @@ Money game, Cubeful Equities:
 </div>
 </div>
 </div>
-<p>Observations</p>
+<p>Observations:</p>
 <ul>
 <li><p>As opposed to the reverse score, 4-away, 5-away, the potential two points at stake now benefits the doubling player more, so the trailer faces higher take points <em>no matter</em> the type of position.</p></li>
 <li><p>This is because <em>both</em> a two-point win and a four-point gammon win is particular valuable to the leader.</p></li>
@@ -1090,8 +1091,8 @@ Money game, Cubeful Equities:
 </div>
 </div>
 <p>Standard take for money, even with just <span class="math inline">\(\frac{10}{36}\times\frac{26}{36}\approx 0.201\)</span> winning probability since White has a strong recube on Blacks misses.</p>
-<p>At the score recubes are even stronger: Black will need 0.298 to take the recube so must pass in case of a miss. That means Whites chances are effectively <span class="math inline">\(\frac{10}{36}\approx 0.278\)</span> – falling short of the 0.304 last-roll take point. `</p>
-<p>The two points Black threatens to win are so valuable that White has a clear pass.</p>
+<p>At the score recubes are even stronger: Black will need 0.298 to take the recube so must pass in case of a miss. That means Whites chances are effectively <span class="math inline">\(\frac{10}{36}\approx 0.278\)</span> – but still falling short of the 0.304 last-roll take point. `</p>
+<p>The two points Black threatens to win are so valuable, that White has a clear pass.</p>
 <div>
 
 </div>
@@ -1172,10 +1173,10 @@ Money game, Cubeful Equities:
 </div>
 </div>
 </div>
-<p>Observations</p>
+<p>Observations:</p>
 <ul>
-<li><p>In a last roll position White still has a high take point, because two points are very valuable for Black – getting him to the Crawford game</p></li>
-<li><p>The race is different, because White now has a lot of cube leverage: Blacks take point when redoubled would be a high 0.334 assuming no gammons. The cube leverage compensates for the high last-roll take point, and leaves White with almost the same take point as for money.</p></li>
+<li><p>In a last roll position White still has a high take point at 0.287, because two points are very valuable for Black – getting him to the Crawford game</p></li>
+<li><p>The race is different, because White now has a lot of cube leverage: White now has almost the same take point as for money.</p></li>
 <li><p>Like we saw at 3-away, 5-away, the effect of gammons is to <em>lower</em> the take point for the trailer. This is because after double/take the gammon value <em>decreases</em> for the leader, and <em>increases</em> for the trailer.</p></li>
 </ul>
 <div>
@@ -1344,7 +1345,7 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 </div>
 </div>
 </div>
-<p>Observations</p>
+<p>Observations:</p>
 <ul>
 <li><p>Without recubes, the trailer’s take point is extremely high: a full 0.395.</p></li>
 <li><p>Of course the one-sided benefit from automatic recube makes a big difference, but, perhaps surprisingly, still leaves the trailer with a slightly higher racing game take point than for money.</p></li>
@@ -1404,7 +1405,7 @@ Money game, Cubeful Equities:
 </div>
 </div>
 <p>White wins about 22%, so big pass for money, due to some gammon losses. At 5-away, 2-away after double/take/redouble gammons don’t hurt, and White can win four points, Black only two. Intuitively this would lower White’s take point by a lot. But the cube is dead which pulls in the opposite direction, and Black’s two points are worth a lot. As we saw above, in a straight race White would need 23% to take which is only a bit less than the comparable 25% White would need to take for money with a dead cube.</p>
-<p>Bottom line: White has a marginal take/pass decision. 22% is about what he needs, the occasional freak gammon <em>win</em> (with a probability about 3%) accounts for the difference from the mentioned 23% racing game dead cube take point.</p>
+<p>Bottom line: White has a marginal take/pass decision. 22% is about what he needs, the occasional freak gammon <em>win</em> (probability about 3%) accounts for the difference from the mentioned 23% racing game dead cube take point.</p>
 </section>
 </section>
 <section id="away-scores-1" class="level3 page-columns page-full">
@@ -1462,7 +1463,7 @@ Money game, Cubeful Equities:
 </div>
 </div>
 </div>
-<p>Observations</p>
+<p>Observations:</p>
 <ul>
 <li><p>Here <em>all</em> take points are higher than for money. This is because both a two-point and a four-point win is particular valuable. Doubling, in effect, <em>more</em> than doubles the stakes.</p></li>
 <li><p>This also makes future <em>redoubles</em> more potent, which is why the smallest difference from money is in straight races: The taker gets powerful recubes but does not need to fear expensive gammon losses.</p></li>
@@ -1484,6 +1485,7 @@ Money game, Cubeful Equities:
  No double:     +0,591
  Double/Take:   +0,547 (-0,044)
  Double/Pass:   +1,000 (+0,409)
+
 4-away, 4-away, Cubeful Equities:
  No double:     +0,682 (-0,135)
  Double/Take:   +0,817
@@ -1572,10 +1574,10 @@ Money game, Cubeful Equities:
 </div>
 </div>
 </div>
-<p>Observations</p>
+<p>Observations:</p>
 <ul>
 <li><p>Here, the two points are more valuable for the leader than the trailer, so the ‘raw’ take point (cubeless, gammonless) is slightly lower than for money.</p></li>
-<li><p>Gammons are dangerous, of course.</p></li>
+<li><p>Gammons are very dangerous, of course.</p></li>
 </ul>
 <div>
 
@@ -1683,7 +1685,7 @@ Money game, Cubeful Equities:
 </div>
 </div>
 </div>
-<p>Observations</p>
+<p>Observations:</p>
 <ul>
 <li>Same pattern as for 4-away, 4-away, and for 3-away, 4-away, but a lot stronger: It’s relatively easy to take in no-gammon situations; very hard when a significant gammon threat exists.</li>
 </ul>
@@ -1738,7 +1740,7 @@ Money game, Cubeful Equities:
 </div>
 </div>
 </div>
-<p>The slightest smell of blitz, makes for a marginal take at best, at 4-away, 2-away.</p>
+<p>The slightest smell of blitz, makes for at best a marginal take at 4-away, 2-away.</p>
 </section>
 <section id="away-3-away-1" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="away-3-away-1">4-away, 3-away</h4>
@@ -1793,7 +1795,7 @@ Money game, Cubeful Equities:
 </div>
 </div>
 </div>
-<p>Observations</p>
+<p>Observations:</p>
 <ul>
 <li>Even trailing, it’s somewhat difficult to find a take at this score – except when gammons are clearly visible.</li>
 </ul>
@@ -1903,9 +1905,9 @@ Money game, Cubeful Equities:
 </div>
 </div>
 </div>
-<p>Observations</p>
+<p>Observations:</p>
 <ul>
-<li><p>With the perfect automatic recube available the trailer can of course take with 19% – the winning chance when passing for 4-away, 1-away, Crawford.</p></li>
+<li><p>With the perfect automatic recube available the trailer can of course take with 19% – the winning chance we get when passing for 4-away, 1-away, Crawford.</p></li>
 <li><p>The last-roll situation, where we don’t get to the automatic recube, is a trap; here the take point is a very high 37%</p></li>
 </ul>
 <div>
@@ -2018,7 +2020,7 @@ Money game, Cubeful Equities:
 </div>
 </div>
 </div>
-<p>Observations</p>
+<p>Observations:</p>
 <ul>
 <li><p>At 3-away, 3-away it is harder to find a take in all position types.</p></li>
 <li><p>On one hand, two points are very valuable – the double more than doubles the stakes – so in the last-roll starting point the take point is quite a bit higher than for money.</p></li>
@@ -2077,7 +2079,7 @@ Money game, Cubeful Equities:
 </div>
 </div>
 </div>
-<p>Black leads in every area, except the race, solid double/take for money. But 3-away, 3-away pushes this into double/pass territory.</p>
+<p>Black leads in every area, including the important race, so solid double/take for money. But 3-away, 3-away pushes this into double/pass territory.</p>
 <div>
 
 </div>
@@ -2107,7 +2109,7 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 </div>
 </div>
 <p>A pretty standard holding game, take for money, becomes a big pass at 3-away, 3-away.</p>
-<p>UNote that this is rolled out, instead of using XG++ like elsewhere: Even the truncated rollout in XG++ overestimates holding games.)</p>
+<p>(Note that this is rolled out, instead of using XG++ like we did most other places. Even the truncated rollout in XG++ overestimates holding games.)</p>
 </section>
 <section id="away-3-away-3" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="away-3-away-3">2-away, 3-away</h4>
@@ -2162,7 +2164,7 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 </div>
 </div>
 </div>
-<p>Observations</p>
+<p>Observations:</p>
 <ul>
 <li><p>Every type of position is a bit harder to take here than for money, although the difference is less pronounced in last-roll positions where White wouldn’t have had the benefit of potential redoubles anyway.</p></li>
 <li><p>Of course, <em>especially</em> when the trailer has a gammon threat, the leader should be reluctant to take.</p></li>
@@ -2193,7 +2195,7 @@ Money game, Cubeful Equities:
 </div>
 </div>
 </div>
-<p>11 doesn’t necessarily save a roll, so White is a bit worse off compared to a pure 4-roll position. Enough to turn a money take into a pass at the score.</p>
+<p>In this 4-roll position 11 doesn’t necessarily save a roll for White, so White is a bit worse off compared to a pure 4-roll position. Enough to turn a money take into a pass at the score.</p>
 <div>
 
 </div>
@@ -2221,7 +2223,7 @@ Money game, Cubeful Equities:
 </div>
 </div>
 </div>
-<p>When Black has a match winning gammon threat, this small money take becomes a gigantic pass at 2-away, 4-away</p>
+<p>When Black has a match winning gammon threat, this small money take becomes a gigantic pass at 2-away, 3-away</p>
 </section>
 <section id="away-2-away-2" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="away-2-away-2">3-away, 2-away</h4>
@@ -2276,9 +2278,9 @@ Money game, Cubeful Equities:
 </div>
 </div>
 </div>
-<p>Observations</p>
+<p>Observations:</p>
 <ul>
-<li><p>Naturally, the trailer can take (and redouble) with anything better than the 24.9% he would have had after passing at 3-away, 1-away, Crawford.</p></li>
+<li><p>Naturally, the trailer can take (and redouble) with anything better than the 24.9% he would have had after passing and getting to 3-away, 1-away, Crawford.</p></li>
 <li><p>Beware the last-roll situation, however: When the leader could win exactly 2-point (and not risk losing 3 or 4 point) that is dangerous.</p></li>
 </ul>
 <div>
@@ -2339,8 +2341,8 @@ Money game, Cubeful Equities:
 </section>
 <section id="the-funny-two-point-match" class="level3">
 <h3 class="anchored" data-anchor-id="the-funny-two-point-match">The funny two-point match</h3>
-<p>The two-point match is funny: It’s a well-known fact that an optimal strategy is to double at first opportunity, at which point the opponent will always have a clear take, with the take point beeing 32%.</p>
-<p>However, in practice, if you delay doubling until you have at least one market losing sequences, you might gain a bit from either:</p>
+<p>The two-point match is funny: It’s a well-known fact that an optimal strategy is to double at first opportunity, at which point the opponent will always have a clear take, with the take point being 32%.</p>
+<p>However, in practice, if you delay doubling until you have at least one market losing sequence, you might gain a bit from either:</p>
 <ol type="a">
 <li>The opponent doubling too late and loosing their market</li>
 <li>The opponent passing a less obvious take</li>
@@ -2351,7 +2353,7 @@ Money game, Cubeful Equities:
 <li>You end up passing what is really a take.</li>
 </ol>
 <p>For example, let’s say the opponent opens with 31. Should you double, knowing there’s zero chance he will pass? The best possible sequence is that you roll 66 and he rolls 61, which will still leave him with more than 40% winning chances and a very clear take. Still, the take is less clear than before, so perhaps there’s someone out there that will pass.</p>
-<p>In practical play, it would be better to roll, since it can’t hurt and it opens the possibility of harvesting possible mistakes the opponent might make.</p>
+<p>In practical play, it would be better to roll in response to an opening 31, since it can’t hurt and it opens the possibility of harvesting a mistake the opponent might make.</p>
 <p>Suppose it is you who opens the game with 31, an he rolls 52, splitting. Now you <em>do</em> have market losers: Mostly involving you rolling 33, 55, or 66 and him responding poorly. Against any particular opponent it <em>might</em> still be the best play to hold off, but that depends on exactly how likely you are to lose your market (and by how much), and exactly how more likely the opponent is to make a future mistake, compare to yourself. That’s extremely hard to judge, so the best practical play against reasonably competent opposition, is probably to double.</p>
 </section>
 </section>
@@ -2444,7 +2446,7 @@ Money game, Cubeful Equities:
 </div>
 </div>
 </div>
-<p>Observations</p>
+<p>Observations:</p>
 <ul>
 <li>At 5-away, 5-away it is little harder to find a take for a recube in positions without too many gammons, because the extra two points are particular valuable.</li>
 <li>When gammons are likely, this effect is reduced, or even reversed, because after double/take the gammon drops low:</li>
@@ -3009,6 +3011,7 @@ Moves: 3-ply, cube decisions: XG Roller</code></pre>
 </div>
 </div>
 </div>
+<p>Black is crazy too-good for money, but both too-good and not good enough at 5-away, 5-away holding a 4-cube.</p>
 
 
 </section>
