@@ -98,15 +98,17 @@ compare_gvs <- function(x1, y1, cube, met, digits = 2) {
 
 This is walk-through of all scores in a five point match. We examine how take points and cube dynamic varies across scores, with sample positions to illustrate differences.
 
+The goal is to try to better understand the *match scores*, not so much any particular position.
+
 ## Positions types
 
 To show differences due to gammons, we consider five different types of positions:
 
-- Last roll: Truly last roll, not even automatic recubes
-- No gammons: Zero gammon but possibly cube leverage
-- A little gammon: Early middle games with anchors
-- Some gammons: No-anchor middle games
-- Many gammons: Blitzes and back games
+-   Last roll: Truly last roll, with not even automatic recubes
+-   No gammons: Zero gammon but possibly some cube leverage
+-   A little gammon: Typically early middle games with anchors
+-   Some gammons: No-anchor middle games
+-   Many gammons: Blitzes and back games
 
 What do the different gammon situations look like? Below are the examples we will use for examination here, along with money game rollouts.
 
@@ -237,14 +239,13 @@ First, a high level overview of the scores we see in five-point matches.
 
 For convenience, here's the default match equity table used by XG, for five-point matches, rounded to three decimal points:
 
-
 ```{r}
 met3[1:5, 1:5]
 ```
 
 ### Take point plots
 
-Plotting take points under different situations, might help to build an intuition of the cube dynamics in the five-point match. We first calculate take point assuming the player will never redouble (except for automatic redoubles when we have nothing to lose). This is to see the effect of the score and gammons, for now ignoring the cube.
+Plotting take points under different situations might help to build an intuition of the cube dynamics in the five-point match. We first calculate take points assuming the doubled player will never redouble (except for automatic redoubles when we have nothing to lose). This is to see the effect of the score and gammons, for now ignoring the cube.
 
 ```{r takepoints}
 probs1 <- outcome_probs(c(25.00, 0.00, 0.00, 75.00,  0.00, 0.00)) / 100
@@ -338,19 +339,18 @@ plot_data |>
 
 Several patterns stand out; some well-know, some might not be so well-know. A few observations:
 
-- The absolutely lowest take point you can face, is when leading 2-away, 5-away in a straight race. You can take here with as little as 17% winning chances.
-- Not surprisingly, if you get doubled at 4-away, 2-away, the automatic redouble to 4 also generates a low take point: 19%.
-- Leading 2-away, 4-away, get you the third-lowest race take point: 20%.
-- However, leading 2-away, *3*-away, makes for a slightly *higher* take point (26%) than for money, since winning two points is also very valuable for the opponent here.
-- Same thing at 4-away, 3-away; we have the very highest dead-cube race take point: 35%. (Note that this of course changes when we introduce the cube, since re-cubes are very potent here. But be careful if this is a last-roll situation).
-- The innocent 5-away 4-away is also dangerous: Take point 30%.
-- At the other end of the spectrum we see (not surprisingly) very high take points when the opponent need 4 *and* has a clear gammon threat. Of course we have the notorious 2-away 4-away, where you need tremendous compensation in terms of winning chances, if you get doubled with a good risk of losing a gammon. But 3-away, 4-away and 5-away, 4-away, are almost as precarious.
-- In general, introducing gammons pushed the take points up, a good deal more than for money (compare the purple dots to the purple dotted line), because winning a gammon with the cube at two generally is pretty decisive.  
+-   The absolutely lowest take point you can face, is when leading 2-away, 5-away in a straight race. You can take here with as little as 17% winning chances.
+-   Not surprisingly, if you get doubled at 4-away, 2-away, the automatic redouble to 4 also generates a low take point: 19%.
+-   Leading 2-away, 4-away, get you the third-lowest race take point: 20%.
+-   However, leading 2-away, *3*-away, makes for a slightly *higher* take point (26%) than for money, since winning two points is also very valuable for the opponent here.
+-   Same thing at 4-away, 3-away; we have the very highest dead-cube race take point: 35%. (Note that this of course changes when we introduce the cube, since re-cubes are very potent here. But be careful if this is a last-roll situation).
+-   The innocent 5-away 4-away is also dangerous: Take point 30%.
+-   At the other end of the spectrum we see (not surprisingly) very high take points when the opponent needs 4 *and* has a clear gammon threat. Of course we have the notorious 2-away 4-away, where you need tremendous compensation in terms of winning chances, if you get doubled with a good risk of losing a gammon. But 3-away, 4-away and 5-away, 4-away, are almost as precarious.
+-   In general, introducing gammons pushed the take points up, a good deal more than for money (compare the purple dots to the purple dotted line), because winning a gammon with the cube at two generally is pretty decisive in a 5-point match.
 
-Let's focus on the effect of introducing the cube. If we look at a straight, medium length race, like in our reference position above, access to the cube in a in a money game generally allows us to take with about 22% rather than the 25% we would need in a true last roll situation.
+Let's focus on the effect of introducing the cube. If we look at a straight, medium length race, like in our reference position above, access to the cube in a money game generally allows us to take with about 22% rather than the 25% we would need in a true last roll situation.
 
 At match scores, that effect varies considerably. Look at the plot below:
-
 
 ```{r plot2}
 #| fig-width: 7
@@ -387,7 +387,7 @@ Of course, at scores where a double/take (and possibly an automatic re-cube) lea
 
 At other scores, in general, the cube benefits the trailer the most: At 4-away, 3-away, for example, cube access makes a massive difference, lowering the take point from 35% to 26%.
 
-In contrast, at 3-away, 5-away, if the leader redoubles, the cube comes back at 8, making his lead meaningless, so being able to redouble is not so helpful. Take point goes from 21% cubeless to 19% with cube leverage. (Both lower than the money take point of 22%, however.) 
+In contrast, at 3-away, 5-away, if the leader redoubles, the cube comes back at 8, making his lead meaningless, so being able to redouble is not so helpful. Take point goes from 21% cubeless to 19% with cube leverage. (Both lower than the money take point of 22%, however.)
 
 ## Pre-crawford
 
@@ -401,7 +401,7 @@ We give this score a pretty detailed treatment, then apply the same methodology 
 compare_tps(x1 = 5, y1 = 5, cube1 = 1, tps = tps, tpsm = tpsm)
 ```
 
-This table compares take point for the five example positions for money and at the score 5-away, 5-away. When the difference between the match and the money take point is negative, it means the position is easier to take at the match score. When the difference is positive, we have less of a take at the score. 
+This table compares take point for the five example positions for money and at the score 5-away, 5-away. When the difference between the match and the money take point is negative, it means the position is easier to take at the match score. When the difference is positive, we have less of a take at the score.
 
 Let's spot check with a few rollouts at the score: Our sample race position and the blitz position:
 
@@ -455,18 +455,19 @@ ggboard("XGID=b---C-CBB---dC---c-cc-B---:0:0:1:00:0:0:0:5:10") +
 
 Again, the rollout shows that the blitz position, which was a marginal take for money, is a pass at the score, due to the slightly higher take point.
 
-Lee's do the rest of the scores, using the same table for displaying take poins and how much they differ for money, but fresh example positions.
+Lee's do the rest of the scores, using the same kind of table for displaying take poins and how much they differ for money, but fresh example positions.
 
 #### 4-away, 5-away
 
 ```{r}
 compare_tps(4, 5, 1, tps, tpsm)
 ```
-Observations
 
-- Winning two points and getting to 2-away is valuable, so take point is lower that for money in last-roll or race positions.
+Observations:
 
-- Losing a gammon hurts extra, so take points rise as the opponents gammon threat rises.
+-   Winning two points and getting to 2-away is valuable, so take point is lower that for money in last-roll or race positions.
+
+-   Losing a gammon hurts extra, so take points rise as the opponents gammon threat rises.
 
 ```{r}
 #| column: page-right
@@ -519,13 +520,14 @@ Facing a very clear gammon threat, White has a big pass at the score, even thoug
 ```{r}
 compare_tps(3, 5, 1, tps, tpsm)
 ```
-Observations
 
-- Winning 2 points is very valuable when 3-away; it gets you to the Crawford game. Therefore, take points in last-roll and race positions are low. 
+Observations:
 
-- Recube vig is low, however, so the difference from money is most pronounced is pure last-roll positions where the cube is dead anyway.
+-   Winning 2 points is very valuable when 3-away; it gets you to the Crawford game. Therefore, take points in last-roll and race positions are low.
 
-- Gammons are dangerous, so cation is required more and more as the likelihood of losing a gammon increases. 
+-   Recube vig is low, however, so the difference from money is most pronounced is pure last-roll positions where the cube is dead anyway.
+
+-   Gammons are dangerous, so cation is required more and more as the likelihood of losing a gammon increases.
 
 ```{r}
 #| column: page-right
@@ -571,7 +573,7 @@ ggboard("XGID=-b----E-D---eD---a-cb-b-AA:0:0:-1:00:0:0:0:0:10") +
 " |> remove_stuff() |> cat()
 ```
 
-Gammons changes the matter. To illustrate, this table of gammon values shows how much doubling *decreases* gammon values for the leader and *increases* gammon values for the trailer, leading to higher take points for the leader whenever gammons are at play.  
+Gammons changes the matter. To illustrate, this table of gammon values shows how much doubling *decreases* gammon values for the leader and *increases* gammon values for the trailer, leading to higher take points for the leader whenever gammons are at play.
 
 ```{r}
 compare_gvs(3,5,1:2, met)
@@ -583,9 +585,9 @@ compare_gvs(3,5,1:2, met)
 compare_tps(2, 5, 1, tps, tpsm)
 ```
 
-Observations
+Observations:
 
-- Same pattern as in 4-away, 5-away and in 3-away, 5-away, but even more pronounced: White takes more in races, considerable less in gammonish positions. 
+-   Same pattern as in 4-away, 5-away and in 3-away, 5-away, but even more pronounced: White takes more in races, considerable less in gammonish positions.
 
 ```{r}
 #| column: page-right
@@ -607,7 +609,8 @@ ggboard("XGID=-AAAA----------------aaaa-:0:0:-1:D:0:0:0:0:10") +
        Double/Pass:   +1,000 (+0,028)
 " |> remove_stuff() |> cat()
 ```
-Even in a slightly desperate close-to-last-roll situation White can find a take when two points wins exactly. 
+
+Even in a slightly desperate close-to-last-roll situation White can find a take when two points wins exactly.
 
 ```{r}
 #| column: page-right
@@ -630,7 +633,7 @@ ggboard("XGID=-BC-cCCA----bBa----bbabb-A:0:0:-1:00:0:0:0:0:10") +
 " |> remove_stuff() |> cat()
 ```
 
-This is a bit scary since White can easily get closed out and gammoned. Still only 12 rolls cover, and on the remaining 24 rolls White will have plenty of play if he just enters. Even after Blacks 8 rolls with hitting 3's, entering gives counter play. Easy take for money. At 2-away, 5-away it is a big pass, however.
+This is a bit scary since White can easily get closed out and gammoned. Still only 11 rolls cover the 4-point blot, and on the remaining 25 rolls White will have plenty of play if he just enters. Even after Blacks 7 rolls with hitting 3's (43 and 63 don't hit), entering gives White counter play. Easy take for money. At 2-away, 5-away it is a big pass, however.
 
 #### 5-away, 4-away
 
@@ -638,11 +641,11 @@ This is a bit scary since White can easily get closed out and gammoned. Still on
 compare_tps(5, 4, 1, tps, tpsm)
 ```
 
-Observations
+Observations:
 
-- As opposed to the reverse score, 4-away, 5-away, the potential two points at stake now benefits the doubling player more, so the trailer faces higher take points *no matter* the type of position.  
+-   As opposed to the reverse score, 4-away, 5-away, the potential two points at stake now benefits the doubling player more, so the trailer faces higher take points *no matter* the type of position.
 
-- This is because *both* a two-point win and a four-point gammon win is particular valuable to the leader.
+-   This is because *both* a two-point win and a four-point gammon win is particular valuable to the leader.
 
 ```{r}
 #| column: page-right
@@ -668,9 +671,9 @@ ggboard("XGID=--B--------------------b--:0:0:-1:D:0:0:0:0:10") +
 
 Standard take for money, even with just $\frac{10}{36}\times\frac{26}{36}\approx 0.201$ winning probability since White has a strong recube on Blacks misses.
 
-At the score recubes are even stronger: Black will need `r tp(4, 5, 2, met) |> round(3)` to take the recube so must pass in case of a miss. That means Whites chances are effectively $\frac{10}{36}\approx 0.278$ -- falling short of the `r tp(5, 4, 1, met, T) |> round(3)` last-roll take point.  `
+At the score recubes are even stronger: Black will need `r tp(4, 5, 2, met) |> round(3)` to take the recube so must pass in case of a miss. That means Whites chances are effectively $\frac{10}{36}\approx 0.278$ -- but still falling short of the `r tp(5, 4, 1, met, T) |> round(3)` last-roll take point. \`
 
-The two points Black threatens to win are so valuable that White has a clear pass.
+The two points Black threatens to win are so valuable, that White has a clear pass.
 
 ```{r}
 #| column: page-right
@@ -693,7 +696,7 @@ ggboard("XGID=-B---AC-B---eE-b-c-e----B-:0:0:-1:00:0:0:0:0:10") +
 " |> remove_stuff() |> cat()
 ```
 
-Even this contact position with a position advantage but no particular gammon threat, is a small pass at the score, despite being only a very small double for money. 
+Even this contact position with a position advantage but no particular gammon threat, is a small pass at the score, despite being only a very small double for money.
 
 #### 5-away, 3-away
 
@@ -701,13 +704,13 @@ Even this contact position with a position advantage but no particular gammon th
 compare_tps(5, 3, 1, tps, tpsm)
 ```
 
-Observations
+Observations:
 
-- In a last roll position White still has a high take point, because two points are very valuable for Black -- getting him to the Crawford game
+-   In a last roll position White still has a high take point at `r tp(5, 3, 1, met) |> round(3)`, because two points are very valuable for Black -- getting him to the Crawford game
 
-- The race is different, because White now has a lot of cube leverage: Blacks take point when redoubled would be a high `r tp(3,5,2, met) |> round(3)` assuming no gammons. The cube leverage compensates for the high last-roll take point, and leaves White with almost the same take point as for money.
+-   The race is different, because White now has a lot of cube leverage: White now has almost the same take point as for money.
 
-- Like we saw at 3-away, 5-away, the effect of gammons is to *lower* the take point for the trailer. This is because after double/take the gammon value *decreases* for the leader, and *increases* for the trailer.
+-   Like we saw at 3-away, 5-away, the effect of gammons is to *lower* the take point for the trailer. This is because after double/take the gammon value *decreases* for the leader, and *increases* for the trailer.
 
 ```{r}
 #| column: page-right
@@ -752,6 +755,7 @@ ggboard("XGID=-BABBBB--AAAA-a-aa-bcbbba-:0:0:-1:00:0:0:0:0:10") +
        Double/Pass:   +1,000 (+0,000)" |> 
   remove_stuff() |> cat()
 ```
+
 In our sample race position cube action is very similar for money and at the score: Whites extra recube vig offsets the higher take point to begin with.
 
 ```{r}
@@ -786,20 +790,19 @@ Gammon values, as we also saw earlier:
 compare_gvs(5, 3, 1:2, met)
 ```
 
-
 #### 5-away, 2-away
 
 ```{r}
 compare_tps(5, 2, 1, tps, tpsm)
 ```
 
-Observations
+Observations:
 
-- Without recubes, the trailer's take point is extremely high: a full `r tp(5, 2, 1, met, T) |> round(3)`.
+-   Without recubes, the trailer's take point is extremely high: a full `r tp(5, 2, 1, met, T) |> round(3)`.
 
-- Of course the one-sided benefit from automatic recube makes a big difference, but, perhaps surprisingly, still leaves the trailer with a slightly higher racing game take point than for money.
+-   Of course the one-sided benefit from automatic recube makes a big difference, but, perhaps surprisingly, still leaves the trailer with a slightly higher racing game take point than for money.
 
-- Gammons don't hurt the trailer after a take; naturally this allows for much more liberal takes compared to money game.
+-   Gammons don't hurt the trailer after a take; naturally this allows for much more liberal takes compared to money game.
 
 ```{r}
 #| column: page-right
@@ -822,7 +825,7 @@ ggboard("XGID=-EED-aa--A---------bbbbbc-:0:0:-1:00:0:3:0:5:10") +
   remove_stuff() |> cat()
 ```
 
-If White takes and Black misses, Black will pass the automatic redouble, so that doesn't benefit White much, leaving him with a very high take point and a pass here, even though for money the take is trivial. 
+If White takes and Black misses, Black will pass the automatic redouble, so that doesn't benefit White much, leaving him with a very high take point and a pass here, even though for money the take is trivial.
 
 ```{r}
 #| column: page-right
@@ -847,7 +850,7 @@ ggboard("XGID=-B--b-ECB---A---bb-cbbbB--:0:0:-1:00:0:0:0:0:10") +
 
 White wins about 22%, so big pass for money, due to some gammon losses. At 5-away, 2-away after double/take/redouble gammons don't hurt, and White can win four points, Black only two. Intuitively this would lower White's take point by a lot. But the cube is dead which pulls in the opposite direction, and Black's two points are worth a lot. As we saw above, in a straight race White would need `r tp(5, 2, 1, met) |> round(2) |> label_percent()()` to take which is only a bit less than the comparable 25% White would need to take for money with a dead cube.
 
-Bottom line: White has a marginal take/pass decision. 22% is about what he needs, the occasional freak gammon *win* (with a probability about 3%) accounts for the difference from the mentioned `r tp(5, 2, 1, met) |> round(2) |> label_percent()()` racing game dead cube take point.
+Bottom line: White has a marginal take/pass decision. 22% is about what he needs, the occasional freak gammon *win* (probability about 3%) accounts for the difference from the mentioned `r tp(5, 2, 1, met) |> round(2) |> label_percent()()` racing game dead cube take point.
 
 ### 4-away scores
 
@@ -857,11 +860,11 @@ Bottom line: White has a marginal take/pass decision. 22% is about what he needs
 compare_tps(4, 4, 1, tps, tpsm)
 ```
 
-Observations
+Observations:
 
-- Here *all* take points are higher than for money. This is because both a two-point and a four-point win is particular valuable. Doubling, in effect, *more* than doubles the stakes. 
+-   Here *all* take points are higher than for money. This is because both a two-point and a four-point win is particular valuable. Doubling, in effect, *more* than doubles the stakes.
 
-- This also makes future *redoubles* more potent, which is why the smallest difference from money is in straight races: The taker gets powerful recubes but does not need to fear expensive gammon losses.
+-   This also makes future *redoubles* more potent, which is why the smallest difference from money is in straight races: The taker gets powerful recubes but does not need to fear expensive gammon losses.
 
 ```{r}
 #| column: page-right
@@ -875,6 +878,7 @@ ggboard("XGID=-b----E-C---eF---a-c--b-bA:0:0:-1:00:0:0:0:0:10") +
        No double:     +0,591
        Double/Take:   +0,547 (-0,044)
        Double/Pass:   +1,000 (+0,409)
+
 
 4-away, 4-away, Cubeful Equities:
        No double:     +0,682 (-0,135)
@@ -906,7 +910,7 @@ ggboard("XGID=-ABBABB-aaB-b--B-a-bbbAbb-:0:0:-1:00:0:0:0:0:10") +
   remove_stuff() |> cat()
 ```
 
-Highly volatile position, which makes for a good double for money, but clear take. White could get gammoned (about 26% of the time) but also wins 35% of the games. At the score, this is too much, White has a moderate pass.  
+Highly volatile position, which makes for a good double for money, but clear take. White could get gammoned (about 26% of the time) but also wins 35% of the games. At the score, this is too much, White has a moderate pass.
 
 #### 3-away, 4-away
 
@@ -914,12 +918,11 @@ Highly volatile position, which makes for a good double for money, but clear tak
 compare_tps(3, 4, 1, tps, tpsm)
 ```
 
-Observations
+Observations:
 
-- Here, the two points are more valuable for the leader than the trailer, so the 'raw' take point (cubeless, gammonless) is slightly lower than for money.
+-   Here, the two points are more valuable for the leader than the trailer, so the 'raw' take point (cubeless, gammonless) is slightly lower than for money.
 
-- Gammons are dangerous, of course.
-
+-   Gammons are very dangerous, of course.
 
 ```{r}
 #| column: page-right
@@ -942,7 +945,7 @@ ggboard("XGID=-b----E-C---eF---a-c--b-bA:0:0:-1:00:0:0:0:0:10") +
   remove_stuff() |> cat()
 ```
 
-Our 65-55-opening blitz from before (small no double for money), is now a clear pass. The combination of a lethal gammon threat and limited recube potential is just too much. 
+Our 65-55-opening blitz from before (small no double for money), is now a clear pass. The combination of a lethal gammon threat and limited recube potential is just too much.
 
 ```{r}
 #| column: page-right
@@ -973,10 +976,9 @@ Sound money double in this artificial position, based on big positional advantag
 compare_tps(2, 4, 1, tps, tpsm)
 ```
 
-Observations
+Observations:
 
-- Same pattern as for 4-away, 4-away, and for 3-away, 4-away, but a lot stronger: It's relatively easy to take in no-gammon situations; very hard when a significant gammon threat exists.
-
+-   Same pattern as for 4-away, 4-away, and for 3-away, 4-away, but a lot stronger: It's relatively easy to take in no-gammon situations; very hard when a significant gammon threat exists.
 
 ```{r}
 #| column: page-right
@@ -1023,7 +1025,7 @@ ggboard("XGID=-b----E-D---eD---b-d--b-AA:0:0:-1:00:0:0:0:0:10") +
 " |> remove_stuff() |> cat()
 ```
 
-The slightest smell of blitz, makes for a marginal take at best, at 4-away, 2-away.
+The slightest smell of blitz, makes for at best a marginal take at 4-away, 2-away.
 
 #### 4-away, 3-away
 
@@ -1031,9 +1033,9 @@ The slightest smell of blitz, makes for a marginal take at best, at 4-away, 2-aw
 compare_tps(4, 3, 1, tps, tpsm)
 ```
 
-Observations
+Observations:
 
-- Even trailing, it's somewhat difficult to find a take at this score -- except when gammons are clearly visible.
+-   Even trailing, it's somewhat difficult to find a take at this score -- except when gammons are clearly visible.
 
 ```{r}
 #| column: page-right
@@ -1087,11 +1089,11 @@ Solid positional advantage, gammons clearly a relevant consideration, so small m
 compare_tps(4, 2, 1, tps, tpsm)
 ```
 
-Observations
+Observations:
 
-- With the perfect automatic recube available the trailer can of course take with `r met3[4,1] |> label_percent()()` -- the winning chance when passing for 4-away, 1-away, Crawford.
+-   With the perfect automatic recube available the trailer can of course take with `r met3[4,1] |> label_percent()()` -- the winning chance we get when passing for 4-away, 1-away, Crawford.
 
-- The last-roll situation, where we don't get to the automatic recube, is a trap; here the take point is a very high `r tp(4,2,1,met,T) |> label_percent()()`
+-   The last-roll situation, where we don't get to the automatic recube, is a trap; here the take point is a very high `r tp(4,2,1,met,T) |> label_percent()()`
 
 ```{r}
 #| column: page-right
@@ -1116,7 +1118,7 @@ ggboard("XGID=-EEC-b--AA--------bcbbbb--:0:0:-1:00:0:0:0:0:10") +
 
 If Black misses, 12/36, he will pass the automatic recube, so White really wins 1/3 plus about 3% after getting hit, roughly 35% in total, which is just a bit short of a take. For money, the problem is that White can lose a gammon after getting hit, but he is getting better odds on the take, and so bottomline is a small take.
 
-So a close take/pass decision both at 4-away, 2-away and money, but for different reasons.    
+So a close take/pass decision both at 4-away, 2-away and money, but for different reasons.
 
 ```{r}
 #| column: page-right
@@ -1149,18 +1151,19 @@ Another tricky one: Clearly a gigantic pass for money, moderately too good to do
 compare_tps(3, 3, 1, tps, tpsm)
 ```
 
-Observations
+Observations:
 
-- At 3-away, 3-away it is harder to find a take in all position types.
-- On one hand, two points are very valuable -- the double more than doubles the stakes -- so in the last-roll starting point the take point is quite a bit higher than for money.
-- On the other hand, the cube leverage is a little better than for money, so some of the difference disappears when we allow for redoubles.
+-   At 3-away, 3-away it is harder to find a take in all position types.
 
-- Also note that the gammon value *before* doubling is very high, after double/take the gammon value is similar to money game:
+-   On one hand, two points are very valuable -- the double more than doubles the stakes -- so in the last-roll starting point the take point is quite a bit higher than for money.
+
+-   On the other hand, the cube leverage is a little better than for money, so some of the difference disappears when we allow for redoubles.
+
+-   Also note that the gammon value *before* doubling is very high, after double/take the gammon value is similar to money game:
 
 ```{r}
 compare_gvs(3, 3, 1:2, met)
 ```
-
 
 ```{r}
 #| column: page-right
@@ -1183,7 +1186,7 @@ ggboard("XGID=-a----E-C-a-cF---caca-b-A-:0:0:-1:00:0:0:0:0:10") +
   remove_stuff() |> cat()
 ```
 
-Black leads in every area, except the race, solid double/take for money. But 3-away, 3-away pushes this into double/pass territory.
+Black leads in every area, including the important race, so solid double/take for money. But 3-away, 3-away pushes this into double/pass territory.
 
 ```{r}
 #| column: page-right
@@ -1208,10 +1211,10 @@ ggboard("XGID=-----BD-C---dD---dBe--b---:0:0:-1:00:0:0:0:0:10") +
   Moves: 3-ply, cube decisions: XG Roller" |> 
   remove_stuff() |> cat()
 ```
+
 A pretty standard holding game, take for money, becomes a big pass at 3-away, 3-away.
 
-UNote that this is rolled out, instead of using XG++ like elsewhere: Even the truncated rollout in XG++ overestimates holding games.) 
-
+(Note that this is rolled out, instead of using XG++ like we did most other places. Even the truncated rollout in XG++ overestimates holding games.)
 
 #### 2-away, 3-away
 
@@ -1219,11 +1222,11 @@ UNote that this is rolled out, instead of using XG++ like elsewhere: Even the tr
 compare_tps(2, 3, 1, tps, tpsm)
 ```
 
-Observations
+Observations:
 
-- Every type of position is a bit harder to take here than for money, although the difference is less pronounced in last-roll positions where White wouldn't have had the benefit of potential redoubles anyway. 
+-   Every type of position is a bit harder to take here than for money, although the difference is less pronounced in last-roll positions where White wouldn't have had the benefit of potential redoubles anyway.
 
-- Of course, *especially* when the trailer has a gammon threat, the leader should be reluctant to take.
+-   Of course, *especially* when the trailer has a gammon threat, the leader should be reluctant to take.
 
 ```{r}
 #| column: page-right
@@ -1246,7 +1249,7 @@ Money game, Cubeful Equities:
 " |> remove_stuff() |> cat()
 ```
 
-11 doesn't necessarily save a roll, so White is a bit worse off compared to a pure 4-roll position. Enough to turn a money take into a pass at the score.
+In this 4-roll position 11 doesn't necessarily save a roll for White, so White is a bit worse off compared to a pure 4-roll position. Enough to turn a money take into a pass at the score.
 
 ```{r}
 #| column: page-right
@@ -1270,7 +1273,7 @@ Money game, Cubeful Equities:
 " |> remove_stuff() |> cat()
 ```
 
-When Black has a match winning gammon threat, this small money take becomes a gigantic pass at 2-away, 4-away
+When Black has a match winning gammon threat, this small money take becomes a gigantic pass at 2-away, 3-away
 
 #### 3-away, 2-away
 
@@ -1278,11 +1281,11 @@ When Black has a match winning gammon threat, this small money take becomes a gi
 compare_tps(3, 2, 1, tps, tpsm)
 ```
 
-Observations
+Observations:
 
-- Naturally, the trailer can take (and redouble) with anything better than the 24.9% he would have had after passing at 3-away, 1-away, Crawford.
+-   Naturally, the trailer can take (and redouble) with anything better than the 24.9% he would have had after passing and getting to 3-away, 1-away, Crawford.
 
-- Beware the last-roll situation, however: When the leader could win exactly 2-point (and not risk losing 3 or 4 point) that is dangerous.
+-   Beware the last-roll situation, however: When the leader could win exactly 2-point (and not risk losing 3 or 4 point) that is dangerous.
 
 ```{r}
 #| column: page-right
@@ -1307,7 +1310,7 @@ Money game, Cubeful Equities:
 " |> remove_stuff() |> cat()
 ```
 
-Even with 36.1% winning chances White can't quite take at the score with no automatic recube available; he needs 36.8%. 
+Even with 36.1% winning chances White can't quite take at the score with no automatic recube available; he needs 36.8%.
 
 ```{r}
 #| column: page-right
@@ -1329,25 +1332,25 @@ Money game, Cubeful Equities:
 " |> remove_stuff() |> cat()
 ```
 
-The same near-four-roll position as shown to be a pass at 2-away, 3-away. A smallish take at this score. 
+The same near-four-roll position as shown to be a pass at 2-away, 3-away. A smallish take at this score.
 
-### The funny two-point match  
+### The funny two-point match
 
-The two-point match is funny: It's a well-known fact that an optimal strategy is to double at first opportunity, at which point the opponent will always have a clear take, with the take point beeing `r round(met[2,1] * 100, 0)`%.
+The two-point match is funny: It's a well-known fact that an optimal strategy is to double at first opportunity, at which point the opponent will always have a clear take, with the take point being `r round(met[2,1] * 100, 0)`%.
 
-However, in practice, if you delay doubling until you have at least one market losing sequences, you might gain a bit from either:
+However, in practice, if you delay doubling until you have at least one market losing sequence, you might gain a bit from either:
 
-   a) The opponent doubling too late and loosing their market
-   b) The opponent passing a less obvious take
-   
+a)  The opponent doubling too late and loosing their market
+b)  The opponent passing a less obvious take
+
 On the flip side, delaying doubling may cost you if:
 
-   a) You accidentally lose your market by overlooking something
-   b) You end up passing what is really a take.
+a)  You accidentally lose your market by overlooking something
+b)  You end up passing what is really a take.
 
 For example, let's say the opponent opens with 31. Should you double, knowing there's zero chance he will pass? The best possible sequence is that you roll 66 and he rolls 61, which will still leave him with more than 40% winning chances and a very clear take. Still, the take is less clear than before, so perhaps there's someone out there that will pass.
 
-In practical play, it would be better to roll, since it can't hurt and it opens the possibility of harvesting possible mistakes the opponent might make.
+In practical play, it would be better to roll in response to an opening 31, since it can't hurt and it opens the possibility of harvesting a mistake the opponent might make.
 
 Suppose it is you who opens the game with 31, an he rolls 52, splitting. Now you *do* have market losers: Mostly involving you rolling 33, 55, or 66 and him responding poorly. Against any particular opponent it *might* still be the best play to hold off, but that depends on exactly how likely you are to lose your market (and by how much), and exactly how more likely the opponent is to make a future mistake, compare to yourself. That's extremely hard to judge, so the best practical play against reasonably competent opposition, is probably to double.
 
@@ -1365,7 +1368,7 @@ A good benchmark: If you open with 41, played 13/9, 24/23, you should *pass* at 
 
 ### Even-away, 1-away
 
-When trailing 2-away or 4-away, of course you double right away. If you have no market losers that would make you a favorite, you *could* delay doubling, hoping to double and induce a wrong pass if you become a near-favorite. But this won't really work: You would need a position good enough so that becoming a near-favorite is possible, but becoming an actual favorite is not possible. Even after a sequence like 54 (split), 44 (point-on-head) you could roll a joker like 11 from the bar, potentially losing your market.    
+When trailing 2-away or 4-away, of course you double right away. If you have no market losers that would make you a favorite, you *could* delay doubling, hoping to double and induce a wrong pass if you become a near-favorite. But this won't really work: You would need a position good enough so that becoming a near-favorite is possible, but becoming an actual favorite is not possible. Even after a sequence like 54 (split), 44 (point-on-head) you could roll a joker like 11 from the bar, potentially losing your market.
 
 ### 1-away, odd-away
 
@@ -1379,11 +1382,11 @@ At 1-away, 5-away, the corresponding numbers would look like this:
 
 $Take\ point = \frac{loss}{loss+gain} = \frac{1.3}{1.3 + 32.3} = `r round(1.3/33.6 * 100, 1)`$%
 
-So the take is indeed almost free -- unless we can lose a gammon. Gammons are expensive, with a value of 1.0 after double/take at 1-away, 3-away, and 0.55 at 1-away, 3-away. This means that in the worst case (opponent 3-away) we can take when our gammon chances are no less than our winning chances. 
+So the take is indeed almost free -- unless we can lose a gammon. Gammons are expensive, with a value of 1.0 after double/take at 1-away, 3-away, and 0.55 at 1-away, 3-away. This means that in the worst case (opponent 3-away) we can take when our gammon chances are no less than our winning chances.
 
 When opponent is 5-away gammons are not nearly as costly, so they need to be roughly double our winning chances for us to pass.
 
-For example, suppose we open with one of the worst possible sequences: 52 (split), then the opponent fails to double, rolls 55 (double hit), then we dance with both checkers with 66. Now we have roughly 30% chances of winning but 40% chanches of getting gammoned. 
+For example, suppose we open with one of the worst possible sequences: 52 (split), then the opponent fails to double, rolls 55 (double hit), then we dance with both checkers with 66. Now we have roughly 30% chances of winning but 40% chanches of getting gammoned.
 
 That is a big pass at 1-away, 3-away, and a big take at 1-away, 5-away.
 
@@ -1391,11 +1394,11 @@ So practically speaking: When we have a free take available we take almost every
 
 ### Odd-away, 1-away
 
-The above analysis also means that when trailing, and the opponent have a free take, we can delay doubling with little risk, as long as we're not really threatening to win a gammon. 
+The above analysis also means that when trailing, and the opponent have a free take, we can delay doubling with little risk, as long as we're not really threatening to win a gammon.
 
 For example, suppose we're trailing 3-away post-crawford, and the opponent opens with 21: 13/11 6/5. We *could* double, expecting an automatic take (hoping for an enormous bonus if the opponent mistakes the free take for a free drop).
 
-*Or* we could roll, hoping for something like 64 (double hit), 66 (double dance), in which case the opponent will *still* have a clear take (winning about 37%, lossing a gammon about 27% of the time) -- but might also have a lot harder decision with more room for mistaking an easy take for a drop. 
+*Or* we could roll, hoping for something like 64 (double hit), 66 (double dance), in which case the opponent will *still* have a clear take (winning about 37%, lossing a gammon about 27% of the time) -- but might also have a lot harder decision with more room for mistaking an easy take for a drop.
 
 The practical advice would be to double anything that looks like a blitz, and wait with anything that does not.
 
@@ -1407,10 +1410,10 @@ The practical advice would be to double anything that looks like a blitz, and wa
 compare_tps(x1 = 5, y1 = 5, cube1 = 2, tps = tps, tpsm = tpsm)
 ```
 
-Observations
+Observations:
 
-- At 5-away, 5-away it is little harder to find a take for a recube in positions without too many gammons, because the extra two points are particular valuable.
-- When gammons are likely, this effect is reduced, or even reversed, because after double/take the gammon drops low:
+-   At 5-away, 5-away it is little harder to find a take for a recube in positions without too many gammons, because the extra two points are particular valuable.
+-   When gammons are likely, this effect is reduced, or even reversed, because after double/take the gammon drops low:
 
 ```{r}
 compare_gvs(5, 5, c(2,4), met)
@@ -1440,7 +1443,6 @@ ggboard("XGID=-B-bBCCBA---b----c-ccb-AA-:1:-1:-1:00:0:0:0:0:10") +
 Case in point: A position with strong boards and some gammon potential for both sides, but not enough to reverse the small tendency to drop at the score: White has enough for a decent money-take for, but at best a very marginal take at the score.
 
 It would take a truly gammonish position to make the underdog *more* inclined to take at the score, like our initial sample position for 'many gammons':
-
 
 ```{r}
 #| column: page-right
@@ -1473,9 +1475,9 @@ compare_tps(x1 = 4, y1 = 5, cube1 = 2, tps = tps, tpsm = tpsm)
 
 Observations:
 
-- At 4-away, 5-away it is even harder for the leader to take a recube, and this holds across all position types, although the effect is smallest when a lot of gammons are in play.
+-   At 4-away, 5-away it is even harder for the leader to take a recube, and this holds across all position types, although the effect is smallest when a lot of gammons are in play.
 
-- The reason is of course, the the cube is now officially dead after redouble/take, *and* the gammon value drops all the way down to zero for the leader, but not quite as low for the trailer:
+-   The reason is of course, the the cube is now officially dead after redouble/take, *and* the gammon value drops all the way down to zero for the leader, but not quite as low for the trailer:
 
 ```{r}
 compare_gvs(4, 5, c(2,4), met)
@@ -1511,10 +1513,9 @@ compare_tps(x1 = 3, y1 = 5, cube1 = 2, tps = tps, tpsm = tpsm)
 
 Observations:
 
-- Across all positions types it is *much* harder to take a redouble when leading 3-away, 5-away, compared to money. 
+-   Across all positions types it is *much* harder to take a redouble when leading 3-away, 5-away, compared to money.
 
-- This is one of the big reasons why it's often a good idea to postpone the initial doubling a bit when leading 3-away, 5-away: It's a powerful weapon you're giving away.
-
+-   This is one of the big reasons why it's often a good idea to postpone the initial doubling a bit when leading 3-away, 5-away: It's a powerful weapon you're giving away.
 
 ```{r}
 #| column: page-right
@@ -1544,12 +1545,11 @@ A pretty straight double/take for money, becomes a gigantic drop at the score.
 compare_tps(x1 = 5, y1 = 4, cube1 = 2, tps = tps, tpsm = tpsm)
 ```
 
-- If White does *not* have an automatic recube available (as in a last-roll situation), he should be careful about taking a redouble at this score.
+-   If White does *not* have an automatic recube available (as in a last-roll situation), he should be careful about taking a redouble at this score.
 
-- Even if the auto-redouble is available, it's considerable harder to find a take in a race than for money.
+-   Even if the auto-redouble is available, it's considerable harder to find a take in a race than for money.
 
-- Of course, after redouble/take/auto-redouble, it is double match point, so gammons are harmless -- this could lead to takes that normally 'look like' big passes.
-
+-   Of course, after redouble/take/auto-redouble, it is double match point, so gammons are harmless -- this could lead to takes that normally 'look like' big passes.
 
 ```{r}
 #| column: page-right
@@ -1572,7 +1572,6 @@ ggboard("XGID=-DCC-------------------ee-:1:-1:-1:00:0:1:0:5:10") +
 ```
 
 This is a 5-roll position with drawbacks: White can't use 22 to save a roll and 11 is not fully effective. Those are quite expensive drawbacks, rather than 28% in in a pure 5-roll, white has only 24% here. Enought for a good money take, not enough at 5-away, 4-away, even taking into consideration the automatic recube.
-
 
 ```{r}
 #| column: page-right
@@ -1602,10 +1601,9 @@ This looks scary for money, and it is indeed a pass. But of course the many gamm
 compare_tps(x1 = 5, y1 = 3, cube1 = 2, tps = tps, tpsm = tpsm)
 ```
 
-- A redouble here is of course for the match, so one needs only the same winning probability as when trailing 5-away, 1-away: 15.8%
+-   A redouble here is of course for the match, so one needs only the same winning probability as when trailing 5-away, 1-away: 15.8%
 
-- Caveat is when you don't get to redouble, as in a last-roll or virtually last roll situation. Then we need a good bit more -- but still less than for money.
-
+-   Caveat is when you don't get to redouble, as in a last-roll or virtually last roll situation. Then we need a good bit more -- but still less than for money.
 
 ```{r}
 #| column: page-right
@@ -1627,7 +1625,7 @@ ggboard("XGID=---BBBCB----aB----Bccbbbb-:1:-1:-1:00:0:2:0:5:10") +
 " |> remove_stuff() |> cat()
 ```
 
-White can find the 15.8% he needs to take here. 
+White can find the 15.8% he needs to take here.
 
 ## The rare 8-cube
 
@@ -1635,7 +1633,7 @@ White can find the 15.8% he needs to take here.
 compare_tps(x1 = 5, y1 = 5, cube1 = 4, tps = tps, tpsm = tpsm)
 ```
 
-The non-automatic 8-cube arises only at 5-away, 5-away, so like before we have at take point at 15.8%. If gammons are likely this could lead to the unusual too-good-to-double-take  situation. When this happens, the doubler is worse off doubling *no matter* if the opponent passes or takes.  
+The non-automatic 8-cube arises only at 5-away, 5-away, so like before we have at take point at 15.8%. If gammons are likely this could lead to the unusual too-good-to-double-take situation. When this happens, the doubler is worse off doubling *no matter* if the opponent passes or takes.
 
 Could look like this:
 
@@ -1661,3 +1659,5 @@ ggboard("XGID=---BBBBB-----C-------bbbB-:2:-1:-1:00:0:0:0:5:10") +
 Moves: 3-ply, cube decisions: XG Roller
 " |> remove_stuff() |> cat()
 ```
+
+Black is crazy too-good for money, but both too-good and not good enough at 5-away, 5-away holding a 4-cube.
