@@ -21,9 +21,13 @@ library(ggrepel)
 options(scipen = 9999)
 options(knitr.table.format = "html")
 
-devtools::load_all(path = "../../bglab")
+devtools::load_all(path = here::here("..", "bglab"))
 met <- get_met()
 ```
+
+## Update
+
+*This note is updated to reflect a more complete understanding of how bots estimate live cube take points. Jeremy Bagai nudged me to update it; Minh Nguyen provided some important missing pieces. Thanks guys.*
 
 ## Why this?
 
@@ -494,11 +498,11 @@ plot_data %>%
   theme_minimal()
   
 ```
-We see how we get from the initial dead-cube take point of `r round(tp(25,24,1,met), 3)` to the live-cube take point of `r round(tp_info(25,24,c(0.5,0,0,0.5,0,0),1,met,0.7)["tp_live"], 3)`. Each subsequent take point has less and less of an impact on our initial take point. And let's just rember once again that the real take point is to be found between these two values; when the game still has a way to go, it is usually closer to live-cube take point that to the dead-cube take point.
+We see how we get from the initial dead-cube take point of `r round(tp(25,24,1,met), 3)` to the live-cube take point of `r round(tp_info(25,24,c(0.5,0,0,0.5,0,0),1,met,0.7)["tp_live"], 3)`. Each subsequent take point has less and less of an impact on our initial take point. And let's just remember once again that the real take point is to be found between these two values; when the game still has a way to go, it is usually closer to live-cube take point that to the dead-cube take point.
 
 ### Example with gammons
 
-Okay, so far it seems possible to (more or less) reproduce how XG and GNU BG transforms cubeless distributions into cubeful match equities and takepoints. Let's try a match play example with lots of gammons, with us playing White and leading (-4,-7).
+Okay, so far it seems possible to (more or less) reproduce how XG and GNU BG transforms cubeless distributions into cubeful match equities and take points. Let's try a match play example with lots of gammons, with us playing White and leading (-4,-7).
 
 A standard opening blitz after 63, 55, dance, looks like this:
 
@@ -544,25 +548,44 @@ tp_table %>%
   column_spec(1:6, width = "5cm") 
 ```
 
-In the last row we see that Black as a very high take point, `r round(tp_info_initial["tp_dead"], 4)`, for the reason mentioned: The likely gammon will lose the match. Should Black turn the match around, however, White *also* has a high takepoint, `r round(tp_info_recube["tp_dead"], 4)`, and since the cube would be dead, the live-cube takepoint is the same as the dead-cube takepoint. For that reason, Black's live-cube and real-cube takepoints are much lower: The model suggests Black would be able to take with a winning probability of `r round(tp_info_initial["tp_real"], 4)`. 
+In the last row we see that Black has a very high take point, `r round(tp_info_initial["tp_dead"], 4)`, for the reason mentioned: The likely gammon will lose the match. Should Black turn the game around, however, White *also* has a high take point, `r round(tp_info_recube["tp_dead"], 4)`, and since the cube would be dead, the live-cube take point is the same as the dead-cube take point. For that reason, Black's live-cube and real-cube take points are much lower: The model suggests Black would be able to take with a winning probability of `r round(tp_info_initial["tp_real"], 4)`. 
 
-GNU BG reports the exact same dead-cube takepoint, which is not surprising.
+GNU BG reports the exact same dead-cube take point, which is not surprising.
 
-The live-cube take point, or "Fully live" as GNU BG calls it, is however a bit different: GNU BG reports 0.3012, rather than the `r round(tp_info_initial["tp_live"], 4)` that I get. It is unclear why this discrepancy arises: We got the same live-cube take points in the no-gammons example above. Introducing gammons shouldn't really change anything, as they are factored into the risks and gains. Since the dead-cube takepoints are identical, that part must be correct. 
+The live-cube take point, or "Fully live" as GNU BG calls it, is however a bit different: GNU BG reports 0.3012, rather than the `r round(tp_info_initial["tp_live"], 4)` that I get. XG shows similar figures.
 
-The cube is dead after a future redouble, and we agree that White's takepoint would then be `r round(tp_info_recube["tp_real"], 4)`, so also the business about future takepoints can't explain the discrepancy. A bit of a mystery.
+In other words, GNU BG and XG are both *less* optimistic about the theoretical minimal take point, aka the live-cube take point, than my implementation of Janowski. But the discrepancy arises only in matchplay, and when gammons are in play.
 
-Of course, the real-cube takepoint I get, is affected by the lower live-cube takepoint. GNU BG doesn't report a real-cube takepoint equivalent, so it is unclear what it thinks that would be. I suppose it would be $0.32 \times 0.4345 + 0.3012 \times 0.68 = `r round(0.32*0.4345 + 0.68 * 0.3012, 4)`$ because as mentioned earlier, the real-cube take point is just a weighted average of the dead-cube and the live-cube takepoints, with weights 0.32 and 0.68 respectively.
+Since the recommended take point, aka the "real-cube take point" is just a (weighted) average of the dead-cube and the live-cube take points, both bots would presumable also be more conservative on that -- although none of them report it. 
 
+This puzzled me for a long while, since I thought the extention of Janowski's formulars to matchplay was pretty straighforward, and that the way I did it was in the spirit of the money game variant. 
 
-The takepoint I get, $TP_{real} = `r round(tp_info_initial["tp_real"], 4)`$, would suggest Black has a smallish take, since he is winning with probability `r round(sum(probs[4:6]), 4)`. GNU BG's assumed takepoint of `r round(0.32*0.4345 + 0.68 * 0.3012, 4)` seems to indicate a smallish pass. Asked to evaluate the proper cube action, however, GNU BG says White has a 0.0320 take. So it must think you can take a position like this with winning chances of `r round(sum(probs[4:6]), 4)`.
+As it turns out, the developers of XG and GNU BG chose to do it a little differently. When calculating the first step, the dead-cube take point, they basically igore the gammons that the *taker* might win. Apparently they did so on the theory the taker would double out, *before* winning any of those gammon.
 
-For the record, a rollout has Black winning (after double and take) with probability 0.3407, and a normalized equity of -0.9619, so indeed a smallish take.
+(This was kindly explained by Minh Nguyen in the Backgammon Strategy Facebook group [here](https://www.facebook.com/groups/backgammonstrategy/posts/3532552207013426/?comment_id=3631176307151015&notif_id=1718828064640279&notif_t=group_comment). Thank you Minh!)
+
+So looking at the earlier formular:
+
+$$TP_{live} = TP_{dead}\times(1-TP_{opponent})$$
+
+Both XG and GNU BG calculates $TP_{dead}$ with zero gammons wins for the taker (but not for the doubler). That clearly yields a higher $TP_{dead}$ and consequently also a higher $TP_{live}$. Hence the discrepancy.
+
+So which implementation is better?
+
+Hard to say. We don't really have a good way of emperically establishing the true take point in a position with those exact gammon and backgammon frequencies. In the example position, a rollout has Black winning (after double and take) with probability 0.341, and a normalized equity of -0.962, so 0.341 is enough for a smallish take. 
+
+From that perspective, my estimated real-cube take point of 0.3251 could be on the low side.
+
+On the other hand XG 3-ply thinks Black wins 0.341 (just like in rollout) for an equity of -0.974, slightly worse off than the rollout showed. GNU BG's equivalent 2-ply thinks Black wins 0.329 for a pass of -1.079, considerbly worse than the rollout, but partly due to being more pessimistic about the position itself.
+
+Any way, this is really splitting hairs, and it's only one sample position, so basically impossible to say which model is better for estimating the take point you *really* need, at a given score, with given gammon frequencies.
 
 ## Conclusions
 
 It can be educational to understand how the neural nets work, and how they transform the static evaluations in cubeless, money-like conditions to more realistic cubeful match play conditions. The key takeaway, is that the underlying model is really quite crude, and likely will fail to some degree for some positions. 
 
-Much as I try, I can't complete figure out *exactly*, to the decimal, what goes on under the hood of GNU BG and XG when estimating takepoints in matches with gammons and realistic cube assumptions.
+Also, the Janowski transformation appears implemented differently from what I thought was the natural way.
 
-I get, however, pretty close, and the exercise feels useful.
+Much as I try, I can't complete figure out exactly, what would be the right way to use Janowski or a Janowski-like model in match play when gammons count.
+
+Still, the exercise feels useful.
