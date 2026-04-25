@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lasse Hjorth Madsen">
-<meta name="dcterms.date" content="2026-04-09">
+<meta name="dcterms.date" content="2026-04-25">
 
 <title>Janowski Formulas</title>
 <style>
@@ -300,7 +300,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 9, 2026</p>
+      <p class="date">April 25, 2026</p>
     </div>
   </div>
   
@@ -314,7 +314,7 @@ window.Quarto = {
 
 <section id="update" class="level2">
 <h2 class="anchored" data-anchor-id="update">Update</h2>
-<p><em>This note is updated to reflect a more complete understanding of how bots estimate live cube take points. Jeremy Bagai nudged me to update it; Minh Nguyen provided some important missing pieces. Thanks guys.</em></p>
+<p><em>This note is updated to reflect a more complete understanding of how bots estimate live cube take points. Jeremy Bagai nudged me to update it; Minh Nguyen provided some important missing pieces; Leonard Brown pointed out an error. Thanks guys.</em></p>
 </section>
 <section id="why-this" class="level2">
 <h2 class="anchored" data-anchor-id="why-this">Why this?</h2>
@@ -408,8 +408,8 @@ window.Quarto = {
 </section>
 <section id="equity-from-cube-location" class="level3">
 <h3 class="anchored" data-anchor-id="equity-from-cube-location">Equity from cube location</h3>
-<p>Expanding the above ideas, the Janowski-formulas can be rearranged to express the <em>equity</em>, as a function of game winning chances, <span class="math inline">\(p\)</span>, cube efficiency, <span class="math inline">\(x\)</span>, and cube location (<em>player</em>, <em>center</em>, <em>opponent</em>):</p>
-<p><span class="math display">\[E_{player}= p(W+L+0.5x)-L\]</span> <span class="math display">\[E_{center}= p(W+L+0.5x)-L-0.5x\]</span> <span class="math display">\[E_{opponent}= \frac{4}{4-x}(p(W+L+0.5x)-L-0.25x)\]</span></p>
+<p>Expanding the above ideas, the Janowski-formulas can be rearranged to express the <em>equity</em>, as a function of game winning chances, <span class="math inline">\(p\)</span>, cube efficiency, <span class="math inline">\(x\)</span>, and cube location (<em>player</em>, <em>opponent</em>, <em>center</em>):</p>
+<p><span class="math display">\[E_{player}= p(W+L+0.5x)-L\]</span> <span class="math display">\[E_{opponent}= p(W+L+0.5x)-L-0.5x\]</span> <span class="math display">\[E_{center}= \frac{4}{4-x}(p(W+L+0.5x)-L-0.25x)\]</span></p>
 <p>From these, we can estimate cube actions and the size of any cube errors.</p>
 <p>A couple of observations:</p>
 <ul>
