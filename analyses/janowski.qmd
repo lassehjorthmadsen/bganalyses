@@ -27,7 +27,7 @@ met <- get_met()
 
 ## Update
 
-*This note is updated to reflect a more complete understanding of how bots estimate live cube take points. Jeremy Bagai nudged me to update it; Minh Nguyen provided some important missing pieces. Thanks guys.*
+*This note is updated to reflect a more complete understanding of how bots estimate live cube take points. Jeremy Bagai nudged me to update it; Minh Nguyen provided some important missing pieces; Leonard Brown pointed out an error. Thanks guys.*
 
 ## Why this?
 
@@ -126,9 +126,11 @@ where $x$ is what Janowski calls the *cube-life index*, a number between 0 (wher
 
 ### Equity from cube location
 
-Expanding the above ideas, the Janowski-formulas can be rearranged to express the *equity*, as a function of game winning chances, $p$, cube efficiency, $x$, and cube location (*player*, *center*, *opponent*):
+Expanding the above ideas, the Janowski-formulas can be rearranged to express the *equity*, as a function of game winning chances, $p$, cube efficiency, $x$, and cube location (*player*, *opponent*, *center*):
 
-$$E_{player}= p(W+L+0.5x)-L$$ $$E_{center}= p(W+L+0.5x)-L-0.5x$$ $$E_{opponent}= \frac{4}{4-x}(p(W+L+0.5x)-L-0.25x)$$
+$$E_{player}= p(W+L+0.5x)-L$$ 
+$$E_{opponent}= p(W+L+0.5x)-L-0.5x$$ 
+$$E_{center}= \frac{4}{4-x}(p(W+L+0.5x)-L-0.25x)$$
 
 From these, we can estimate cube actions and the size of any cube errors.
 
